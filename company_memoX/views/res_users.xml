@@ -1,0 +1,15 @@
+<odoo>
+  <data>
+    <record id="memo_model_form_view_form" model="ir.ui.view">
+        <field name="name">memo_model_form_view_inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='action_id']" position="after">
+                <field name="user_signature" widget="image" class="oe_avatar"/>
+            </xpath> 
+        </field>
+    </record>
+ 
+  </data>
+</odoo>

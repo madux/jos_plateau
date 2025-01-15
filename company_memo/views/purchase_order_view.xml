@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="purchase_form_view_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                
+            <xpath expr="//notebook" position="inside">
+                <page name="attachment" string="Attachments">
+                <field name="po_attachment_ids" string="Attachment" domain="[('id', '=', None)]" context="{'default_res_model': 'purchase.order', 'default_res_id': active_id, 'default_public': True}">
+                    <tree string="Attachment">
+                        <field name="name" string="Document Name"/> 
+                        <field name="datas" filename="name" string="File"/>
+                    </tree>
+                    <form string="Attachment">
+                        <group>
+                            <group>
+                                <field name="name" string="Document Name"/> 
+                            </group>
+                            <group>
+                                <field name="datas" filename="name" string="File"/>
+                            </group>
+                        </group>
+                    </form>
+                </field>
+            </page>
+            </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

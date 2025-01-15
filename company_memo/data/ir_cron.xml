@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_notify_server_request_followers_actions" model="ir.cron">
+        <field name="name">Notify Server Request Followers</field>
+        <field name="model_id" ref="model_memo_model"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_notify_server_request_followers()</field>
+        <field name="interval_number">2</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+</odoo>

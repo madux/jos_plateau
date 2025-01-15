@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0"> 
+        <record id="public_account_sector_admin" model="account.public.segment">
+            <field name="name">Administrative</field>
+            <field name="active">1</field>
+            <field name="code">01</field>
+        </record>
+        <record id="public_account_sector_economic" model="account.public.segment">
+            <field name="name">Economic</field>
+            <field name="active">1</field>
+            <field name="code">02</field>
+        </record> 
+        <record id="public_account_sector_law" model="account.public.segment">
+            <field name="name">Law and Justice</field>
+            <field name="active">1</field>
+            <field name="code">03</field>
+        </record> 
+        <record id="public_account_sector_regional" model="account.public.segment">
+            <field name="name">Regional</field>
+            <field name="active">1</field>
+            <field name="code">04</field>
+        </record> 
+        <record id="public_account_sector_social" model="account.public.segment">
+            <field name="name">Social</field>
+            <field name="active">1</field>
+            <field name="code">05</field>
+        </record> 
+     </data>
+</odoo>

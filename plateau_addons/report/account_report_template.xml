@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data> 
+    <record id="print_account_report" model="ir.actions.report">
+        <field name="name">FINANCIAL STATEMENT ACCOUNT REPORT</field>
+        <field name="model">account.move.line</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">plateau_addons.print_account_report_template</field>
+        <field name="report_file">plateau_addons.print_account_report_template</field>
+        <field name="print_report_name">'Print Memo - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="account.model_account_move_line"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+	</record>
+    <template id="print_account_report_template">
+      <t t-call="web.html_container">
+      <!-- tr:nth-child(odd){
+                    background-color: #ccc;
+                } -->
+        <h1 class="text-bold">NOTES TO THE FINANCIAL STATEMENT FOR <t t-esc="datetime.datetime.now().strftime('%B %d, %Y')"/></h1> 
+            <style>
+                table {
+                    border-collapse: collapse;
+                    margin-bottom: 40px;
+                }
+
+                th {
+                    background-color: #333;
+                    color: #fff;
+                }
+
+                table, th, tr, td, h3 {
+                    font-size: 18px
+                }
+                .title-header {
+                    font-size: 30px 
+                }
+
+                table, th, tr, td {
+                    border:1px solid #999;
+                    font-family: Times New Roman;
+                    margin-bottom: 3px;
+                    font-size: 12px
+                }
+
+                
+
+                th, td{
+                    padding: 5px;
+                }
+
+                td:nth-child(4) {
+                    color: black;
+                }
+                .accounthead {
+                    background-color: #ccc;
+                }
+
+                .outstanding {
+                    color: red;
+                }
+            </style>
+            <hr></hr>
+            <div class="row mt-4">
+                <div class="col-lg-7 mb-lg-0 mb-4">
+                    <div class="card">
+                        <div class="table-responsive mt-5">
+                            <table style="width:100%">
+                            <!-- class="table align-items-left mb-0"> -->
+                                <thead>
+                                    <tr>    
+                                        <th width="5%">
+                                            <span class="text-bold">S/N</span>
+                                        </th>
+                                        <th width="30%">
+                                            <span class="text-bold">Account</span>
+                                        </th>
+                                        <th width="30%">
+                                            <span class="text-bold">Details</span>
+                                        </th>
+                                        <th width="20%">
+                                            <span class="text-bold">Actual</span>
+                                        </th>
+                                        <th width="20%">
+                                            <span class="text-bold">Budget 2024</span>
+                                        </th>
+                                        <th>
+                                            <span class="text-bold">Utilization</span>
+                                        </th>
+                                        <th>
+                                            <span class="text-bold">Variance</span>
+                                        </th>
+                                        <th>
+                                            <span class="text-bold">Remark</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="count_num" t-value="0"/>
+                                    <t t-foreach="data" t-as="dt">
+                                        <!-- <strong><t t-esc="dt.get('account_name')"/></strong> -->
+                                        <t t-set="count_num" t-value="count_num + 1"/>
+                                        <tr class="accounthead">
+                                            <td>
+                                                <strong><t t-esc="count_num"/></strong>
+                                            </td>
+                                            <td>
+                                                <strong><t t-esc="dt.get('account_obj').get('account_name')"/></strong>
+                                            </td>
+                                            <td>
+                                                <strong></strong>
+                                            </td>
+                                            <td>
+                                                <strong><t t-esc="'{0:,}'.format(float(dt.get('account_obj').get('current_balance')))"/></strong>
+                                            </td>
+                                            <td>
+                                                <strong><t t-esc="'{0:,}'.format(float(dt.get('account_obj').get('budget_amount')))"/></strong>
+                                            </td> 
+                                            <td>
+                                            </td>
+                                            <td>
+                                                ---
+                                            </td>
+                                            <td>
+                                                ---
+                                            </td>
+                                        </tr>
+                                        <t t-set="total_account" t-value="0"/>
+                                        <t t-foreach="dt.get('account_obj').get('account_move_line')" t-as="ml">
+                                            <tr>   
+                                                <td>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="ml.get('journal')"/> 
+                                                    
+                                                </td>
+                                                <td>
+                                                    <t t-esc="ml.get('move_description')"/> 
+                                                </td>
+                                                <td>
+                                                    <t t-esc="'{0:,}'.format(float(ml.get('move_balance')))"/>
+                                                </td> 
+                                                <td>
+                                                    <t t-esc="'{0:,}'.format(float(ml.get('account_and_journal_budget')))"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="'{0:,}'.format(float(ml.get('account_and_journal_budget_utilization')))"/>
+                                                </td>
+                                                <td>
+                                                     <t t-esc="'{0:,}'.format(float(ml.get('account_and_journal_budget_variance')))"/>
+                                                </td>
+                                                <td>
+                                                    ---
+                                                </td>
+                                            </tr>
+                                            <t t-set="total_account" t-value="total_account + float(ml.get('account_and_journal_budget_variance'))"/>
+                                        </t>
+                                        <tr>
+                                            
+                                            <td>
+                                            </td>
+                                            <td>
+                                                <strong>Total - <t t-esc="dt.get('account_obj').get('account_name')"/></strong>
+                                            </td>
+                                             <td>
+                                            </td>
+                                            <td>
+                                                <strong>NGN <t t-esc="'{0:,}'.format(float(total_account))"/></strong>
+                                            </td> 
+                                            <td>
+                                                <strong>NGN <t t-esc="'{0:,}'.format(float(dt.get('account_obj').get('budget_amount')))"/></strong>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </t> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+  </data>
+</odoo>

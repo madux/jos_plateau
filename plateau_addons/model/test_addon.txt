@@ -1,0 +1,389 @@
+from odoo import fields, models ,api, _
+from tempfile import TemporaryFile
+from odoo.exceptions import UserError, ValidationError, RedirectWarning
+import base64
+import random
+import logging
+from datetime import date, datetime, timedelta
+from dateutil.relativedelta import relativedelta as rd
+import xlrd
+from xlrd import open_workbook
+import base64
+
+_logger = logging.getLogger(__name__)
+ 
+
+class ImportPLCharts(models.TransientModel):
+    _name = 'pl.import.wizard'
+
+    data_file = fields.Binary(string="Upload File (.xls)")
+    filename = fields.Char("Filename")
+    index = fields.Integer("Sheet Index", default=0)
+    import_type = fields.Selection(
+        selection=[
+            ("chart", "Chart/Journal"),
+            ("transaction", "Account transactions"),
+        ],
+        string="Journal Type", tracking=True,
+        required=False, default = "chart"
+    )
+    running_journal_id = fields.Many2one('account.journal', string="Running Journal")
+    account_type = fields.Selection(
+        selection=[
+            ("asset_receivable", "Receivable"),
+            ("asset_cash", "Bank and Cash"),
+            ("asset_current", "Current Assets"),
+            ("asset_non_current", "Non-current Assets"),
+            ("asset_prepayments", "Prepayments"),
+            ("asset_fixed", "Fixed Assets"),
+            ("liability_payable", "Payable"),
+            ("liability_credit_card", "Credit Card"),
+            ("liability_current", "Current Liabilities"),
+            ("liability_non_current", "Non-current Liabilities"),
+            ("equity", "Equity"),
+            ("equity_unaffected", "Current Year Earnings"),
+            ("income", "Income"),
+            ("income_other", "Other Income"),
+            ("expense", "Expenses"),
+            ("expense_depreciation", "Depreciation"),
+            ("expense_direct_cost", "Cost of Revenue"),
+            ("off_balance", "Off-Balance Sheet"),
+        ],
+        string="Account Type", tracking=True,
+        required=True,
+    )
+    journal_type = fields.Selection(
+        selection=[
+            ("purchase", "Purchase"),
+            ("sale", "Sale"),
+            ("bank", "Bank"),
+            ("cash", "Cash"),
+            ("off_balance", "Off-Balance Sheet"),
+        ],
+        string="Journal Type", tracking=True,
+        required=False,
+    )
+
+    default_account = fields.Many2one('account.account', string="Default account")
+
+    def create_company(self, name, company_registry):
+        if name and company_registry:
+            company_obj = self.env['res.company']
+            company = company_obj.search([('company_registry', '=', company_registry)], limit=1)
+            if not company:
+                company = self.env['res.company'].create({
+                    'name': name,
+                    'company_registry': company_registry,
+                })
+            return company
+        else:
+            return None
+        
+    def generate_analytic_plan(self, partner):
+        analytic_account_plan = self.env['account.analytic.plan'].sudo()
+        if partner:
+            account_existing = analytic_account_plan.search([('code', '=', partner.vat)], limit = 1)
+            account = analytic_account_plan.create({
+                        "name": partner.name,
+                        "code": partner.vat,
+                        "default_applicability": 'optional',
+                    }) if not account_existing else account_existing
+            return account
+        else:
+            return None
+
+    def create_contact(self, name, code):
+        if name and code:
+            partner = self.env['res.partner'].search([('vat', '=', code)], limit=1)
+            if not partner:
+                partner = self.env['res.partner'].create({
+                    'name': name,
+                    'vat': code,
+                })
+            return partner
+        else:
+            return None
+        
+    def create_branch(self, name, code):
+        if name and code:
+            branch = self.env['multi.branch'].search([('code', '=', code)], limit=1)
+            if not branch:
+                branch = self.env['multi.branch'].create({
+                    'name': name,
+                    'code': code,
+                })
+            return branch
+        else:
+            return None
+        
+    def create_analytic_account(self, name, partner, branch, account_id, journal_id, budget_amount):
+        analytic_account = self.env['account.analytic.account'].sudo()
+        if partner:
+            plan_id = self.generate_analytic_plan(partner)
+            account_existing = analytic_account.search([('code', '=',partner.vat)], limit = 1)
+            account = analytic_account.create({
+                        "name": name, #partner.name.strip().title() +' - '+ partner.vat,
+                        "partner_id": partner.id,
+                        "branch_id": branch.id,
+                        "company_id": self.env.user.company_id.id,
+                        "plan_id": plan_id.id if plan_id else False,
+                        "line_ids": [(0, 0, {
+                            'name': name, 
+                            'general_account_id': account_id.id, 
+                            'amount': budget_amount, 
+                            'journal_id': journal_id.id, 
+                        })]
+                    }) if not account_existing else account_existing
+            return account
+        else:
+            return None
+
+    def create_chart_of_account(self, name, code, type=False):
+        account_chart_obj = self.env['account.account']
+        if name and code:
+            account_existing = account_chart_obj.search([('code', '=', code)], limit = 1)
+            account = account_chart_obj.create({
+                        "name": name.strip().upper(),
+                        "code": code,
+                        'is_migrated': True,
+                        "reconcile": True,
+                        "account_type": self.account_type if not type else type,
+                    }) if not account_existing else account_existing
+            return account
+        else:
+            return None
+        
+    def create_journal(self, code, name, branch, journal_type):#, default_account_id, other_accounts):
+        #journal_type:  'sale', 'purchase', 'cash', 'bank', 'general'
+        if name and code:
+            journal_obj =  self.env['account.journal']
+            account_journal_existing = journal_obj.search([('code', '=',code)], limit = 1)
+            journal = journal_obj.create({
+                'name': name,
+                'type': journal_type,
+                'code': code,
+                'alias_name': ''.join(random.choice('EdcpasHwodfo!xyzus$rs1234567') for _ in range(10)),
+                'alias_domain': ''.join(random.choice('domain') for _ in range(8)),
+                'is_migrated': True,
+                'branch_id': branch.id,
+                # 'default_account_id': default_account_id,
+                # 'loss_account_id': other_accounts.get('loss_account_id') if journal_type in ['bank'] else False,
+                # 'profit_account_id': other_accounts.get('profit_account_id') if journal_type in ['bank'] else False,
+            }) if not account_journal_existing else account_journal_existing
+            return journal
+        else:
+            return None
+
+    def create_vendor_bill(self, company_id, account_id, analytic_account_id, **kwargs):
+        journal_id = self.env['account.journal'].search(
+        [('type', '=', 'purchase'),
+            ('code', '=', 'BILL')
+            ], limit=1)
+        account_move = self.env['account.move'].sudo()
+        partner_id = company_id.partner_id
+        inv = account_move.create({  
+            'ref': self.code,
+            'origin': kwargs.get('code'),
+            'partner_id': partner_id.id,
+            'company_id': company_id.id,
+            'currency_id': self.env.user.company_id.currency_id.id,
+            # Do not set default name to account move name, because it
+            # is unique
+            'name': f"{kwargs.get('code')}",
+            'move_type': 'in_receipt',
+            'invoice_date': fields.Date.today(),
+            'date': fields.Date.today(),
+            'journal_id': journal_id.id,
+            'invoice_line_ids': [(0, 0, {
+                    'name': kwargs.get('description'),
+                    'ref': f"{kwargs.get('code')}",
+                    'account_id': account_id.id,
+                    'price_unit': f"{kwargs.get('amount')}",
+                    'quantity': 1,
+                    'discount': 0.0,
+                    'code': kwargs.get('code'),
+                    # 'product_uom_id': pr.product_id.uom_id.id if pr.product_id else None,
+                    # 'product_id': pr.product_id.id if pr.product_id else None,
+            })],
+        })
+        return inv
+    
+    def import_records_action(self):
+        if self.data_file:
+            # file_datas = base64.decodestring(self.data_file)
+            file_datas = base64.decodebytes(self.data_file)
+            workbook = xlrd.open_workbook(file_contents=file_datas)
+            sheet_index = int(self.index) if self.index else 0
+            sheet = workbook.sheet_by_index(sheet_index)
+            data = [[sheet.cell_value(r, c) for c in range(sheet.ncols)] for r in range(sheet.nrows)]
+            data.pop(0)
+            file_data = data
+        else:
+            raise ValidationError('Please select file and type of file')
+        errors = ['The Following messages occurred']
+        unimport_count, count = 0, 0
+        success_records = []
+        unsuccess_records = []
+        for row in file_data:
+            if row[0] and row[1] and row[5] and row[2]:
+                code = str(int(row[0])) if type(row[0]) == float else str(int(row[0]))
+                partner = self.create_contact(row[1].strip(), code)
+                branch = self.create_branch(row[1].strip(), code)
+                # Creating the main charts of accounts id for main company account 
+                account_code = str(int(row[2])) if type(row[2]) == float else str(int(row[2])) # CONVERTING IT FROM FLOAT TO INTEGER, THEN TO STRING
+                account_id = self.create_chart_of_account(row[5], account_code, self.account_type)
+                _logger.info(
+                    f"Surviving this game {row} and {account_id.name} and code {account_code}"
+                )
+                journal_type_items = ['bank']
+                journal = None
+                for journal_type in journal_type_items:
+                    journal = self.create_journal(
+                        f"{code}", # 009901
+                        f" {str(row[1])}", 
+                        branch,
+                        journal_type,
+                        )
+                    account_id.update({
+                        'allowed_journal_ids': [(4, journal.id)],
+                        'branch_id': branch,
+                    })
+                budget_amount = row[4]
+                self.create_analytic_account(row[3], partner, branch, account_id, journal, budget_amount)
+                _logger.info(f'data artifacts generated: {account_id.name}')
+                count += 1
+                success_records.append(row[0])
+            else:
+                unsuccess_records.append(row[0])
+        errors.append('Successful Import(s): '+str(count)+' Record(s): See Records Below \n {}'.format(success_records))
+        errors.append('Unsuccessful Import(s): '+str(unsuccess_records)+' Record(s)')
+        if len(errors) > 1:
+            message = '\n'.join(errors)
+          
+    def confirm_notification(self,popup_message):
+        view = self.env.ref('plateau_addons.pl_import_wizard_form_view')
+        view_id = view and view.id or False
+        context = dict(self._context or {})
+        context['message'] = popup_message
+        return {
+                'name':'Message!',
+                'type':'ir.actions.act_window',
+                'view_type':'form',
+                'res_model':'pl.confirm.dialog',
+                'views':[(view.id, 'form')],
+                'view_id':view.id,
+                'target':'new',
+                'context':context,
+                }
+
+    def import_account_transaction(self):
+        # MDA Bank transactions sample
+        if self.data_file:
+            file_datas = base64.decodebytes(self.data_file)
+            workbook = xlrd.open_workbook(file_contents=file_datas)
+            sheet_index = int(self.index) if self.index else 0
+            sheet = workbook.sheet_by_index(sheet_index)
+            data = [[sheet.cell_value(r, c) for c in range(sheet.ncols)] for r in range(sheet.nrows)]
+            data.pop(0)
+            file_data = data
+        else:
+            raise ValidationError('Please select file and type of file')
+        errors = ['The Following messages occurred']
+        unimport_count, count = 0, 0
+        success_records = []
+        unsuccess_records = []
+        account_bank_statement_line = self.env['account.bank.statement.line'].sudo()
+        if not self.running_journal_id:
+            raise ValidationError('please select a running journal') 
+        
+        for row in file_data:
+            # 0 Date of Approval, 1 Date of Payment,	2 Head
+            # 3 Sub-Head, 4 Credit (₦)  5 Debit (₦) 
+            journal_head = row[2]
+            date_of_payment = fields.Date.today() 
+            year, month, day = False, False, False
+            if row[1]:
+                if type(row[1]) in [float, int]:
+                    date_of_payment = datetime(*xlrd.xldate_as_tuple(row[1], 0))
+                elif type(row[1]) in str:
+                    dp = row[1].split('/')
+                    if dp:
+                        year = int(dp[2])
+                        month = int(dp[1])
+                        day = int(dp[0])
+                        date_of_payment = date(year, month, day)
+            credit = row[6] if row[6] and row[6] > 0 else False
+            debit = row[7] if row[7] and row[7] > 0 else False
+            narration = row[5]
+            if journal_head and debit:
+                source_journal = self.env['account.journal'].search([('code', '=', str(journal_head))], limit = 1)
+                if source_journal:
+                    # internal_payment = self.create_internal_payment(
+                    #     date_of_payment, 
+                    #     credit,
+                    #     debit,
+                    #     narration,
+                    #     source_journal,
+                    #     )
+                    credit_vals = {
+                        'journal_id': source_journal.id, 
+                        'amount': debit,
+                        'payment_ref': f"{row[4]}, {narration}",
+                        'date': date_of_payment
+                    }
+                    debit_vals = {
+                        'journal_id': self.running_journal_id.id, 
+                        'amount': -debit,
+                        'payment_ref': f"{row[4]}, {narration}",
+                        'date': date_of_payment
+                    }
+                    account_bank_statement_line.create(credit_vals) 
+                    account_bank_statement_line.create(debit_vals) 
+                    _logger.info(f'Loading the journal payment: {journal_head}')
+                    count += 1
+                    success_records.append(journal_head)
+                else:
+                    unsuccess_records.append(f"No related journal with code {journal_head} found ")
+
+            elif credit and not journal_head:
+                account_bank_statement_line = self.env['account.bank.statement.line'].sudo()
+                credit_vals = {
+                    'journal_id': self.running_journal_id.id, 
+                    'amount': credit,
+                    'payment_ref': narration,
+                    'date': date_of_payment
+                }
+                account_bank_statement_line.create(credit_vals) 
+            else:
+                unsuccess_records.append(journal_head)
+        errors.append('Successful Import(s): '+str(count)+' Record(s): See Records Below \n {}'.format(success_records))
+        errors.append('Unsuccessful Import(s): '+str(unsuccess_records)+' Record(s)')
+        if len(errors) > 1:
+            message = '\n'.join(errors)
+            return self.confirm_notification(message)
+
+    def create_internal_payment(self, date_of_payment, credit, debit, narration, mda_journal):
+        running_journal = self.running_journal_id
+        account_payment = self.env['account.payment']
+        vals = {
+            'is_internal_transfer': True, 
+            'payment_type': 'outbound' if debit else 'inbound', 
+            'amount': debit or credit,
+            'narration': narration,
+            'journal_id': running_journal.id if debit else mda_journal.id,
+            'destination_journal_id': mda_journal.id if debit else running_journal.id,
+            'payment_date': date_of_payment
+        }
+        payment = account_payment.create(vals) 
+        payment.create_generate_statement_line(payment)
+        
+class PLDialogModel(models.TransientModel):
+    _name="pl.confirm.dialog"
+
+    def get_default(self):
+        if self.env.context.get("message", False):
+            return self.env.context.get("message")
+        return False 
+
+    name = fields.Text(string="Message",readonly=True,default=get_default)
+

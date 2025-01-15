@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="document_document_inherit_form_view">
+            <field name="name">Document Entries --</field>
+            <field name="model">documents.document</field>
+            <field name="inherit_id" ref="documents.document_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='folder_id']" position="after">
+                    <field name="submitted_by"/>
+                    <field name="submitted_date"/>
+                    <field name="department_id"/>
+                </xpath> 
+            </field>
+        </record>
+        <record model="ir.ui.view" id="document_folder_form_view">
+            <field name="name">Document Folder --</field>
+            <field name="model">documents.folder</field>
+            <field name="inherit_id" ref="documents.folder_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_see_actions']" position="after">
+                    <button name="get_xy_data" type="object" class="oe_stat_button" icon="fa-book">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">test data</span>
+                        </div>
+                    </button>
+                    <button name="check_due_submission" type="object" class="oe_stat_button" icon="fa-book">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value"><field name="number_failed_submission"/></span>
+                            <span class="o_stat_text">Due documents</span>
+                        </div>
+                    </button>
+                    <button name="check_success_submission" type="object" class="oe_stat_button" icon="fa-book">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value"><field name="number_successful_submission"/></span>
+                            <span class="o_stat_text">Submissions</span>
+                        </div>
+                    </button>
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value"><field name="number_of_awaiting"/></span>
+                        <span class="o_stat_text">Awaiting</span>
+                    </div>
+                </xpath> 
+                <xpath expr="//field[@name='parent_folder_id']" position="after">
+                    <field name="department_ids" string="Department" options="{'no_create_edit': True}" widget="many2many_tags"/>
+                    <field name="district_ids" string="District" options="{'no_create_edit': True}" widget="many2many_tags"/>
+                    <field name="users_responsible" string="Users Responsible" options="{'no_create_edit': True}" widget="many2many_tags"/>
+                    <field name="users_followers" string="Followers" options="{'no_create_edit': True}" widget="many2many_tags"/>
+
+                    <!-- <field name="number_failed_submission"/>
+                    <field name="number_successful_submission"/> -->
+                </xpath> 
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="period_type"/>
+                    <field name="applicable_date" readonly="0" force_save="1" attrs="{'invisible': [('period_type', '!=', 'when_applicable')]}"/>
+                    <field name="interval_period" readonly="0" force_save="1" attrs="{'required': [('period_type', 'not in', ['when_applicable','on_request'])], 
+                    'invisible': [('period_type', 'in', ['when_applicable','on_request'])]}"/>
+                    <field name="next_reoccurance_date" readonly="0" force_save="1" attrs="{'required': [('period_type', 'not in', ['when_applicable','on_request'])], 
+                    'invisible': [('period_type', 'in', ['when_applicable','on_request'])]}"/>
+                    
+                    <field name="submission_minimum_range" readonly="0" force_save="1" attrs="{'required': [('period_type', 'not in', ['when_applicable','on_request'])], 
+                    'invisible': [('period_type', 'in', ['when_applicable','on_request'])]}"/>
+                    <field name="submission_maximum_range" readonly="0" force_save="1" attrs="{'required': [('period_type', 'not in', ['when_applicable','on_request'])], 
+                    'invisible': [('period_type', 'in', ['when_applicable','on_request'])]}"/>
+                    <field name="submission_start_date" />
+                    <field name="expiry_date" />
+                </xpath> 
+
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Submitted documents">
+                        <field name="document_ids" context="{
+                            'form_view_ref': 'documents.document_view_form', 
+                            }">
+                            <tree string="">
+                                <field name="name"/>
+                                <field name="folder_id"/>
+                                <field name="memo_category_id"/>
+                                <field name="submitted_by"/>
+                                <field name="department_id"/>
+                                <field name="submitted_date"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record> 
+    </data>
+</odoo>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="memo_fleet_maintenance_view" model="ir.ui.view">
+            <field name="name">Memo Fleet form</field>
+            <field name="model">memo.fleet.maintenance</field>
+            <field name="arch" type="xml">
+                <form string="Maintenance">
+                    <header>
+                        <button name="button_confirm_service_action" class="oe_highlight" string="Confirm Service" type="object"
+                        attrs="{'invisible':[('state','in', 'draft')]}"/>
+                        <button name="button_reverse_confirmed_service_action" class="oe_highlight" string="Reverse Service" 
+                        type="object"
+                        attrs="{'invisible':[('state','in', 'confirm')]}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="state" invisible="1"/> 
+                                <field name="vehicle_id" options="{'no_create':True, 'no_open': False}"/> 
+                                <field name="requested_by" options="{'no_create':True, 'no_open': False}"/> 
+                                <field name="serviced_by" options="{'no_create':True, 'no_open': False}"/> 
+                            </group>
+                            <group>
+                                <field name="start_time" string="Start date"/> 
+                                <field name="end_time" string="Finished date"/> 
+                                <field name="next_service_date"/> 
+                                <field name="state_maintenace_required" string="Maintenace Description"/> 
+                                <field name="service_resolution" string="Service resolution"/> 
+                                <field name="status"/> 
+                                
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_memo_fleet_maintenance_filter" model="ir.ui.view">
+			<field name="name">Memo fleet maintenance</field>
+			<field name="model">memo.fleet.maintenance</field>
+			<field name="arch" type="xml">
+				<search string="Search">
+                    <field name="vehicle_id"/> 
+                    <field name="requested_by"/> 
+                    <field name="serviced_by"/> 
+                    <field name="start_time" string="Start date"/> 
+                    <field name="end_time" string="Finished date"/> 
+                    <field name="next_service_date"/> 
+				</search>
+			</field>
+		</record>
+
+        <record id="memo_fleet_tree_view" model="ir.ui.view">
+            <field name="name">Memo fleet Tree </field>
+            <field name="model">memo.fleet.maintenance</field>
+            <field name="arch" type="xml">
+                <tree string="Trips">
+                    <field name="vehicle_id" options="{'no_create':True, 'no_open': False}"/> 
+                    <field name="requested_by" options="{'no_create':True, 'no_open': False}"/> 
+                    <field name="serviced_by" options="{'no_create':True, 'no_open': False}"/> 
+                    <field name="start_time" string="Start date"/> 
+                    <field name="end_time" string="Finished date"/> 
+                    <field name="next_service_date"/> 
+                </tree>
+            </field>
+        </record>
+         
+
+        <record id="memo_fleet_maintenance_action" model="ir.actions.act_window">
+			<field name="name">Fleet maintenance</field>
+			<field name="res_model">memo.fleet.maintenance</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click To Create.
+				</p>
+			</field>
+		</record>
+ 
+        <menuitem id="memo_maintenance_menu" name="Maintenace" sequence="35" 
+            action="memo_fleet_maintenance_action"
+            groups="company_memo.group_memo_fleet"
+            parent="company_memo.menu_memo_vehicle_setting_menu"/>
+
+    </data>
+</odoo>

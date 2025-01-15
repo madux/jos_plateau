@@ -1,0 +1,210 @@
+<?xml version="1.0" ?>
+<odoo>
+        <data>
+            <menuitem id="base_employee_main_menu" name="Base Info" parent="hr.menu_human_resources_configuration" sequence="20" groups="base.group_user"/>
+            <record model="ir.ui.view" id="hr_unit_tree">
+                <field name="name">Unit</field>
+                <field name="model">hr.work.unit</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string='Unit' editable="bottom">
+                        <field name="name"/>
+                        <field name="code"/>
+                    </tree>
+                </field>
+            </record>
+
+             <record id="hr_unit_search" model="ir.ui.view">
+                <field name="name">Unit</field>
+                <field name="model">hr.work.unit</field>
+                <field name="priority" eval="8" />
+			    <field name="arch" type="xml">
+                    <search string="Unit">
+                        <field name="name"/>
+                        <field name="code"/>
+				    </search>
+                </field>
+            </record>
+
+            <record id="hr_unit_action" model="ir.actions.act_window">
+                    <field name="name">Unit</field>
+                    <field name="res_model">hr.work.unit</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="domain">[]</field>
+                    <field name="context">{}</field>
+                    <field name="view_id" eval="False"/>
+                    <field name="help" type="html">
+                      <p class="o_view_nocontent_smiling_face">
+                        Click to add a new record.
+                      </p>
+                    </field>
+            </record>
+            <!-- <menuitem action="hr_unit_action" id="hr_unit_menu_sub_id" name="Unit" parent="base_employee_main_menu" sequence="2"/> -->
+
+            <record model="ir.ui.view" id="res_district_tree">
+                <field name="name">District</field>
+                <field name="model">hr.district</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string='District' editable="bottom">
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="state_id"/>
+                        <field name="lga_id"/>
+                    </tree>
+                </field>
+            </record>
+
+             <record id="res_district_search" model="ir.ui.view">
+                <field name="name">District Search</field>
+                <field name="model">hr.district</field>
+                <field name="priority" eval="8" />
+			    <field name="arch" type="xml">
+                    <search string="District">
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="lga_id"/>
+				    </search>
+                </field>
+            </record>
+
+            <record id="res_district_action" model="ir.actions.act_window">
+                    <field name="name">District</field>
+                    <field name="res_model">hr.district</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="domain">[]</field>
+                    <field name="context">{}</field>
+                    <field name="view_id" eval="False"/>
+                    <field name="help" type="html">
+                      <p class="o_view_nocontent_smiling_face">
+                        Click to add a new record.
+                      </p>
+                    </field>
+            </record>
+            <menuitem action="res_district_action" id="res_district_menu_sub_id" name="District" parent="eedc_addons.base_employee_main_menu" sequence="1" groups="base.group_user"/>
+            <menuitem action="res_district_action" id="res_district_contact_menu_id" name="District" parent="contacts.menu_localisation" sequence="40" groups="base.group_user"/>
+
+            <record model="ir.ui.view" id="hr_rank_tree">
+                <field name="name">Rank</field>
+                <field name="model">hr.rank</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string='Rank' editable="bottom">
+                        <field name="name"/>
+                        <field name="code"/>
+                    </tree>
+                </field>
+            </record>
+
+             <record id="hr_rank_search" model="ir.ui.view">
+                <field name="name">Rank Search</field>
+                <field name="model">hr.rank</field>
+                <field name="priority" eval="8" />
+			    <field name="arch" type="xml">
+                    <search string="Rank">
+                        <field name="name"/>
+                        <field name="code"/>
+				    </search>
+                </field>
+            </record>
+
+            <record id="hr_rank_action" model="ir.actions.act_window">
+                    <field name="name">Rank</field>
+                    <field name="res_model">hr.rank</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="domain">[]</field>
+                    <field name="context">{}</field>
+                    <field name="view_id" eval="False"/>
+                    <field name="help" type="html">
+                      <p class="o_view_nocontent_smiling_face">
+                        Click to add a new record.
+                      </p>
+                    </field>
+            </record>
+            <menuitem action="hr_rank_action" id="hr_rank_menu_sub_id" name="Rank" parent="base_employee_main_menu" sequence="1"/>
+            
+            <record model="ir.ui.view" id="hr_grade_tree">
+                <field name="name">grade</field>
+                <field name="model">hr.grade</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string='Grade' editable="bottom">
+                        <field name="name"/>
+                        <field name="code"/>
+                    </tree>
+                </field>
+            </record>
+
+             <record id="hr_grade_search" model="ir.ui.view">
+                <field name="name">grade Search</field>
+                <field name="model">hr.grade</field>
+                <field name="priority" eval="8"/>
+			    <field name="arch" type="xml">
+                    <search string="Grade">
+                        <field name="name"/>
+                        <field name="code"/>
+				    </search>
+                </field>
+            </record>
+
+            <record id="hr_grade_action" model="ir.actions.act_window">
+                    <field name="name">grade</field>
+                    <field name="res_model">hr.grade</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="domain">[]</field>
+                    <field name="context">{}</field>
+                    <field name="view_id" eval="False"/>
+                    <field name="help" type="html">
+                      <p class="o_view_nocontent_smiling_face">
+                        Click to add a new record.
+                      </p>
+                    </field>
+            </record>
+            <menuitem action="hr_grade_action" id="hr_grade_menu_sub_id" name="grade" parent="base_employee_main_menu" sequence="1"/>
+
+            <record model="ir.ui.view" id="res_lga_tree">
+                <field name="name">LGA</field>
+                <field name="model">res.lga</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string='LGA' editable="bottom">
+                        <field name="name"/>
+                        <field name="code"/>
+                    </tree>
+                </field>
+            </record>
+
+             <record id="lga_search" model="ir.ui.view">
+                <field name="name">LGA Search</field>
+                <field name="model">res.lga</field>
+                <field name="priority" eval="8" />
+			    <field name="arch" type="xml">
+                    <search string="LGA">
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="state_id"/>
+                        <group  expand='0' string='Group by...'>
+                            <filter name="group_state_id" string='State' domain="[]" context="{'group_by' : 'state_id'}"/>
+                        </group>
+				    </search>
+                </field>
+            </record>
+
+            <record id="res_lga_action" model="ir.actions.act_window">
+                    <field name="name">LGA</field>
+                    <field name="res_model">res.lga</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="domain">[]</field>
+                    <field name="context">{}</field>
+                    <field name="view_id" eval="False"/>
+                    <field name="context">{'search_default_group_state_id': 1,'search_default_group_state_id': 1}</field>
+                    <field name="help" type="html">
+                      <p class="o_view_nocontent_smiling_face">
+                        Click to add a new record.
+                      </p>
+                    </field>
+            </record>
+            <menuitem action="res_lga_action" id="res_lga_menu_sub_id" name="LGA(s)" parent="contacts.menu_localisation" sequence="3"/>
+            
+        </data>
+</odoo>

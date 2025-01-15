@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="account_public_segment_form_view" model="ir.ui.view">
+        <field name="name">account.public.segment</field>
+        <field name="model">account.public.segment</field>
+        <field name="arch" type="xml">
+            <form string="Import ">
+                <header>
+                    Import 
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" invisible="0" required="1"/> 
+                            <field name="code"/> 
+                            <field name="account_segment_ids" required="0"  widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="account_branch_ids" required="0" widget="many2many_tags"/>
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_public_segment_tree_view" model="ir.ui.view">
+        <field name="name">account.public.segment</field>
+        <field name="model">account.public.segment</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" invisible="0" required="1"/> 
+                <field name="code"/> 
+            </tree>
+        </field>
+    </record> 
+
+    <record id="action_account_public_segment" model="ir.actions.act_window">
+        <field name="name">Import</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.public.segment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+     <menuitem
+            id="menu_public_chart"
+            name="Chart of Account Segment"
+            parent="account.menu_finance_configuration"
+            sequence="3"/>
+     
+    <menuitem
+            id="menu_import_applicants_records"
+            name="Public Chart of Account Segment"
+            parent="plateau_addons.menu_public_chart"
+            action="plateau_addons.action_account_public_segment"
+            sequence="1"/>
+
+</odoo>

@@ -1,0 +1,82 @@
+<odoo>
+  <data>
+
+        <!-- <record id="helpdesk_extension_team_view_form" model="ir.ui.view">
+            <field name="name">helpdesk.team.form.multi.branch</field>
+            <field name="model">helpdesk.team</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//h2[1]" position="before">
+                    <h2>Branch</h2>
+                    <div class="row mt16 o_settings_container" id="transition">
+                        <div class="col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div id="branch_id">
+                                    <label for="branch_id"/>
+                                    <div class="text-muted">
+                                        Rooms are unique for each branch
+                                    </div>
+                                    <div class="text-warning mb4 mt16">
+
+                                        <field name="room_type" invisible="1" />
+                                        <field name="branch_id"  attrs="{'required':[('room_type', 'in', ['Exam Room', 'Laboratory','Ophthalmology','Dental','Pharmacy','Waiting Room'])]}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath> 
+            </field>
+        </record>
+
+      <record id="multi_branch_team_view_search" model="ir.ui.view">
+          <field name="name">helpdesk.team.multi.branch</field>
+          <field name="model">helpdesk.team</field>
+          <field name="inherit_id" ref="helpdesk.helpdesk_team_view_search"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='name']" position="after">
+                  <field name="branch_id" />
+              </xpath> 
+              <xpath expr="//filter[@name='archived']" position="after"> 
+                  <filter string="Branch" domain="[]" name="branch_filter" context="{'group by':'branch_id'}"/>
+              </xpath> 
+          </field>
+      </record>
+
+      <record id="helpdesk_team_view_tree_extended" model="ir.ui.view">
+          <field name="name">helpdesk.team.view.treee.multi_branch</field>
+          <field name="model">helpdesk.team</field>
+          <field name="inherit_id" ref="helpdesk.helpdesk_team_view_tree"/>
+          <field name="arch" type="xml">
+              <field name="alias_id" position="after">
+                  <field name="branch_id" />
+              </field> 
+          </field>
+      </record>
+
+    <record id="helpdesk_ticket_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after" >
+                <field name="ticket_type_categ" invisible="1" />
+                  <field name="branch_id" attrs="{'required': [('ticket_type_categ', '=', 'patient')]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="helpdesk_sla_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.sla.form</field>
+        <field name="model">helpdesk.sla</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_sla_view_form"/>
+        <field name="arch" type="xml">
+            <field name="ticket_type_id" position="after" >
+	        	<field string="Branch" name="branch_id" />
+            </field>
+        </field>
+    </record> -->
+    <!-- MIGRATIONTODO TODO MIGRATION Uncomment all when helpdesk_extension is installed-->
+
+  </data>
+</odoo>

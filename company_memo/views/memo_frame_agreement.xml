@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="memo_frame_agreement_form" model="ir.ui.view">
+            <field name="name">memo.frame.agreement</field>
+            <field name="model">memo.frame.agreement</field>
+            <field name="arch" type="xml">
+                <form string="Frame agreement">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/> 
+                                <field name="active" default="1" readonly="0"/> 
+                                <field name="memo_id" required="1" options="{'no_create':True, 'no_open': False}"/> 
+                            </group>
+                            <group>
+                                <field name="currency_id"/>
+                                <field name="agreed_budget" required="1"/>
+                                <field name="description"/>
+                                <field name="code" string="code" placeholder="K, Y, A"/>
+                            </group>
+                            <notebook>
+                                <page string="Client Lines">
+                                    <field name="client_ids" required="1">
+                                        <tree string="clients">
+                                            <field name="name"/>
+                                            <field name="phone"/>
+                                            <field name="email"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook> 
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="memo_frame_agreement_tree" model="ir.ui.view">
+            <field name="name">memo.frame.agreement</field>
+            <field name="model">memo.frame.agreement</field>
+			<field name="arch" type="xml">
+				<tree string="List">
+                    <field name="name"/>
+                    <field name="code"/>
+                    
+				</tree>
+			</field>
+		</record>
+        <record model="ir.actions.act_window" id="frame_agreement_configuration_action">
+            <field name="name">Frame Agreement</field>
+            <field name="res_model">memo.frame.agreement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- <menuitem id="memo_frame_agreement_configuration" name="Frame Agreement"
+            parent="company_memo.memo_configuration" action="company_memo.frame_agreement_configuration_action" sequence="5" groups="base.group_system,company_memo.mainmemo_manager"/> -->
+         
+    </data>
+</odoo>

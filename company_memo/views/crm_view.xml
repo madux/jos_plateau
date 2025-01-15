@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="crm_lead_inherit_view_form">
+            <field name="name">CRM LEAD</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="memo_id" readonly="1" force_save="1" invisible="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                    <field name="code"  readonly="1" required="0" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="crm_lead_inherit_view_tree">
+            <field name="name">CRM LEAD</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="code"  readonly="1" required="0" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+         
+    </data>
+</odoo>

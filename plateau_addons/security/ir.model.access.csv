@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pl_import_wizard_id,pl_import_wizard_name,plateau_addons.model_pl_import_wizard,,1,1,1,1
+access_pl_confirm_dialog_id,pl_confirm_dialog_name,plateau_addons.model_pl_confirm_dialog,,1,1,1,1
+access_account_dynamic_report_id,account_account_dynamic_report_name,plateau_addons.model_account_dynamic_report,,1,1,1,1
+access_account_public_segment_id,account_public_segment_name,plateau_addons.model_account_public_segment,,1,1,1,1
+access_ng_account_budget_id,accountng_account_budget_name,plateau_addons.model_ng_account_budget,,1,1,1,1

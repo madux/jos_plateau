@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="process_healthmate_invoice_url_param" model="ir.config_parameter">
+            <field name="key">process_healthmate_invoice_url</field>
+            <field name="value">https://europe-west1-clinics-companion-app-dev.cloudfunctions.net/webApi/api/v1/invoice/</field>
+        </record>
+    </data>
+</odoo>

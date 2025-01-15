@@ -1,0 +1,40 @@
+<odoo>
+  <data>
+    <record id="view_user_form_extended" model="ir.ui.view">
+        <field name="name">res.user.form.extended</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='access_rights']" position="inside" >
+	        	<group string="Multi Branches" >
+                    <field string="Allowed Branches" name="branch_ids" widget="many2many_tags" />
+                    <field string="Current Branch" name="branch_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_user_preference_form_extended" model="ir.ui.view">
+        <field name="name">res.user.preference.form.extended</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+                <xpath expr="//field[@name='email']" position="after">
+                         <field name="branch_id" widget="selection"/>
+                </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_form_extended" model="ir.ui.view">
+        <field name="name">res.partner.form.extended</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="lang" position="after" >
+	        	<field string="Branch" name="branch_id" />
+            </field>
+        </field>
+    </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="document_folder_view_kanban" model="ir.ui.view" >
+            <field name="name">documents.folder.dashboard</field>
+            <field name="model">documents.folder</field>
+            <field name="priority">200</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_helpdesk_kanban o_helpdesk_view" group_create="0" create="0" sample="1" action="action_view_documents" type="object">
+                <!-- <kanban class="oe_background_grey o_kanban_dashboard o_helpdesk_kanban o_helpdesk_view" group_create="0" create="0" js_class="helpdesk_team_kanban_view" sample="1" action="action_view_documents" type="object"> -->
+                    <field name="name"/>
+                    <field name="next_reoccurance_date"/>
+                    <field name="interval_period"/>
+                    <field name="submission_maximum_range"/>
+                    <field name="number_failed_submission"/>
+                    <field name="number_successful_submission"/>
+                    <field name="number_of_awaiting"/>
+                    <templates>
+
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                 <div class="o_kanban_card_header">
+                                     <div class="o_kanban_card_header_title">
+                                        <div class="o_primary"><field name="display_name"/></div>
+                                          <i class="fa fa-envelope-o" title="Name" role="img" aria-label="Name"/>&amp;nbsp;  
+                                    </div>
+                                    <div class="o_kanban_manage_button_section">
+                                        <a class="o_kanban_manage_toggle_button o_dropdown_kanban" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+                                    </div>
+                                </div> 
+                                <div class="container o_kanban_card_content">
+                                    <div class="row">
+                                        <div class="col o_kanban_primary_left">
+                                            <button class="btn btn-primary o_helpdesk_ticket_btn" name="action_view_documents" type="object" context="{'default_id': active_id}">My Documents</button>
+                                        </div>
+                                    </div>
+                                    <div class="col o_kanban_primary_right">
+                                      <div class="mb4">
+                                          <a name="action_view_documents" type="object" title="Number of documents submitted within deadline" class="justify-content-between flex-nowrap d-inline-flex w-100">
+                                              <span>Submitted before Deadline</span>
+                                              <span class="ms-3">
+                                                  <field name="number_successful_submission"/>
+                                              </span>
+                                          </a>
+                                      </div>
+                                      <div class="mb4" invisible="success_rate == 0 or success_rate &lt; 0.0">
+                                          <a name="action_view_success_rate" type="object" title="Ratio of documents successfully raised and approved within the submission date" class="justify-content-between flex-nowrap d-inline-flex w-100">
+                                              <span>Success Rate</span>
+                                              <span class="ms-3">
+                                                  <field name="success_rate"/>
+                                              </span>
+                                          </a>
+                                      </div>
+                                      <!-- <div class="mb4">
+                                          <a name="action_view_avg" type="object" title="Average Submission rate" class="justify-content-between flex-nowrap d-inline-flex w-100">
+                                              <span>Average</span>
+                                              <span class="ms-3">
+                                                  <b>
+                                                      <strong class="fa fa-fw mt4 fa-smile-o text-success fw-bolder" t-if="record.number_successful_submission &gt;= 4" title="Average Rating: Satisfied" role="img" aria-label="Happy face"/>
+                                                      <strong class="fa fa-fw mt4 fa-meh-o text-warning fw-bolder" t-elif="record.number_successful_submission &gt;= 2" title="Average Rating: Okay" role="img" aria-label="Neutral face"/>
+                                                      <strong class="fa fa-fw mt4 fa-frown-o text-danger fw-bolder" t-else="" title="Average Rating: Dissatisfied" role="img" aria-label="Sad face"/>
+                                                  </b>
+                                                  <field name="average_submission_rate" nolabel="1" widget="percentage"/>
+                                              </span>
+                                          </a>
+                                      </div> -->
+                                  </div>
+                                  <div class="row pt-5">
+                                        <div class="col border-start">
+                                            <a name="action_view_number_of_awaiting" type="object" class="d-flex flex-column align-items-center">
+                                                <span class="fw-bold"><field name="number_of_awaiting"/></span>
+                                                <span class="text-muted">Awaiting Approval</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a name="action_view_open_documents" type="object" class="d-flex flex-column align-items-center">
+                                                <span class="fw-bold"><field name="opened_documents"/></span>
+                                                <span class="text-muted">Open</span>
+                                            </a>
+                                        </div>
+                                        <div class="col border-start">
+                                            <a name="action_view_closed_documents" type="object" class="d-flex flex-column align-items-center">
+                                                <span class="fw-bold"><field name="closed_documents"/></span>
+                                                <span class="text-muted">Closed</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="document_folder_dashboard_action_main" model="ir.actions.act_window">
+        <field name="name">Document folder Overview</field>
+        <field name="res_model">documents.folder</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{}</field>
+        <field name="view_id" ref="company_memo.document_folder_view_kanban"/>
+        <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+                No record found
+            </p>
+            <p>
+                Create a folder to start to organize your document by expertise 
+            </p>
+        </field>
+    </record>
+    <menuitem id="internal_memo_document_menu_model" name="Document Request-"
+            parent="internal_memo_menu_model_main2" sequence="40"/>
+
+    <menuitem id="document_folder_dashboard" action="company_memo.document_folder_dashboard_action_main"
+        sequence="2" parent="company_memo.internal_memo_document_menu_model" name="Overview"/>
+    </data>
+</odoo>

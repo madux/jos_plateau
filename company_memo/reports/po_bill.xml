@@ -1,0 +1,217 @@
+<odoo>
+  <data> 
+    <record id="print_po_bill_report" model="ir.actions.report">
+        <field name="name">PO BILL</field>
+        <field name="model">memo.model</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">company_memo.po_print_report_template</field>
+        <field name="report_file">company_memo.po_print_report_template</field>
+        <field name="print_report_name">'PO for - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="company_memo.model_memo_model"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+	</record>
+    <template id="po_print_report_template">
+      <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="o">
+              <t t-call="company_memo.po_print_template"/>
+          </t>
+      </t>
+    </template>
+    <template id="po_print_template">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+            <div class="page" style="padding-top: 10px;">
+                <style>
+                 table {
+                    border-collapse: collapse;
+                    margin-bottom: 40px;
+                }
+
+                th {
+                    background-color: #333;
+                    color: #fff;
+                }
+
+                table, th, tr, td, h3 {
+                    font-size: 16px
+                }
+                .title-header {
+                    font-size: 30px 
+                }
+
+                table, th, tr, td {
+                    border:1px solid #999;
+                    font-family: Times New Roman;
+                    margin-bottom: 3px;
+                    font-size: 12px
+                }
+
+                
+
+                th, td{
+                    padding: 5px;
+                }
+
+                td:nth-child(4) {
+                    color: black;
+                }
+                .accounthead {
+                    background-color: #ccc;
+                }
+
+
+                .outstanding {
+                    color: red;
+                }
+
+                .flex-color {
+                    background-color: #c94141;
+                    text-align: left;
+                    color: #ffffff
+                }
+                </style>
+                <div class="row flex-color p-3">
+                    <div class="col-2">
+                        <span class="report-header"> <t t-esc="o.name"/> <p> <span class="report-header"> <t t-esc="o.client_id.name"/></span></p> </span> 
+                    </div>
+                    <div class="col-2 text-center">
+                    </div>
+                    <div class="col-2 offset-5 text-end">
+                        <strong><span class="report-header">File Number: <t t-esc="o.code"/> </span></strong>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class="col-2">
+                         <span class="report-header">PO Size: <t t-esc="len([r.id for r in o.po_ids])"/> item(s)</span>
+                    </div>
+                    <div class="col-2 offset-2 text-center">
+                    </div>
+                    <div class="col-2 offset-3 text-end">
+                        <span class="report-header"><t t-esc="o.write_uid.name"/><p><span class="report-header"> <t t-esc="datetime.datetime.now().strftime('%B %d, %Y')"/></span></p> </span> 
+                    </div>
+                </div> 
+                <t t-foreach="o.po_ids" t-as="po">
+                    <div class='alert alert-danger' role="alert">
+                        <h3 class="text-bold flex-color p-2"><t t-esc="po.name"/></h3><br/>
+                        Vendor: <t t-esc="po.partner_id.name"/><br/>
+                        Date: <t t-esc="po.date_planned"/><br/>
+                    </div>
+                    <div class="table-responsive">
+                        <table style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th width="10%">
+                                        PO No.
+                                    </th>
+                                    <th width="10%">
+                                        # Our item
+                                    </th>
+                                    
+                                    <th width="20%">
+                                        Description
+                                    </th>
+                                    <th width="10%">
+                                        Qty
+                                    </th>
+                                    <!-- <th width="10%">
+                                        UOM
+                                    </th> -->
+                                    <th width="10%">
+                                        Received
+                                    </th>
+                                     
+                                    <th width="15%">
+                                        Unit Price
+                                    </th>
+                                    <th width="20%">
+                                        SubTotal
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="po.order_line" t-as="ol">
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="po.name"/></h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="ol.product_id.name"/></h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="ol.name"/></h3>
+                                        </td>
+                                        
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="ol.product_qty"/></h3>
+                                        </td>
+                                        
+                                        <!-- <td>
+                                            <h3 class="text-bold"><t t-esc="ol.product_qty_uom.name"/></h3>
+                                        </td> -->
+                                        
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="ol.qty_received"/></h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="po.currency_id.symbol"/> <t t-esc="'{0:,}'.format(float(ol.price_unit))"/></h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="po.currency_id.symbol"/><t t-esc="'{0:,}'.format(float(ol.price_total))"/></h3>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>  
+                </t>  
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 flex-grow-1 bd-highlight">
+                        <h3 class="text-bold flex-color p-2">Signature Box</h3>
+                        <div class="table-responsive">
+                            <table class="table align-items-left mb-0">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">
+                                        </th>
+                                        <th width="50%">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Client Name:</h3>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Date/Time</h3>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Signature</h3>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+      </t>
+
+    </template>
+
+ 
+  </data>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="seq_memo_model" model="ir.sequence">
+            <field name="name">memo.model</field>
+            <field name="code">memo.model</field>
+            <field name="prefix"></field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="seq_department_suffix_memo_model" model="ir.sequence">
+            <field name="name">department-num</field>
+            <field name="code">department-num</field>
+            <field name="prefix"></field>
+            <field name="padding">2</field>
+        </record>
+        <record id="seq_work_instruction_memo_model" model="ir.sequence">
+            <field name="name">work-instruction</field>
+            <field name="code">work-instruction</field>
+            <field name="prefix">WI</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="seq_frame_agreement_memo_model" model="ir.sequence">
+            <field name="name">memo-frame-agreement</field>
+            <field name="code">memo-frame-agreement</field>
+            <field name="prefix">FR-A</field>
+            <field name="padding">8</field>
+        </record>
+        <record id="seq_crm_lead_memo_model" model="ir.sequence">
+            <field name="name">crm.lead</field>
+            <field name="code">crm.lead</field>
+            <field name="prefix">CRM</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+</odoo>

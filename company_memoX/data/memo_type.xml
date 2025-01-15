@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0"> 
+        <record id="mtype_Payment" model="memo.type">
+            <field name="name">Payment Process</field>
+            <field name="memo_key">Payment</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_loan" model="memo.type">
+            <field name="name">Loan</field>
+            <field name="memo_key">loan</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_employee_update" model="memo.type">
+            <field name="name">Employee Update Request</field>
+            <field name="memo_key">employee_update</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_material_request" model="memo.type">
+            <field name="name">Material request</field>
+            <field name="memo_key">material_request</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_procurement_request" model="memo.type">
+            <field name="name">Procurement Request</field>
+            <field name="memo_key">procurement_request</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_vehicle_request" model="memo.type">
+            <field name="name">Vehicle request</field>
+            <field name="memo_key">vehicle_request</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_leave_request" model="memo.type">
+            <field name="name">Leave Request</field>
+            <field name="memo_key">leave_request</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_server_access" model="memo.type">
+            <field name="name">Server Access Request</field>
+            <field name="memo_key">server_access</field>
+            <field name="active">1</field>
+        </record>
+        
+        <record id="mtype_Cashadvance" model="memo.type">
+            <field name="name">Cash Advance</field>
+            <field name="memo_key">cash_advance</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_soe" model="memo.type">
+            <field name="name">Statement of Expense</field>
+            <field name="memo_key">soe</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_recruitment_request" model="memo.type">
+            <field name="name">Recruitment Request</field>
+            <field name="memo_key">recruitment_request</field>
+            <field name="active">1</field>
+        </record>
+
+        
+         
+
+     </data>
+</odoo>

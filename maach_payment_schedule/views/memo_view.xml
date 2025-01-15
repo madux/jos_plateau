@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_memo_view_form_inherited" model="ir.ui.view">
+        <field name="name">Memo View for payment payment schedule</field>
+        <field name="model">memo.model</field>
+        <field name="inherit_id" ref="company_memo.memo_model_form_view_3"/>
+        <field name="arch" type="xml">
+            <button name="action_post_and_vallidate_payment" position="after">
+                <button name="action_generate_payment_schedule" string="Add to Schedule" type="object" class="oe_highlight" attrs="{'invisible':['|','|', '|',('user_is_approver','!=',True), ('state','not in',['Approve']), ('memo_type_key','not in',['Payment']),('is_request_completed','!=', True)]}"/>
+            </button>
+        </field>
+    </record>
+</odoo>

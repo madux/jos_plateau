@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+        
+        <record id="extension_passport_collection_doc" model="memo.stage.document.line">
+            <field name="name">Passport Collection</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_stage_extension_passport_collection" model="memo.stage">
+            <field name="name">Documents Collection</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">10</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.extension_passport_collection_doc')),
+            ]"/>
+        </record>
+        <record id="extension_add_extension_form" model="memo.stage.document.line">
+            <field name="name">Extension form</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="extension_sub_add_passport" model="memo.stage.document.line">
+            <field name="name">Add passport</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="memo_sub_stage_purchase_fill_extension_form" model="memo.stage">
+            <field name="name">Fill extension form</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="is_sub_stage" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="sequence">4000</field>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.extension_add_extension_form')),
+            (4, ref('company_memo.extension_sub_add_passport')),
+            ]"/>
+        </record>
+
+        <record id="memo_extension_purchase_extension_form" model="memo.stage">
+            <field name="name">Purchase Extension form &amp; Submit to immigration</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">20</field>
+            <field name="description"></field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="sub_stage_ids" eval="[
+            (4, ref('company_memo.memo_sub_stage_purchase_fill_extension_form')),
+            ]"/>
+        </record> 
+         <record id="memo_extension_po_and_pay" model="memo.stage">
+            <field name="name">Create PO:</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">30</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="require_po_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="extension_passport_receipt_from_immigration_doc" model="memo.stage.document.line">
+            <field name="name">Add Received Passport from Immigration</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_stage_extension_receive_passport_from_immigration" model="memo.stage">
+            <field name="name">Receive Passport with Visa Extension</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">40</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.extension_passport_receipt_from_immigration_doc')),
+            ]"/>
+        </record>
+
+        <record id="extension_attached_passport_copy" model="memo.stage.document.line">
+            <field name="name">Attach Passport Copy</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="memo_stage_extension_make_copy_passport_and_send" model="memo.stage">
+            <field name="name">Make Copy and Send to Client</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">50</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.extension_attached_passport_copy')),
+            ]"/>
+        </record>
+        <record id="memo_extension_create_client_invoice4" model="memo.stage">
+            <field name="name">Create Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">60</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/> 
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_extension_permit_create_so_and_pay5" model="memo.stage">
+            <field name="name">Validate Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">70</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record>
+
+        <record id="memo_extension_ops_file_check" model="memo.stage">
+            <field name="name">Operational File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">80</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_extension_financial_file_check" model="memo.stage">
+            <field name="name">Financial File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">90</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_extension_file_closure" model="memo.stage">
+            <field name="name">File Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">100</field>
+             <field name="is_approved_stage" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_travel_extension_closured" model="memo.stage">
+            <field name="name">Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">110</field>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="memo_config_travel_extension" model="memo.config">
+            <field name="memo_type" ref="company_memo.mtype_travel_extension"/>
+            <field name="active">1</field>
+            <field name="project_type">travel</field>
+            <field name="config_tag_id" ref="company_memo.memo_tag_travel_visa"/>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+            <field name="stage_ids" eval="[
+            (4, ref('company_memo.memo_stage_extension_passport_collection')),
+            (4, ref('company_memo.memo_extension_purchase_extension_form')),
+            (4, ref('company_memo.memo_extension_po_and_pay')),
+            (4, ref('company_memo.memo_stage_extension_receive_passport_from_immigration')),
+            (4, ref('company_memo.memo_stage_extension_make_copy_passport_and_send')),
+            (4, ref('company_memo.memo_extension_create_client_invoice4')),
+            (4, ref('company_memo.memo_extension_permit_create_so_and_pay5')),
+            (4, ref('company_memo.memo_extension_ops_file_check')),
+            (4, ref('company_memo.memo_extension_financial_file_check')),
+            (4, ref('company_memo.memo_extension_file_closure')),
+            (4, ref('company_memo.memo_travel_extension_closured')),
+            ]"/>
+        </record>
+         
+        <record id="company_memo.memo_stage_extension_passport_collection" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+        <record id="company_memo.memo_extension_purchase_extension_form" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+        <record id="company_memo.memo_extension_po_and_pay" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+        <record id="company_memo.memo_stage_extension_receive_passport_from_immigration" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+        <record id="company_memo.memo_stage_extension_make_copy_passport_and_send" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+        <record id="company_memo.memo_extension_create_client_invoice4" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+        <record id="company_memo.memo_extension_permit_create_so_and_pay5" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+
+        <record id="company_memo.memo_extension_ops_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+
+        <record id="company_memo.memo_extension_financial_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+
+        <record id="company_memo.memo_extension_file_closure" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+        <record id="company_memo.memo_travel_extension_closured" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_travel_extension"/>
+        </record>
+         
+     </data>
+</odoo>

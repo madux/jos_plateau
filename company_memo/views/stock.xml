@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="memo_stock_location_view">
+            <field name="name">stock location</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="code" string="Stock Code" required="0"/>
+                </xpath> 
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="interval_period"/>
+                    <field name="period_type" required ="interval_period != False"/>
+                    <field name="next_reoccurance_date" readonly="0" force_save="1" required="interval_period != False"/>
+                    <field name="submission_maximum_range" required="interval_period != False"/>
+                    <field name="success_rate"/>
+                     
+                </xpath> 
+
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Submitted documents">
+                        <field name="document_ids">
+                            <tree string="">
+                                <field name="name"/>
+                                <field name="folder_id"/>
+                                <field name="memo_category_id"/>
+                                <field name="submitted_date"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath> 
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="memo_documents_document_view_list">
+            <field name="name">Documents</field>
+            <field name="model">documents.document</field>
+            <field name="inherit_id" ref="documents.documents_view_list"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="memo_category_id" string="Category id" options="{'no_create_edit': True}"/>
+                </xpath> 
+            </field>
+        </record>
+    </data>
+</odoo>

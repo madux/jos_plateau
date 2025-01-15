@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="memo_fleet_form_view" model="ir.ui.view">
+            <field name="name">Memo Fleet form</field>
+            <field name="model">memo.fleet</field>
+            <field name="arch" type="xml">
+                <form string="Memo fleet">
+                    <header>
+                        <button name="action_generate_maintenance_line" class="oe_highlight" string="Generate Service Request" type="object"
+                        attrs="{'invisible':[('require_maintenance','=', False)]}"/> 
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/> 
+                                <field name="vehicle_assigned" options="{'no_create':True, 'no_open': False}"/> 
+                                <field name="memo_id" options="{'no_create':True, 'no_open': False}" readonly="1"/> 
+                                <field name="driver_assigned" options="{'no_create':True, 'no_open': False}"/> 
+                                <field name="source_location_id"/> 
+                                <field name="source_destination_id"/> 
+                                <field name="distance_covered" required="1" options="{'no_create':True, 'no_open': False}"/> 
+                                <field name="requested_by" options="{'no_create':True, 'no_open': False}"/> 
+                            </group>
+                            <group>
+                                <field name="distance_measured"/> 
+                                <field name="start_time"/> 
+                                <field name="end_time"/> 
+                                <field name="number_of_days_covered" force_save="1"/> 
+                                <field name="volume_of_current_fuel"/> 
+                                <field name="volume_of_extra_fuel_used"/> 
+                                <field name="total_fuel_used" force_save="1"/> 
+                                <field name="incident_report"/> 
+                                <field name="require_maintenance"/> 
+                                <field name="state_maintenace_required"/> 
+                            </group>
+                            <notebook>
+                                <page name='Maintenance_line' string='Maintenance History' attrs="{'invisible':[('require_maintenance','=', False)]}">
+                                    <field name="maintenance_ids" string = "Maintenance line">
+                                        <tree string="Maintenance" editable="bottom">
+                                            <field name="vehicle_id" options="{'no_create':True, 'no_open': False}"/> 
+                                            <field name="requested_by" options="{'no_create':True, 'no_open': False}"/> 
+                                            <field name="serviced_by" options="{'no_create':True, 'no_open': False}"/> 
+                                            <field name="start_time" string="Start date"/> 
+                                            <field name="end_time" string="Finished date"/> 
+                                            <field name="next_service_date"/> 
+                                        </tree>
+                                        <form string="Maintenance">
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                        <field name="vehicle_id" options="{'no_create':True, 'no_open': False}"/> 
+                                                        <field name="requested_by" options="{'no_create':True, 'no_open': False}"/> 
+                                                        <field name="serviced_by" options="{'no_create':True, 'no_open': False}"/> 
+                                                    </group>
+                                                    <group>
+                                                        <field name="start_time" string="Start date"/> 
+                                                        <field name="end_time" string="Finished date"/> 
+                                                        <field name="next_service_date"/> 
+                                                        <field name="state"/> 
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_memo_fleet_filter" model="ir.ui.view">
+			<field name="name">Memo fleet</field>
+			<field name="model">memo.fleet</field>
+			<field name="arch" type="xml">
+				<search string="Search">
+                    <field name="code"/> 
+                    <field name="vehicle_assigned" options="{'no_create':True, 'no_open': False}"/> 
+                    <field name="memo_id" options="{'no_create':True, 'no_open': False}" readonly="1"/> 
+                    <field name="driver_assigned" options="{'no_create':True, 'no_open': False}"/> 
+                    <field name="requested_by"/> 
+                    <field name="source_location_id"/> 
+                    <field name="source_destination_id"/> 
+                    <filter string="Active" name="memo_active_filter" domain="[('active','=', True)]"/>
+				</search>
+			</field>
+		</record>
+
+        <record id="memo_fleet_tree_view" model="ir.ui.view">
+            <field name="name">Memo fleet Tree </field>
+            <field name="model">memo.fleet</field>
+            <field name="arch" type="xml">
+                <tree string="Trips">
+                    <field name="code" string="Code"/> 
+                    <field name="vehicle_assigned"/> 
+                    <field name="driver_assigned"/> 
+                    <field name="source_location_id"/> 
+                    <field name="source_destination_id"/> 
+                    <field name="start_time" readonly="1"/>
+                    <field name="end_time" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_memo_product_product_tree" model="ir.ui.view">
+			<field name="name">view.memo.product.template</field>
+			<field name="model">product.template</field>
+			<field name="arch" type="xml">
+				<tree string="Vehicle" create="1">
+                    <field name="name"/>
+                    <field name="vehicle_plate_number" invisible="0"/>
+                    <field name="vehicle_model"/> 
+                    <field name="vehicle_reg_number"/> 
+                    <field name="is_available"/> 
+                </tree>
+			</field>
+		</record>
+        <record model="ir.actions.act_window" id="memo_fleet_action">
+            <field name="name">Memo Fleet</field>
+            <field name="res_model">memo.fleet</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="action_memo_vehicle_setting_action" model="ir.actions.act_window">
+			<field name="name">Fleet Management</field>
+			<field name="res_model">product.template</field>
+			<field name="view_mode">tree,form</field>
+            <field name="domain">[('is_vehicle_product', '=', True)]</field>
+			<field name="view_id" ref="company_memo.view_memo_product_product_tree"/>
+			<field name="context">{"default_is_vehicle_product": True}</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click To Create.
+				</p>
+			</field>
+		</record>
+
+        <record id="memo_fleet_trip_progress_action" model="ir.actions.act_window">
+			<field name="name">Fleet Trip in progress </field>
+			<field name="res_model">memo.fleet</field>
+			<field name="view_mode">tree,form</field>
+            <field name="domain">[('end_time', '=', False)]</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click To Create.
+				</p>
+			</field>
+		</record>
+
+        <menuitem id="menu_memo_vehicle_setting_menu" name="Fleet App" 
+        action = "action_memo_vehicle_setting_action" sequence="3" 
+        web_icon="company_memo,static/description/memo_fleet.png"
+        groups="company_memo.group_memo_fleet"/>
+        <!-- setting this to archive, on change of memo type, the system activates the menu, assign users to the menu   -->
+        <!-- <record id="company_memo.menu_memo_vehicle_setting_menu" model="ir.ui.menu">
+			<field name="active" eval="False"/>
+		</record> -->
+        <menuitem id="memo_fleet_menu" name="Fleets"
+            parent="company_memo.menu_memo_vehicle_setting_menu" sequence="25" 
+            action="action_memo_vehicle_setting_action"/>
+
+        <menuitem id="memo_fleet_trip_menu" name="Trip"
+            parent="company_memo.menu_memo_vehicle_setting_menu" sequence="30"/>
+
+        <menuitem id="memo_fleet_trip_request_menu" name="Trip request"
+            parent="company_memo.memo_fleet_trip_menu" sequence="10" action="company_memo.memo_fleet_action"/>
+        <menuitem id="memo_fleet_trips_progress_menu" name="Trip in progress"
+            parent="company_memo.memo_fleet_trip_menu" sequence="20" action="company_memo.memo_fleet_trip_progress_action"/>
+        <menuitem id="memo_fleet_trips_config_menu" name="Configuration"
+            parent="company_memo.menu_memo_vehicle_setting_menu" sequence="40"/>
+
+        <menuitem id="memo_fleet_trips_vehicle_settings_menu" name="Vehicle Maintenance"
+            parent="company_memo.memo_fleet_trips_config_menu" sequence="1" action="company_memo.action_memo_vehicle_setting_action"/>
+    
+        
+        <menuitem id="memo_fleet_trips_vehicle_settings_menu" name="Vehicle settings"
+            parent="company_memo.memo_fleet_trips_config_menu" sequence="1" action="company_memo.action_memo_vehicle_setting_action"/>
+    
+    </data>
+</odoo>

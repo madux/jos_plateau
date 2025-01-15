@@ -1,0 +1,3850 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="res.lga" id="ng_lga_2">
+            <field name="name">Aba North</field>
+            <field name="code">LGA-2</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+        <record model="res.lga" id="ng_lga_3">
+            <field name="name">Aba South</field>
+            <field name="code">LGA-3</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_4">
+            <field name="name">Arochukwu</field>
+            <field name="code">LGA-4</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_5">
+            <field name="name">Bende</field>
+            <field name="code">LGA-5</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_6">
+            <field name="name">Ikwuano</field>
+            <field name="code">LGA-6</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_7">
+            <field name="name">Isiala-Ngwa North</field>
+            <field name="code">LGA-7</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_8">
+            <field name="name">Isiala-Ngwa South</field>
+            <field name="code">LGA-8</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_9">
+            <field name="name">Isuikwato</field>
+            <field name="code">LGA-9</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_10">
+            <field name="name">Obi Nwa</field>
+            <field name="code">LGA-10</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_11">
+            <field name="name">Ohafia</field>
+            <field name="code">LGA-11</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_12">
+            <field name="name">Osisioma</field>
+            <field name="code">LGA-12</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_13">
+            <field name="name">Ngwa</field>
+            <field name="code">LGA-13</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_14">
+            <field name="name">Ugwunagbo</field>
+            <field name="code">LGA-14</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_15">
+            <field name="name">Ukwa East</field>
+            <field name="code">LGA-15</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_16">
+            <field name="name">Ukwa West</field>
+            <field name="code">LGA-16</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_17">
+            <field name="name">Umuahia North</field>
+            <field name="code">LGA-17</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_18">
+            <field name="name">Umuahia South</field>
+            <field name="code">LGA-18</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_19">
+            <field name="name">Umu-Neochi</field>
+            <field name="code">LGA-19</field>
+            <field name="state_id" ref="eedc_addons.ng_state_1"/>
+            </record>
+<record model="res.lga" id="ng_lga_21">
+            <field name="name">Demsa</field>
+            <field name="code">LGA-21</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_22">
+            <field name="name">Fufore</field>
+            <field name="code">LGA-22</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_23">
+            <field name="name">Ganaye</field>
+            <field name="code">LGA-23</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_24">
+            <field name="name">Gireri</field>
+            <field name="code">LGA-24</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_25">
+            <field name="name">Gombi</field>
+            <field name="code">LGA-25</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_26">
+            <field name="name">Guyuk</field>
+            <field name="code">LGA-26</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_27">
+            <field name="name">Hong</field>
+            <field name="code">LGA-27</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_28">
+            <field name="name">Jada</field>
+            <field name="code">LGA-28</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_29">
+            <field name="name">Lamurde</field>
+            <field name="code">LGA-29</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_30">
+            <field name="name">Madagali</field>
+            <field name="code">LGA-30</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_31">
+            <field name="name">Maiha</field>
+            <field name="code">LGA-31</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_32">
+            <field name="name">Mayo-Belwa</field>
+            <field name="code">LGA-32</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_33">
+            <field name="name">Michika</field>
+            <field name="code">LGA-33</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_34">
+            <field name="name">Mubi North</field>
+            <field name="code">LGA-34</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_35">
+            <field name="name">Mubi South</field>
+            <field name="code">LGA-35</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_36">
+            <field name="name">Numan</field>
+            <field name="code">LGA-36</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_37">
+            <field name="name">Shelleng</field>
+            <field name="code">LGA-37</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_38">
+            <field name="name">Song</field>
+            <field name="code">LGA-38</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_39">
+            <field name="name">Toungo</field>
+            <field name="code">LGA-39</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_40">
+            <field name="name">Yola North</field>
+            <field name="code">LGA-40</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_41">
+            <field name="name">Yola South</field>
+            <field name="code">LGA-41</field>
+            <field name="state_id" ref="eedc_addons.ng_state_20"/>
+            </record>
+<record model="res.lga" id="ng_lga_43">
+            <field name="name">Aguata</field>
+            <field name="code">LGA-43</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_44">
+            <field name="name">Anambra East</field>
+            <field name="code">LGA-44</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_45">
+            <field name="name">Anambra West</field>
+            <field name="code">LGA-45</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_46">
+            <field name="name">Anaocha</field>
+            <field name="code">LGA-46</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_47">
+            <field name="name">Awka North</field>
+            <field name="code">LGA-47</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_48">
+            <field name="name">Awka South</field>
+            <field name="code">LGA-48</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_49">
+            <field name="name">Ayamelum</field>
+            <field name="code">LGA-49</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_50">
+            <field name="name">Dunukofia</field>
+            <field name="code">LGA-50</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_51">
+            <field name="name">Ekwusigo</field>
+            <field name="code">LGA-51</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_52">
+            <field name="name">Idemili North</field>
+            <field name="code">LGA-52</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_53">
+            <field name="name">Idemili south</field>
+            <field name="code">LGA-53</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_54">
+            <field name="name">Ihiala</field>
+            <field name="code">LGA-54</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_55">
+            <field name="name">Njikoka</field>
+            <field name="code">LGA-55</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_56">
+            <field name="name">Nnewi North</field>
+            <field name="code">LGA-56</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_57">
+            <field name="name">Nnewi South</field>
+            <field name="code">LGA-57</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_58">
+            <field name="name">Ogbaru</field>
+            <field name="code">LGA-58</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_59">
+            <field name="name">Onitsha North</field>
+            <field name="code">LGA-59</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_60">
+            <field name="name">Onitsha South</field>
+            <field name="code">LGA-60</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_61">
+            <field name="name">Orumba North</field>
+            <field name="code">LGA-61</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_62">
+            <field name="name">Orumba South</field>
+            <field name="code">LGA-62</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_63">
+            <field name="name">Oyi</field>
+            <field name="code">LGA-63</field>
+            <field name="state_id" ref="eedc_addons.ng_state_42"/>
+            </record>
+<record model="res.lga" id="ng_lga_65">
+            <field name="name">Abak</field>
+            <field name="code">LGA-65</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_66">
+            <field name="name">Eastern Obolo</field>
+            <field name="code">LGA-66</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_67">
+            <field name="name">Eket</field>
+            <field name="code">LGA-67</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_68">
+            <field name="name">Esit Eket</field>
+            <field name="code">LGA-68</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_69">
+            <field name="name">Essien Udim</field>
+            <field name="code">LGA-69</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_70">
+            <field name="name">Etim Ekpo</field>
+            <field name="code">LGA-70</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_71">
+            <field name="name">Etinan</field>
+            <field name="code">LGA-71</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_72">
+            <field name="name">Ibeno</field>
+            <field name="code">LGA-72</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_73">
+            <field name="name">Ibesikpo Asutan</field>
+            <field name="code">LGA-73</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_74">
+            <field name="name">Ibiono Ibom</field>
+            <field name="code">LGA-74</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_75">
+            <field name="name">Ika</field>
+            <field name="code">LGA-75</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_76">
+            <field name="name">Ikono</field>
+            <field name="code">LGA-76</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_77">
+            <field name="name">Ikot Abasi</field>
+            <field name="code">LGA-77</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_78">
+            <field name="name">Ikot Ekpene</field>
+            <field name="code">LGA-78</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_79">
+            <field name="name">Ini</field>
+            <field name="code">LGA-79</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_80">
+            <field name="name">Itu</field>
+            <field name="code">LGA-80</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_81">
+            <field name="name">Mbo</field>
+            <field name="code">LGA-81</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_82">
+            <field name="name">Mkpat Enin</field>
+            <field name="code">LGA-82</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_83">
+            <field name="name">Nsit Atai</field>
+            <field name="code">LGA-83</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_84">
+            <field name="name">Nsit Ibom</field>
+            <field name="code">LGA-84</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_85">
+            <field name="name">Nsit Ubium</field>
+            <field name="code">LGA-85</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_86">
+            <field name="name">Obot Akara</field>
+            <field name="code">LGA-86</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_87">
+            <field name="name">Okobo</field>
+            <field name="code">LGA-87</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_88">
+            <field name="name">Onna</field>
+            <field name="code">LGA-88</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_89">
+            <field name="name">Oron</field>
+            <field name="code">LGA-89</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_90">
+            <field name="name">Oruk Anam</field>
+            <field name="code">LGA-90</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_91">
+            <field name="name">Udung Uko</field>
+            <field name="code">LGA-91</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_92">
+            <field name="name">Ukanafun</field>
+            <field name="code">LGA-92</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_93">
+            <field name="name">Uruan</field>
+            <field name="code">LGA-93</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_94">
+            <field name="name">Urue-Offong/Oruko </field>
+            <field name="code">LGA-94</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_95">
+            <field name="name">Uyo</field>
+            <field name="code">LGA-95</field>
+            <field name="state_id" ref="eedc_addons.ng_state_64"/>
+            </record>
+<record model="res.lga" id="ng_lga_97">
+            <field name="name">Alkaleri</field>
+            <field name="code">LGA-97</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_98">
+            <field name="name">Bauchi</field>
+            <field name="code">LGA-98</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_99">
+            <field name="name">Bogoro</field>
+            <field name="code">LGA-99</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_100">
+            <field name="name">Damban</field>
+            <field name="code">LGA-100</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_101">
+            <field name="name">Darazo</field>
+            <field name="code">LGA-101</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_102">
+            <field name="name">Dass</field>
+            <field name="code">LGA-102</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_103">
+            <field name="name">Ganjuwa</field>
+            <field name="code">LGA-103</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_104">
+            <field name="name">Giade</field>
+            <field name="code">LGA-104</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_105">
+            <field name="name">Itas/Gadau</field>
+            <field name="code">LGA-105</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_106">
+            <field name="name">Jama'are</field>
+            <field name="code">LGA-106</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_107">
+            <field name="name">Katagum</field>
+            <field name="code">LGA-107</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_108">
+            <field name="name">Kirfi</field>
+            <field name="code">LGA-108</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_109">
+            <field name="name">Misau</field>
+            <field name="code">LGA-109</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_110">
+            <field name="name">Ningi</field>
+            <field name="code">LGA-110</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_111">
+            <field name="name">Shira</field>
+            <field name="code">LGA-111</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_112">
+            <field name="name">Tafawa-Balewa</field>
+            <field name="code">LGA-112</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_113">
+            <field name="name">Toro</field>
+            <field name="code">LGA-113</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_114">
+            <field name="name">Warji</field>
+            <field name="code">LGA-114</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_115">
+            <field name="name">Zaki</field>
+            <field name="code">LGA-115</field>
+            <field name="state_id" ref="eedc_addons.ng_state_96"/>
+            </record>
+<record model="res.lga" id="ng_lga_117">
+            <field name="name">Brass</field>
+            <field name="code">LGA-117</field>
+            <field name="state_id" ref="eedc_addons.ng_state_116"/>
+            </record>
+<record model="res.lga" id="ng_lga_118">
+            <field name="name">Ekeremor</field>
+            <field name="code">LGA-118</field>
+            <field name="state_id" ref="eedc_addons.ng_state_116"/>
+            </record>
+<record model="res.lga" id="ng_lga_119">
+            <field name="name">Kolokuma/Opokuma</field>
+            <field name="code">LGA-119</field>
+            <field name="state_id" ref="eedc_addons.ng_state_116"/>
+            </record>
+<record model="res.lga" id="ng_lga_120">
+            <field name="name">Nembe</field>
+            <field name="code">LGA-120</field>
+            <field name="state_id" ref="eedc_addons.ng_state_116"/>
+            </record>
+<record model="res.lga" id="ng_lga_121">
+            <field name="name">Ogbia</field>
+            <field name="code">LGA-121</field>
+            <field name="state_id" ref="eedc_addons.ng_state_116"/>
+            </record>
+<record model="res.lga" id="ng_lga_122">
+            <field name="name">Sagbama</field>
+            <field name="code">LGA-122</field>
+            <field name="state_id" ref="eedc_addons.ng_state_116"/>
+            </record>
+<record model="res.lga" id="ng_lga_123">
+            <field name="name">Southern Jaw</field>
+            <field name="code">LGA-123</field>
+            <field name="state_id" ref="eedc_addons.ng_state_116"/>
+            </record>
+<record model="res.lga" id="ng_lga_124">
+            <field name="name">Yenegoa</field>
+            <field name="code">LGA-124</field>
+            <field name="state_id" ref="eedc_addons.ng_state_116"/>
+            </record>
+<record model="res.lga" id="ng_lga_126">
+            <field name="name">Ado</field>
+            <field name="code">LGA-126</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_127">
+            <field name="name">Agatu</field>
+            <field name="code">LGA-127</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_128">
+            <field name="name">Apa</field>
+            <field name="code">LGA-128</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_129">
+            <field name="name">Buruku</field>
+            <field name="code">LGA-129</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_130">
+            <field name="name">Gboko</field>
+            <field name="code">LGA-130</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_131">
+            <field name="name">Guma</field>
+            <field name="code">LGA-131</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_132">
+            <field name="name">Gwer East</field>
+            <field name="code">LGA-132</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_133">
+            <field name="name">Gwer West</field>
+            <field name="code">LGA-133</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_134">
+            <field name="name">Katsina-Ala</field>
+            <field name="code">LGA-134</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_135">
+            <field name="name">Konshisha</field>
+            <field name="code">LGA-135</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_136">
+            <field name="name">Kwande</field>
+            <field name="code">LGA-136</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_137">
+            <field name="name">Logo</field>
+            <field name="code">LGA-137</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_138">
+            <field name="name">Makurdi</field>
+            <field name="code">LGA-138</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_139">
+            <field name="name">Obi</field>
+            <field name="code">LGA-139</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_140">
+            <field name="name">Ogbadibo</field>
+            <field name="code">LGA-140</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_141">
+            <field name="name">Oju</field>
+            <field name="code">LGA-141</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_142">
+            <field name="name">Okpokwu</field>
+            <field name="code">LGA-142</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_143">
+            <field name="name">Ohimini</field>
+            <field name="code">LGA-143</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_144">
+            <field name="name">Oturkpo</field>
+            <field name="code">LGA-144</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_145">
+            <field name="name">Tarka</field>
+            <field name="code">LGA-145</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_146">
+            <field name="name">Ukum</field>
+            <field name="code">LGA-146</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_147">
+            <field name="name">Ushongo</field>
+            <field name="code">LGA-147</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_148">
+            <field name="name">Vandeikya</field>
+            <field name="code">LGA-148</field>
+            <field name="state_id" ref="eedc_addons.ng_state_125"/>
+            </record>
+<record model="res.lga" id="ng_lga_150">
+            <field name="name">Abadam</field>
+            <field name="code">LGA-150</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_151">
+            <field name="name">Askira/Uba</field>
+            <field name="code">LGA-151</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_152">
+            <field name="name">Bama</field>
+            <field name="code">LGA-152</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_153">
+            <field name="name">Bayo</field>
+            <field name="code">LGA-153</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_154">
+            <field name="name">Biu</field>
+            <field name="code">LGA-154</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_155">
+            <field name="name">Chibok</field>
+            <field name="code">LGA-155</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_156">
+            <field name="name">Damboa</field>
+            <field name="code">LGA-156</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_157">
+            <field name="name">Dikwa</field>
+            <field name="code">LGA-157</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_158">
+            <field name="name">Gubio</field>
+            <field name="code">LGA-158</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_159">
+            <field name="name">Guzamala</field>
+            <field name="code">LGA-159</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_160">
+            <field name="name">Gwoza</field>
+            <field name="code">LGA-160</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_161">
+            <field name="name">Hawul</field>
+            <field name="code">LGA-161</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_162">
+            <field name="name">Jere</field>
+            <field name="code">LGA-162</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_163">
+            <field name="name">Kaga</field>
+            <field name="code">LGA-163</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_164">
+            <field name="name">Kala/Balge</field>
+            <field name="code">LGA-164</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_165">
+            <field name="name">Konduga</field>
+            <field name="code">LGA-165</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_166">
+            <field name="name">Kukawa</field>
+            <field name="code">LGA-166</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_167">
+            <field name="name">Kwaya Kusar</field>
+            <field name="code">LGA-167</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_168">
+            <field name="name">Mafa</field>
+            <field name="code">LGA-168</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_169">
+            <field name="name">Magumeri</field>
+            <field name="code">LGA-169</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_170">
+            <field name="name">Maiduguri</field>
+            <field name="code">LGA-170</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_171">
+            <field name="name">Marte</field>
+            <field name="code">LGA-171</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_172">
+            <field name="name">Mobbar</field>
+            <field name="code">LGA-172</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_173">
+            <field name="name">Monguno</field>
+            <field name="code">LGA-173</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_174">
+            <field name="name">Ngala</field>
+            <field name="code">LGA-174</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_175">
+            <field name="name">Nganzai</field>
+            <field name="code">LGA-175</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_176">
+            <field name="name">Shani</field>
+            <field name="code">LGA-176</field>
+            <field name="state_id" ref="eedc_addons.ng_state_149"/>
+            </record>
+<record model="res.lga" id="ng_lga_178">
+            <field name="name">Akpabuyo</field>
+            <field name="code">LGA-178</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_179">
+            <field name="name">Odukpani</field>
+            <field name="code">LGA-179</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_180">
+            <field name="name">Akamkpa</field>
+            <field name="code">LGA-180</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_181">
+            <field name="name">Biase</field>
+            <field name="code">LGA-181</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_182">
+            <field name="name">Abi</field>
+            <field name="code">LGA-182</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_183">
+            <field name="name">Ikom</field>
+            <field name="code">LGA-183</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_184">
+            <field name="name">Yarkur</field>
+            <field name="code">LGA-184</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_185">
+            <field name="name">Odubra</field>
+            <field name="code">LGA-185</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_186">
+            <field name="name">Boki</field>
+            <field name="code">LGA-186</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_187">
+            <field name="name">Ogoja</field>
+            <field name="code">LGA-187</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_188">
+            <field name="name">Yala</field>
+            <field name="code">LGA-188</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_189">
+            <field name="name">Obanliku</field>
+            <field name="code">LGA-189</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_190">
+            <field name="name">Obudu</field>
+            <field name="code">LGA-190</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_191">
+            <field name="name">Calabar South</field>
+            <field name="code">LGA-191</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_192">
+            <field name="name">Etung</field>
+            <field name="code">LGA-192</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_193">
+            <field name="name">Bekwara</field>
+            <field name="code">LGA-193</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_194">
+            <field name="name">Bakassi</field>
+            <field name="code">LGA-194</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_195">
+            <field name="name">Calabar Municipality</field>
+            <field name="code">LGA-195</field>
+            <field name="state_id" ref="eedc_addons.ng_state_177"/>
+            </record>
+<record model="res.lga" id="ng_lga_197">
+            <field name="name">Oshimili</field>
+            <field name="code">LGA-197</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_198">
+            <field name="name">Aniocha</field>
+            <field name="code">LGA-198</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_199">
+            <field name="name">Aniocha South</field>
+            <field name="code">LGA-199</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_200">
+            <field name="name">Ika South</field>
+            <field name="code">LGA-200</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_201">
+            <field name="name">Ika North-East</field>
+            <field name="code">LGA-201</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_202">
+            <field name="name">Ndokwa West</field>
+            <field name="code">LGA-202</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_203">
+            <field name="name">Ndokwa East</field>
+            <field name="code">LGA-203</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_204">
+            <field name="name">Isoko south</field>
+            <field name="code">LGA-204</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_205">
+            <field name="name">Isoko North</field>
+            <field name="code">LGA-205</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_206">
+            <field name="name">Bomadi</field>
+            <field name="code">LGA-206</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_207">
+            <field name="name">Burutu</field>
+            <field name="code">LGA-207</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_208">
+            <field name="name">Ughelli South</field>
+            <field name="code">LGA-208</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_209">
+            <field name="name">Ughelli North</field>
+            <field name="code">LGA-209</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_210">
+            <field name="name">Ethiope West</field>
+            <field name="code">LGA-210</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_211">
+            <field name="name">Ethiope East</field>
+            <field name="code">LGA-211</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_212">
+            <field name="name">Sapele</field>
+            <field name="code">LGA-212</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_213">
+            <field name="name">Okpe</field>
+            <field name="code">LGA-213</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_214">
+            <field name="name">Warri North</field>
+            <field name="code">LGA-214</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_215">
+            <field name="name">Warri South</field>
+            <field name="code">LGA-215</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_216">
+            <field name="name">Uvwie</field>
+            <field name="code">LGA-216</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_217">
+            <field name="name">Udu</field>
+            <field name="code">LGA-217</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_218">
+            <field name="name">Warri Central</field>
+            <field name="code">LGA-218</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_219">
+            <field name="name">Ukwani</field>
+            <field name="code">LGA-219</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_220">
+            <field name="name">Oshimili North</field>
+            <field name="code">LGA-220</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_221">
+            <field name="name">Patani</field>
+            <field name="code">LGA-221</field>
+            <field name="state_id" ref="eedc_addons.ng_state_196"/>
+            </record>
+<record model="res.lga" id="ng_lga_223">
+            <field name="name">Edda</field>
+            <field name="code">LGA-223</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_224">
+            <field name="name">Afikpo</field>
+            <field name="code">LGA-224</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_225">
+            <field name="name">Onicha</field>
+            <field name="code">LGA-225</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_226">
+            <field name="name">Ohaozara</field>
+            <field name="code">LGA-226</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_227">
+            <field name="name">Abakaliki</field>
+            <field name="code">LGA-227</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_228">
+            <field name="name">Ishielu</field>
+            <field name="code">LGA-228</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_229">
+            <field name="name">lkwo</field>
+            <field name="code">LGA-229</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_230">
+            <field name="name">Ezza</field>
+            <field name="code">LGA-230</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_231">
+            <field name="name">Ezza South</field>
+            <field name="code">LGA-231</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_232">
+            <field name="name">Ohaukwu</field>
+            <field name="code">LGA-232</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_233">
+            <field name="name">Ebonyi</field>
+            <field name="code">LGA-233</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_234">
+            <field name="name">Ivo</field>
+            <field name="code">LGA-234</field>
+            <field name="state_id" ref="eedc_addons.ng_state_222"/>
+            </record>
+<record model="res.lga" id="ng_lga_236">
+            <field name="name">Enugu South,</field>
+            <field name="code">LGA-236</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_237">
+            <field name="name">Igbo-Eze South</field>
+            <field name="code">LGA-237</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_238">
+            <field name="name">Enugu North</field>
+            <field name="code">LGA-238</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_239">
+            <field name="name">Nkanu</field>
+            <field name="code">LGA-239</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_240">
+            <field name="name">Udi Agwu</field>
+            <field name="code">LGA-240</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_241">
+            <field name="name">Oji-River</field>
+            <field name="code">LGA-241</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_242">
+            <field name="name">Ezeagu</field>
+            <field name="code">LGA-242</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_243">
+            <field name="name">IgboEze North</field>
+            <field name="code">LGA-243</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_244">
+            <field name="name">Isi-Uzo</field>
+            <field name="code">LGA-244</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_245">
+            <field name="name">Nsukka</field>
+            <field name="code">LGA-245</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_246">
+            <field name="name">Igbo-Ekiti</field>
+            <field name="code">LGA-246</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_247">
+            <field name="name">Uzo-Uwani</field>
+            <field name="code">LGA-247</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_248">
+            <field name="name">Enugu Eas</field>
+            <field name="code">LGA-248</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_249">
+            <field name="name">Aninri</field>
+            <field name="code">LGA-249</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_250">
+            <field name="name">Nkanu East</field>
+            <field name="code">LGA-250</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_251">
+            <field name="name">Udenu.</field>
+            <field name="code">LGA-251</field>
+            <field name="state_id" ref="eedc_addons.ng_state_235"/>
+            </record>
+<record model="res.lga" id="ng_lga_253">
+            <field name="name">Esan North-East</field>
+            <field name="code">LGA-253</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_254">
+            <field name="name">Esan Central</field>
+            <field name="code">LGA-254</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_255">
+            <field name="name">Esan West</field>
+            <field name="code">LGA-255</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_256">
+            <field name="name">Egor</field>
+            <field name="code">LGA-256</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_257">
+            <field name="name">Ukpoba</field>
+            <field name="code">LGA-257</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_258">
+            <field name="name">Central</field>
+            <field name="code">LGA-258</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_259">
+            <field name="name">Etsako Central</field>
+            <field name="code">LGA-259</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_260">
+            <field name="name">Igueben</field>
+            <field name="code">LGA-260</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_261">
+            <field name="name">Oredo</field>
+            <field name="code">LGA-261</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_262">
+            <field name="name">Ovia SouthWest</field>
+            <field name="code">LGA-262</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_263">
+            <field name="name">Ovia South-East</field>
+            <field name="code">LGA-263</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_264">
+            <field name="name">Orhionwon</field>
+            <field name="code">LGA-264</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_265">
+            <field name="name">Uhunmwonde</field>
+            <field name="code">LGA-265</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_266">
+            <field name="name">Etsako East</field>
+            <field name="code">LGA-266</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_267">
+            <field name="name">Esan South-East</field>
+            <field name="code">LGA-267</field>
+            <field name="state_id" ref="eedc_addons.ng_state_252"/>
+            </record>
+<record model="res.lga" id="ng_lga_269">
+            <field name="name">Ado</field>
+            <field name="code">LGA-269</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_270">
+            <field name="name">Ekiti-East</field>
+            <field name="code">LGA-270</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_271">
+            <field name="name">Ekiti-West</field>
+            <field name="code">LGA-271</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_272">
+            <field name="name">Emure/Ise/Orun</field>
+            <field name="code">LGA-272</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_273">
+            <field name="name">Ekiti South-West</field>
+            <field name="code">LGA-273</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_274">
+            <field name="name">Ikere</field>
+            <field name="code">LGA-274</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_275">
+            <field name="name">Irepodun</field>
+            <field name="code">LGA-275</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_276">
+            <field name="name">Ijero,</field>
+            <field name="code">LGA-276</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_277">
+            <field name="name">Ido/Osi</field>
+            <field name="code">LGA-277</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_278">
+            <field name="name">Oye</field>
+            <field name="code">LGA-278</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_279">
+            <field name="name">Ikole</field>
+            <field name="code">LGA-279</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_280">
+            <field name="name">Moba</field>
+            <field name="code">LGA-280</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_281">
+            <field name="name">Gbonyin</field>
+            <field name="code">LGA-281</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_282">
+            <field name="name">Efon</field>
+            <field name="code">LGA-282</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_283">
+            <field name="name">Ise/Orun</field>
+            <field name="code">LGA-283</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_284">
+            <field name="name">Ilejemeje.</field>
+            <field name="code">LGA-284</field>
+            <field name="state_id" ref="eedc_addons.ng_state_268"/>
+            </record>
+<record model="res.lga" id="ng_lga_286">
+            <field name="name">Abaji</field>
+            <field name="code">LGA-286</field>
+            <field name="state_id" ref="eedc_addons.ng_state_285"/>
+            </record>
+<record model="res.lga" id="ng_lga_287">
+            <field name="name">Abuja Municipal</field>
+            <field name="code">LGA-287</field>
+            <field name="state_id" ref="eedc_addons.ng_state_285"/>
+            </record>
+<record model="res.lga" id="ng_lga_288">
+            <field name="name">Bwari</field>
+            <field name="code">LGA-288</field>
+            <field name="state_id" ref="eedc_addons.ng_state_285"/>
+            </record>
+<record model="res.lga" id="ng_lga_289">
+            <field name="name">Gwagwalada</field>
+            <field name="code">LGA-289</field>
+            <field name="state_id" ref="eedc_addons.ng_state_285"/>
+            </record>
+<record model="res.lga" id="ng_lga_290">
+            <field name="name">Kuje</field>
+            <field name="code">LGA-290</field>
+            <field name="state_id" ref="eedc_addons.ng_state_285"/>
+            </record>
+<record model="res.lga" id="ng_lga_291">
+            <field name="name">Kwali</field>
+            <field name="code">LGA-291</field>
+            <field name="state_id" ref="eedc_addons.ng_state_285"/>
+            </record>
+<record model="res.lga" id="ng_lga_293">
+            <field name="name">Akko</field>
+            <field name="code">LGA-293</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_294">
+            <field name="name">Balanga</field>
+            <field name="code">LGA-294</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_295">
+            <field name="name">Billiri</field>
+            <field name="code">LGA-295</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_296">
+            <field name="name">Dukku</field>
+            <field name="code">LGA-296</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_297">
+            <field name="name">Kaltungo</field>
+            <field name="code">LGA-297</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_298">
+            <field name="name">Kwami</field>
+            <field name="code">LGA-298</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_299">
+            <field name="name">Shomgom</field>
+            <field name="code">LGA-299</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_300">
+            <field name="name">Funakaye</field>
+            <field name="code">LGA-300</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_301">
+            <field name="name">Gombe</field>
+            <field name="code">LGA-301</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_302">
+            <field name="name">Nafada/Bajoga</field>
+            <field name="code">LGA-302</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_303">
+            <field name="name">Yamaltu/Delta.</field>
+            <field name="code">LGA-303</field>
+            <field name="state_id" ref="eedc_addons.ng_state_292"/>
+            </record>
+<record model="res.lga" id="ng_lga_305">
+            <field name="name">Aboh-Mbaise</field>
+            <field name="code">LGA-305</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_306">
+            <field name="name">Ahiazu-Mbaise</field>
+            <field name="code">LGA-306</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_307">
+            <field name="name">Ehime-Mbano</field>
+            <field name="code">LGA-307</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_308">
+            <field name="name">Ezinihitte</field>
+            <field name="code">LGA-308</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_309">
+            <field name="name">Ideato North</field>
+            <field name="code">LGA-309</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_310">
+            <field name="name">Ideato South</field>
+            <field name="code">LGA-310</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_311">
+            <field name="name">Ihitte/Uboma</field>
+            <field name="code">LGA-311</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_312">
+            <field name="name">Ikeduru</field>
+            <field name="code">LGA-312</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_313">
+            <field name="name">Isiala Mbano</field>
+            <field name="code">LGA-313</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_314">
+            <field name="name">Isu</field>
+            <field name="code">LGA-314</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_315">
+            <field name="name">Mbaitoli</field>
+            <field name="code">LGA-315</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_316">
+            <field name="name">Mbaitoli</field>
+            <field name="code">LGA-316</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_317">
+            <field name="name">Ngor-Okpala</field>
+            <field name="code">LGA-317</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_318">
+            <field name="name">Njaba</field>
+            <field name="code">LGA-318</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_319">
+            <field name="name">Nwangele</field>
+            <field name="code">LGA-319</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_320">
+            <field name="name">Nkwerre</field>
+            <field name="code">LGA-320</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_321">
+            <field name="name">Obowo</field>
+            <field name="code">LGA-321</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_322">
+            <field name="name">Oguta</field>
+            <field name="code">LGA-322</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_323">
+            <field name="name">Ohaji/Egbema</field>
+            <field name="code">LGA-323</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_324">
+            <field name="name">Okigwe</field>
+            <field name="code">LGA-324</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_325">
+            <field name="name">Orlu</field>
+            <field name="code">LGA-325</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_326">
+            <field name="name">Orsu</field>
+            <field name="code">LGA-326</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_327">
+            <field name="name">Oru East</field>
+            <field name="code">LGA-327</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_328">
+            <field name="name">Oru West</field>
+            <field name="code">LGA-328</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_329">
+            <field name="name">Owerri-Municipal</field>
+            <field name="code">LGA-329</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_330">
+            <field name="name">Owerri North</field>
+            <field name="code">LGA-330</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_331">
+            <field name="name">Owerri West</field>
+            <field name="code">LGA-331</field>
+            <field name="state_id" ref="eedc_addons.ng_state_304"/>
+            </record>
+<record model="res.lga" id="ng_lga_333">
+            <field name="name">Auyo</field>
+            <field name="code">LGA-333</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_334">
+            <field name="name">Babura</field>
+            <field name="code">LGA-334</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_335">
+            <field name="name">Birni Kudu</field>
+            <field name="code">LGA-335</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_336">
+            <field name="name">Biriniwa</field>
+            <field name="code">LGA-336</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_337">
+            <field name="name">Buji</field>
+            <field name="code">LGA-337</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_338">
+            <field name="name">Dutse</field>
+            <field name="code">LGA-338</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_339">
+            <field name="name">Gagarawa</field>
+            <field name="code">LGA-339</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_340">
+            <field name="name">Garki</field>
+            <field name="code">LGA-340</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_341">
+            <field name="name">Gumel</field>
+            <field name="code">LGA-341</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_342">
+            <field name="name">Guri</field>
+            <field name="code">LGA-342</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_343">
+            <field name="name">Gwaram</field>
+            <field name="code">LGA-343</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_344">
+            <field name="name">Gwiwa</field>
+            <field name="code">LGA-344</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_345">
+            <field name="name">Hadejia</field>
+            <field name="code">LGA-345</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_346">
+            <field name="name">Jahun</field>
+            <field name="code">LGA-346</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_347">
+            <field name="name">Kafin Hausa</field>
+            <field name="code">LGA-347</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_348">
+            <field name="name">Kaugama Kazaure</field>
+            <field name="code">LGA-348</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_349">
+            <field name="name">Kiri Kasamma</field>
+            <field name="code">LGA-349</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_350">
+            <field name="name">Kiyawa</field>
+            <field name="code">LGA-350</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_351">
+            <field name="name">Maigatari</field>
+            <field name="code">LGA-351</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_352">
+            <field name="name">Malam Madori</field>
+            <field name="code">LGA-352</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_353">
+            <field name="name">Miga</field>
+            <field name="code">LGA-353</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_354">
+            <field name="name">Ringim</field>
+            <field name="code">LGA-354</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_355">
+            <field name="name">Roni</field>
+            <field name="code">LGA-355</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_356">
+            <field name="name">Sule-Tankarkar</field>
+            <field name="code">LGA-356</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_357">
+            <field name="name">Taura</field>
+            <field name="code">LGA-357</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_358">
+            <field name="name">Yankwashi</field>
+            <field name="code">LGA-358</field>
+            <field name="state_id" ref="eedc_addons.ng_state_332"/>
+            </record>
+<record model="res.lga" id="ng_lga_360">
+            <field name="name">Birni-Gwari</field>
+            <field name="code">LGA-360</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_361">
+            <field name="name">Chikun</field>
+            <field name="code">LGA-361</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_362">
+            <field name="name">Giwa</field>
+            <field name="code">LGA-362</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_363">
+            <field name="name">Igabi</field>
+            <field name="code">LGA-363</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_364">
+            <field name="name">Ikara</field>
+            <field name="code">LGA-364</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_365">
+            <field name="name">jaba</field>
+            <field name="code">LGA-365</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_366">
+            <field name="name">Jema'a</field>
+            <field name="code">LGA-366</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_367">
+            <field name="name">Kachia</field>
+            <field name="code">LGA-367</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_368">
+            <field name="name">Kaduna North</field>
+            <field name="code">LGA-368</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_369">
+            <field name="name">Kaduna South</field>
+            <field name="code">LGA-369</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_370">
+            <field name="name">Kagarko</field>
+            <field name="code">LGA-370</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_371">
+            <field name="name">Kajuru</field>
+            <field name="code">LGA-371</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_372">
+            <field name="name">Kaura</field>
+            <field name="code">LGA-372</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_373">
+            <field name="name">Kauru</field>
+            <field name="code">LGA-373</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_374">
+            <field name="name">Kubau</field>
+            <field name="code">LGA-374</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_375">
+            <field name="name">Kudan</field>
+            <field name="code">LGA-375</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_376">
+            <field name="name">Lere</field>
+            <field name="code">LGA-376</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_377">
+            <field name="name">Makarfi</field>
+            <field name="code">LGA-377</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_378">
+            <field name="name">Sabon-Gari</field>
+            <field name="code">LGA-378</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_379">
+            <field name="name">Sanga</field>
+            <field name="code">LGA-379</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_380">
+            <field name="name">Soba</field>
+            <field name="code">LGA-380</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_381">
+            <field name="name">Zango-Kataf</field>
+            <field name="code">LGA-381</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_382">
+            <field name="name">Zaria</field>
+            <field name="code">LGA-382</field>
+            <field name="state_id" ref="eedc_addons.ng_state_359"/>
+            </record>
+<record model="res.lga" id="ng_lga_384">
+            <field name="name">Ajingi</field>
+            <field name="code">LGA-384</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_385">
+            <field name="name">Albasu</field>
+            <field name="code">LGA-385</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_386">
+            <field name="name">Bagwai</field>
+            <field name="code">LGA-386</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_387">
+            <field name="name">Bebeji</field>
+            <field name="code">LGA-387</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_388">
+            <field name="name">Bichi</field>
+            <field name="code">LGA-388</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_389">
+            <field name="name">Bunkure</field>
+            <field name="code">LGA-389</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_390">
+            <field name="name">Dala</field>
+            <field name="code">LGA-390</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_391">
+            <field name="name">Dambatta</field>
+            <field name="code">LGA-391</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_392">
+            <field name="name">Dawakin Kudu</field>
+            <field name="code">LGA-392</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_393">
+            <field name="name">Dawakin Tofa</field>
+            <field name="code">LGA-393</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_394">
+            <field name="name">Doguwa</field>
+            <field name="code">LGA-394</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_395">
+            <field name="name">Fagge</field>
+            <field name="code">LGA-395</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_396">
+            <field name="name">Gabasawa</field>
+            <field name="code">LGA-396</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_397">
+            <field name="name">Garko</field>
+            <field name="code">LGA-397</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_398">
+            <field name="name">Garum</field>
+            <field name="code">LGA-398</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_399">
+            <field name="name">Mallam</field>
+            <field name="code">LGA-399</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_400">
+            <field name="name">Gaya</field>
+            <field name="code">LGA-400</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_401">
+            <field name="name">Gezawa</field>
+            <field name="code">LGA-401</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_402">
+            <field name="name">Gwale</field>
+            <field name="code">LGA-402</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_403">
+            <field name="name">Gwarzo</field>
+            <field name="code">LGA-403</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_404">
+            <field name="name">Kabo</field>
+            <field name="code">LGA-404</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_405">
+            <field name="name">Kano Municipal</field>
+            <field name="code">LGA-405</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_406">
+            <field name="name">Karaye</field>
+            <field name="code">LGA-406</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_407">
+            <field name="name">Kibiya</field>
+            <field name="code">LGA-407</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_408">
+            <field name="name">Kiru</field>
+            <field name="code">LGA-408</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_409">
+            <field name="name">kumbotso</field>
+            <field name="code">LGA-409</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_410">
+            <field name="name">Ghari</field>
+            <field name="code">LGA-410</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_411">
+            <field name="name">Kura</field>
+            <field name="code">LGA-411</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_412">
+            <field name="name">Madobi</field>
+            <field name="code">LGA-412</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_413">
+            <field name="name">Makoda</field>
+            <field name="code">LGA-413</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_414">
+            <field name="name">Minjibir</field>
+            <field name="code">LGA-414</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_415">
+            <field name="name">Nasarawa</field>
+            <field name="code">LGA-415</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_416">
+            <field name="name">Rano</field>
+            <field name="code">LGA-416</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_417">
+            <field name="name">Rimin Gado</field>
+            <field name="code">LGA-417</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_418">
+            <field name="name">Rogo</field>
+            <field name="code">LGA-418</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_419">
+            <field name="name">Shanono</field>
+            <field name="code">LGA-419</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_420">
+            <field name="name">Sumaila</field>
+            <field name="code">LGA-420</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_421">
+            <field name="name">Takali</field>
+            <field name="code">LGA-421</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_422">
+            <field name="name">Tarauni</field>
+            <field name="code">LGA-422</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_423">
+            <field name="name">Tofa</field>
+            <field name="code">LGA-423</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_424">
+            <field name="name">Tsanyawa</field>
+            <field name="code">LGA-424</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_425">
+            <field name="name">Tudun Wada</field>
+            <field name="code">LGA-425</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_426">
+            <field name="name">Ungogo</field>
+            <field name="code">LGA-426</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_427">
+            <field name="name">Warawa</field>
+            <field name="code">LGA-427</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_428">
+            <field name="name">Wudil</field>
+            <field name="code">LGA-428</field>
+            <field name="state_id" ref="eedc_addons.ng_state_383"/>
+            </record>
+<record model="res.lga" id="ng_lga_430">
+            <field name="name">Bakori</field>
+            <field name="code">LGA-430</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_431">
+            <field name="name">Batagarawa</field>
+            <field name="code">LGA-431</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_432">
+            <field name="name">Batsari</field>
+            <field name="code">LGA-432</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_433">
+            <field name="name">Baure</field>
+            <field name="code">LGA-433</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_434">
+            <field name="name">Bindawa</field>
+            <field name="code">LGA-434</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_435">
+            <field name="name">Charanchi</field>
+            <field name="code">LGA-435</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_436">
+            <field name="name">Dandume</field>
+            <field name="code">LGA-436</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_437">
+            <field name="name">Danja</field>
+            <field name="code">LGA-437</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_438">
+            <field name="name">Dan Musa</field>
+            <field name="code">LGA-438</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_439">
+            <field name="name">Daura</field>
+            <field name="code">LGA-439</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_440">
+            <field name="name">Dutsi</field>
+            <field name="code">LGA-440</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_441">
+            <field name="name">Dutsin-Ma</field>
+            <field name="code">LGA-441</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_442">
+            <field name="name">Faskari</field>
+            <field name="code">LGA-442</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_443">
+            <field name="name">Funtua</field>
+            <field name="code">LGA-443</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_444">
+            <field name="name">Ingawa</field>
+            <field name="code">LGA-444</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_445">
+            <field name="name">Jibia</field>
+            <field name="code">LGA-445</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_446">
+            <field name="name">Kafur</field>
+            <field name="code">LGA-446</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_447">
+            <field name="name">Kaita</field>
+            <field name="code">LGA-447</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_448">
+            <field name="name">Kankara</field>
+            <field name="code">LGA-448</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_449">
+            <field name="name">Kankia</field>
+            <field name="code">LGA-449</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_450">
+            <field name="name">Katsina</field>
+            <field name="code">LGA-450</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_451">
+            <field name="name">Kurfi</field>
+            <field name="code">LGA-451</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_452">
+            <field name="name">Kusada</field>
+            <field name="code">LGA-452</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_453">
+            <field name="name">Mai'Adua</field>
+            <field name="code">LGA-453</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_454">
+            <field name="name">Malumfashi</field>
+            <field name="code">LGA-454</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_455">
+            <field name="name">Mani</field>
+            <field name="code">LGA-455</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_456">
+            <field name="name">Mashi</field>
+            <field name="code">LGA-456</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_457">
+            <field name="name">Matazuu</field>
+            <field name="code">LGA-457</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_458">
+            <field name="name">Musawa</field>
+            <field name="code">LGA-458</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_459">
+            <field name="name">Rimi</field>
+            <field name="code">LGA-459</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_460">
+            <field name="name">Sabuwa</field>
+            <field name="code">LGA-460</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_461">
+            <field name="name">Safana</field>
+            <field name="code">LGA-461</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_462">
+            <field name="name">Sandamu</field>
+            <field name="code">LGA-462</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_463">
+            <field name="name">Zango</field>
+            <field name="code">LGA-463</field>
+            <field name="state_id" ref="eedc_addons.ng_state_429"/>
+            </record>
+<record model="res.lga" id="ng_lga_465">
+            <field name="name">Aleiro</field>
+            <field name="code">LGA-465</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_466">
+            <field name="name">Arewa-Dandi</field>
+            <field name="code">LGA-466</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_467">
+            <field name="name">Argungu</field>
+            <field name="code">LGA-467</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_468">
+            <field name="name">Augie</field>
+            <field name="code">LGA-468</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_469">
+            <field name="name">Bagudo</field>
+            <field name="code">LGA-469</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_470">
+            <field name="name">Birnin Kebbi</field>
+            <field name="code">LGA-470</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_471">
+            <field name="name">Bunza</field>
+            <field name="code">LGA-471</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_472">
+            <field name="name">Dandi</field>
+            <field name="code">LGA-472</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_473">
+            <field name="name">Fakai</field>
+            <field name="code">LGA-473</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_474">
+            <field name="name">Gwandu</field>
+            <field name="code">LGA-474</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_475">
+            <field name="name">Jega</field>
+            <field name="code">LGA-475</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_476">
+            <field name="name">Kalgo</field>
+            <field name="code">LGA-476</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_477">
+            <field name="name">Koko/Besse</field>
+            <field name="code">LGA-477</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_478">
+            <field name="name">Maiyama</field>
+            <field name="code">LGA-478</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_479">
+            <field name="name">Ngaski</field>
+            <field name="code">LGA-479</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_480">
+            <field name="name">Sakaba</field>
+            <field name="code">LGA-480</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_481">
+            <field name="name">Shanga</field>
+            <field name="code">LGA-481</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_482">
+            <field name="name">Suru</field>
+            <field name="code">LGA-482</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_483">
+            <field name="name">Wasagu/Danko</field>
+            <field name="code">LGA-483</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_484">
+            <field name="name">Yauri</field>
+            <field name="code">LGA-484</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_485">
+            <field name="name">Zuru</field>
+            <field name="code">LGA-485</field>
+            <field name="state_id" ref="eedc_addons.ng_state_464"/>
+            </record>
+<record model="res.lga" id="ng_lga_487">
+            <field name="name">Adavi</field>
+            <field name="code">LGA-487</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_488">
+            <field name="name">Ajaokuta</field>
+            <field name="code">LGA-488</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_489">
+            <field name="name">Ankpa</field>
+            <field name="code">LGA-489</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_490">
+            <field name="name">Bassa</field>
+            <field name="code">LGA-490</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_491">
+            <field name="name">Dekina</field>
+            <field name="code">LGA-491</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_492">
+            <field name="name">Ibaji</field>
+            <field name="code">LGA-492</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_493">
+            <field name="name">Idah</field>
+            <field name="code">LGA-493</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_494">
+            <field name="name">Igalamela-Odolu</field>
+            <field name="code">LGA-494</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_495">
+            <field name="name">Ijumu</field>
+            <field name="code">LGA-495</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_496">
+            <field name="name">Kabba/Bunu</field>
+            <field name="code">LGA-496</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_497">
+            <field name="name">Kogi</field>
+            <field name="code">LGA-497</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_498">
+            <field name="name">Lokoja</field>
+            <field name="code">LGA-498</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_499">
+            <field name="name">Mopa-Muro</field>
+            <field name="code">LGA-499</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_500">
+            <field name="name">Ofu</field>
+            <field name="code">LGA-500</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_501">
+            <field name="name">Ogori/Mangongo</field>
+            <field name="code">LGA-501</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_502">
+            <field name="name">Okehi</field>
+            <field name="code">LGA-502</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_503">
+            <field name="name">Okene</field>
+            <field name="code">LGA-503</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_504">
+            <field name="name">Olamabolo</field>
+            <field name="code">LGA-504</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_505">
+            <field name="name">Omala</field>
+            <field name="code">LGA-505</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_506">
+            <field name="name">Yagba East</field>
+            <field name="code">LGA-506</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_507">
+            <field name="name">Yagba West</field>
+            <field name="code">LGA-507</field>
+            <field name="state_id" ref="eedc_addons.ng_state_486"/>
+            </record>
+<record model="res.lga" id="ng_lga_509">
+            <field name="name">Asa</field>
+            <field name="code">LGA-509</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_510">
+            <field name="name">Baruten</field>
+            <field name="code">LGA-510</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_511">
+            <field name="name">Edu</field>
+            <field name="code">LGA-511</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_512">
+            <field name="name">Ekiti</field>
+            <field name="code">LGA-512</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_513">
+            <field name="name">Ifelodun</field>
+            <field name="code">LGA-513</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_514">
+            <field name="name">Ilorin East</field>
+            <field name="code">LGA-514</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_515">
+            <field name="name">Ilorin West</field>
+            <field name="code">LGA-515</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_516">
+            <field name="name">Irepodun</field>
+            <field name="code">LGA-516</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_517">
+            <field name="name">Isin</field>
+            <field name="code">LGA-517</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_518">
+            <field name="name">Kaiama</field>
+            <field name="code">LGA-518</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_519">
+            <field name="name">Moro</field>
+            <field name="code">LGA-519</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_520">
+            <field name="name">Offa</field>
+            <field name="code">LGA-520</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_521">
+            <field name="name">Oke-Ero</field>
+            <field name="code">LGA-521</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_522">
+            <field name="name">Oyun</field>
+            <field name="code">LGA-522</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_523">
+            <field name="name">Pategi</field>
+            <field name="code">LGA-523</field>
+            <field name="state_id" ref="eedc_addons.ng_state_508"/>
+            </record>
+<record model="res.lga" id="ng_lga_525">
+            <field name="name">Agege</field>
+            <field name="code">LGA-525</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_526">
+            <field name="name">Ajeromi-Ifelodun</field>
+            <field name="code">LGA-526</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_527">
+            <field name="name">Alimosho</field>
+            <field name="code">LGA-527</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_528">
+            <field name="name">Amuwo-Odofin</field>
+            <field name="code">LGA-528</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_529">
+            <field name="name">Apapa</field>
+            <field name="code">LGA-529</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_530">
+            <field name="name">Badagry</field>
+            <field name="code">LGA-530</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_531">
+            <field name="name">Epe</field>
+            <field name="code">LGA-531</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_532">
+            <field name="name">Eti-Osa</field>
+            <field name="code">LGA-532</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_533">
+            <field name="name">Ibeju/Lekki</field>
+            <field name="code">LGA-533</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_534">
+            <field name="name">Ifako-Ijaye</field>
+            <field name="code">LGA-534</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_535">
+            <field name="name">Ikeja</field>
+            <field name="code">LGA-535</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_536">
+            <field name="name">Ikorodu</field>
+            <field name="code">LGA-536</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_537">
+            <field name="name">Kosofe</field>
+            <field name="code">LGA-537</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_538">
+            <field name="name">Lagos Island</field>
+            <field name="code">LGA-538</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_539">
+            <field name="name">Lagos Mainland</field>
+            <field name="code">LGA-539</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_540">
+            <field name="name">Mushin</field>
+            <field name="code">LGA-540</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_541">
+            <field name="name">Ojo</field>
+            <field name="code">LGA-541</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_542">
+            <field name="name">Oshodi-Isolo</field>
+            <field name="code">LGA-542</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_543">
+            <field name="name">Shomolu</field>
+            <field name="code">LGA-543</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_544">
+            <field name="name">Surulere</field>
+            <field name="code">LGA-544</field>
+            <field name="state_id" ref="eedc_addons.ng_state_524"/>
+            </record>
+<record model="res.lga" id="ng_lga_546">
+            <field name="name">Akwanga</field>
+            <field name="code">LGA-546</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_547">
+            <field name="name">Awe</field>
+            <field name="code">LGA-547</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_548">
+            <field name="name">Doma</field>
+            <field name="code">LGA-548</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_549">
+            <field name="name">Karu</field>
+            <field name="code">LGA-549</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_550">
+            <field name="name">Keana</field>
+            <field name="code">LGA-550</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_551">
+            <field name="name">Keffi</field>
+            <field name="code">LGA-551</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_552">
+            <field name="name">Kokona</field>
+            <field name="code">LGA-552</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_553">
+            <field name="name">Lafia</field>
+            <field name="code">LGA-553</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_554">
+            <field name="name">Nasarawa</field>
+            <field name="code">LGA-554</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_555">
+            <field name="name">Nasarawa-Eggon</field>
+            <field name="code">LGA-555</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_556">
+            <field name="name">Obi</field>
+            <field name="code">LGA-556</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_557">
+            <field name="name">Toto</field>
+            <field name="code">LGA-557</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_558">
+            <field name="name">Wamba</field>
+            <field name="code">LGA-558</field>
+            <field name="state_id" ref="eedc_addons.ng_state_545"/>
+            </record>
+<record model="res.lga" id="ng_lga_560">
+            <field name="name">Agaie</field>
+            <field name="code">LGA-560</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_561">
+            <field name="name">Agwara</field>
+            <field name="code">LGA-561</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_562">
+            <field name="name">Bida</field>
+            <field name="code">LGA-562</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_563">
+            <field name="name">Borgu</field>
+            <field name="code">LGA-563</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_564">
+            <field name="name">Bosso</field>
+            <field name="code">LGA-564</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_565">
+            <field name="name">Chanchaga</field>
+            <field name="code">LGA-565</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_566">
+            <field name="name">Edati</field>
+            <field name="code">LGA-566</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_567">
+            <field name="name">Gbako</field>
+            <field name="code">LGA-567</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_568">
+            <field name="name">Gurara</field>
+            <field name="code">LGA-568</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_569">
+            <field name="name">Katcha</field>
+            <field name="code">LGA-569</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_570">
+            <field name="name">Kontagora</field>
+            <field name="code">LGA-570</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_571">
+            <field name="name">Lapai</field>
+            <field name="code">LGA-571</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_572">
+            <field name="name">Lavun</field>
+            <field name="code">LGA-572</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_573">
+            <field name="name">Magama</field>
+            <field name="code">LGA-573</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_574">
+            <field name="name">Mariga</field>
+            <field name="code">LGA-574</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_575">
+            <field name="name">Mashegu</field>
+            <field name="code">LGA-575</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_576">
+            <field name="name">Mokwa</field>
+            <field name="code">LGA-576</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_577">
+            <field name="name">Muya</field>
+            <field name="code">LGA-577</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_578">
+            <field name="name">Pailoro</field>
+            <field name="code">LGA-578</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_579">
+            <field name="name">Rafi</field>
+            <field name="code">LGA-579</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_580">
+            <field name="name">Rijau</field>
+            <field name="code">LGA-580</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_581">
+            <field name="name">Shiroro</field>
+            <field name="code">LGA-581</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_582">
+            <field name="name">Suleja</field>
+            <field name="code">LGA-582</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_583">
+            <field name="name">Tafa</field>
+            <field name="code">LGA-583</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_584">
+            <field name="name">Wushishi</field>
+            <field name="code">LGA-584</field>
+            <field name="state_id" ref="eedc_addons.ng_state_559"/>
+            </record>
+<record model="res.lga" id="ng_lga_586">
+            <field name="name">Abeokuta North</field>
+            <field name="code">LGA-586</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_587">
+            <field name="name">Abeokuta South</field>
+            <field name="code">LGA-587</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_588">
+            <field name="name">Ado-Odo/Ota</field>
+            <field name="code">LGA-588</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_589">
+            <field name="name">Yewa North</field>
+            <field name="code">LGA-589</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_590">
+            <field name="name">Yewa South</field>
+            <field name="code">LGA-590</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_591">
+            <field name="name">Ewekoro</field>
+            <field name="code">LGA-591</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_592">
+            <field name="name">Ifo</field>
+            <field name="code">LGA-592</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_593">
+            <field name="name">Ijebu East</field>
+            <field name="code">LGA-593</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_594">
+            <field name="name">Ijebu North</field>
+            <field name="code">LGA-594</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_595">
+            <field name="name">Ijebu North East</field>
+            <field name="code">LGA-595</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_596">
+            <field name="name">Ijebu Ode</field>
+            <field name="code">LGA-596</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_597">
+            <field name="name">Ikenne</field>
+            <field name="code">LGA-597</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_598">
+            <field name="name">Imeko-Afon</field>
+            <field name="code">LGA-598</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_599">
+            <field name="name">Ipokia</field>
+            <field name="code">LGA-599</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_600">
+            <field name="name">Obafemi-Owode</field>
+            <field name="code">LGA-600</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_601">
+            <field name="name">Ogun Waterside</field>
+            <field name="code">LGA-601</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_602">
+            <field name="name">Odeda</field>
+            <field name="code">LGA-602</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_603">
+            <field name="name">Odogbolu</field>
+            <field name="code">LGA-603</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_604">
+            <field name="name">Remo North</field>
+            <field name="code">LGA-604</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_605">
+            <field name="name">Shagamu</field>
+            <field name="code">LGA-605</field>
+            <field name="state_id" ref="eedc_addons.ng_state_585"/>
+            </record>
+<record model="res.lga" id="ng_lga_607">
+            <field name="name">Akoko North East</field>
+            <field name="code">LGA-607</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_608">
+            <field name="name">Akoko North West</field>
+            <field name="code">LGA-608</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_609">
+            <field name="name">Akoko South Akure East</field>
+            <field name="code">LGA-609</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_610">
+            <field name="name">Akoko South West</field>
+            <field name="code">LGA-610</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_611">
+            <field name="name">Akure North</field>
+            <field name="code">LGA-611</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_612">
+            <field name="name">Akure South</field>
+            <field name="code">LGA-612</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_613">
+            <field name="name">Ese-Odo</field>
+            <field name="code">LGA-613</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_614">
+            <field name="name">Idanre</field>
+            <field name="code">LGA-614</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_615">
+            <field name="name">Ifedore</field>
+            <field name="code">LGA-615</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_616">
+            <field name="name">Ilaje</field>
+            <field name="code">LGA-616</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_617">
+            <field name="name">Ile-Oluji</field>
+            <field name="code">LGA-617</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_618">
+            <field name="name">Okeigbo</field>
+            <field name="code">LGA-618</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_619">
+            <field name="name">Irele</field>
+            <field name="code">LGA-619</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_620">
+            <field name="name">Odigbo</field>
+            <field name="code">LGA-620</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_621">
+            <field name="name">Okitipupa</field>
+            <field name="code">LGA-621</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_622">
+            <field name="name">Ondo East</field>
+            <field name="code">LGA-622</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_623">
+            <field name="name">Ondo West</field>
+            <field name="code">LGA-623</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_624">
+            <field name="name">Ose</field>
+            <field name="code">LGA-624</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_625">
+            <field name="name">Owo</field>
+            <field name="code">LGA-625</field>
+            <field name="state_id" ref="eedc_addons.ng_state_606"/>
+            </record>
+<record model="res.lga" id="ng_lga_627">
+            <field name="name">Aiyedade</field>
+            <field name="code">LGA-627</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_628">
+            <field name="name">Aiyedire</field>
+            <field name="code">LGA-628</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_629">
+            <field name="name">Atakumosa East</field>
+            <field name="code">LGA-629</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_630">
+            <field name="name">Atakumosa West</field>
+            <field name="code">LGA-630</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_631">
+            <field name="name">Boluwaduro</field>
+            <field name="code">LGA-631</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_632">
+            <field name="name">Boripe</field>
+            <field name="code">LGA-632</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_633">
+            <field name="name">Ede North</field>
+            <field name="code">LGA-633</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_634">
+            <field name="name">Ede South</field>
+            <field name="code">LGA-634</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_635">
+            <field name="name">Egbedore</field>
+            <field name="code">LGA-635</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_636">
+            <field name="name">Ejigbo</field>
+            <field name="code">LGA-636</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_637">
+            <field name="name">Ife Central</field>
+            <field name="code">LGA-637</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_638">
+            <field name="name">Ife East</field>
+            <field name="code">LGA-638</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_639">
+            <field name="name">Ife North</field>
+            <field name="code">LGA-639</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_640">
+            <field name="name">Ife South</field>
+            <field name="code">LGA-640</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_641">
+            <field name="name">Ifedayo</field>
+            <field name="code">LGA-641</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_642">
+            <field name="name">Ifelodun</field>
+            <field name="code">LGA-642</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_643">
+            <field name="name">Ila</field>
+            <field name="code">LGA-643</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_644">
+            <field name="name">Ilesha East</field>
+            <field name="code">LGA-644</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_645">
+            <field name="name">Ilesha West</field>
+            <field name="code">LGA-645</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_646">
+            <field name="name">Irepodun</field>
+            <field name="code">LGA-646</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_647">
+            <field name="name">Irewole</field>
+            <field name="code">LGA-647</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_648">
+            <field name="name">Isokan</field>
+            <field name="code">LGA-648</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_649">
+            <field name="name">Iwo</field>
+            <field name="code">LGA-649</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_650">
+            <field name="name">Obokun</field>
+            <field name="code">LGA-650</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_651">
+            <field name="name">Odo-Otin</field>
+            <field name="code">LGA-651</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_652">
+            <field name="name">Ola-Oluwa</field>
+            <field name="code">LGA-652</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_653">
+            <field name="name">Olorunda</field>
+            <field name="code">LGA-653</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_654">
+            <field name="name">Oriade</field>
+            <field name="code">LGA-654</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_655">
+            <field name="name">Orolu</field>
+            <field name="code">LGA-655</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_656">
+            <field name="name">Osogbo</field>
+            <field name="code">LGA-656</field>
+            <field name="state_id" ref="eedc_addons.ng_state_626"/>
+            </record>
+<record model="res.lga" id="ng_lga_658">
+            <field name="name">Afijio</field>
+            <field name="code">LGA-658</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_659">
+            <field name="name">Akinyele</field>
+            <field name="code">LGA-659</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_660">
+            <field name="name">Atiba</field>
+            <field name="code">LGA-660</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_661">
+            <field name="name">Atisbo</field>
+            <field name="code">LGA-661</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_662">
+            <field name="name">Egbeda</field>
+            <field name="code">LGA-662</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_663">
+            <field name="name">Ibadan Central</field>
+            <field name="code">LGA-663</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_664">
+            <field name="name">Ibadan North</field>
+            <field name="code">LGA-664</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_665">
+            <field name="name">Ibadan North West</field>
+            <field name="code">LGA-665</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_666">
+            <field name="name">Ibadan South East</field>
+            <field name="code">LGA-666</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_667">
+            <field name="name">Ibadan South West</field>
+            <field name="code">LGA-667</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_668">
+            <field name="name">Ibarapa Central</field>
+            <field name="code">LGA-668</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_669">
+            <field name="name">Ibarapa East</field>
+            <field name="code">LGA-669</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_670">
+            <field name="name">Ibarapa North</field>
+            <field name="code">LGA-670</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_671">
+            <field name="name">Ido</field>
+            <field name="code">LGA-671</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_672">
+            <field name="name">Irepo</field>
+            <field name="code">LGA-672</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_673">
+            <field name="name">Iseyin</field>
+            <field name="code">LGA-673</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_674">
+            <field name="name">Itesiwaju</field>
+            <field name="code">LGA-674</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_675">
+            <field name="name">Iwajowa</field>
+            <field name="code">LGA-675</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_676">
+            <field name="name">Kajola</field>
+            <field name="code">LGA-676</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_677">
+            <field name="name">Lagelu Ogbomosho North</field>
+            <field name="code">LGA-677</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_678">
+            <field name="name">Ogbomosho South</field>
+            <field name="code">LGA-678</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_679">
+            <field name="name">Ogo Oluwa</field>
+            <field name="code">LGA-679</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_680">
+            <field name="name">Olorunsogo</field>
+            <field name="code">LGA-680</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_681">
+            <field name="name">Oluyole</field>
+            <field name="code">LGA-681</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_682">
+            <field name="name">Ona-Ara</field>
+            <field name="code">LGA-682</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_683">
+            <field name="name">Orelope</field>
+            <field name="code">LGA-683</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_684">
+            <field name="name">Ori Ire</field>
+            <field name="code">LGA-684</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_685">
+            <field name="name">Oyo East</field>
+            <field name="code">LGA-685</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_686">
+            <field name="name">Oyo West</field>
+            <field name="code">LGA-686</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_687">
+            <field name="name">Saki East</field>
+            <field name="code">LGA-687</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_688">
+            <field name="name">Saki West</field>
+            <field name="code">LGA-688</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_689">
+            <field name="name">Surulere</field>
+            <field name="code">LGA-689</field>
+            <field name="state_id" ref="eedc_addons.ng_state_657"/>
+            </record>
+<record model="res.lga" id="ng_lga_691">
+            <field name="name">Barikin Ladi</field>
+            <field name="code">LGA-691</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_692">
+            <field name="name">Bassa</field>
+            <field name="code">LGA-692</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_693">
+            <field name="name">Bokkos</field>
+            <field name="code">LGA-693</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_694">
+            <field name="name">Jos East</field>
+            <field name="code">LGA-694</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_695">
+            <field name="name">Jos North</field>
+            <field name="code">LGA-695</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_696">
+            <field name="name">Jos South</field>
+            <field name="code">LGA-696</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_697">
+            <field name="name">Kanam</field>
+            <field name="code">LGA-697</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_698">
+            <field name="name">Kanke</field>
+            <field name="code">LGA-698</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_699">
+            <field name="name">Langtang North</field>
+            <field name="code">LGA-699</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_700">
+            <field name="name">Langtang South</field>
+            <field name="code">LGA-700</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_701">
+            <field name="name">Mangu</field>
+            <field name="code">LGA-701</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_702">
+            <field name="name">Mikang</field>
+            <field name="code">LGA-702</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_703">
+            <field name="name">Pankshin</field>
+            <field name="code">LGA-703</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_704">
+            <field name="name">Qua'an Pan</field>
+            <field name="code">LGA-704</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_705">
+            <field name="name">Riyom</field>
+            <field name="code">LGA-705</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_706">
+            <field name="name">Shendam</field>
+            <field name="code">LGA-706</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_707">
+            <field name="name">Wase</field>
+            <field name="code">LGA-707</field>
+            <field name="state_id" ref="eedc_addons.ng_state_690"/>
+            </record>
+<record model="res.lga" id="ng_lga_709">
+            <field name="name">Abua/Odual</field>
+            <field name="code">LGA-709</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_710">
+            <field name="name">Ahoada East</field>
+            <field name="code">LGA-710</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_711">
+            <field name="name">Ahoada West</field>
+            <field name="code">LGA-711</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_712">
+            <field name="name">Akuku Toru</field>
+            <field name="code">LGA-712</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_713">
+            <field name="name">Andoni</field>
+            <field name="code">LGA-713</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_714">
+            <field name="name">Asari-Toru</field>
+            <field name="code">LGA-714</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_715">
+            <field name="name">Bonny</field>
+            <field name="code">LGA-715</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_716">
+            <field name="name">Degema</field>
+            <field name="code">LGA-716</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_717">
+            <field name="name">Emohua</field>
+            <field name="code">LGA-717</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_718">
+            <field name="name">Eleme</field>
+            <field name="code">LGA-718</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_719">
+            <field name="name">Etche</field>
+            <field name="code">LGA-719</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_720">
+            <field name="name">Gokana</field>
+            <field name="code">LGA-720</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_721">
+            <field name="name">Ikwerre</field>
+            <field name="code">LGA-721</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_722">
+            <field name="name">Khana</field>
+            <field name="code">LGA-722</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_723">
+            <field name="name">Obio/Akpor</field>
+            <field name="code">LGA-723</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_724">
+            <field name="name">Ogba/Egbema/Ndoni</field>
+            <field name="code">LGA-724</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_725">
+            <field name="name">Ogu/Bolo</field>
+            <field name="code">LGA-725</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_726">
+            <field name="name">Okrika</field>
+            <field name="code">LGA-726</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_727">
+            <field name="name">Omumma</field>
+            <field name="code">LGA-727</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_728">
+            <field name="name">Opobo/Nkoro</field>
+            <field name="code">LGA-728</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_729">
+            <field name="name">Oyigbo</field>
+            <field name="code">LGA-729</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_730">
+            <field name="name">Port-Harcourt</field>
+            <field name="code">LGA-730</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_731">
+            <field name="name">Tai</field>
+            <field name="code">LGA-731</field>
+            <field name="state_id" ref="eedc_addons.ng_state_708"/>
+            </record>
+<record model="res.lga" id="ng_lga_733">
+            <field name="name">Binji</field>
+            <field name="code">LGA-733</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_734">
+            <field name="name">Bodinga</field>
+            <field name="code">LGA-734</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_735">
+            <field name="name">Dange-shnsi</field>
+            <field name="code">LGA-735</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_736">
+            <field name="name">Gada</field>
+            <field name="code">LGA-736</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_737">
+            <field name="name">Goronyo</field>
+            <field name="code">LGA-737</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_738">
+            <field name="name">Gudu</field>
+            <field name="code">LGA-738</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_739">
+            <field name="name">Gawabawa</field>
+            <field name="code">LGA-739</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_740">
+            <field name="name">Illela</field>
+            <field name="code">LGA-740</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_741">
+            <field name="name">Isa</field>
+            <field name="code">LGA-741</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_742">
+            <field name="name">Kware</field>
+            <field name="code">LGA-742</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_743">
+            <field name="name">kebbe</field>
+            <field name="code">LGA-743</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_744">
+            <field name="name">Rabah</field>
+            <field name="code">LGA-744</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_745">
+            <field name="name">Sabon birni</field>
+            <field name="code">LGA-745</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_746">
+            <field name="name">Shagari</field>
+            <field name="code">LGA-746</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_747">
+            <field name="name">Silame</field>
+            <field name="code">LGA-747</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_748">
+            <field name="name">Sokoto North</field>
+            <field name="code">LGA-748</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_749">
+            <field name="name">Sokoto South</field>
+            <field name="code">LGA-749</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_750">
+            <field name="name">Tambuwal</field>
+            <field name="code">LGA-750</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_751">
+            <field name="name">Tqngaza</field>
+            <field name="code">LGA-751</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_752">
+            <field name="name">Tureta</field>
+            <field name="code">LGA-752</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_753">
+            <field name="name">Wamako</field>
+            <field name="code">LGA-753</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_754">
+            <field name="name">Wurno</field>
+            <field name="code">LGA-754</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_755">
+            <field name="name">Yabo</field>
+            <field name="code">LGA-755</field>
+            <field name="state_id" ref="eedc_addons.ng_state_732"/>
+            </record>
+<record model="res.lga" id="ng_lga_757">
+            <field name="name">Ardo-kola</field>
+            <field name="code">LGA-757</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_758">
+            <field name="name">Bali</field>
+            <field name="code">LGA-758</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_759">
+            <field name="name">Donga</field>
+            <field name="code">LGA-759</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_760">
+            <field name="name">Gashaka</field>
+            <field name="code">LGA-760</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_761">
+            <field name="name">Cassol</field>
+            <field name="code">LGA-761</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_762">
+            <field name="name">Ibi</field>
+            <field name="code">LGA-762</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_763">
+            <field name="name">Jalingo</field>
+            <field name="code">LGA-763</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_764">
+            <field name="name">Karin-Lamido</field>
+            <field name="code">LGA-764</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_765">
+            <field name="name">Kurmi</field>
+            <field name="code">LGA-765</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_766">
+            <field name="name">Lau</field>
+            <field name="code">LGA-766</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_767">
+            <field name="name">Sardauna</field>
+            <field name="code">LGA-767</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_768">
+            <field name="name">Takum</field>
+            <field name="code">LGA-768</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_769">
+            <field name="name">Ussa</field>
+            <field name="code">LGA-769</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_770">
+            <field name="name">Wukari</field>
+            <field name="code">LGA-770</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_771">
+            <field name="name">Yorro</field>
+            <field name="code">LGA-771</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_772">
+            <field name="name">Zing</field>
+            <field name="code">LGA-772</field>
+            <field name="state_id" ref="eedc_addons.ng_state_756"/>
+            </record>
+<record model="res.lga" id="ng_lga_774">
+            <field name="name">Bade</field>
+            <field name="code">LGA-774</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_775">
+            <field name="name">Bursari</field>
+            <field name="code">LGA-775</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_776">
+            <field name="name">Damaturu</field>
+            <field name="code">LGA-776</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_777">
+            <field name="name">Fika</field>
+            <field name="code">LGA-777</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_778">
+            <field name="name">Fune</field>
+            <field name="code">LGA-778</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_779">
+            <field name="name">Geidam</field>
+            <field name="code">LGA-779</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_780">
+            <field name="name">Gujba</field>
+            <field name="code">LGA-780</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_781">
+            <field name="name">Gulani</field>
+            <field name="code">LGA-781</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_782">
+            <field name="name">Jakusko</field>
+            <field name="code">LGA-782</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_783">
+            <field name="name">Karasuwa</field>
+            <field name="code">LGA-783</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_784">
+            <field name="name">Karawa</field>
+            <field name="code">LGA-784</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_785">
+            <field name="name">Machina</field>
+            <field name="code">LGA-785</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_786">
+            <field name="name">Nangere</field>
+            <field name="code">LGA-786</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_787">
+            <field name="name">Nguru Potiskum</field>
+            <field name="code">LGA-787</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_788">
+            <field name="name">Tarmua</field>
+            <field name="code">LGA-788</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_789">
+            <field name="name">Yunusari</field>
+            <field name="code">LGA-789</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_790">
+            <field name="name">Yusufari</field>
+            <field name="code">LGA-790</field>
+            <field name="state_id" ref="eedc_addons.ng_state_773"/>
+            </record>
+<record model="res.lga" id="ng_lga_792">
+            <field name="name">Anka</field>
+            <field name="code">LGA-792</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_793">
+            <field name="name">Bakura</field>
+            <field name="code">LGA-793</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_794">
+            <field name="name">Birnin Magaji</field>
+            <field name="code">LGA-794</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_795">
+            <field name="name">Bukkuyum</field>
+            <field name="code">LGA-795</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_796">
+            <field name="name">Bungudu</field>
+            <field name="code">LGA-796</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_797">
+            <field name="name">Gummi</field>
+            <field name="code">LGA-797</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_798">
+            <field name="name">Gusau</field>
+            <field name="code">LGA-798</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_799">
+            <field name="name">Kaura</field>
+            <field name="code">LGA-799</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_800">
+            <field name="name">Namoda</field>
+            <field name="code">LGA-800</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_801">
+            <field name="name">Maradun</field>
+            <field name="code">LGA-801</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_802">
+            <field name="name">Maru</field>
+            <field name="code">LGA-802</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_803">
+            <field name="name">Shinkafi</field>
+            <field name="code">LGA-803</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_804">
+            <field name="name">Talata Mafara</field>
+            <field name="code">LGA-804</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+<record model="res.lga" id="ng_lga_805">
+            <field name="name">Tsafe</field>
+            <field name="code">LGA-805</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+        <record model="res.lga" id="ng_lga_806">
+            <field name="name">Zurmi</field>
+            <field name="code">LGA-806</field>
+            <field name="state_id" ref="eedc_addons.ng_state_791"/>
+            </record>
+    </data>
+</odoo>

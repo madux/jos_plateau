@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="helpdesk_user_rule" model="ir.rule">
+        <field name="name">Helpdesk User</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="domain_force">[('branch_id', '=', user.branch_id.id)]</field>
+        <field name="global" eval="True"/>
+    </record>
+
+    <!-- see only branch rooms-->
+    <record id="helpdesk_team_user_rule" model="ir.rule">
+        <field name="name">User to see assigned helpdesk in branch</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_team"/>
+        <field name="domain_force">['|', ('branch_id', '=', False), ('branch_id', '=', user.branch_id.id)]</field>
+    </record>
+
+</odoo>

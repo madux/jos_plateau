@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_account_payment_form_memo_inherit">
+            <field name="name">Account Payment Memo Inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="narration" invisible="0" placeholder="Please enter narration of this payment"/>
+                </xpath>
+            </field>
+        </record>
+       
+    </data>
+</odoo>

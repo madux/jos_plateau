@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- <template id="report_delivery_document_extended" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@class='row mt32 mb32']/div/p" position="after">
+            <div t-if="o.sign_signature" style="margin-top:200px">
+                <img style="margin-left:-30px" t-att-src="image_data_uri(o.sign_signature)" height="100px" alt="Product image"/>
+                <p t-esc="o.warehouse_id.partner_id.name"/>
+                <p class="fontsize-small"><b>Warehouse Manager</b></p>
+            </div>
+        </xpath>
+        <xpath expr="//table[@name='stock_move_line_table']/thead" position="replace">
+            <thead>
+                <tr>
+                    <th name="th_sml_product"><strong>Product</strong></th>
+                    <th name="lot_serial" t-if="has_serial_number" groups="stock.group_lot_on_delivery_slip">
+                        Lot/Serial Number
+                    </th>
+                    <th name="th_sm_unit_price"><strong>Unit Price</strong></th> 
+                    <th name="th_sm_nafdac"><strong>NAFDAC No.</strong></th> 
+                    <th name="th_sm_expiry"><strong>Expiry Date</strong></th>
+                    <th name="th_sml_quantity" class="text-center"><strong>Quantity</strong></th>
+
+                </tr>
+            </thead>
+        </xpath> 
+    </template>
+
+    <template id="stock_report_delivery_aggregated_move_lines_extended" inherit_id="stock.stock_report_delivery_aggregated_move_lines">
+        <xpath expr="//tr[@t-as='line']/td[1]" position="after">
+            <td class="text-center" name="move_line_aggregated_price_unit">
+                <t t-if="aggregated_lines[line]['sale_price']">
+                    <span t-esc="aggregated_lines[line]['sale_price']"/>
+                </t>
+            </td>
+            <td class="text-center" name="move_line_aggregated_nafdac_number">
+                <t t-if="aggregated_lines[line]['product_id']">
+                    <span t-esc="aggregated_lines[line]['product_id'].nafdac_number"/>
+                </t>
+            </td>
+            <td class="text-center" name="move_line_aggregated_use_date">
+                <t t-if="aggregated_lines[line]['product_id']">
+                    <span t-esc="aggregated_lines[line]['lot_id'].use_date"/>
+                </t>
+            </td>
+        </xpath>
+
+    </template> -->
+</odoo>

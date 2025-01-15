@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+        <!-- <template id="account_reports_backend_extended" inherit_id="web.assets_backend" active="True">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/eha_multi_branch/account/static/src/js/account_report.js"></script>
+            </xpath>
+        </template>
+
+        <template id="search_template_branch">
+            <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-home"/>
+                Branch:
+                <t t-set="selected_branches" t-value="', '.join(branch.get('code') for branch in options['branches'] if branch.get('selected'))"/>
+                <t t-if="selected_branches">
+                    <t t-esc="selected_branches"/>
+                </t>
+                <t t-else="">
+                All
+                </t>
+            </a>
+
+
+            <div class="dropdown-menu o_filters_menu" role="menu">
+                <t t-foreach="options['branches']" t-as="b">
+                    <t t-if="b.get('id') == 'divider'">
+                        <div role="separator" class="dropdown-divider"/>
+                        <b role="menuitem" class="ml4 dropdown-item-text">
+                            <t t-esc="b.get('name')"/>
+                        </b>
+                        <div role="separator" class="dropdown-divider"/>
+                    </t>
+
+                    <t t-if="b.get('id') != 'divider'">
+                        <a role="menuitem" class="dropdown-item js_account_report_choice_filter" t-att-title="b.get('name')+ '-' + b.get('code')" t-att-data-id="b.get('id')" data-filter="branches">
+                            <t t-esc="b.get('name')"/>
+                        </a>
+                    </t>
+                </t>
+            </div>
+
+        </template>
+
+        <template id="search_template_extended" inherit_id="account_reports.search_template">
+            <div class='btn-group o_dropdown o_account_reports_filter_analytic' position="after">
+                <div class="btn-group o_dropdown o_account_reports_filter_branch">
+                    <t t-call="eha_multi_branch.search_template_branch"/>
+                </div>
+            </div>
+        </template> -->
+
+    </data>
+</odoo>

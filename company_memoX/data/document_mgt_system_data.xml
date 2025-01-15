@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[
+                ('name', 'in', ['documents_internal_folder', 'documents_finance_folder', 'documents_hr_folder', 
+                'documents_marketing_folder', 'documents_product_folder', 'documents_project_folder',
+                'documents_spreadsheet_folder','documents_recruitment_folder']), 
+                ('model', '=', 'documents.folder')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <record id="documents.documents_internal_folder" model="documents.folder">
+            <field name="active">0</field>
+        </record>
+        <record id="documents.documents_finance_folder" model="documents.folder">
+            <field name="active">0</field>
+        </record>
+        <record id="documents_hr.documents_hr_folder" model="documents.folder">
+            <field name="active">0</field>
+        </record>
+        <record id="documents.documents_marketing_folder" model="documents.folder">
+            <field name="active">0</field>
+        </record>
+        <record id="documents_product.documents_product_folder" model="documents.folder">
+            <field name="active">0</field>
+        </record>
+        <record id="documents_project.documents_project_folder" model="documents.folder">
+            <field name="active">0</field>
+        </record>
+        <record id="documents_spreadsheet.documents_spreadsheet_folder" model="documents.folder">
+            <field name="active">0</field>
+        </record>
+        <!-- <record id="documents_hr_recruitment.documents_recruitment_folder" model="documents.folder">
+            <field name="active">0</field>
+        </record> -->
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[
+                ('name', 'in', ['documents_internal_folder', 'documents_finance_folder', 'documents_hr_folder', 
+                'documents_marketing_folder', 'documents_product_folder', 'documents_project_folder',
+                'documents_spreadsheet_folder','documents_recruitment_folder']), 
+                ('model', '=', 'documents.folder')]"/>
+            </function>
+            <value eval="{'noupdate': True}"/>
+        </function>
+        
+    
+    </data>
+    
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+        <record id="memo_initial_stage" model="memo.stage">
+            <field name="name">Draft</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="memo_refuse_stage" model="memo.stage">
+            <field name="name">Refused</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">1000000</field>
+        </record>
+
+        <record id="memo_cancel_stage" model="memo.stage">
+            <field name="name">Cancelled</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">2000000</field>
+        </record>
+     </data>
+</odoo>

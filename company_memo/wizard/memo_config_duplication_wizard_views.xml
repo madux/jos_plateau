@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_memo_config_duplication_wizard_form" model="ir.ui.view">
+        <field name="name">memo.config.duplication.wizard.form</field>
+        <field name="model">memo.config.duplication.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Duplicate Memo Configuration">
+                <group>
+                    <group>
+                        <field name="name"  required="1"/>
+                        <field name="dept_ids" widget="many2many_tags" />
+                    </group>
+                    <group>
+                        <field name="employees_follow_up_ids" widget="many2many_tags" />
+                        <field name="allowed_companies_ids" widget="many2many_tags" />
+                    </group>
+                </group>
+                <notebook>
+                    <page name="Stages" string="Stages">
+                        <field name="dummy_memo_stage_ids" nolabel="1" widget="one2many_list">
+                            <tree editable="top">
+                                <field name="name"/>
+                                <field name="sequence"/>
+                                <field name="main_stage_id"/>
+                                <field name="approver_ids" widget="many2many_tags"/>
+                                <field name="is_approved_stage"/>
+                            </tree>
+                        </field>    
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="duplicate_memo_config" string="Duplicate" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="dummy_memo_stage_view_form" model="ir.ui.view">
+        <field name="name">dummy.memo.stage.view.form</field>
+        <field name="model">dummy.memo.stage</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/> 
+                            <field name="sequence" required="1"/> 
+                            <field name="active" default="1"/> 
+                        </group>
+                        <group>
+                            <field name="approver_ids" string="Approvers" required="0" widget="many2many_tags" options="{'no_create':True, 'no_open': False}"/> 
+                            <field name="is_approved_stage" default="0"/> 
+                        </group>   
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+        <record id="eha_view_account_payment_form" model="ir.ui.view">
+            <field name="name">eha.account.payment.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form" />
+            <field name="arch" type="xml">
+                <field name="date" position="after">
+                    <field name="sale_order_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

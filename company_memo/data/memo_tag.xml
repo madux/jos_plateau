@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+        <record id="memo_tag_vessel_clearance" model="memo.config.tag">
+            <field name="name">AGENCY: Vessel Clearance</field>
+            <field name="active">1</field>
+        </record>
+        <record id="memo_tag_tanker_clearance" model="memo.config.tag">
+            <field name="name">AGENCY:  TANKER CLEARANCE</field>
+            <field name="active">1</field>
+        </record>
+        <record id="memo_tag_protective_agency" model="memo.config.tag">
+            <field name="name">AGENCY: PROTECTIVE AGENCY</field>
+            <field name="active">1</field>
+        </record>
+
+
+        <record id="memo_tag_cfwd_export" model="memo.config.tag">
+            <field name="name">CFWD EXPORT</field>
+            <field name="active">1</field>
+        </record>
+        <record id="memo_tag_cfwd_import" model="memo.config.tag">
+            <field name="name">CFWD IMPORT</field>
+            <field name="active">1</field>
+        </record>
+        <record id="memo_tag_travel_visa" model="memo.config.tag">
+            <field name="name">TRAVEL VISA</field>
+            <field name="active">1</field>
+        </record>
+        <record id="memo_tag_travel_crewchange" model="memo.config.tag">
+            <field name="name">TRAVEL CREW CHANGE</field>
+            <field name="active">1</field>
+        </record>
+        <record id="memo_tag_warehouse" model="memo.config.tag">
+            <field name="name">WAREHOUSING</field>
+            <field name="active">1</field>
+        </record>
+
+
+        <record id="memo_tag_transport" model="memo.config.tag">
+            <field name="name">TRANSPORTATION</field>
+            <field name="active">1</field>
+        </record>
+
+        <record id="memo_tag_procurement" model="memo.config.tag">
+            <field name="name">PROCUREMEMT</field>
+            <field name="active">1</field>
+        </record>
+        <record id="memo_tag_procurement_request" model="memo.config.tag">
+            <field name="name">PROCUREMEMT REQUEST</field>
+            <field name="active">1</field>
+        </record>
+        <record id="memo_tag_all" model="memo.config.tag">
+            <field name="name">ALL</field>
+            <field name="active">1</field>
+        </record>
+     </data>
+</odoo>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_view_employee_inherited_form_for_eedc_addons">
+            <field name="name">hr.employee</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="required">0</attribute>
+                </xpath>
+                <!-- <xpath expr="//div[@class='oe_title']" position="inside">
+                    <h1>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="first_name" class="oe_edit_only" string="First Name"/>
+                                <div>
+                                    <field name="first_name"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="middle_name" class="oe_edit_only" string="Middle Name"/>
+                                <div>
+                                    <field name="middle_name"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="last_name" class="oe_edit_only" string="Last Name"/>
+                                <div>
+                                    <field name="last_name"/>
+                                </div>
+                            </div>
+                        </div>
+                    </h1>
+                </xpath> -->
+                <xpath expr="//field[@name='mobile_phone']" position="before">
+                    <field name="first_name"/>
+                    <field name="middle_name"/>
+                    <field name="last_name"/>
+                </xpath>
+                <xpath expr="//field[@name='lang']" position="after">
+                    <field name="house_address" groups="hr.group_hr_user"/>
+                    <field name="state_id"/>
+                    <field name="local_government"/>
+                </xpath>
+                <xpath expr="//group[@name='active_group']//field[@name='user_id']" position="replace">
+                     <field name="user_id" string="Related User" context="{'allow_create_employee': False, 'default_create_employee': False}"/>
+                    <!-- <field name="user_id" string="Related User" domain="[('share', '=', False)]" context="{'allow_create_employee': False, 'default_create_employee': False}"/> -->
+                </xpath>
+                <xpath expr="//field[@name='birthday']" position="after">
+                    <field name="age"/>
+                    <field name="is_external_staff"/>
+                    <field name="external_company_id" domain="[('is_company','=', True)]" attrs="{'invisible': [('is_external_staff','=', False)], 'required': [('is_external_staff','=', True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='children']" position="after">
+                    <field name="spouse_name"/>
+                    <field name="spouse_telephone"/>
+                    <field name="father_name"/>
+                    <field name="father_phone"/>
+                    <field name="mother_name"/>
+                    <field name="mother_phone"/>
+                </xpath>
+
+                <xpath expr="//page[@name='personal_information']/group[1]" position="after">
+                    <group string="Next of Kin">
+                        <field name="next_of_kin_ids">
+                            <tree string="Next of Kin">
+                                <field name="name"/>
+                                <field name="phone"/>
+                                <field name="street"/>
+                                
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_view_employee_inherited_filter_for_eedc_addons" >
+            <field name="name">hr.employee.eedc_addons</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter" />
+            <field name="arch" type="xml"> 
+                <field name="name" position="after">
+                    <filter string="First Name" name="first_name" />
+                    <filter string="Middle Name" name="middle_name" />
+                    <filter string="Last Name" name="last_name" />
+                </field>
+                <field name="parent_id" position="after">
+                    <field name="external_company_id"/>
+                    <filter string="First Name" name="first_name" />
+                    <filter string="Middle Name" name="middle_name" />
+                    <filter string="Last Name" name="last_name" />
+                </field>
+                <xpath expr="//filter[@name='my_department']" position="after">
+                    <filter name="group_external_company_id" string='External Company' domain="[('is_external_staff','=', True)]"/>
+                </xpath>
+                <xpath expr="//filter[@name='group_manager']" position="before">
+                    <filter name="group_external_company_id" string='External Company' domain="[('is_external_staff','=', True)]" context="{'group_by' : 'external_company_id'}"/>
+                </xpath>
+ 
+            </field>
+        </record>
+ 
+        <record id="action_external_employee" model="ir.actions.act_window">
+			<field name="name">External Employees</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_mode">tree,form</field>
+            <field name="domain">[('is_external_staff', '=', True)]</field>
+			<field name="view_id" ref="hr.view_employee_tree"/>
+            <field name="context">{'search_default_group_external_company_id': 1,'default_is_external_staff': True}</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Click To Create.
+				</p>
+			</field>
+		</record>
+        <menuitem id="menu_external_staff" name="External Employees" sequence="10" parent="hr.menu_hr_employee_payroll" action="eedc_addons.action_external_employee"/>
+        
+        <record id="ir_action_server_employee_user" model="ir.actions.server">
+			<field name="name">Generate User*</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="hr.model_hr_employee" />
+            <field name="binding_model_id" ref="hr.model_hr_employee" />
+            <field name="state">code</field>
+            <field name="groups_id" eval="[(6, 0, [
+			ref('base.group_system'), 
+            ref('hr.group_hr_manager')
+			])]"/>
+            <field name="code">action=model.sudo().generate_user_record()</field>
+        </record>
+
+        <record id="ir_action_server_hr_transfer" model="ir.actions.server">
+			<field name="name">Transfer</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="eedc_addons.model_hr_employee"/>
+            <field name="binding_model_id" ref="eedc_addons.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="groups_id" eval="[(6, 0, [
+			ref('base.group_system'),
+            ref('hr_pms.group_pms_officer_id'),
+			])]"/>
+            <field name="code">action=model.transfer_employee_action()</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+        
+        <record id="upload_bi_bw_manifest" model="memo.stage.document.line">
+            <field name="name">Upload &amp; Confirm BI Manifest</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="import_pi_bw_confirm_bi_manifest" model="memo.stage">
+            <field name="name">Upload and Confirm BI Manifest</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">10</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.upload_bi_bw_manifest')),
+            ]"/>
+        </record>
+        <record id="generate_pi_bw_transire_doc" model="memo.stage.document.line">
+            <field name="name">Upload Generate transire (IM7)</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="import_pi_generate_tranireim7" model="memo.stage">
+            <field name="name">Generate transire (IM7) &amp; cancel the manifest from importer</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">20</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.generate_pi_bw_transire_doc')),
+            ]"/>
+        </record>
+        
+        <record id="import_pi_bw_confirm_ncs_for_transfer_doc" model="memo.stage.document.line">
+            <field name="name">Upload Generate transire (IM7)</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="import_pi_bw_confirm_ncs_for_transfer" model="memo.stage">
+            <field name="name">Confirm approval from NCS for Transfer</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">30</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.import_pi_bw_confirm_ncs_for_transfer_doc')),
+            ]"/>
+        </record>
+
+        <record id="import_pi_bw_process_terminal_fee" model="memo.stage">
+            <field name="name">Process terminal and shipping fee</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">40</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="False"/>
+            <field name="require_po_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="obtain_to_tdo_doc" model="memo.stage.document.line">
+            <field name="name">DO and TDO Document</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="import_pi_bw_obtain_do_tdo" model="memo.stage">
+            <field name="name">Obtain DO &amp; TOD</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">50</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.obtain_to_tdo_doc')),
+            ]"/>
+        </record>
+
+        <record id="import_pi_bw_arrange_trans_escort" model="memo.stage">
+            <field name="name">Arrange Transport and and Escort</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">60</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+        </record>
+
+        <record id="import_pi_bw_arrival_at_warehouse" model="memo.stage">
+            <field name="name">Arrival At Wareohuse</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">70</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            
+        </record>
+        <record id="import_arrange_cargo_tally_doc" model="memo.stage.document.line">
+            <field name="name">Carog Tally Document</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="pi_bw_arrange_cargo_tally" model="memo.stage">
+            <field name="name">Arrange Agency Cargo Tally At Warehouse</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">80</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.import_arrange_cargo_tally_doc')),
+            ]"/>
+            
+        </record>
+
+        <record id="acknowledge_cargo_escort_doc" model="memo.stage.document.line">
+            <field name="name">Approved manifest for transfer</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="pi_acknowledge_cargo_escort_release" model="memo.stage">
+            <field name="name">Acknowledge of Cargo to realease Escort</field>
+            <field name="loaded_from_data">1</field>
+            <field name="description">Acknowledgement of Cargo to Escort</field>
+            <field name="active">1</field>
+            <field name="sequence">90</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.acknowledge_cargo_escort_doc')),
+            ]"/>
+        </record>
+
+        <record id="approved_manifest_transfer_doc" model="memo.stage.document.line">
+            <field name="name">Approved manifest for transfer</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="pi_bw_approval_manifest_transfer" model="memo.stage">
+            <field name="name">Approval Manifest for transfer</field>
+            <field name="loaded_from_data">1</field>
+            <field name="description">Approval Manifest for transfer</field>
+            <field name="active">1</field>
+            <field name="sequence">100</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.approved_manifest_transfer_doc')),
+            ]"/>
+        </record>
+
+        <record id="pi_bw_duty_confirmation" model="memo.stage">
+            <field name="name">Duty &amp; confirmation</field>
+            <field name="loaded_from_data">1</field>
+            <field name="description">Duty Payment processing and payment confirmation</field>
+            <field name="active">1</field>
+            <field name="sequence">110</field>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="False"/>
+            <field name="require_po_confirmation" eval="True"/>
+        </record>
+
+        <record id="import_pi_bw_custom_examination" model="memo.stage">
+            <field name="name">Schedule Custom Examination</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">120</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <!-- <field name="require_bill_payment" eval="False"/>
+            <field name="require_po_confirmation" eval="True"/> -->
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="import_pi_bw_custom_release" model="memo.stage">
+            <field name="name">Custom Release</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">130</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="import_pi_bw_obtain_exit" model="memo.stage">
+            <field name="name">Obtain Exit</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">140</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="import_pi_bw_take_delivery_shipment" model="memo.stage">
+            <field name="name">Take Delivery of Shipment</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">150</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record>
+        <record id="import_pi_bw_create_client_invoice4" model="memo.stage">
+            <field name="name">Create Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">160</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record>
+        <record id="import_pi_bw_so_and_pay5" model="memo.stage">
+            <field name="name">Validate Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">170</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record>
+
+        <record id="import_pi_bw_ops_file_check" model="memo.stage">
+            <field name="name">Operational File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">180</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="import_pi_bw_financial_file_check" model="memo.stage">
+            <field name="name">Financial File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">190</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="import_pi_bw_file_closure" model="memo.stage">
+            <field name="name">File Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">200</field>
+             <field name="is_approved_stage" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="import_pi_bw_closured" model="memo.stage">
+            <field name="name">Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">210</field>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="memo_config_cfwd_import_pi" model="memo.config">
+            <field name="memo_type" ref="company_memo.mtype_import_process_pi_bonded_warehouse"/>
+            <field name="project_type">cfwd</field>
+            <field name="active">1</field>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+            <field name="config_tag_id" ref="company_memo.memo_tag_cfwd_import"/>
+            <field name="stage_ids" eval="[
+            (4, ref('company_memo.import_pi_bw_confirm_bi_manifest')),
+            (4, ref('company_memo.import_pi_generate_tranireim7')),
+            (4, ref('company_memo.import_pi_bw_confirm_ncs_for_transfer')),
+            (4, ref('company_memo.import_pi_bw_process_terminal_fee')),
+            (4, ref('company_memo.import_pi_bw_obtain_do_tdo')),
+            (4, ref('company_memo.import_pi_bw_arrange_trans_escort')),
+            (4, ref('company_memo.import_pi_bw_arrival_at_warehouse')),
+            (4, ref('company_memo.pi_bw_arrange_cargo_tally')),
+            (4, ref('company_memo.pi_acknowledge_cargo_escort_release')),
+            (4, ref('company_memo.pi_bw_approval_manifest_transfer')),
+            (4, ref('company_memo.pi_bw_duty_confirmation')),
+            (4, ref('company_memo.import_pi_bw_custom_examination')),
+            (4, ref('company_memo.import_pi_bw_custom_release')),
+            (4, ref('company_memo.import_pi_bw_obtain_exit')),
+            (4, ref('company_memo.import_pi_bw_take_delivery_shipment')),
+            (4, ref('company_memo.import_pi_bw_create_client_invoice4')),
+            (4, ref('company_memo.import_pi_bw_so_and_pay5')),
+            (4, ref('company_memo.import_pi_bw_ops_file_check')),
+            (4, ref('company_memo.import_pi_bw_file_closure')),
+            (4, ref('company_memo.import_pi_bw_closured')),
+            ]"/>
+        </record>
+         
+        <record id="company_memo.import_pi_bw_confirm_bi_manifest" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_generate_tranireim7" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_confirm_ncs_for_transfer" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_process_terminal_fee" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_obtain_do_tdo" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_arrange_trans_escort" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_arrival_at_warehouse" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+
+        <record id="company_memo.pi_bw_arrange_cargo_tally" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+
+        <record id="company_memo.import_pi_bw_arrival_at_warehouse" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.pi_acknowledge_cargo_escort_release" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.pi_bw_approval_manifest_transfer" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.pi_bw_duty_confirmation" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_custom_examination" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_custom_release" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_obtain_exit" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+
+        <record id="company_memo.import_pi_bw_take_delivery_shipment" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_create_client_invoice4" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_so_and_pay5" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_ops_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_file_closure" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+        <record id="company_memo.import_pi_bw_closured" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi"/>
+        </record>
+     </data>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_view_country_state_form_for_eedc_addons">
+            <field name="name">States</field>
+            <field name="model">res.country.state</field>
+            <field name="inherit_id" ref="base.view_country_state_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='country_id']" position="after">
+                    <field name="lga_ids">
+                        <tree string="LGA">
+                            <field name="name"/>
+                            <field name="code"/>
+                        </tree>
+                    </field>
+                    
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo noupdate="0">
+        <function model="ir.model.data" name="write">
+            <function model="ir.model.data" name="search">
+                <value eval="[('module', '=', 'account'), ('name', '=', 'account_move_rule_group_readonly')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <function model="ir.model.data" name="write">
+            <function model="ir.model.data" name="search">
+                <value eval="[('module', '=', 'account'), ('name', '=', 'account_move_rule_group_invoice')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <function model="ir.model.data" name="write">
+            <function model="ir.model.data" name="search">
+                <value eval="[('module', '=', 'account'), ('name', '=', 'account_move_see_all')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        
+        <!-- <record id="branch_user_see_only_account_journal" model="ir.rule">
+            <field name="name">branch: Internal users See only related branch journal</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="global" eval="True"/>
+            
+            <field name="domain_force">['|','|',
+            ('for_public_use', '=', True), 
+            ('branch_id.id', '=', user.branch_id.id),
+            ('branch_id.id', 'in', user.branch_ids.ids)
+            ]</field>
+        </record> -->
+
+        <record id="branch_user_see_only_account_payment" model="ir.rule">
+            <field name="name">branch: Internal users See only related branch payments</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="global" eval="True"/>
+            <field name="groups" eval="[
+            (4, ref('account.group_account_readonly')),
+            (4, ref('account.group_account_invoice')),
+            ]"/>
+            <field name="domain_force">['|',('branch_id.id', '=', user.branch_id.id),('branch_id.id', 'in', user.branch_ids.ids)]</field>
+        </record>
+
+        <record id="branch_user_see_only_account_batch_payment" model="ir.rule">
+            <field name="name">branch: Internal users See only related branch batch payments</field>
+            <field name="model_id" ref="account_batch_payment.model_account_batch_payment"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[
+            ('branch_id.id', '=', user.branch_id.id)]
+            </field>
+        </record>
+
+        <record id="branch_admin_all_only_account_batch_payment" model="ir.rule">
+            <field name="name">branch: Internal admin all only related branch batch payments</field>
+            <field name="model_id" ref="account_batch_payment.model_account_batch_payment"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[
+            (1, '=', 1)]
+            </field>
+        </record>
+
+        
+
+        <record id="branch_user_see_all_acount_journal" model="ir.rule">
+            <field name="name">branch: top account users See all journal</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="global" eval="True"/>
+            <field name="groups" eval="[
+            (4, ref('ik_multi_branch.account_major_user')),
+            ]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="branch_user_see_all_acount_payment" model="ir.rule">
+            <field name="name">branch: top account users See all payment</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="global" eval="True"/>
+            <field name="groups" eval="[
+            (4, ref('ik_multi_branch.account_major_user')),
+            ]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+        
+        <record id="branch_user_see_only_aacount_moves" model="ir.rule">
+            <field name="name">branch: Internal users See only related branch moves</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="global" eval="True"/>
+            <field name="groups" eval="[
+            (4, ref('account.group_account_readonly')),
+            (4, ref('account.group_account_invoice')),
+            ]"/>
+            <field name="domain_force">['|',
+            ('branch_id.id', '=', user.branch_id.id),
+            ('branch_id.id', 'in', user.branch_ids.ids)
+            ]</field>
+        </record>
+
+        <record id="branch_user_see_all_acount_moves" model="ir.rule">
+            <field name="name">branch: top account users See all moves</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="global" eval="True"/>
+            <field name="groups" eval="[
+            (4, ref('ik_multi_branch.account_major_user')),
+            ]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="account.account_move_see_all" model="ir.rule">
+            <field name="name">Branch: All Journal Entry</field>
+            <field ref="account.model_account_move" name="model_id"/>
+            <field name="domain_force">['|',('branch_id.id', '=', user.branch_id.id),('branch_id.id', 'in', user.branch_ids.ids)]</field>
+            <!-- <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/> -->
+        </record>
+
+        <record id="account.account_move_rule_group_readonly" model="ir.rule">
+            <field name="name">Branch: Readonly Move Journal Entry 2</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="domain_force">['|',('branch_id.id', '=', user.branch_id.id),('branch_id.id', 'in', user.branch_ids.ids)]</field>
+            <!-- <field name="groups" eval="[(4, ref('account.group_account_readonly'))]"/> -->
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_read" eval="True"/>
+        </record>
+
+        <record id="account.account_move_rule_group_invoice" model="ir.rule">
+            <field name="name">Branch: Readonly Move Journal Entry 3</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="domain_force">['|',('branch_id.id', '=', user.branch_id.id),('branch_id.id', 'in', user.branch_ids.ids)]</field>
+            <!-- <field name="groups" eval="[(4, ref('account.group_account_invoice'),(4, ref('account.group_account_readonly'))]"/> -->
+        </record>
+
+    </odoo>

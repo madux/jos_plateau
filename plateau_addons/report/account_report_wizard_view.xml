@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="account_dynamic_report_form_view" model="ir.ui.view">
+        <field name="name">account.dynamic.report</field>
+        <field name="model">account.dynamic.report</field>
+        <field name="arch" type="xml">
+            <form string="Dynamic report">
+                <sheet>
+                    <header>
+                        
+                    </header>
+
+                    <div class="oe_edit_only alert alert-info" role="alert">
+                        Select the type of default account to create for rows e.g "Domestic"<br/>
+                        <strong>Date From: </strong> <field name="date_from" nolabel="1"/> -- to -- <strong>Date to: </strong><field name="date_to" nolabel="1"/><br/>
+                        <br/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="budget_id" readonly="0"/> 
+                            <field name="partner_id" readonly="0"/> 
+                            <field name="report_type"/> 
+                            <field name="format"/> 
+                        </group>
+                        <group> 
+                            <field name="journal_ids" widget="many2many_tags"/>
+                            <field name="account_ids" widget="many2many_tags"/>
+                            <field name="account_analytics_ids" widget="many2many_tags" readonly="0"/>
+                            <field name="branch_ids" widget="many2many_tags" readonly="0"/>
+                            <field name="moveline_ids" widget="many2many_tags" invisible="1"/>
+
+                        </group>
+                    </group>
+                </sheet>
+
+                <footer>
+                    <button name="action_print_report" string="Print" type="object"  class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record> 
+
+    <record id="action_account_dynamic_report" model="ir.actions.act_window">
+        <field name="name">Account Reports</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.dynamic.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record> 
+    <menuitem
+            id="menu_import_applicants_records"
+            name="Print Dynamic Report"
+            parent="account.account_reports_legal_statements_menu"
+            action="plateau_addons.action_account_dynamic_report"
+            sequence="102"/>
+
+</odoo>

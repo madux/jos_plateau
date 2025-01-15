@@ -1,0 +1,20 @@
+{
+    'name': 'Plateau Addons',
+    'version': '17.0',
+    'author': "Maduka Sopulu",
+    'category': 'ERP',
+    'summary': 'ODOO Base Extension to customize base modules',
+    'depends': ['base', 'account', 'account_accountant','account_budget', 'documents_spreadsheet', 'currency_rate_live', 'company_memo', 'ik_multi_branch'],
+    'description': "ODOO Base Extension to customize base modules ",
+    "data": [
+        'security/ir.model.access.csv',
+        'security/ir_rule.xml',
+        'views/view_import_chart_data.xml', 
+        'views/company_memo_view.xml', 
+        'views/account_view.xml', 
+        'views/account_segment_view.xml', 
+        'data/account_segment.xml', 
+        'report/account_report_wizard_view.xml', 
+        'report/account_report_template.xml', 
+    ],
+}

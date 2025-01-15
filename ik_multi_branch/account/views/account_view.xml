@@ -1,0 +1,537 @@
+<odoo>
+    <data>
+        <record id="account.menu_finance_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('ik_multi_branch.account_major_user')])]"/>
+        </record>
+
+        <!--group customer/vendor invoices by branch -->
+        <record id="view_account_invoice_filter_extended" model="ir.ui.view">
+            <field name="name">account.move.select</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <filter name="salesperson" position="before">
+                    <filter name="branch_id" string="Branch" context="{'group_by':'branch_id'}"/>
+                </filter>
+            </field>
+        </record>
+
+        <record id="view_account_journal_form_extended" model="ir.ui.view">
+            <field name="name">account.journal</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <field name="code" position="after">
+                    <!-- <field name="is_main_account_user" string="Is main user"/> -->
+                    <field name="allowed_branch_ids" string="Allowed Branch" widget="many2many_tags"/>
+                </field>
+
+            </field>
+        </record>
+
+        <!-- <record id="account.open_account_journal_dashboard_kanban" model="ir.actions.act_window">
+            <field name="name">Accounting Dashboard Branch</field>
+            <field name="res_model">account.journal</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="account.account_journal_dashboard_kanban_view"/>
+            <field name="usage">menu</field>
+            <field name="context">{'search_default_dashboard':1}</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_neutral_face">
+                    This is the accounting dashboard
+                </p><p>
+                    If you have not installed a chart of account, please install one first.<br/>
+                <a class="btn-link" type="action" name="%(account.open_account_charts_modules)d" tabindex="-1">Browse available countries.</a>
+                </p>
+            </field>
+        </record> -->
+
+
+         
+        <!-- <menuitem id="menu_board_journal_for_non_top_user" name="All Journal transactions"
+            parent="account_accountant.menu_accounting" sequence="2" action="ik_multi_branch.ir_action_server_account_transaction"
+            groups="ik_multi_branch.account_major_user"/> -->
+         <!-- <menuitem id="menu_board_journal_for_non_top_user" name="All Journal transactions"
+            parent="account_accountant.menu_accounting" sequence="2" action="ik_multi_branch.ir_action_server_account_transaction"
+            groups="account.group_account_manager,account.group_account_invoice,account.group_account_readonly"/>
+           -->
+<!-- <field name="groups_id" eval="[(6, 0, [
+            ref('ik_multi_branch.account_major_user'),
+            ])]"/> -->
+        <!--group customer receipts by branch-->
+        <!-- <record id="view_voucher_filter_extended" model="ir.ui.view">
+            <field name="name">account.voucher.select.extended</field>
+            <field name="model">account.voucher</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter"/>
+            <field name="arch" type="xml">
+                <filter name="partner" position="before">
+                    <filter name="branch_id" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                </filter>
+            </field>
+        </record> -->
+
+        <!--group vendor receipts by branch-->
+        <!-- <record id="view_voucher_filter_vendor_extended" model="ir.ui.view">
+            <field name="name">account.voucher.purchase.select.extended</field>
+            <field name="model">account.voucher</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter_vendor"/>
+            <field name="arch" type="xml">
+                <filter name="vendor" position="before">
+                    <filter name="branch_id" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                </filter>
+            </field>
+        </record> -->
+
+        <!--group customer receipts by branch-->
+        <!-- <record id="view_voucher_filter_sale_extended" model="ir.ui.view">
+            <field name="name">account.voucher.sale.select.extended</field>
+            <field name="model">account.voucher</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter_sale"/>
+            <field name="arch" type="xml">
+                <filter name="customer" position="before">
+                    <filter name="branch_id" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                </filter>
+            </field>
+        </record> -->
+
+        <!--group payments by branch-->
+        <record id="view_account_payment_search_extended" model="ir.ui.view">
+            <field name="name">account.payment.search.extended</field>
+            <field name="model">account.payment</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="account.view_account_payment_search"/>
+            <field name="arch" type="xml">
+                <filter name="inbound_filter" position="before">
+                    <filter name="branch_id" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                </filter>
+            </field>
+        </record>
+
+
+        <record id="view_patient_account_invoice_filter" model="ir.ui.view">
+            <field name="name">account.move.select</field>
+            <field name="model">account.move</field>
+            <field name="priority" eval="8" />
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" operator="child_of" position="after">
+                   <field name="branch_id" options="{'no_create': True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_account_invoice_branch_form1" model="ir.ui.view">
+            <field name="name">account.move.branch.extened</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <button name="action_register_payment" position="attributes">
+                    <attribute name="context">{'dont_redirect_to_payments': True,'default_branch_id':branch_id}</attribute>
+                </button>
+
+                <field name="invoice_date" position="after">
+                    <field name="branch_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                </field>
+
+                
+                    <!-- <button name="action_register_payment" id="account_invoice_payment_btn"
+                                    type="object" class="oe_highlight"
+                                    attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('payment_state', 'not in', ('not_paid', 'partial')), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"
+                                    context="{'dont_redirect_to_payments': True,'default_branch_id':branch_id}"
+                                    string="Register Payment" data-hotkey="g"
+                                    groups="account.group_account_invoice"/> -->
+            </field>
+        </record>
+
+        <!-- <record id="view_account_invoice_supplier_branch_form1" model="ir.ui.view">
+            <field name="name">account.move.supplier.extended</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <button name="%(account.action_account_invoice_payment)d" position="replace">
+                    <button name="%(account.action_account_invoice_payment)d" type="action" states="open" string="Register Payment" groups="account.group_account_invoice" class="oe_highlight" context="{'default_branch_id':branch_id}"/>
+                </button>
+                <field name="date_invoice" position="after">
+                    <field name="branch_id"/>
+                </field>
+            </field>
+        </record> -->
+
+        <record id="invoice_tree_extended" model="ir.ui.view">
+            <field name="name">account.move.tree.branch</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='invoice_date']" position="after">
+                    <field name="partner_id"/>
+                    <field name="branch_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--vendor bill payment tree view-->
+        <!-- <record id="view_invoice_tree" model="ir.ui.view">
+            <field name="name">account.move.supplier.tree.extended</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='vendor_display_name']" position="after">
+                    <field name="branch_id"/>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- <record id="view_account_voucher_branch_wizard_form1" model="ir.ui.view">
+            <field name="name">account.voucher.branch.wizard.extened</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_sale_receipt_form"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="branch_id"/>
+                </field>
+            </field>
+        </record> -->
+
+        <!-- <record id="view_account_voucher_branch_form1" model="ir.ui.view">
+            <field name="name">account.voucher.branch.extened</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_purchase_receipt_form"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="branch_id"/>
+                </field>
+            </field>
+        </record> -->
+
+        <!--account.voucher tree views-->
+        <!-- <record model="ir.ui.view" id="view_voucher_tree_extended">
+            <field name="name">account.voucher.tree.extended</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_tree"/>
+            <field name="arch" type="xml">
+                <field name="date" position="after">
+                    <field name="branch_id"/>
+                </field>
+            </field>
+        </record> -->
+
+        <!-- <record model="ir.ui.view" id="view_voucher_tree_purchase_extended">
+            <field name="name">account.voucher.tree.supplier.extended</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_tree_purchase"/>
+            <field name="arch" type="xml">
+                <field name="date" position="after">
+                    <field name="branch_id"/>
+                </field>
+            </field>
+        </record> -->
+
+        <!--Follow-up Reports for partners on overdue invoices-->
+        <!-- <record id="customer_statements_tree_view_extended" model="ir.ui.view">
+            <field name="name">customer.statements.tree.extended</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account_reports.customer_statements_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="branch_id"/>
+                </field>
+            </field>
+        </record> -->
+
+        <!--Search/Group Follow-up Reports by Branch-->
+        <!-- <record id="customer_statements_search_view_extended" model="ir.ui.view">
+            <field name="name">customer.statements.search.extended</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account_reports.customer_statements_search_view"/>
+            <field name="arch" type="xml">
+                <filter name="supplier" position="before">
+                    <filter name="branch_id" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                </filter>
+            </field>
+
+        </record> -->
+
+        <!-- account move-->
+        <record id="view_account_move_tree" model="ir.ui.view">
+            <field name="name">account.move.tree.extended</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='partner_id']" position="after">
+                    <field name="branch_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--Account Move Journal line items-->
+        <!-- <record id="view_account_move_line_form" model="ir.ui.view">
+            <field name="name">account.move.line.extened</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_line_form"/>
+            <field name="arch" type="xml">
+                <field name="date" position="before">
+                    <field name="branch_id"/>
+                </field>
+                <field name="//field[@name='line_ids']/tree/field[@name='partner_id']" position="before">
+                    <field name="branch_id" options="{'no_create': True}" />
+                </xpath>
+            </field>
+        </record> -->
+
+        <record id="view_account_move_filter_extended" model="ir.ui.view">
+            <field name="name">account.move.select</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_move_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="branch_id" />
+                </field>
+                <filter name="partner" position="before">
+                    <filter name="branch_id" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                </filter>
+            </field>
+        </record>
+
+        <!--journal items tree view-->
+        <record id="view_move_line_tree_extended" model="ir.ui.view">
+            <field name="name">account.move.line.tree.extended</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='journal_id']" position="after">
+                    <field name="branch_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--group/search journal items by branch-->
+        <record id="view_account_move_line_filter_extended" model="ir.ui.view">
+            <field name="name">Journal Items filter</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="branch_id" />
+                </field>
+                <filter name="group_by_partner" position="before">
+                    <filter name="branch_id" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                </filter>
+            </field>
+        </record>
+
+        <!--analytic items tree view-->
+        <record id="view_account_analytic_line_tree_inherit" model="ir.ui.view">
+            <field name="name">account.analytic.line.tree.inherit</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="date" position="after">
+                    <field name="branch_id" />
+                </field>
+            </field>
+        </record>
+
+        <!--analytic items form-->
+        <record id="view_account_analytic_line_form_extended" model="ir.ui.view">
+            <field name="name">account.analytic.line.form.extended</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_line_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="branch_id" />
+                </field>
+            </field>
+        </record>
+
+        <!--search analytic items-->
+        <record id="view_account_analytic_line_filter_extended" model="ir.ui.view">
+            <field name="name">account.analytic.line.select.extended</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_line_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="branch_id" />
+                </field>
+                <!-- <filter name="account_id" position="before">
+                    <filter name="branch_id" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                </filter> -->
+            </field>
+        </record>
+
+        <!--account asset form-->
+        <!-- <record model="ir.ui.view" id="view_account_asset_asset_form_extended">
+            <field name="name">account.asset.asset.form.extended</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
+            <field name="arch" type="xml">
+                <field name="category_id" position="before">
+                    <field name="branch_id" required="1" options="{'no_create':'True'}" />
+                </field>
+            </field>
+        </record> -->
+
+        <!-- <record model="ir.ui.view" id="view_account_asset_asset_purchase_tree_extended">
+            <field name="name">account.asset.asset.purchase.tree.extended</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_asset_purchase_tree"/>
+            <field name="arch" type="xml">
+                <field name="category_id" position="before">
+                    <field name="branch_id" />
+                </field>
+            </field>
+        </record> -->
+
+        <!-- <record id="view_account_asset_search_extended" model="ir.ui.view">
+            <field name="name">account.asset.asset.search.extended</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_search"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="branch_id" />
+                </field>
+                <filter name="month" position="before">
+                    <filter name="branch_id" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                </filter>
+            </field>
+        </record> -->
+
+
+        <!--deffered revenue form-->
+        <!-- <record model="ir.ui.view" id="view_account_asset_revenue_form_extended">
+            <field name="name">account.asset.revenue.form.extended</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_deferred_revenue.view_account_asset_revenue_form"/>
+            <field name="arch" type="xml">
+                <field name="category_id" position="before">
+                    <field name="branch_id" options="{'no_create':'True'}" />
+                </field>
+            </field>
+        </record> -->
+
+        <!-- <record model="ir.ui.view" id="view_account_asset_asset_sale_tree_extended">
+            <field name="name">account.asset.asset.sale.tree.extended</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_deferred_revenue.view_account_asset_asset_sale_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="branch_id" />
+                </field>
+            </field>
+        </record> -->
+
+        <!--bank statement-->
+        <!-- <record id="view_banck_statement_branch_view" model="ir.ui.view">
+            <field name="name">account.bank.statement.branch</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="branch_id" required="1"/>
+                </field>
+            </field>
+        </record> -->
+
+        <!-- <record id="view_account_refund_view" model="ir.ui.view">
+            <field name="name">account.refund.view</field>
+            <field name="model">account.move.refund</field>
+            <field name="inherit_id" ref="account.view_account_invoice_refund"/>
+            <field name="arch" type="xml">
+                <field name="date_invoice" position="after">
+                    <field name="branch_id" required="1"/>
+                </field>
+            </field>
+        </record> -->
+
+        <record id="account_payment_register_form_with_branch" model="ir.ui.view">
+            <field name="name">account.payment.register.branch.form</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="branch_id" readonly="1" options="{'no_create': True}" />
+                </field>
+            </field>
+        </record>
+
+        <!--Account.payment form-->
+        <record id="account_payment_form_with_branch" model="ir.ui.view">
+            <field name="name">account.payment.branch.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="branch_id" readonly="1" options="{'no_create': True}" />
+                </field>
+            </field>
+        </record>
+
+        <!--this view is used by register payment wizard or vendor/customer payment form-->
+        <!-- <record id="account_payment_invoice_form_branch" model="ir.ui.view">
+            <field name="name">account.payment.branch.invoice.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="branch_id" attrs="{'readonly': True}" options="{'no_create': True}" />
+                </field>
+            </field>
+        </record> -->
+
+        <!--customer payment tree view-->
+        <record id="view_account_payment_tree_branch" model="ir.ui.view">
+            <field name="name">account.payment.tree.branch</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='name']" position="after">
+                    <field name="branch_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--vendor payment tree view-->
+        <record id="view_account_supplier_payment_tree_branch" model="ir.ui.view">
+            <field name="name">account.supplier.payment.tree.branch</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_supplier_payment_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='partner_id']" position="after">
+                    <field name="branch_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_payment_search_extended" model="ir.ui.view">
+            <field name="name">account.payment.search.extended</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_search"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="branch_id" />
+                </field>
+                <filter name="partner" position="before">
+                    <filter name="branch_id" string="Branch" domain="[]" context="{'group_by':'branch_id'}"/>
+                </filter>
+            </field>
+
+        </record>
+
+        <!-- <record id="account.action_account_invoice_payment" model="ir.actions.act_window">
+            <field name="name">Register Payment</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account.view_account_payment_invoice_form"/>
+            <field name="context">{'default_invoice_ids': [(4, active_id, None)]}</field>
+            <field name="target">new</field>
+        </record> -->
+
+
+
+    </data>
+</odoo>

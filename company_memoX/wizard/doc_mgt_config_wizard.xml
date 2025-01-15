@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    
+    <record id="view_doc_mgt_config_form" model="ir.ui.view">
+        <field name="name">doc.mgt.config.wizard.form</field>
+        <field name="model">doc.mgt.config.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Document Management Configuration">
+                <group>
+                    <group>
+                        <field name="memo_type_id"/>
+                    </group>
+                    <group>
+                    </group>
+                </group>
+                <notebook>
+                    <page name="memo_config" string="Memo Config">
+                        <group>
+                            <field name="memo_config_ids" widget="one2many_tags">
+                                <tree>
+                                    <field name="memo_type"/>
+                                    <field name="department_id"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="close_memo_config_wizard" string="Close" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="doc_mgt_config_action">
+        <field name="name">Request Stages/Approvers</field>
+        <field name="res_model">doc.mgt.config.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+       <field name="domain">[]</field>
+         <field name="view_mode">form</field>
+         <field name="target">new</field>
+    </record>
+
+    <menuitem
+            id="doc_mgt_config_menu"
+            name="Memo Config"
+            action="company_memo.doc_mgt_config_action"
+            groups="documents.group_documents_manager"
+            parent="documents.Config"
+            sequence="10"/>
+
+
+    
+</odoo>

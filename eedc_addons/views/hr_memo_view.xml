@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="memo_model_form_view_eedc_addons">
+            <field name="name">memo view inherited for eedc addons</field>
+            <field name="model">memo.model</field>
+            <field name="inherit_id" ref="company_memo.memo_model_form_view_3"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='demo_staff']" position="after">
+                    <field name="district_id" string="District" invisible="0" attrs="{'readonly':[('state','not in',['submit'])]}" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
+                </xpath>
+                <xpath expr="//field[@name='product_ids']//tree//field[@name='to_retire']" position="after">
+                    <field name="district_id" string="District" invisible="1"/> 
+                </xpath>  
+                <xpath expr="//page[@name='server_request_page']" position="after">
+                    <page name='employee_update_request_page' string='Employee Transfer Request' attrs="{'invisible':[('memo_type_key','not in',['employee_update'])]}">
+                        <field name ="employee_transfer_line_ids">
+                            <form string=""> 
+                                <sheet>
+                                    <group>
+                                        <group>
+                                            <field name="employee_id" />
+                                            <field name="current_dept_id" /> 
+                                        </group>
+                                        <group>
+                                            <field name="transfer_dept" />
+                                            <field name="new_role" />
+                                            <field name="new_district" />
+                                            <field name="memo_id" invisible="1"/>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                            <tree string="" editable="bottom">
+                                <field name="employee_id" options="{'no_create':True, 'no_open': False}"/>
+                                <field name="current_dept_id" options="{'no_create':True, 'no_open': False}"/>
+                                <field name="transfer_dept" options="{'no_create':True, 'no_open': False}"/>
+                                <field name="new_role" options="{'no_create':True, 'no_open': False}"/>
+                                <field name="new_district" options="{'no_create':True, 'no_open': False}"/>
+                                <field name="memo_id" invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+ 
+        
+    </data>
+</odoo>

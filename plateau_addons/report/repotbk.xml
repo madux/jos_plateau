@@ -1,0 +1,127 @@
+<div class="row mt-4">
+                <div class="col-lg-7 mb-lg-0 mb-4">
+                    <div class="card">
+                         
+                        <div class="table-responsive mt-5">
+                            <table class="table align-items-left mb-0">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">
+                                        </th>
+                                        <th width="50%">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Work Instruction #: </h3> 
+                                            <!-- <strong><t t-esc="o.work_order_code"/></strong> -->
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold">Customer #: </h3> 
+                                            <!-- <t t-esc="o.client_id.name"/> -->
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Our RFQ / Reference: </h3> ## <span/>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold">Your Contact Reference: </h3> <t t-esc="o.client_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Our Project: </h3>  <t t-esc="o.code"/>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold">Your Project: </h3> <span/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Date Created: </h3>  <t t-esc="o.date"/>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold">Requested by: </h3> <span/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Description: </h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><span style="text-align: justify; font-family: 'Times New Roman', Times, serif; font-size:16px;" t-raw="o.work_instruction_description"/> </h3> <span/>
+                                        </td>
+                                    </tr>
+                                        
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2> Work price: </h2>
+                            </div>
+                            <div class="col-2 offset-2 text-center">
+                                <h2><t t-esc="'{0:,}'.format(float(o.amountfig))"/></h2>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-left mb-0">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">
+                                        </th>
+                                        <th width="50%">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <hr><h4 class="text-bold"><t t-esc="o.write_uid.company_id.name"/></h4></hr>
+                                            <h3 class="text-bold">Name: </h3> <t t-esc="o.write_uid.name"/>
+                                        </td>
+                                        <td>
+                                            <hr><h4 class="text-bold"><t t-esc="o.client_id.name"/></h4></hr>
+                                            <h3 class="text-bold">Authorized by: </h3> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold"> Date: </h3><t t-esc="datetime.datetime.now().strftime('%B %d, %Y')"/>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"> Date: .............................</h3>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-left mb-0">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">
+                                        </th>
+                                        <th width="50%">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img t-if="user.user_signature" t-att-src="image_data_uri(user.user_signature)" style="max-height: 65px;max-width: 200px;" alt="Logo"/>
+                                        </td>
+                                        <td>
+                                            .....
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>

@@ -1,0 +1,29 @@
+/** @odoo-module **/
+import { FormRenderer } from "@web/views/form/form_renderer";
+import { formView } from "@web/views/form/form_view";
+import { registry } from "@web/core/registry";
+import { FormController } from "@web/views/form/form_controller";
+
+console.log("THins thins thsin ")
+
+export class ComSaleOrderRender extends FormRenderer {
+   setup() {
+       super.setup();
+       fetch('/get_images', {
+            method: 'GET',
+            credentials: "include",
+        }).then(response => response.json())
+            .then(data => {
+                console.log("The big bull")
+            })
+
+   }
+    
+}
+
+export const memoFormView = {
+    ...formView,
+    Controller: ComSaleOrderRender,
+};
+
+registry.category("views").add("memo_model_form_view_3", memoFormView);

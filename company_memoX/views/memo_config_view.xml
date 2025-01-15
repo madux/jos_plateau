@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="memo_config_form" model="ir.ui.view">
+            <field name="name">Memo User Setting</field>
+            <field name="model">memo.config</field>
+            <field name="arch" type="xml">
+                <form string="Memo Setting">
+                    <header>
+                        <button name="auto_configuration" type="object" class="oe_highlight" string="Auto Configure" confirm="Are you sure? Note this will auto generate all department not yet configured"/>
+                        <button name="custom_duplicate" type="object" class="oe_highlight" string="Custom Duplicate"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="memo_type" required="1"/> 
+                                <field name="active" default="1" readonly="0"/> 
+                                <field name="department_id" required="1" options="{'no_create':True, 'no_open': False}"/> 
+                            </group>
+                            <group>
+                                <field name="prefix_code" string="Prefix Code" placeholder="e.g PF for project file"/>
+                                <field name="department_code" string="Department suffix" placeholder="K, Y, A"/>
+                                <field name="approver_ids" string="Employees for Follow up" required="0" widget="many2many_tags" options="{'no_create':True, 'no_open': False}"/>
+                                <field name="allowed_for_company_ids" string="Allow companies" domain="[('is_company','=', True)]" widget="many2many_tags" options="{'no_create':True, 'no_open': False}"/>
+                            </group>
+                            <notebook>
+                                <page string="Stages">
+                                    <field name="stage_ids" domain="[('id', '=', None)]" required="1" context="{'default_memo_config_id': active_id}">
+                                        <tree string="stages">
+                                            <field name="sequence" widget="handle" string="Drag"/>
+                                            <field name="name"/>
+                                             <field name="sequence"/>
+                                            <field name="id" invisible="1"/>
+                                            <!-- <field name="approver_id" options="{'no_create':True, 'no_open': False}"/> -->
+                                            <field name="approver_ids" string="Employees for Follow up" required="0" widget="many2many_tags" options="{'no_create':True, 'no_open': False}"/>
+                                            <field name="is_approved_stage"/>
+                                            <field name="memo_config_id" force_save="1" invisible="1" options="{'no_create':True, 'no_open': False}"/>
+                                            <field name="active" force_save="1"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook> 
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_memo_config_filter" model="ir.ui.view">
+			<field name="name">Memo settings</field>
+			<field name="model">memo.config</field>
+			<field name="arch" type="xml">
+				<search string="Search">
+                    <field name="department_id"/>
+                    <field name="memo_type"/>
+                    <filter string="Active" name="memo_active_filter" domain="[('active','=', True)]"/>
+                    <filter string="InActive" name="memo_inactive_filter" domain="[('active','=', False)]"/>
+                    <group  expand='0' string='Group by...'>
+                        <filter name="group_memo_department_id" string='Department' domain="[]" context="{'group_by' : 'department_id'}"/>
+                    </group>
+				</search>
+			</field>
+		</record>
+        <record model="ir.actions.act_window" id="memo_configuration_action">
+            <field name="name">Memo Configuration</field>
+            <field name="res_model">memo.config</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_group_memo_department_id': 1}</field>
+        </record>
+
+        <menuitem id="memo_configuration" name="Configuration"
+            parent="internal_memo_menu_model_main2" sequence="10" groups="base.group_system,company_memo.mainmemo_manager"/>
+        <menuitem id="memo_approvers_configuration" name="Approvers"
+            parent="memo_configuration" action="memo_configuration_action" sequence="10" groups="base.group_system,company_memo.mainmemo_manager"/>
+            
+
+        <record id="memo_stage_form" model="ir.ui.view">
+            <field name="name">Memo Stage Setting</field>
+            <field name="model">memo.stage</field>
+            <field name="arch" type="xml">
+                <form string="Memo Stage">
+                    <header>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/> 
+                            <field name="sequence" required="1"/> 
+                            <field name="active" default="1"/> 
+                            <field name="approver_ids" string="Approvers" required="0" widget="many2many_tags" options="{'no_create':True, 'no_open': False}"/> 
+                            <field name="publish_on_dashboard"/>
+                            <field name="require_po_confirmation"/>
+                        </group>
+                        <group>
+                            <field name="require_so_confirmation"/>
+                            <field name="require_bill_payment"/>
+                            <!-- <field name="approver_id" required="0"/> -->
+                            <field name="is_approved_stage" default="0"/> 
+                            <field name="memo_has_condition"/>
+                            <field name="yes_condition" attrs="{'invisible': [('memo_has_condition', '!=', True)]}"/>
+                            <field name="no_condition" attrs="{'invisible': [('memo_has_condition', '!=', True)]}"/> 
+                            <!-- # attrs="{'ssss': [('xdsds', 'sddf', sdfef)]}" -->
+                            <field name="dummy_memo_config_stage_ids" invisible="1"/>
+                            <field name="yes_conditional_stage_id" force_save="1" readonly="0" domain="[('id', 'in', dummy_memo_config_stage_ids)]" 
+                            attrs="{'invisible': [('yes_condition', '!=', True)], 'required': [('yes_condition', '=', True)]}"/>
+                            <field name="no_conditional_stage_id" force_save="1" readonly="0" domain="[('id', 'in', dummy_memo_config_stage_ids)]" 
+                            attrs="{'invisible': [('no_condition', '!=', True)], 'required': [('no_condition', '=', True)]}" />
+                            <field name="memo_config_id" readonly="0" force_save="1" string="Parent setting" required="1" options="{'no_create':True, 'no_open': False}"/> 
+
+                            <!-- <field name="approver_id" required="0"/> -->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Required Invoice lines">  
+                            <field name="required_invoice_line" domain="[('id', '=', 0)]">
+                                <tree string="Required Invoice">
+                                    <field name="name" string="Invoice name"/>
+                                    <field name="move_type" string="Invoice type" required="1"/>
+                                    <field name="compulsory" string="Is compulsory"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Required Documents">  
+                            <field name="required_document_line" domain="[('id', '=', 0)]">
+                                <tree string="Document">
+                                    <field name="name"/>
+                                    <field name="compulsory" string="Is compulsory"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Sub Stages">  
+                            <field name="sub_stage_ids" context="{'default_is_sub_stage': True, 'default_memo_config_id': memo_config_id}">
+                                <form string="Sub Stages">
+                                    <group>
+                                        <group>
+                                            <field name="name" string="Stage name"/>
+                                            <field name="approver_ids" string="Approvers" required="1" widget="many2many_tags" options="{'no_create':True, 'no_open': False}"/>
+                                            <field name="sequence" string="Sequence"/>
+                                            
+                                        </group>
+                                        <group>
+                                            <field name="is_sub_stage" string="Is sub stage" readonly="1"/>
+                                            <field name="require_po_confirmation"/>
+                                            <field name="require_so_confirmation"/>
+                                            <field name="active" string="Active" readonly="1"/>
+                                            <field name="memo_config_id" readonly="0" force_save="1"
+                                            string="Parent setting" attrs="{'required': [('is_sub_stage', '!=', True)]}" options="{'no_create':True, 'no_open': False}"/> 
+                                        </group>
+                                    </group>
+                                    <notebook>
+                                        <page string="Required Invoice lines">  
+                                            <field name="required_invoice_line" domain="[('id', '=', 0)]">
+                                                <tree string="Required Invoice">
+                                                    <field name="name" string="Invoice name"/>
+                                                    <field name="move_type" string="Invoice type" required="1"/>
+                                                    <field name="compulsory" string="Is compulsory"/>
+                                                </tree>
+                                            </field>
+                                        </page>
+                                        <page string="Required Documents">  
+                                            <field name="required_document_line" domain="[('id', '=', 0)]">
+                                                <tree string="Document">
+                                                    <field name="name"/>
+                                                    <field name="compulsory" string="Is compulsory"/>
+                                                </tree>
+                                            </field>
+                                        </page>
+                                    </notebook>
+                                </form>
+                                <tree string="Sub Stages">
+                                    <field name="name" string="Stage name"/>
+                                    <field name="approver_ids" string="Approvers" required="1" widget="many2many_tags" options="{'no_create':True, 'no_open': False}"/>
+                                    <field name="is_sub_stage" string="Is sub stage" readonly="1"/>
+                                    <field name="active" string="Active" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Description">  
+                                <field name="description"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="memo_stage_action">
+            <field name="name">Memo stage</field>
+            <field name="res_model">memo.stage</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="memo_stage_configuration" name="Stage(s)"
+            parent="memo_configuration" action="memo_stage_action" sequence="10" groups="base.group_system,company_memo.mainmemo_manager"/>
+        
+        <record id="memo_tpye_form" model="ir.ui.view">
+            <field name="name">Memo type Setting</field>
+            <field name="model">memo.type</field>
+            <field name="arch" type="xml">
+                <form string="Memo type">
+                    <header>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/> 
+                            <field name="memo_key" required="1"/> 
+                            <field name="allow_for_publish" required="1"/> 
+                        </group>
+                        <group>
+                            <field name="active" default="1"/> 
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="memo_type_action">
+            <field name="name">Memo Type</field>
+            <field name="res_model">memo.type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="memo_type_configuration" name="Memo Type(s)"
+            parent="memo_configuration" action="memo_type_action" sequence="14" groups="base.group_system,company_memo.mainmemo_manager"/>
+        
+    </data>
+</odoo>

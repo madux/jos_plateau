@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="mail_template_document_request_due_notification" model="mail.template">
+            <field name="name">Notify on due date</field>
+            <field name="model_id" ref="documents.model_documents_folder" />
+            <field name="subject">{{object.name}}: Notification for Document Submission </field>
+            <field name="email_to">{{ ctx.default_email_to }}</field>
+            <field name="description">Sent to notify for document request due date</field>
+            <field name="body_html">
+                <![CDATA[
+                <p>
+                    <p>Dear Sir/Madam,</p>
+                    You are being notified that it is the due date for submission of Document Request: <t t-out="object.name"/>.<br/>
+                    Submission starts: <t t-out="object.submission_start_date"/>.<br/>
+                    Submission ends: <t t-out="object.expiry_date"/>.<br/>
+                    <a t-att-href="'%s/web/#menu_id=&action=891&model=memo.model&view_type=form&document_folder=%s' % (object.get_base_url(), object.id)">Click to create request</a>
+                </p>
+                ]]>
+            </field>
+            <field name="lang">{{ object.env.lang or 'en_US' }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="mail_template_document_request_expiry_notification" model="mail.template">
+            <field name="name">Document Request Expiry Notification</field>
+            <field name="model_id" ref="documents.model_documents_folder" />
+            <field name="subject">{{object.name}}: Failure to Submit before Expiration</field>
+            <field name="email_to">{{ ctx.default_email_to }}</field>
+            <field name="description">Sent to notify about expiration of Document Request</field>
+            <field name="body_html">
+                <![CDATA[
+                <p>
+                    You are being notified of the expiration of Document Request: <t t-out="object.name"/>.<br/>
+                    No Submission has been made.<br>
+                    Expiry date: <t t-out="object.expiry_date"/>.<br/>
+                </p>
+                ]]>
+            </field>
+            <field name="lang">{{ object.env.lang or 'en_US' }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

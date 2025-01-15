@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <!-- <template id="mail_notification_paynow" name="Mail: Pay Now mail notification template" inherit_id="mail.mail_notification_paynow">
+            <xpath expr="//t[@t-set='access_name']" position="replace">
+                <t t-set="access_name">
+                    Click here to view <t t-esc="model_description or 'document'"/> and conveniently pay online
+                </t>
+                   
+            </xpath>
+        </template> -->
+
+    </data>
+</odoo>

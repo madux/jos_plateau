@@ -1,0 +1,1000 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+         <record id="memo_hr_department_logistic" model="hr.department">
+            <field name="name">Logistics</field>
+        </record>
+
+        <!--  DOCUMENTLINE -->
+        <record id="shipping_particulars" model="memo.stage.document.line">
+            <field name="name">Ship's Particulars</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="last_port_clearance" model="memo.stage.document.line">
+            <field name="name">Last port Clearance</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="maritime_declaration_health" model="memo.stage.document.line">
+            <field name="name">Maritime Declaration of Health</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="ship_storelist" model="memo.stage.document.line">
+            <field name="name">Ship's Store List</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="nil_list" model="memo.stage.document.line">
+            <field name="name">Nil list</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="crew_list" model="memo.stage.document.line">
+            <field name="name">Crew List</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        
+        <record id="memo_crew_effects" model="memo.stage.document.line">
+            <field name="name">Crew Effects</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_narcotics_doc" model="memo.stage.document.line">
+            <field name="name">Narcotics</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="ship_storelist" model="memo.stage.document.line">
+            <field name="name">Cargo Manifest</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        
+        <record id="stowage_plan_doc" model="memo.stage.document.line">
+            <field name="name">Stowage Plan</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="bill_of_laden" model="memo.stage.document.line">
+            <field name="name">Bills of Ladin</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="transit_documents" model="memo.stage.document.line">
+            <field name="name">Transit Documents</field>
+            <field name="compulsory" eval="True"/>
+        </record> 
+        <record id="notice_readiness_protecting_agency" model="memo.stage.document.line">
+            <field name="name">Notice of Readiness</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+       
+        <record id="memo_port_call_protecting_agency" model="memo.stage">
+            <field name="name">Protecting Agent - Ensure Clearance On time</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">6</field>
+            <field name="required_document_line" eval="[(4, ref('company_memo.notice_readiness_protecting_agency'))]"/>
+        </record> 
+
+        <record id="memo_initial_documentation_pic" model="memo.stage">
+            <field name="name">Port Agent - Collate Vessel &amp; Cargo Documentation</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">10</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.shipping_particulars')),
+            (4, ref('company_memo.last_port_clearance')),
+            (4, ref('company_memo.maritime_declaration_health')),
+            (4, ref('company_memo.ship_storelist')),
+            (4, ref('company_memo.nil_list')),
+            (4, ref('company_memo.crew_list')),
+            (4, ref('company_memo.memo_crew_effects')),
+            (4, ref('company_memo.memo_narcotics_doc')),
+            (4, ref('company_memo.ship_storelist')),
+            (4, ref('company_memo.ship_storelist')),
+            (4, ref('company_memo.stowage_plan_doc')),
+            (4, ref('company_memo.bill_of_laden')),
+            (4, ref('company_memo.transit_documents')),
+            (4, ref('company_memo.notice_readiness_protecting_agency')),
+
+            ]"/>
+        </record>
+
+        <!-- <record id="memo_nomination_type_pic" model="memo.stage">
+            <field name="name">Nomination type</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">5</field>
+            <field name="memo_has_condition" eval="True"/>
+            <field name="yes_condition" eval="True"/>
+            <field name="no_condition" eval="True"/>
+            <field name="yes_conditional_stage_id" ref="company_memo.memo_initial_documentation_pic"/>
+            <field name="no_conditional_stage_id" ref="company_memo.memo_port_call_protecting_agency"/>
+        </record> -->
+
+        <!--  PAYMENT INVOICE -->
+        <record id="memo_process_sen_number_with_npa_pic" model="memo.stage">
+            <field name="name">Process SEN Number With NPA</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">20</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+        <record id="sen_payment_invoice" model="memo.stage.invoice.line">
+            <field name="name">SEN PAYMNENT INVOICE</field>
+            <field name="compulsory" eval="True"/>
+            <field name="move_type">vendor</field>
+        
+        </record>
+        <record id="memo_process_npa_sen_payment_approval_pic" model="memo.stage">
+            <field name="name">SEN Payment Approval</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">30</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+            <field name="required_invoice_line" eval="[(4, ref('company_memo.sen_payment_invoice'))]"/>
+        </record>
+        <record id="memo_process_rotation_electronic_advise_vessel_pic" model="memo.stage">
+            <field name="name">Process rotation number with custom, Electronic manifest, Advise Vessel to custom</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">40</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+
+        <record id="memo_declare_vessel_custom_ndlea_immigration_pic" model="memo.stage">
+            <field name="name">DELCARE TO CUSTOM / NDLEA/ IMMIGRATION</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">50</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+
+        <!--  substage for declare vessel to npa starts-->
+        <record id="memo_declare_vessel_npa_pic" model="memo.stage">
+            <field name="name">Declare Vessel to NPA</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="is_sub_stage" eval="True"/>
+            <field name="sequence">1000</field>
+        </record>
+
+        <!--  PAYMENT INVOICE -->
+        <record id="nimasa_dues_declare" model="memo.stage.invoice.line">
+            <field name="name">NIMASA DUES</field>
+            <field name="compulsory" eval="True"/>
+            <field name="move_type">vendor</field>
+        </record>
+        <!--  substage for declare vessel to nimasa starts-->
+        <record id="memo_declare_vessel_nimasa_pic" model="memo.stage">
+            <field name="name">Declare Vessel to NIMASA</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">1001</field>
+            <field name="is_sub_stage" eval="True"/>
+            <field name="required_invoice_line" eval="[(4, ref('company_memo.nimasa_dues_declare'))]"/>
+        </record>
+        <!--  PAYMENT INVOICE -->
+        <record id="terminal_dues_declare" model="memo.stage.invoice.line">
+            <field name="name">TERMINAL DUES</field>
+            <field name="compulsory" eval="True"/>
+            <field name="move_type">vendor</field>
+        </record>
+        <record id="memo_declare_vessel_terminal_pic" model="memo.stage">
+            <field name="name">Declare Vessel to Terminal</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">1002</field>
+            <field name="required_invoice_line" eval="[(4, ref('company_memo.terminal_dues_declare'))]"/>
+        </record>
+
+        <record id="memo_declare_vessel_custom_ndlea_immigration_pic" model="memo.stage">
+            <field name="name">Declare Vessel to NPA, NIMASA, TERMINAL</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">60</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+            <field name="sub_stage_ids" eval="[
+            (4, ref('company_memo.memo_declare_vessel_npa_pic')),
+            (4, ref('company_memo.memo_declare_vessel_nimasa_pic')),
+            (4, ref('company_memo.memo_declare_vessel_terminal_pic')),
+            ]"/>
+        </record>
+
+        <!--  DOCUMENTLINE -->
+        <record id="berthing_clearance_approval_doc" model="memo.stage.document.line">
+            <field name="name">Berthing Clearance Approval Document</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_berthing_clearance_pic" model="memo.stage">
+            <field name="name">BERTHING CLEARANCE</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">70</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.berthing_clearance_approval_doc')),
+            ]"/>
+        </record>
+        <record id="memo_book_vessel_harbour_department_pic" model="memo.stage">
+            <field name="name">Book vessel at Habours Department</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">80</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+
+        <!--  PAYMENT INVOICE -->
+        <record id="client_invoice_line1" model="memo.stage.invoice.line">
+            <field name="name">CLIENT INVOICE</field>
+            <field name="compulsory" eval="True"/>
+            <field name="move_type">customer</field>
+        </record>
+
+        <record id="memo_client_invoice_port_process_pic" model="memo.stage">
+            <field name="name">CLIENT INVOICE</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">90</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+            <field name="required_invoice_line" eval="[
+            (4, ref('company_memo.client_invoice_line1')),
+            ]"/>
+        </record>
+
+
+        <!-- substage boarding formalities -->
+
+        <!--  DOCUMENTLINE substage -->
+
+         <record id="board_formalities_port_health" model="memo.stage.document.line">
+            <field name="name">Port Health Document</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+       
+        <record id="memo_boarding_formalities_porthealth" model="memo.stage">
+            <field name="name">Boarding Formalities - Port Health</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">2002</field>
+            <field name="required_document_line" eval="[(4, ref('company_memo.board_formalities_port_health'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record> 
+        <!--  DOCUMENTLINE substage -->
+         <record id="board_formalities_immigration" model="memo.stage.document.line">
+            <field name="name">Boarding Formalities - Immigration</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+         <record id="memo_boarding_formalities_immigration" model="memo.stage">
+            <field name="name">Boarding Formalities - Immigration</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">2003</field>
+            <field name="required_document_line" eval="[(4, ref('company_memo.board_formalities_immigration'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record> 
+
+        <record id="memo_boarding_formalities_pic" model="memo.stage">
+            <field name="name">Boarding Formalities</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">100</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+            <field name="sub_stage_ids" eval="[
+            (4, ref('company_memo.memo_boarding_formalities_immigration')),
+            (4, ref('company_memo.memo_boarding_formalities_porthealth')),
+            ]"/>
+        </record>
+
+
+        <!-- substage vessel verification -->
+        <!-- DOCUMENTLINE SUBSTAGE -->
+        <record id="custom_clearance_document" model="memo.stage.document.line">
+            <field name="name">Custom clearance documentation</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="memo_verification_bring_custom_onboard" model="memo.stage">
+            <field name="name">Bring Custom Officers Onboard</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">2004</field>
+            <field name="required_document_line" eval="[(4, ref('company_memo.custom_clearance_document'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record> 
+        <record id="other_agency_clearance_documentation" model="memo.stage.document.line">
+            <field name="name">Other agency clearance documentation</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_verification_bring_other_agencies_onboard" model="memo.stage">
+            <field name="name">Bring other agencies Onboard</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">2005</field>
+            <field name="required_document_line" eval="[(4, ref('company_memo.other_agency_clearance_documentation'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record> 
+
+        <record id="memo_vessel_verification_pic" model="memo.stage">
+            <field name="name">Vessel Verification</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">120</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+            <field name="sub_stage_ids" eval="[
+            (4, ref('company_memo.memo_verification_bring_custom_onboard')),
+            (4, ref('company_memo.memo_verification_bring_other_agencies_onboard')),
+            ]"/>
+        </record>
+        <record id="memo_loading_or_discharge_pic" model="memo.stage">
+            <field name="name">Begin Loading / Discharge</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">130</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+
+
+        <record id="memo_advance_break_bulk_pic" model="memo.stage">
+            <field name="name">Advance Break-Bulk</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">110</field>
+            <field name="memo_has_condition" eval="True"/>
+            <field name="yes_condition" eval="True"/>
+            <field name="no_condition" eval="True"/>
+            <field name="yes_conditional_stage_id" ref="company_memo.memo_loading_or_discharge_pic"/>
+            <field name="no_conditional_stage_id" ref="company_memo.memo_vessel_verification_pic"/>
+        </record>
+
+        <!-- substages outward clearance -->
+        <!-- DOCUMENTLINE SUBSTAGE -->
+        <record id="outward_nimasa_clearance_documentation" model="memo.stage.document.line">
+            <field name="name">Outward - Nimasa clearance documentation</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="memo_stage_outward_nimasa_clearance" model="memo.stage">
+            <field name="name">Outward - Nimasa clearance</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">2006</field>
+            <field name="required_document_line" eval="[(4, ref('company_memo.outward_nimasa_clearance_documentation'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record>
+        <!-- DOCUMENTLINE SUBSTAGE -->
+
+        <record id="outward_npa_clearance_documentation" model="memo.stage.document.line">
+            <field name="name">Outward - NPA clearance documentation</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="memo_stage_outward_npa_clearance" model="memo.stage">
+            <field name="name">Outward - NPA clearance</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">2007</field>
+            <field name="required_document_line" eval="[(4, ref('company_memo.outward_npa_clearance_documentation'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record>
+        <!-- DOCUMENTLINE SUBSTAGE -->
+
+        <record id="outward_custom_clearance_documentation" model="memo.stage.document.line">
+            <field name="name">Outward - NPA clearance documentation</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="memo_stage_outward_custom_clearance" model="memo.stage">
+            <field name="name">Outward - Custom clearance</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">2008</field>
+            <field name="required_document_line" eval="[(4, ref('company_memo.outward_custom_clearance_documentation'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record>
+
+        <record id="memo_outward_clearance_pic" model="memo.stage">
+            <field name="name">Outward Cleance</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">140</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+            <field name="sub_stage_ids" eval="[
+            (4, ref('company_memo.memo_stage_outward_nimasa_clearance')),
+            (4, ref('company_memo.memo_stage_outward_npa_clearance')),
+            (4, ref('company_memo.memo_stage_outward_custom_clearance')),
+            ]"/>
+        </record>
+
+        <!-- DOCUMENTLINE SUBSTAGE -->
+        <record id="sign_sof_export_mate_with_master_documentation" model="memo.stage.document.line">
+            <field name="name">Sign Satement of Fact (SOF), Export manifest, Mate receipt with Master</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <!-- DOCUMENTLINE SUBSTAGE -->
+        <record id="sign_sof_with_captain_documentation" model="memo.stage.document.line">
+            <field name="name">Sign Statement of Fact (SOF) with Captain</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_stage_book_pilot_pic" model="memo.stage">
+            <field name="name">Book Pilot</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">150</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.sign_sof_export_mate_with_master_documentation')),
+            (4, ref('company_memo.sign_sof_with_captain_documentation'))
+            ]"/>
+        </record>
+
+        <record id="memo_immigration_rummaging_pic" model="memo.stage">
+            <field name="name">Immigration Rummaging and Assistance of Departure Clearance</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">160</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+
+        <record id="memo_pilot_onboard_pic" model="memo.stage">
+            <field name="name">Pilot Onboard</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">170</field>
+            <field name="is_approved_stage" eval="False"/>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+
+        <record id="memo_sailing_pic" model="memo.stage">
+            <field name="name">Sailing</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">180</field>
+            <field name="is_approved_stage" eval="True"/>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+        <record id="memo_done_after_agency_invward" model="memo.stage">
+            <field name="name">DONE</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">190</field>
+        </record>
+
+        <!-- CONFIG ##########################################################-->
+        <!-- CONFIG ##########################################################-->
+        <!-- CONFIG ##########################################################-->
+        <record id="memo_config_vessel_clearance" model="memo.config">
+            <!-- <field name="name">PORT CALL INWARD CLEARANCE (Port Agent - VESSEL CLEARANCE) *</field> -->
+            <field name="memo_type" ref="company_memo.mtype_agency_port_inward_port_agent_request"/>
+            <field name="active">1</field>
+            <field name="project_type">agency</field>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+            <field name="config_tag_id" ref="company_memo.memo_tag_vessel_clearance"/>
+            <field name="stage_ids" eval="[
+            (4, ref('company_memo.memo_initial_documentation_pic')),
+            (4, ref('company_memo.memo_process_sen_number_with_npa_pic')),
+            (4, ref('company_memo.memo_process_npa_sen_payment_approval_pic')),
+            (4, ref('company_memo.memo_process_rotation_electronic_advise_vessel_pic')),
+            (4, ref('company_memo.memo_declare_vessel_custom_ndlea_immigration_pic')),
+            (4, ref('company_memo.memo_berthing_clearance_pic')),
+            (4, ref('company_memo.memo_book_vessel_harbour_department_pic')),
+            (4, ref('company_memo.memo_client_invoice_port_process_pic')),
+            (4, ref('company_memo.memo_boarding_formalities_pic')),
+            (4, ref('company_memo.memo_advance_break_bulk_pic')),
+            (4, ref('company_memo.memo_vessel_verification_pic')),
+            (4, ref('company_memo.memo_loading_or_discharge_pic')),
+            (4, ref('company_memo.memo_outward_clearance_pic')),
+            (4, ref('company_memo.memo_stage_book_pilot_pic')),
+            (4, ref('company_memo.memo_immigration_rummaging_pic')),
+            (4, ref('company_memo.memo_pilot_onboard_pic')),
+            (4, ref('company_memo.memo_sailing_pic')),
+            (4, ref('company_memo.memo_done_after_agency_invward')),
+            ]"/>
+        </record>
+         
+        <!-- <record id="company_memo.memo_nomination_type_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record> -->
+        <!-- <record id="company_memo.memo_port_call_protecting_agency" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record> -->
+
+        <record id="company_memo.memo_initial_documentation_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_process_sen_number_with_npa_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_process_npa_sen_payment_approval_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_process_rotation_electronic_advise_vessel_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_declare_vessel_custom_ndlea_immigration_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_berthing_clearance_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_book_vessel_harbour_department_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_client_invoice_port_process_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_boarding_formalities_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_advance_break_bulk_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_vessel_verification_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_loading_or_discharge_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_outward_clearance_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_book_pilot_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_immigration_rummaging_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        <record id="company_memo.memo_pilot_onboard_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+         
+        <record id="company_memo.memo_sailing_pic" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+        
+        <record id="company_memo.memo_done_after_agency_invward" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_vessel_clearance"/>
+        </record>
+  
+
+        <record id="memo_stage_start_inward_outward_tanker_clearance" model="memo.stage">
+            <field name="name">Initial Stage</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">15</field>
+            <field name="is_approved_stage" eval="False"/>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+        <record id="memo_stage_establish_contact_vessel_io_tanker_clearance" model="memo.stage">
+            <field name="name">Establish contact with vessel</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">30</field>
+            <field name="is_approved_stage" eval="False"/>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+
+        <!--  DOCUMENTLINE -->
+        <record id="crew_list_tanker_clearance_doc" model="memo.stage.document.line">
+            <field name="name">CREW LIST</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="port_call_tanker_clearance_doc" model="memo.stage.document.line">
+            <field name="name">PORT OF CALL LIST</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="ship_particulars_tanker_clearance_doc" model="memo.stage.document.line">
+            <field name="name">Ship Particulars</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="cargo_manifest_tanker_clearance_doc" model="memo.stage.document.line">
+            <field name="name">Cargo Manifest</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="crew_effect_tanker_clearance_doc" model="memo.stage.document.line">
+            <field name="name">Crew Effects</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="memo_stage_recieve_pre_arrival_io_tanker_clearance" model="memo.stage">
+            <field name="name">Receive pre-arrival documents</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">35</field>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.crew_list_tanker_clearance_doc')),
+            (4, ref('company_memo.port_call_tanker_clearance_doc')),
+            (4, ref('company_memo.ship_particulars_tanker_clearance_doc')),
+            (4, ref('company_memo.cargo_manifest_tanker_clearance_doc')),
+            (4, ref('company_memo.crew_effect_tanker_clearance_doc')),
+            ]"/>
+        </record>
+
+        <record id="pre_arrival_document_custom_tanker_clearance_doc" model="memo.stage.document.line">
+            <field name="name">Pre-arrival document with custom</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        
+
+        <record id="memo_arrival_documentation_customs" model="memo.stage">
+            <field name="name">Pre-arrival documentation with customs</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">1000</field>
+            <field name="is_sub_stage" eval="True"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.pre_arrival_document_custom_tanker_clearance_doc')),
+            ]"/>
+        </record>
+        <record id="memo_advice_government_official" model="memo.stage">
+            <field name="name">Advice government officials</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">2000</field>
+            <field name="is_sub_stage" eval="True"/>
+        </record>
+        
+        <record id="memo_stage_berthing_clearnace_io_tanker_clearance" model="memo.stage">
+            <field name="name">Berthing Clearance</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">40</field>
+            <field name="sub_stage_ids" eval="[
+            (4, ref('company_memo.memo_advice_government_official')),
+            (4, ref('company_memo.memo_arrival_documentation_customs')),
+            ]"/>
+        </record>
+        <record id="memo_stage_inform_terminal_mail_io_tanker_clearance" model="memo.stage">
+            <field name="name">Inform Terminal by mail destination of tanker and update ETA</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">45</field>
+        </record>
+        <record id="memo_stage_preparation_for_io_tanker_clearance" model="memo.stage">
+            <field name="name">Preparation for inward clearance at the terminal</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">50</field> 
+        </record>
+        <record id="memo_stage_nomination_type_inward_outward_tanker_clearance" model="memo.stage">
+            <field name="name">Nomination Type</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">25</field>
+            <field name="is_approved_stage" eval="False"/>
+            <field name="memo_has_condition" eval="True"/>
+            <field name="yes_condition" eval="True"/>
+            <field name="no_condition" eval="True"/>
+            <field name="yes_conditional_stage_id" ref="company_memo.memo_stage_establish_contact_vessel_io_tanker_clearance"/>
+            <field name="no_conditional_stage_id" ref="company_memo.memo_stage_inform_terminal_mail_io_tanker_clearance"/>
+        </record>
+        <record id="memo_stage_inward_clearance_io_tanker_clearance" model="memo.stage">
+            <field name="name">Inward clearance</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">55</field>
+            <field name="is_approved_stage" eval="False"/>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+        </record>
+        <record id="monitoring_of_loading_for_update_report_doc" model="memo.stage.document.line">
+            <field name="name">Monitoring of loading for update reporting document</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="memo_stage_monitoring_of_loading_io_tanker_clearance" model="memo.stage">
+            <field name="name">Monitoring of loading for update reporting</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">60</field>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.monitoring_of_loading_for_update_report_doc'))]"/>
+        </record>
+        <record id="documentation_after_loading_completion_doc" model="memo.stage.document.line">
+            <field name="name">Documentation after loading completion onboard</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="memo_stage_doc_after_loading_io_tanker_clearance" model="memo.stage">
+            <field name="name">Documentation after loading completion onboard</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">65</field>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.documentation_after_loading_completion_doc'))]"/>
+        </record>
+        <record id="memo_stage_sail_of_tanker_io_tanker_clearance" model="memo.stage">
+            <field name="name">Sail of tanker vessel</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="is_approved_stage" eval="False"/>
+            <field name="sequence">70</field> 
+        </record>
+
+        <record id="nimasa_payment_tanker_clearance" model="memo.stage.invoice.line">
+            <field name="name">NIMASA PAYMENT (FOR TANKER CLEARANCE)</field>
+            <field name="compulsory" eval="True"/>
+            <field name="move_type">vendor</field>
+        </record>
+        <record id="npa_payment_tanker_clearance" model="memo.stage.invoice.line">
+            <field name="name">NPA (Tanker clearance)</field>
+            <field name="compulsory" eval="True"/>
+            <field name="move_type">vendor</field>
+        </record>
+
+        <record id="memo_stage_nimasa_payment_tanker_clearance" model="memo.stage">
+            <field name="name">NIMASA PAYMENT</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">400</field>
+            <field name="is_sub_stage" eval="True"/>
+            <field name="required_invoice_line" eval="[
+            (4, ref('company_memo.nimasa_payment_tanker_clearance'))]"/>
+        </record>
+        <record id="memo_stage_npa_payment_tanker_clearance" model="memo.stage">
+            <field name="name">NPA (Tanker Clearance) PAYMENT</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">500</field>
+            <field name="is_sub_stage" eval="True"/>
+            <field name="required_invoice_line" eval="[
+            (4, ref('company_memo.npa_payment_tanker_clearance'))]"/>
+        </record>
+         
+        <record id="memo_stage_creation_of_po_io_tanker_clearance" model="memo.stage">
+            <field name="name">Creation of Purchase Order (NPA &amp; NIMASA)</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">75</field> 
+            <field name="sub_stage_ids" eval="[
+            (4, ref('company_memo.memo_stage_nimasa_payment_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_npa_payment_tanker_clearance')),
+            ]"/>
+        </record>
+        <record id="client_invoice_tanker_clearance" model="memo.stage.invoice.line">
+            <field name="name">Client Invoice</field>
+            <field name="compulsory" eval="True"/>
+            <field name="move_type">customer</field>
+        </record>
+        <record id="memo_stage_creation_of_client_invoice_tanker_clearance" model="memo.stage">
+            <field name="name">Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">80</field> 
+            <field name="required_invoice_line" eval="[
+            (4, ref('company_memo.client_invoice_tanker_clearance'))]"/>
+        </record>
+
+        <record id="memo_stage_creation_of_file_check_tanker_clearance" model="memo.stage">
+            <field name="name">Operational File check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="sequence">85</field> 
+        </record>
+        <record id="memo_stage_financial_of_file_check_tanker_clearance" model="memo.stage">
+            <field name="name">Financial File check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">90</field> 
+        </record>
+        <record id="memo_stage_file_closure_io_tanker_clearance" model="memo.stage">
+            <field name="name">File Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="is_approved_stage" eval="True"/>
+            <field name="sequence">95</field> 
+        </record>
+        <record id="memo_stage_closure_of_tanker_clearance" model="memo.stage">
+            <field name="name">Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">100</field> 
+        </record>
+        <!-- port agent tanker inward outward call -->
+        <record id="memo_config_inward_outward_tanker_clearance" model="memo.config">
+            <field name="memo_type" ref="company_memo.mtype_agency_port_inward_port_agent_tanker_req"/>
+            <field name="active">1</field>
+            <field name="project_type">agency</field>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+            <field name="config_tag_id" ref="company_memo.memo_tag_tanker_clearance"/>
+            <field name="stage_ids" eval="[
+            (4, ref('company_memo.memo_stage_start_inward_outward_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_nomination_type_inward_outward_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_establish_contact_vessel_io_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_recieve_pre_arrival_io_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_berthing_clearnace_io_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_inform_terminal_mail_io_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_preparation_for_io_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_monitoring_of_loading_io_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_doc_after_loading_io_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_sail_of_tanker_io_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_creation_of_po_io_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_creation_of_client_invoice_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_creation_of_file_check_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_financial_of_file_check_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_file_closure_io_tanker_clearance')),
+            (4, ref('company_memo.memo_stage_closure_of_tanker_clearance')),
+            ]"/>
+        </record>
+        <record id="company_memo.memo_stage_start_inward_outward_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_nomination_type_inward_outward_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_establish_contact_vessel_io_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_recieve_pre_arrival_io_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_berthing_clearnace_io_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_inform_terminal_mail_io_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_preparation_for_io_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_monitoring_of_loading_io_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_doc_after_loading_io_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_sail_of_tanker_io_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_creation_of_po_io_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        
+        <record id="company_memo.memo_stage_creation_of_client_invoice_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_creation_of_file_check_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_financial_of_file_check_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+
+        <record id="company_memo.memo_stage_file_closure_io_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        <record id="company_memo.memo_stage_closure_of_tanker_clearance" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_inward_outward_tanker_clearance"/>
+        </record>
+        
+        <!-- <record id="memo_config_protecting_agent_tanker_clearance" model="memo.config">
+            <field name="memo_type" ref="company_memo.mtype_agency_port_inward_protecting_agent_tanker_request"/>
+            <field name="active">1</field>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+        </record>  -->
+ 
+        <record id="memo_stage_call_extra_po_draft" model="memo.stage">
+            <field name="name">Draft</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="require_po_confirmation" eval="True"/>
+            <field name="sequence">120</field>
+        </record>
+        <record id="memo_stage_call_extra_po_manager_to_approve" model="memo.stage">
+            <field name="name">Manager to approve</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="is_approved_stage" eval="True"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="sequence">140</field>
+        </record>
+        <record id="memo_stage_call_extra_po_done" model="memo.stage">
+            <field name="name">Done</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="sequence">160</field>
+        </record>
+        <record id="memo_config_po_extra_approval" model="memo.config">
+            <field name="memo_type" ref="company_memo.mtype_additional_po_request"/>
+            <field name="active">1</field>
+            <field name="config_tag_id" ref="company_memo.memo_tag_procurement"/>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+            <field name="stage_ids" eval="[
+            (4, ref('company_memo.memo_stage_call_extra_po_draft')),
+            (4, ref('company_memo.memo_stage_call_extra_po_manager_to_approve')),
+            (4, ref('company_memo.memo_stage_call_extra_po_done')),
+            ]"/>
+        </record>
+        <record id="company_memo.memo_stage_call_extra_po_draft" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_po_extra_approval"/>
+        </record>
+        <record id="company_memo.memo_stage_call_extra_po_manager_to_approve" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_po_extra_approval"/>
+        </record>
+        <record id="company_memo.memo_stage_call_extra_po_done" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_po_extra_approval"/>
+        </record>
+
+        
+     </data>
+</odoo>

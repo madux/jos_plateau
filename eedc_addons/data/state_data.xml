@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+            <record model="res.country.state" id="ng_state_1">
+                <field name="name">Abia</field>
+                <field name="code">NG-1</field>
+                <field name="country_id" eval="163"/>
+            </record>
+    <record model="res.country.state" id="ng_state_20">
+                <field name="name">Adamawa</field>
+                <field name="code">NG-20</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_42">
+                <field name="name">Anambra</field>
+                <field name="code">NG-42</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_64">
+                <field name="name">Akwa Ibom</field>
+                <field name="code">NG-64</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_96">
+                <field name="name">Bauchi</field>
+                <field name="code">NG-96</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_116">
+                <field name="name">Bayelsa</field>
+                <field name="code">NG-116</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_125">
+                <field name="name">Benue</field>
+                <field name="code">NG-125</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_149">
+                <field name="name">Borno</field>
+                <field name="code">NG-149</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_177">
+                <field name="name">Cross River</field>
+                <field name="code">NG-177</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_196">
+                <field name="name">Delta</field>
+                <field name="code">NG-196</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_222">
+                <field name="name">Ebonyi</field>
+                <field name="code">NG-222</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_235">
+                <field name="name">Enugu</field>
+                <field name="code">NG-235</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_252">
+                <field name="name">Edo</field>
+                <field name="code">NG-252</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_268">
+                <field name="name">Ekiti</field>
+                <field name="code">NG-268</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_285">
+                <field name="name">FCT</field>
+                <field name="code">NG-285</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_292">
+                <field name="name">Gombe</field>
+                <field name="code">NG-292</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_304">
+                <field name="name">Imo</field>
+                <field name="code">NG-304</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_332">
+                <field name="name">Jigawa</field>
+                <field name="code">NG-332</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_359">
+                <field name="name">Kaduna</field>
+                <field name="code">NG-359</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_383">
+                <field name="name">Kano</field>
+                <field name="code">NG-383</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_429">
+                <field name="name">Katsina</field>
+                <field name="code">NG-429</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_464">
+                <field name="name">Kebbi</field>
+                <field name="code">NG-464</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_486">
+                <field name="name">Kogi</field>
+                <field name="code">NG-486</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_508">
+                <field name="name">Kwara</field>
+                <field name="code">NG-508</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_524">
+                <field name="name">Lagos</field>
+                <field name="code">NG-524</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_545">
+                <field name="name">Nasarawa</field>
+                <field name="code">NG-545</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_559">
+                <field name="name">Niger</field>
+                <field name="code">NG-559</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_585">
+                <field name="name">Ogun</field>
+                <field name="code">NG-585</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_606">
+                <field name="name">Ondo</field>
+                <field name="code">NG-606</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_626">
+                <field name="name">Osun</field>
+                <field name="code">NG-626</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_657">
+                <field name="name">Oyo</field>
+                <field name="code">NG-657</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_690">
+                <field name="name">Plateau</field>
+                <field name="code">NG-690</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_708">
+                <field name="name">Rivers</field>
+                <field name="code">NG-708</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_732">
+                <field name="name">Sokoto</field>
+                <field name="code">NG-732</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_756">
+                <field name="name">Taraba</field>
+                <field name="code">NG-756</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    <record model="res.country.state" id="ng_state_773">
+                <field name="name">Yobe</field>
+                <field name="code">NG-773</field>
+                <field name="country_id" eval="163"/>
+                </record>
+            <record model="res.country.state" id="ng_state_791">
+                <field name="name">Zamfara</field>
+                <field name="code">NG-791</field>
+                <field name="country_id" eval="163"/>
+                </record>
+    </data>
+</odoo>

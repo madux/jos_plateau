@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+        <!-- CREW CHANGE -->
+        <!--  DOCUMENTLINE -->
+        <record id="crew_change_pda_invoice_doc_approval_doc" model="memo.stage.document.line">
+            <field name="name">CREW CHANGE PDA/QUOTATION</field>
+            <field name="compulsory" eval="False"/>
+        </record>
+       
+        <record id="crew_change_pda_quotation_payment_invoice" model="memo.stage.invoice.line">
+            <field name="name">CREW CHANGE PDA/QUOTATION INVOICE</field>
+            <field name="compulsory" eval="False"/>
+            <field name="move_type">customer</field>
+        </record>
+
+        <record id="memo_pda_quotation_crew_change" model="memo.stage">
+            <field name="name">PDA/QUOTATION SENT TO CLIENT</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">30</field>
+            <field name="memo_has_condition" eval="False"/>
+            <field name="yes_condition" eval="False"/>
+            <field name="no_condition" eval="False"/>
+            <field name="yes_conditional_stage_id" eval="False"/>
+            <field name="no_conditional_stage_id" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="False"/>
+            <field name="require_po_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+            <!-- <field name="required_invoice_line" eval="[(4, ref('company_memo.crew_change_pda_quotation_payment_invoice'))]"/> -->
+            <!-- <field name="required_document_line" eval="[(4, ref('company_memo.crew_change_pda_invoice_doc_approval_doc'))]"/> -->
+        </record>
+
+        <record id="crew_change_upload_work_instruction_doc" model="memo.stage.document.line">
+            <field name="name">CREW CHANGE WORK INSTRUCTION</field>
+            <field name="compulsory" eval="False"/>
+        </record>
+        <record id="crew_change_arrangement_inplace_instruction_doc" model="memo.stage.document.line">
+            <field name="name">Crew Change Arrangement Documentation</field>
+            <field name="compulsory" eval="False"/>
+        </record>
+        <record id="memo_crew_change_work_instruction" model="memo.stage">
+            <field name="name">WORK INSTRUCTION</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">50</field>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.crew_change_upload_work_instruction_doc'))
+            ]"/>
+        </record>
+
+        <record id="memo_inform_protocol_officer" model="memo.stage">
+            <field name="name">Inform Protocol Officers</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">5000</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record>
+        <record id="memo_book_hotel_crew_change" model="memo.stage">
+            <field name="name">Booking of Hotel</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">5001</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record>
+
+        <record id="memo_arrange_armed_escort_crew_change" model="memo.stage">
+            <field name="name">Arrange Armed Escort</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">5002</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record>
+        <record id="memo_booking_flight_crew_change" model="memo.stage">
+            <field name="name">Booking of flight</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">5003</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record>
+        <record id="memo_arranging_vehicle_carhire_crew_change" model="memo.stage">
+            <field name="name">Arranging Vehicle/Car Hire</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">5004</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record>
+        <record id="memo_arranging_immigrationservice_crew_change" model="memo.stage">
+            <field name="name">Arranging of Immigration Service</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">5005</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="is_sub_stage" eval="True"/>
+        </record>
+        
+        <record id="memo_crew_change_arrangement_in_place" model="memo.stage">
+            <field name="name">Putting Crew Change Arrangement in Place</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">60</field>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.crew_change_arrangement_inplace_instruction_doc'))
+            ]"/>
+            <field name="sub_stage_ids" eval="[
+            (4, ref('company_memo.memo_inform_protocol_officer')),
+            (4, ref('company_memo.memo_book_hotel_crew_change')),
+            (4, ref('company_memo.memo_arrange_armed_escort_crew_change')),
+            (4, ref('company_memo.memo_arranging_vehicle_carhire_crew_change')),
+            (4, ref('company_memo.memo_arranging_immigrationservice_crew_change')),
+            ]"/>
+        </record>
+
+        <record id="create_purchase_order_crew_change" model="memo.stage.invoice.line">
+            <field name="name">CREATE PURHCASE ORDER FOR VENDOR</field>
+            <field name="compulsory" eval="False"/>
+            <field name="move_type">vendor</field>
+        </record>
+
+        <record id="memo_crew_change_creation_of_purchaseorder" model="memo.stage">
+            <field name="name">Creation of Purchase Order</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">70</field>
+            <field name="require_bill_payment" eval="False"/>
+            <field name="require_po_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <!-- <field name="required_invoice_line" eval="[
+            (4, ref('company_memo.create_purchase_order_crew_change'))
+            ]"/> -->
+        </record>
+
+        <record id="crew_change_signed_airport_work_service_document" model="memo.stage.document.line">
+            <field name="name">Signed Airport Work Service docs</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+        <record id="crew_change_upload_vendor_invoice_and_backup_document" model="memo.stage.document.line">
+            <field name="name">Upload all vendor invoices and backups</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_crew_change_upload_all_docs" model="memo.stage">
+            <field name="name">Upload all Documents</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">80</field>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.crew_change_signed_airport_work_service_document')),
+            (4, ref('company_memo.crew_change_upload_vendor_invoice_and_backup_document'))
+            ]"/>
+        </record>
+        <record id="crew_change_client_invoice_invoice" model="memo.stage.invoice.line">
+            <field name="name">CREW CHANGE PDA/QUOTATION INVOICE</field>
+            <field name="compulsory" eval="False"/>
+            <field name="move_type">customer</field>
+        </record>
+
+        <record id="memo_crew_change_final_client_invoice" model="memo.stage">
+            <field name="name">CLIENT INVOICE</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">90</field>
+            <field name="is_approved_stage" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/> 
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+            <!-- <field name="required_invoice_line" eval="[
+            (4, ref('company_memo.crew_change_client_invoice_invoice'))
+            ]"/> -->
+        </record>
+
+        <record id="memo_crew_change_po_and_pay" model="memo.stage">
+            <field name="name">Validate Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">120</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record>
+
+        <record id="memo_crew_change_ops_file_check" model="memo.stage">
+            <field name="name">Operational File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">130</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_crew_change_financial_file_check" model="memo.stage">
+            <field name="name">Financial File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">140</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_screw_change_file_closure" model="memo.stage">
+            <field name="name">File Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">150</field>
+            <field name="is_approved_stage" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_crew_change_complete_process" model="memo.stage">
+            <field name="name">Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">160</field>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_config_crew_change" model="memo.config">
+            <field name="memo_type" ref="company_memo.mtype_travel_crew_change_request"/>
+            <field name="active">1</field>
+            <field name="project_type">travel</field>
+            <field name="config_tag_id" ref="company_memo.memo_tag_travel_crewchange"/>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+            <field name="stage_ids" eval="[
+            (4, ref('company_memo.memo_pda_quotation_crew_change')),
+            (4, ref('company_memo.memo_crew_change_work_instruction')),
+            (4, ref('company_memo.memo_crew_change_arrangement_in_place')),
+            (4, ref('company_memo.memo_crew_change_creation_of_purchaseorder')),
+            (4, ref('company_memo.memo_crew_change_upload_all_docs')),
+            (4, ref('company_memo.memo_crew_change_final_client_invoice')),
+            (4, ref('company_memo.memo_crew_change_po_and_pay')),
+            (4, ref('company_memo.memo_crew_change_ops_file_check')),
+            (4, ref('company_memo.memo_crew_change_financial_file_check')),
+            (4, ref('company_memo.memo_screw_change_file_closure')),
+            (4, ref('company_memo.memo_crew_change_complete_process')),
+            ]"/>
+        </record>
+
+        <record id="company_memo.memo_pda_quotation_crew_change" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+        <record id="company_memo.memo_crew_change_work_instruction" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+        <record id="company_memo.memo_crew_change_arrangement_in_place" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+        <record id="company_memo.memo_crew_change_creation_of_purchaseorder" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+        <record id="company_memo.memo_crew_change_upload_all_docs" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+        <record id="company_memo.memo_crew_change_final_client_invoice" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+        <record id="company_memo.memo_crew_change_po_and_pay" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+        <record id="company_memo.memo_crew_change_ops_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+
+        <record id="company_memo.memo_crew_change_financial_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+        <record id="company_memo.memo_screw_change_file_closure" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+        <record id="company_memo.memo_crew_change_complete_process" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_crew_change"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,245 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; /* Adjust as needed */
+}
+
+/* .oe_gauge_memo {
+  margin: 1px;
+  padding: 1px;
+  width: 100%;
+  height: 200px;
+  background-color: #060202;
+
+} */
+
+.color-grey {
+  color: #dddcdc
+}
+
+.card-guage{
+  /* box-shadow: 0 7px 25px rgba(65, 1, 11, 0.733); */
+  margin-bottom: 10px;
+  background-color: #fff;
+  /* height: 300px; */
+}
+
+.card-border-gauge{
+  background-color: #fff;
+  border: none;
+}
+
+.process-flow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .process {
+    text-align: center;
+    flex-grow: 1;
+    position: relative;
+  }
+  .process .icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  .process .title {
+    font-weight: bold;
+    /* font-size: 20px; */
+  }
+  .process .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 200px;
+    background-color: #060202;
+    z-index: -1;
+  }
+  .process:last-child .arrow {
+    display: none; /* Hide arrow for last process */
+  }
+
+.responsive-border {
+    border: 2px solid #f0f1f2; /* Border color and size */
+    padding: 10px; /* Space between content and border */
+    width: auto; /* Adjust width automatically based on content */
+    max-width: 100%; /* Prevent it from overflowing */
+    word-wrap: break-word; /* Handle long content gracefully */
+    box-sizing: border-box; /* Include padding in width/height */
+    /* margin: 10px auto; /*Center and add spacing */
+}
+
+.flex-containero {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  padding: 0px;
+  margin: 0px;
+  height: 20%
+}
+
+.flex-itemo {
+  min-width: 50%;
+  min-height: 50%;
+  height: 0px;
+}
+
+
+
+body {
+  background-color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+/* .card-header {
+  background-color: #b51c1c;
+  color: white;
+  font-weight: bold;
+ 
+} */
+
+
+.card{
+  height: 100%;
+}
+.progress-bar {
+  background-color: #b51c1c;
+  border-radius: 2px;
+  margin: 0px;
+  padding: 1px;
+}
+.finance-card .circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.finance-card .circle h5 {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.inner{
+  font-size: 11px;
+}
+.halfdoughnut__title{
+  color: #131010;
+  position: relative;
+  bottom: 50%;
+  font-size: 10px;
+}
+.consignment strong{
+  font-size: 13px;
+  /* color: #91f552; */
+  /* color: #db6f6f; */
+  /* color: #d64545; */
+  /* color: #b94b4b; */
+}
+
+.finance{
+  background-color: rgb(236, 234, 234);
+  /* background-color: inherit; */
+} 
+
+/* .col-6>.o_field_widget {
+  margin: 0px !important; 
+  margin-left: 0px !important; 
+  margin-top: 0px !important; 
+  margin-right: 0px !important; 
+  margin-bottom: 0px !important; 
+  padding: 0px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.col-6>.o_field_gaugeMemo {
+  margin: 0px !important; 
+  padding: 0px !important;
+  border-color: #060202;
+  margin-left: 0px !important; 
+  margin-top: 0px !important; 
+  margin-right: 0px !important; 
+  margin-bottom: 0px !important;
+}
+ 
+.col-6>.o_readonly_modifier {
+  margin: 0px !important; 
+  padding: 0px !important;
+} */
+
+.halfdoughnut {
+  position: relative;
+  /* height: 100px;
+  width: 100%;
+  margin: 1em auto;
+  overflow: hidden; */
+  /* margin-top: 6px; */
+  /* border: 1px dashed rgba(0,0,0,.1); */
+
+  &__title {
+    position: absolute;
+    z-index: 2;
+    bottom: 30px;
+    top: 55%;
+    left: 10%;
+    padding:2px;
+    font-family: Comfortaa, sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+    color: rgb(44, 241, 159);
+    transform: translate(-50%,-50%);
+
+    span {
+      display: block;
+      font-size: .8em;
+      color: rgb(44, 241, 159);
+      }
+    }
+}
+
+
+.gauge-title {
+  /* margin: 1em auto;
+  overflow: hidden;*/
+  position: absolute; 
+
+  z-index: 2;
+  top: 58%;
+  left: 50%;
+  font-family: Comfortaa, sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  text-align: center;
+  color: rgb(18, 19, 18);
+  transform: translate(-50%,-50%);
+
+  span {
+    display: block;
+    font-size: .8em;
+    color: rgb(10, 24, 18);
+    }
+  }
+
+
+
+.form-card-header {
+  background-color: #b51c1c;
+  color: white;
+  font-weight: bold;
+  border-radius: 2px;
+  /* height: 10%; */
+  padding: 7px;
+
+  /* box-shadow: 5px 5px 3px #888787; */
+}
+
+
+.form-body {
+  background-color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

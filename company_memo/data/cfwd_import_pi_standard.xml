@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+        
+        <record id="upload_bi_bw_manifest" model="memo.stage.document.line">
+            <field name="name">Upload Duty Payment Confirmation</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_sub_stage_standard_raise_duty" model="memo.stage">
+            <field name="name">Raise Duty</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="is_sub_stage" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="sequence">2330</field>
+        </record>
+
+        <record id="import_cfwd_pi_standard_accessduty_or_shipping_terminal_fee" model="memo.stage">
+            <field name="name">Access Duty or Shipping terminal Fee</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">5</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="require_po_confirmation" eval="True"/>
+            <field name="sub_stage_ids" eval="[
+            (4, ref('company_memo.memo_sub_stage_standard_raise_duty')),
+            ]"/>
+        </record>
+
+        <record id="import_cfwd_pi_standard_duty_payment" model="memo.stage">
+            <field name="name">Duty Payment</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">10</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_po_confirmation" eval="True"/>
+        </record>
+        <record id="import_cfwd_pi_standard_process_terminal_fee" model="memo.stage">
+            <field name="name">Process terminal and shipping fee</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">20</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="False"/>
+            <field name="require_po_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+         <record id="import_pi_standard_custom_examination" model="memo.stage">
+            <field name="name">Schedule Custom Examination</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">30</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <!-- <field name="require_bill_payment" eval="False"/>
+            <field name="require_po_confirmation" eval="True"/> -->
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="custom_manual_release" model="memo.stage.document.line">
+            <field name="name">Custom Approved Manual Release</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="import_pi_standard_custom_release" model="memo.stage">
+            <field name="name">Custom Manual Released</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">40</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.custom_manual_release')),
+            ]"/>
+        </record> 
+
+        <record id="system_document_release" model="memo.stage.document.line">
+            <field name="name">System Release</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="import_pi_standard_system_release" model="memo.stage">
+            <field name="name">System Released</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">50</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.system_document_release')),
+            ]"/>
+        </record> 
+
+        <record id="cargodocument_release" model="memo.stage.document.line">
+            <field name="name">Cargo Release</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="import_pi_standard_cargo_release" model="memo.stage">
+            <field name="name">Cargo Released</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">60</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.cargodocument_release')),
+            ]"/>
+        </record> 
+
+        <record id="pi_standard_scrolling_doc" model="memo.stage.document.line">
+            <field name="name">Scrolling Document</field>
+            <field name="compulsory" eval="False"/>
+        </record>
+
+        <record id="import_pi_standard_scrolling" model="memo.stage">
+            <field name="name">Scrolling</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">70</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.pi_standard_scrolling_doc')),
+            ]"/>
+        </record> 
+
+        <record id="import_pi_standard_oc_gate_approval" model="memo.stage">
+            <field name="name">OC Gate Approval</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">80</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="import_pi_standard_create_client_invoice" model="memo.stage">
+            <field name="name">Create Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">110</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/> 
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="import_pi_standard_po_and_pay" model="memo.stage">
+            <field name="name">Validate Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">120</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record>
+
+        <record id="import_pi_standard_ops_file_check" model="memo.stage">
+            <field name="name">Operational File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">130</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="import_pi_standard_financial_file_check" model="memo.stage">
+            <field name="name">Financial File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">140</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="import_pi_standard_file_closure" model="memo.stage">
+            <field name="name">File Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">150</field>
+            <field name="is_approved_stage" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="import_pi_standard_closured" model="memo.stage">
+            <field name="name">Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">160</field>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="memo_config_cfwd_import_pi_standard" model="memo.config">
+            <field name="memo_type" ref="company_memo.mtype_import_process_pi_standard"/>
+            <field name="project_type">cfwd</field>
+            <field name="active">1</field>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+            <field name="config_tag_id" ref="company_memo.memo_tag_cfwd_import"/>
+            <field name="stage_ids" eval="[
+            (4, ref('company_memo.import_cfwd_pi_standard_accessduty_or_shipping_terminal_fee')),
+            (4, ref('company_memo.import_cfwd_pi_standard_duty_payment')),
+            (4, ref('company_memo.import_cfwd_pi_standard_process_terminal_fee')),
+            (4, ref('company_memo.import_pi_standard_custom_examination')),
+            (4, ref('company_memo.import_pi_standard_custom_release')),
+            (4, ref('company_memo.import_pi_standard_system_release')),
+            (4, ref('company_memo.import_pi_standard_cargo_release')),
+            (4, ref('company_memo.import_pi_standard_scrolling')),
+            (4, ref('company_memo.import_pi_standard_oc_gate_approval')),
+            (4, ref('company_memo.import_pi_standard_create_client_invoice')),
+            (4, ref('company_memo.import_pi_standard_po_and_pay')),
+            (4, ref('company_memo.import_pi_standard_ops_file_check')),
+            (4, ref('company_memo.import_pi_standard_financial_file_check')),
+            (4, ref('company_memo.import_pi_standard_file_closure')),
+            (4, ref('company_memo.import_pi_standard_closured')),
+            ]"/>
+        </record>
+         
+        <record id="company_memo.import_cfwd_pi_standard_accessduty_or_shipping_terminal_fee" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_cfwd_pi_standard_duty_payment" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_cfwd_pi_standard_process_terminal_fee" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_custom_examination" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_custom_release" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_system_release" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_cargo_release" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_scrolling" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_oc_gate_approval" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+
+        <record id="company_memo.import_pi_standard_create_client_invoice" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_po_and_pay" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_ops_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_financial_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_file_closure" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+        <record id="company_memo.import_pi_standard_closured" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_cfwd_import_pi_standard"/>
+        </record>
+     </data>
+</odoo>

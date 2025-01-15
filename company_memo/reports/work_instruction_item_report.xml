@@ -1,0 +1,216 @@
+<odoo>
+  <data> 
+    <record id="print_work_instruction_item_report" model="ir.actions.report">
+        <field name="name">Work Instruction item</field>
+        <field name="model">memo.work.instruction</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">company_memo.work_instruction_print_item_report_template</field>
+        <field name="report_file">company_memo.work_instruction_print_item_report_template</field>
+        <field name="print_report_name">'Print Work instruction - %s' % (object.memo_id.name)</field>
+        <field name="binding_model_id" ref="company_memo.model_memo_work_instruction"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+	</record>
+    <template id="work_instruction_print_item_report_template">
+      <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="o">
+              <t t-call="company_memo.work_instruction_item_print_template"/>
+          </t>
+      </t>
+    </template>
+    <template id="work_instruction_item_print_template">
+      <t t-call="web.internal_layout">
+        <t t-foreach="docs" t-as="o">
+          <div class="page" style="padding-top: 10px;">
+            <style>
+              table {
+                border-collapse: collapse;
+                margin-bottom: 40px;
+              }
+
+              th {
+                background-color: #333;
+                color: #fff;
+              }
+
+              table, th, tr, td, h3 {
+                font-size: 18px
+              }
+              .title-header {
+                font-size: 20px 
+              }
+
+              table, th, tr, td {
+                border:1px solid #999;
+                font-family: Trebuchet MS;
+                margin-bottom: 3px;
+              }
+
+              tr:nth-child(odd){
+                background-color: #ccc;
+              }
+
+              th, td{
+                padding: 5px;
+              }
+
+              td:nth-child(4) {
+                color: green;
+              }
+
+              .outstanding {
+                color: red;
+              }
+            </style> 
+            <div class="row">
+                <div class="col-3 pt-4">
+                    <span class="title-header"> Work Instruction </span> 
+                </div>
+                <div class="col-2 offset-2 text-center">
+                    <img t-if="user.company_id" t-att-src="image_data_uri(user.company_id.logo)" style="max-height: 100px;max-width: 200px;" alt="Logo"/>
+                </div>
+                <div class="col-2 offset-3 text-end">
+                    <img class="logo" t-attf-src="data:image/*;base64,{{o.memo_id.qr_code_commonpass}}" style="width:80px;height:80px" align="center"/> 
+                </div>
+            </div>
+            <hr/>
+            <div class="row mt-4">
+                <div class="col-lg-7 mb-lg-0 mb-4">
+                    <div class="card">
+                        <div class="table-responsive mt-5">
+                        <table class="table align-items-left mb-0">
+                            <thead>
+                            <tr>
+                                <th width="50%" class="bg-white"></th>
+                                <th width="50%" class="bg-white"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="bg-white">
+                                <h3 class="text-bold">Work Instruction #: </h3>
+                                <strong>
+                                    <t t-esc="o.work_order_code"/>
+                                </strong>
+                                </td>
+                                <td class="bg-white">
+                                <h3 class="text-bold">Customer #: </h3>
+                                <t t-esc="o.memo_id.client_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <h3 class="text-bold">Our RFQ / Reference: </h3> ## 
+                                                                </td>
+                                <td>
+                                <h3 class="text-bold">Your Contact Reference: </h3>
+                                <t t-esc="o.memo_id.client_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bg-white">
+                                <h3 class="text-bold">Our Project: </h3>
+                                <t t-esc="o.memo_id.code"/>
+                                </td>
+                                <td class="bg-white">
+                                <h3 class="text-bold">Your Project: </h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <h3 class="text-bold">Date Created: </h3>
+                                <t t-esc="o.memo_id.date"/>
+                                </td>
+                                <td>
+                                <h3 class="text-bold">Requested by: </h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bg-white">
+                                <h3 class="text-bold">Description: </h3>
+                                </td>
+                                <td class="bg-white">
+                                <h3 class="text-bold">
+                                    <span style="text-align: justify; font-family: 'Times New Roman', Times, serif; font-size:16px;" t-raw="o.description"/>
+                                </h3>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                        <div class="row">
+                        <div class="col-6">
+                            <h2> Work price: </h2>
+                        </div>
+                        <div class="col-2 offset-2 text-center">
+                            <h3>As Agreed</h3>
+                        </div>
+                        </div>
+                        <div class="table-responsive">
+                        <table class="table align-items-left mb-0">
+                            <thead>
+                            <tr>
+                                <th width="50%" class="bg-white">
+                                                                </th>
+                                <th width="50%" class="bg-white">
+                                                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="bg-white">
+                                <hr/>
+                                <h3 class="text-bold">Name: </h3>
+                                <t t-esc="o.write_uid.name"/>
+                                </td>
+                                <td class="bg-white">
+                                <hr/>
+                                <h3 class="text-bold">Authorized by: </h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <h3 class="text-bold"> Date: </h3>
+                                <t t-esc="datetime.datetime.now().strftime('%B %d, %Y')"/>
+                                </td>
+                                <td>
+                                <h3 class="text-bold"> Date: .............................</h3>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                        <div class="table-responsive">
+                        <table class="table align-items-left mb-0">
+                            <thead>
+                            <tr>
+                                <th width="50%" class="bg-white">
+                                                                </th>
+                                <th width="50%" class="bg-white">
+                                                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                <img t-if="user.user_signature" t-att-src="image_data_uri(user.user_signature)" style="max-height: 65px;max-width: 200px;" alt="Logo"/>
+                                </td>
+                                <td>
+                                    .....
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </t>
+      </t>
+
+    </template>
+
+ 
+  </data>
+</odoo>

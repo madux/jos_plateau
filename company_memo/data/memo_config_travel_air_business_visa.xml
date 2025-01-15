@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+        
+        <record id="prepare_application_tab" model="memo.stage.document.line">
+            <field name="name">Application Letter</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_tab_application_letter" model="memo.stage">
+            <field name="name">Prepare Application letter</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">10</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.prepare_application_tab')),
+            ]"/>
+        </record>
+        <record id="memo_tab_create_client_invoice4" model="memo.stage">
+            <field name="name">Create Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">20</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/> 
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_tab_permitcreate_po_and_pay5" model="memo.stage">
+            <field name="name">Validate Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">30</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record>
+
+        <record id="memo_tab_ops_file_check" model="memo.stage">
+            <field name="name">Operational File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">40</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_tab_financial_file_check" model="memo.stage">
+            <field name="name">Financial File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">50</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_tab_file_closure" model="memo.stage">
+            <field name="name">File Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">60</field>
+             <field name="is_approved_stage" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_tab_closured" model="memo.stage">
+            <field name="name">Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">70</field>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="memo_config_tab_travel" model="memo.config">
+            <field name="memo_type" ref="company_memo.mtype_travel_air_business_visa"/>
+            <field name="active">1</field>
+            <field name="project_type">travel</field>
+            <field name="config_tag_id" ref="company_memo.memo_tag_travel_visa"/>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+            <field name="stage_ids" eval="[
+            (4, ref('company_memo.memo_tab_application_letter')),
+            (4, ref('company_memo.memo_tab_create_client_invoice4')),
+            (4, ref('company_memo.memo_tab_permitcreate_po_and_pay5')),
+            (4, ref('company_memo.memo_tab_ops_file_check')),
+            (4, ref('company_memo.memo_tab_financial_file_check')),
+            (4, ref('company_memo.memo_tab_file_closure')),
+            (4, ref('company_memo.memo_tab_closured')),
+            ]"/>
+        </record>
+         
+        <record id="company_memo.memo_tab_application_letter" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tab_travel"/>
+        </record>
+        <record id="company_memo.memo_tab_create_client_invoice4" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tab_travel"/>
+        </record>
+        <record id="company_memo.memo_tab_permitcreate_po_and_pay5" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tab_travel"/>
+        </record>
+        <record id="company_memo.memo_tab_ops_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tab_travel"/>
+        </record>
+        <record id="company_memo.memo_tab_financial_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tab_travel"/>
+        </record>
+        <record id="company_memo.memo_tab_file_closure" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tab_travel"/>
+        </record>
+        <record id="company_memo.memo_tab_closured" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tab_travel"/>
+        </record>
+     </data>
+</odoo>

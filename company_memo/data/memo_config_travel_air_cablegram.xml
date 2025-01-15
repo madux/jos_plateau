@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+        
+        <record id="cable_memo_twp_cablegram_request_datapage_doc" model="memo.stage.document.line">
+            <field name="name">Datapage Document</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_twp_cablegram_request_datapage" model="memo.stage">
+            <field name="name">Datapage &amp; Embassy Application</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">10</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.cable_memo_twp_cablegram_request_datapage_doc')),
+            ]"/>
+        </record>
+
+        <record id="prepare_application_cable" model="memo.stage.document.line">
+            <field name="name">Application Letter</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_cable_application_letter" model="memo.stage">
+            <field name="name">Prepare Application letter</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">20</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.prepare_application_cable')),
+            ]"/>
+        </record>
+        <record id="approved_cable_gram_doc" model="memo.stage.document.line">
+            <field name="name">Approved Cable Gram</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="prepare_loi_letter_cable_gram_doc" model="memo.stage.document.line">
+            <field name="name">LOI LETTER</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="crewlist_cable_gram_doc" model="memo.stage.document.line">
+            <field name="name">CREW LIST </field>
+            <field name="compulsory" eval="True"/>
+        </record>
+
+        <record id="memo_cable_receive_app_cablegram" model="memo.stage">
+            <field name="name">Approved Cablegram &amp; LOI letter / Crew List </field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">30</field>
+            <field name="publish_on_dashboard" eval="False"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.approved_cable_gram_doc')),
+            (4, ref('company_memo.prepare_loi_letter_cable_gram_doc')),
+            (4, ref('company_memo.crewlist_cable_gram_doc')),
+
+            ]"/>
+        </record>
+        <record id="memo_cablegram_po_and_pay" model="memo.stage">
+            <field name="name">Create PO and Pay</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">40</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="require_po_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="memo_cablegram_create_client_invoice4" model="memo.stage">
+            <field name="name">Create Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">50</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/> 
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_cablegram_permitcreate_so_and_pay5" model="memo.stage">
+            <field name="name">Validate Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">60</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record>
+
+        <record id="memo_cablegram_ops_file_check" model="memo.stage">
+            <field name="name">Operational File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">70</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_cablegram_financial_file_check" model="memo.stage">
+            <field name="name">Financial File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">80</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_cablegram_file_closure" model="memo.stage">
+            <field name="name">File Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">90</field>
+             <field name="is_approved_stage" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_cablegram_closured" model="memo.stage">
+            <field name="name">Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">100</field>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="memo_config_twp_cablegram2" model="memo.config">
+            <field name="memo_type" ref="company_memo.mtype_travel_air_twp_cablegram"/>
+            <field name="active">1</field>
+            <field name="project_type">travel</field>
+            <field name="config_tag_id" ref="company_memo.memo_tag_travel_visa"/>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+            <field name="stage_ids" eval="[
+            (4, ref('company_memo.memo_twp_cablegram_request_datapage')),
+            (4, ref('company_memo.memo_cable_application_letter')),
+            (4, ref('company_memo.memo_cable_receive_app_cablegram')),
+            (4, ref('company_memo.memo_cablegram_po_and_pay')),
+            (4, ref('company_memo.memo_cablegram_create_client_invoice4')),
+            (4, ref('company_memo.memo_cablegram_permitcreate_so_and_pay5')),
+            (4, ref('company_memo.memo_cablegram_ops_file_check')),
+            (4, ref('company_memo.memo_cablegram_financial_file_check')),
+            (4, ref('company_memo.memo_cablegram_file_closure')),
+            (4, ref('company_memo.memo_cablegram_closured')),
+            ]"/>
+        </record>
+         
+        <record id="company_memo.memo_twp_cablegram_request_datapage" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_twp_cablegram2"/>
+        </record>
+        <record id="company_memo.memo_cable_application_letter" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_twp_cablegram2"/>
+        </record>
+        
+        <record id="company_memo.memo_cable_receive_app_cablegram" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_twp_cablegram2"/>
+        </record>
+        <record id="company_memo.memo_cablegram_po_and_pay" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_twp_cablegram2"/>
+        </record>
+        <record id="company_memo.memo_cablegram_create_client_invoice4" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_twp_cablegram2"/>
+        </record>
+        <record id="company_memo.memo_cablegram_permitcreate_so_and_pay5" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_twp_cablegram2"/>
+        </record>
+
+        <record id="company_memo.memo_cablegram_ops_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_twp_cablegram2"/>
+        </record>
+
+        <record id="company_memo.memo_cablegram_file_closure" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_twp_cablegram2"/>
+        </record>
+
+        <record id="company_memo.memo_cablegram_closured" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_twp_cablegram2"/>
+        </record>
+         
+     </data>
+</odoo>

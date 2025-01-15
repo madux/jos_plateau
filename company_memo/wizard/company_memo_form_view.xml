@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+        <record id ="memo_model_new_simple_form_view" model ="ir.ui.view">
+            <field name="name">Memo Record</field>
+            <field name="model">memo.model</field>
+            <field eval="1" name="priority"/>
+            <field name ="arch" type="xml">
+                <form string="Record">
+                    <header>
+                        <button name="forward_memo" id="forward_memo" string="Proceed -" icon="fa-forward" 
+                        invisible="state in ['Done', 'Refuse'] or user_is_approver == True" type="object" class="oe_highlight fwm"/>
+                        <button name="approve_memo"
+                        invisible="memo_type_key not in ['cash_advance', 'loan', 'Payment', 'server_access', 'material_request', 'procurement_request', 'procurement','vehicle_request', 'employee_update', 'Internal', 'export_process', 'import_process', 'agency_process'] or state in ['submit', 'Approve Done Refuse'] or not user_is_approver" 
+                         string="Approve" type="object" class="oe_highlight"/>
+                        <button name="view_parent_project" string="View Parent Project" icon="fa-print" invisible="memo_project_type not in ['project_pro']" type="object" class="btn-primary"/>
+                        <button name="set_draft" invisible="state != 'Refuse'" string="ReSet &amp; Forward" type="object" class="btn-primary"/>
+                        <button name="return_memo" id="return_id" string="Return Memo" icon="fa-redo" invisible="state not in ['Sent', 'Approve Approve2']" type="object"/>
+                        <button name="Cancel" string="Cancel" type="object" invisible="state != ['sent']"/>
+                        <button name="print_memo" string="Print" icon="fa-print" invisible="state in ['submit', 'Refuse']" type="object" class="oe_highlight"/>
+                        <!-- <field name="stage_id" widget="statusbar" force_save="1" readonly="1" domain="[('id', 'in', computed_stage_ids)]"/> -->
+                        <field name="stage_id" widget="statusbar" readonly="0" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <div class="row">
+                            <div class="col-xs-4 pull-left mt8">
+                                <button name="return_memo" class="btn-danger oe_stat_button sm" icon="fa-redo" invisible="memo_type_key not in ['Internal server_access employee_update', 'material_request', 'procurement_request', 'procurement','cash_advance', 'soe', 'vehicle_request'] or state != 'Sent' or not user_is_approver" type="object" string="Refuse" confirm="Are you sure you want to refuse with comments?">
+                                </button>
+                            </div> 
+                        </div>
+                        <br/>
+                        <!-- <div class="oe_button_box" name="button_box"> -->
+                        <div class="oe_button_box oe_right d-none">
+                            <button name="action_get_attachment_view" class="oe_highlight" icon="fa-book" type="object">
+                                <field name="attachment_number" widget="statinfo" string=" - Documents"/>
+                            </button>
+                            <button name="view_related_record" class="btn-primary oe_highlight" invisible="state in ['Sent', 'submit', 'Refuse']" type="object" string="View Related Record"/>
+                        </div>
+                        <div class="oe_title">
+                        <label for="name"/>
+                            <h1 style="color:Tomato;">
+                                <field name="name" required="1" force_save="1" placeholder="e.g. Description" readonly="state not in ['submit']"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <label for="memo_type"/>
+                                <div>
+                                    <field name="memo_type" required="1" readonly="state not in ['submit']" 
+                                    options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                    domain="[('id', 'in', dummy_memo_types)]"/>
+                                    <field name="memo_type_key" string="Memo key" invisible="1" force_save="1"/> 
+                                </div>
+                            </group> 
+                            <group>
+
+                            </group>
+                            <group name="normal_memo_group1">
+                                <field name="dummy_memo_types" invisible="1" widget="many2many_tags" force_save="1"/>
+                                <field name="work_order_code" invisible="1" force_save="1"/>
+                                <field name="internal_memo_option" string="Memo Option" invisible="memo_type_key not in ['Internal', 'internal']" readonly="state not in ['submit']"/>
+                                    <field name="partner_ids" string="Reciepients" widget="many2many_tags" 
+                                    readonly="state not in ['submit']" invisible="internal_memo_option not in ['selected']" 
+                                    required="not user_is_approver or internal_memo_option in ['selected'] or memo_type_key in ['Internal', 'internal']" 
+                                    options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
+                                <field name="client_id" readonly="state not in ['submit']" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" /> 
+                                <field name="employee_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state not in ['submit']"/>
+                                <field name="phone" readonly="1"/>
+                                <field name="email" readonly="1"/> 
+                                <field name="memo_setting_id" invisible="1" force_save="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                <field name="direct_employee_id" required="0" invisible="1" string="Through" readonly="state in ['Done', 'Approve']"/>
+                                <field name="demo_staff" invisible="1"/>
+                                <field name="dept_ids" widget="selection" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="1"/>
+                                <field name="loan_type" invisible="memo_type_key != 'loan'" required="memo_type_key == 'loan'"/>
+                                <field name="loan_amount" invisible="memo_type_key != 'loan'" required="memo_type_key == 'loan'"/>
+                                <field name="periods" invisible="memo_type_key != 'loan'" required="memo_type_key == 'loan'"/>
+                                <field name="method_period" invisible="memo_type_key != 'loan'" required="memo_type_key == 'loan'"/>
+                                <field name="start_date" invisible="memo_type_key != 'loan'" required="memo_type_key == 'loan'"/>
+                                <field name="cash_advance_reference" invisible="memo_type_key != 'soe'" required="memo_type_key == 'soe'"/>
+                                <field name="soe_advance_reference" invisible="memo_type_key != 'cash_advance'"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="move_id" invisible="1"/>
+                                <field name="users_followers" widget="many2many_tags" required="0" invisible="0" readonly="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                <field name="res_users" widget="many2many_tags" required="0" readonly="1"/>  
+                                <field name="active" invisible="1" groups="base.group_system"/>
+                                <field name="has_sub_stage"  invisible="1"/> 
+                            </group> 
+                            <group name="normal_memo_group2"> 
+                                <field name="date" readonly="state not in ['submit']" options="{&quot;datepicker&quot;: {&quot;daysOfWeekDisabled&quot;: [5,6]}}"/>
+                                <field name="set_staff" string="Assigned to" readonly="1" invisible="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                <field name="date_deadline" readonly="state not in ['submit']" invisible="memo_type_key not in ['material_request procurement_request','procurement']"/>
+                                <field name="leave_type_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" required="memo_type_key in ['leave_request']" invisible="memo_type_key not in ['leave_request']" readonly="state not in ['submit']"/>
+                                <field name="leave_start_date" widget="daterange" options="{&quot;related_end_date&quot;: &quot;leave_end_date&quot;, &quot;datepicker&quot;: {&quot;daysOfWeekDisabled&quot;: [5, 6]}}" required="memo_type_key in ['leave_request']" invisible="memo_type_key not in ['leave_request']" readonly="state not in ['submit']"/>
+                                <field name="leave_end_date" required="memo_type_key in ['leave_request']" invisible="memo_type_key not in ['leave_request']" readonly="state not in ['submit']"/>
+                                <field name="user_ids" readonly="1" invisible="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                <field name="amountfig" string="Amount" readonly="1" invisible="memo_type_key not in ['Payment']"/>
+                                <field name="project_id" readonly="state not in ['submit']" invisible="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                <field name="project_memo_id" string="Parent Project" invisible="0" readonly="0"/>  
+                                <field widget="binary" height="64" name="file_upload" filename="file_namex" required="0" invisible="1" string="Upload File"/>
+                                <field name="file_namex" invisible="1"/> 
+                                <field name="to_create_document" invisible="1"/> 
+                                <field name="memo_category_id" invisible="not to_create_document" required="to_create_document"/> 
+                                <field name="document_folder" invisible="not to_create_document" required="to_create_document"/> 
+                                <field name="status_progress" widget="progressbar" string="Progress(%)"/>
+                                <field name="code" force_save="1"/>  
+                                <field name="approver_id" invisible="1" readonly="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" groups="base.group_system"/>
+                                <field name="approver_ids" invisible="1" widget="many2many_tags" readonly="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" groups="base.group_system"/>
+                                <field name="user_is_approver" invisible="1" readonly="0"/>
+                                <field name="state" invisible="1" force_save="1" readonly="0"/>
+                                <field name="is_request_completed" readonly="1" invisible="1"/>
+                                <field name="is_internal_transfer" readonly="0" invisible="1"/>
+                                <field name="memo_project_type" readonly="0" invisible="1"/>
+                                <field name="freeze_po_budget" readonly="0" invisible="1"/>
+                                <field name="to_unfreezed_budget" readonly="0" invisible="1"/>
+                                <field name="create_date" readonly="0" invisible="1"/>
+                            </group> 
+                        </group>
+                        <field name="unfreezed_budget_reason" string="Reason" placeholder="Reason for Addition PO..." widget="html"
+                            required="to_unfreezed_budget == True" readonly="to_unfreezed_budget != True"/>
+                        <notebook>
+                            <page name="PurchaseOrder" string="Purchase Order -" invisible="id == False">
+                                <!-- <button name="action_add_extra_po" string="Add PO" class="oe_highlight btn-sm" type="object"/> -->
+                                <field name="po_ids" force_save="1" domain="[('id', 'in', [0])]" readonly = "state not in ['submit', 'Sent']"
+                                context="{'form_view_ref': 'company_memo.company_memo_purchase_order_form_view', 'default_memo_id': active_id, 'default_memo_state': state, 'default_partner_id': client_id, 'default_memo_type': memo_type, 'default_memo_type_key': memo_type_key}">
+                                    <tree string="PO" no_open="1" decoration-info="state == 'draft'" decoration-primary="state in ['done']" decoration-success="state in ['purchase']" decoration-danger="state == 'draft'" export_xlsx="1">
+                                        <field name="memo_state" string="Memo State" column_invisible="1"/> 
+                                        <field name="memo_type_key" string="memo key" column_invisible="1"/>  
+                                        <field name="memo_id" string="Project ref" column_invisible="0"/> 
+                                        <field name="memo_type" string="Memo type" column_invisible="1"/> 
+                                        <field name="name" string="PO Number"/>
+                                        <field name="state" string="PO Status" widget="badge"/>
+                                        <field name="amount_total" string="Total"/>
+                                        <button name="button_confirm" type="object" invisible="state not in ['draft', 'sent']" string="Confirm Order" context="{'validate_analytic': True}" class="oe_highlight btn-sm" id="bid_confirm" data-hotkey="q"/>
+                                        <button name="button_view_po" type="object" string="View" class="oe_highlight btn-sm" id="view_po" data-hotkey="q"/>
+                                    </tree> 
+                                </field>
+                            </page>
+                            
+                            <page name="sub_stages" string="Sub Tasks">
+                                <!-- invisible="not has_sub_stage"> -->
+                                <field name="memo_sub_stage_ids">
+                                    <tree string="Sub tasks">
+                                        <field name="name"/>
+                                        <field name="description" invisible="0"/>
+                                        <field name="approver_ids" widget="many2many_tags" readonly="1"/>
+                                        <field name="memo_id" invisible="1" column_invisible="1"/>
+                                        <!-- <field name="sub_stage_id" invisible="0"/> -->
+                                        <field name="sub_stage_done" invisible="0" readonly="1"/>
+                                        <button name="confirm_sub_stage_done" string="Confirm" class="oe_highlight btn-sm" type="object" invisible="sub_stage_done"/>
+                                    </tree>
+                                    <form string="Sub tasks">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="memo_id" invisible="1" />
+                                            </group>
+                                            <group>
+                                                <field name="sub_stage_done" invisible="0" readonly="1"/>
+                                                <field name="sub_stage_id" invisible="1"/>
+                                            </group>
+                                            <notebook>
+                                                <page name="Invoices" string="Finances">
+                                                    <field name="invoice_ids" context="{'default_move_type': 'in_invoice', 'default_memo_id': active_id, 'form_view_ref': 'account.view_move_form'}">
+                                                        <tree string="Invoices">
+                                                            <field name="memo_id" string="Memo" invisible="1" column_invisible="1"/>  
+                                                            <field name="memo_state" string="Memo state" invisible="1" column_invisible="1"/>  
+                                                            <field name="name" string="#" invisible="0"/>  
+                                                            <field name="partner_id" string="Beneficiary" invisible="0"/> 
+                                                            <field name="move_type" string="Type" invisible="1" column_invisible="1"/> 
+                                                            <field name="ref" string="Ref" invisible="1" column_invisible="1"/>  
+                                                            <field name="date" string="Date" invisible="1" column_invisible="1"/> 
+                                                            <field name="journal_id" string="Payment journal" required="0"/>  
+                                                            <field name="amount_total" string="Amount" invisible="0"/> 
+                                                            <field name="state" string="Status" invisible="1" column_invisible="1"/> 
+                                                            <field name="stage_invoice_name" invisible="1" column_invisible="1"/> 
+                                                            <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" invisible="memo_state not in ['Approve']" groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
+                                                            <field name="payment_state" string="Payment Status" invisible="0"/>  
+                                                            <button name="action_register_payment" id="account_invoice_payment_btn" type="object" class="oe_highlight btn-sm" invisible="memo_state not in ['Approve'] or state != 'posted' or payment_state != 'not_paid' or move_type not in ['out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt']" string="Register Payment" groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                                <page name="attachment" string="Attachments">
+                                                    <field name="attachment_ids" string="Attachment" domain="[('id', '=', None)]" context="{'default_res_model': 'memo.model', 'default_res_id': active_id, 'default_public': True}">
+                                                        <tree string="Attachment">
+                                                        
+                                                            <field name="stage_document_name" string="Required Documents"/> 
+                                                            <field name="name" string="Document Name"/> 
+                                                            <field name="datas" filename="name" string="File"/>
+                                                            <field name="stage_document_required" string="Is Compulsory"/>
+                                                            <field name="is_locked" string="Locked?" invisible="0" />
+                                                        </tree>
+                                                        <form string="Attachment">
+                                                            <group>
+                                                                <group>
+                                                                    <field name="stage_document_name" string="Required Documents" readonly="1" force_save="1"/> 
+                                                                    <field name="name" string="Document Name" readonly="is_locked == True"/> 
+                                                                </group>
+                                                                <group>
+                                                                    <field name="datas" filename="name" string="File" readonly="is_locked == True"/>
+                                                                    <field name="stage_document_required" string="Is Compulsory" readonly="1" force_save="1"/> 
+                                                                    <field name="is_locked" string="Locked?" invisible="1"/> 
+                                                                </group>
+                                                            </group>
+                                                        </form>
+                                                    </field>
+                                                </page>
+                                                
+                                            </notebook>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page name="comments" string="Comments">
+                                <field name="comments" string="Comments" placeholder="Notes..." widget="html" readonly="state in ['Done', 'Approve']"/>
+                            </page>
+
+                            <page name="supervisor_comments" string="Supervisor's Comments" invisible="1">
+                                <field name="is_supervior" readonly="0" invisible="1"/>
+                                <field name="supervisor_comment" string="Supervisor Comments" placeholder="Notes..." widget="html" readonly="is_supervior"/>
+                            </page>
+                            <page name="manager_comment" string="Manager's Comments" invisible="1">
+                                <field name="is_manager" readonly="0" invisible="1"/>
+                                <field name="manager_comment" string="Manager Comments" placeholder="Notes..." widget="html" readonly="is_manager"/>
+                            </page>
+                            <page name="reason_backs" string="Return Reason">
+                                <field name="reason_back" string="Add Notes" placeholder="Notes..." widget="html" readonly="state in ['Done', 'Approve']"/>
+                            </page>
+                            
+                            <page invisible="1">
+                                <field name="computed_stage_ids" invisible="0"/>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+        
+        <!--  DOCUMENTLINE -->
+        <!-- tav - travel air - visa -->
+        <record id="tav_passport_photo" model="memo.stage.document.line">
+            <field name="name">Passport Photo</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+         <record id="tav_flight_ticket" model="memo.stage.document.line">
+            <field name="name">Flight ticket</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+         <record id="tav_red_cac" model="memo.stage.document.line">
+            <field name="name">RED CAC</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+         
+       <!-- TRAVEL AIR VISA -->
+        <record id="memo_stage_tav_documentation1" model="memo.stage">
+            <field name="name">Documentation</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">10</field>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.tav_passport_photo')),
+            (4, ref('company_memo.tav_flight_ticket')),
+            (4, ref('company_memo.tav_red_cac')),
+            ]"/>
+        </record> 
+        <record id="memo_stage_tav_portal_application2" model="memo.stage">
+            <field name="name">Apply on Portal</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">20</field>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+        </record> 
+        <record id="tav_visa_issued_doc" model="memo.stage.document.line">
+            <field name="name">ISSUED VISA DOWNLOADED</field>
+            <field name="compulsory" eval="True"/>
+        </record>
+         
+        <record id="memo_stage_tav_issued_visa3" model="memo.stage">
+            <field name="name">ISSUE DOWNLOADED VISA</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">30</field>
+            <field name="publish_on_dashboard" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="required_document_line" eval="[
+            (4, ref('company_memo.tav_visa_issued_doc')),
+            ]"/>
+        </record> 
+        <record id="memo_tav_create_client_invoice4" model="memo.stage">
+            <field name="name">Create Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">40</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/> 
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_tav_permitcreate_po_and_pay5" model="memo.stage">
+            <field name="name">Validate Client Invoice</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">50</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="require_bill_payment" eval="True"/>
+            <field name="require_so_confirmation" eval="True"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record>
+
+        <record id="memo_tav_ops_file_check" model="memo.stage">
+            <field name="name">Operational File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">60</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_tav_financial_file_check" model="memo.stage">
+            <field name="name">Financial File Check</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">70</field>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_tav_file_closure" model="memo.stage">
+            <field name="name">File Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">80</field>
+             <field name="is_approved_stage" eval="True"/>
+            <field name="approver_ids" eval="[(4, ref('hr.employee_admin'))]"/>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+        <record id="memo_tavclosured" model="memo.stage">
+            <field name="name">Closure</field>
+            <field name="loaded_from_data">1</field>
+            <field name="active">1</field>
+            <field name="sequence">90</field>
+            <field name="publish_on_dashboard" eval="True"/>
+        </record> 
+
+        <record id="memo_config_tav_travel" model="memo.config">
+            <field name="memo_type" ref="company_memo.mtype_travel_air_visa_on_arrival_request"/>
+            <field name="active">1</field>
+            <field name="project_type">travel</field>
+            <field name="config_tag_id" ref="company_memo.memo_tag_travel_visa"/>
+            <field name="department_id" ref="company_memo.memo_hr_department_logistic"/>
+            <field name="stage_ids" eval="[
+            (4, ref('company_memo.memo_stage_tav_documentation1')),
+            (4, ref('company_memo.memo_stage_tav_portal_application2')),
+            (4, ref('company_memo.memo_stage_tav_issued_visa3')),
+            (4, ref('company_memo.memo_tav_create_client_invoice4')),
+            (4, ref('company_memo.memo_tav_permitcreate_po_and_pay5')),
+            (4, ref('company_memo.memo_tav_ops_file_check')),
+            (4, ref('company_memo.memo_tav_financial_file_check')),
+            (4, ref('company_memo.memo_tav_file_closure')),
+            (4, ref('company_memo.memo_tavclosured')),
+            ]"/>
+        </record>
+         
+        <record id="company_memo.memo_stage_tav_documentation1" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tav_travel"/>
+        </record>
+        <record id="company_memo.memo_stage_tav_portal_application2" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tav_travel"/>
+        </record>
+        <record id="company_memo.memo_stage_tav_issued_visa3" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tav_travel"/>
+        </record>
+        <record id="company_memo.memo_tav_create_client_invoice4" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tav_travel"/>
+        </record>
+        <record id="company_memo.memo_tav_permitcreate_po_and_pay5" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tav_travel"/>
+        </record>
+        <record id="company_memo.memo_tav_ops_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tav_travel"/>
+        </record>
+        <record id="company_memo.memo_tav_financial_file_check" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tav_travel"/>
+        </record>
+        <record id="company_memo.memo_tav_file_closure" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tav_travel"/>
+        </record>
+        <record id="company_memo.memo_tavclosured" model="memo.stage">
+            <field name="memo_config_id" ref="company_memo.memo_config_tav_travel"/>
+        </record>
+         
+     </data>
+</odoo>

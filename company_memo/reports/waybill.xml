@@ -1,0 +1,325 @@
+<odoo>
+  <data> 
+    <record id="print_waybill_report" model="ir.actions.report">
+        <field name="name">WayBill</field>
+        <field name="model">memo.model</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">company_memo.waybill_print_report_template</field>
+        <field name="report_file">company_memo.waybill_print_report_template</field>
+        <field name="print_report_name">'WayBill for - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="company_memo.model_memo_model"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+	</record>
+    <template id="waybill_print_report_template">
+      <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="o">
+              <t t-call="company_memo.waybill_print_template"/>
+          </t>
+      </t>
+    </template>
+    <template id="waybill_print_template">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+            <div class="page" style="padding-top: 10px;">
+                <style>
+                 table {
+                    border-collapse: collapse;
+                    margin-bottom: 40px;
+                }
+
+                th {
+                    background-color: #333;
+                    color: #fff;
+                }
+
+                table, th, tr, td, h3 {
+                    font-size: 16px
+                }
+                .title-header {
+                    font-size: 30px 
+                }
+
+                table, th, tr, td {
+                    border:1px solid #999;
+                    font-family: Times New Roman;
+                    margin-bottom: 3px;
+                    font-size: 12px
+                }
+
+                
+
+                th, td{
+                    padding: 5px;
+                }
+
+                td:nth-child(4) {
+                    color: black;
+                }
+                .accounthead {
+                    background-color: #ccc;
+                }
+
+
+                .outstanding {
+                    color: red;
+                }
+
+                .flex-color {
+                    background-color: #c94141;
+                    text-align: left;
+                    color: #ffffff
+                }
+                </style>
+                <!-- HEADER SECTION-->
+                <!-- <div class="row">
+                    <div class="col-2">
+                        <span class="title-header"> Address </span> 
+                    </div>
+                    <div class="col-2 offset-2 text-center">
+                    </div>
+                    <div class="col-2 offset-3 text-end">
+                        <img t-if="user.company_id" t-att-src="image_data_uri(user.company_id.logo)" style="max-height: 100px;max-width: 200px;" alt="Logo"/>
+                    </div>
+                </div>
+                <hr/>  -->
+                <div class="row flex-color p-3">
+                    <div class="col-2">
+                        <span class="report-header"> <t t-esc="o.name"/> <p> <span class="report-header"> <t t-esc="o.client_id.name"/></span></p> </span> 
+                    </div>
+                    <div class="col-2 text-center">
+                    </div>
+                    <div class="col-2 offset-5 text-end">
+                        <strong><span class="report-header"> <t t-esc="o.code"/> </span></strong>
+                    </div>
+                </div>
+                 
+                 <div class='row'>
+                    <div class="col-2">
+                         <span class="report-header">Order Size: <t t-esc="len([r.id for r in o.waybill_ids])"/> item(s)</span>
+                    </div>
+                    <div class="col-2 offset-2 text-center">
+                    </div>
+                    <div class="col-2 offset-3 text-end">
+                        <span class="report-header"><t t-esc="o.write_uid.name"/><p><span class="report-header"> <t t-esc="datetime.datetime.now().strftime('%B %d, %Y')"/></span></p> </span> 
+                    </div>
+                </div>
+                 
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 flex-grow-1 bd-highlight">
+                        <h3 class="text-bold flex-color p-2">ORDER DETAILS</h3>
+                        <div class="table-responsive mt-0">
+                            <table style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th width="40%">
+                                        </th>
+                                        <th width="60%">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Our Order Number: </h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="o.code"/></h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Customer </h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="o.client_id.name"/></h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold"> Destination of Goods: </h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="o.waybill_to"/></h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold"> Notes </h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold pb-3"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <h3 class="text-bold flex-color p-2">TRUCK DRIVER DETAILS</h3>
+                        <div class="table-responsive mt-0">
+                            <table style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th width="40%">
+                                        </th>
+                                        <th width="60%">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Truck Company Name </h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="o.truck_company_name.name"/></h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Truck Registration No </h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="o.truck_reg"/></h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Truck Type </h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold pb-3"><t t-esc="o.truck_type"/></h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Driver Name </h3>
+                                        </td>
+                                        <td>
+                                            <h3 class="text-bold"><t t-esc="o.truck_driver.name"/></h3>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>   
+                <div class='alert alert-danger' role="alert">
+                    <h3 class="text-bold flex-color p-2">RELATED INVENTORY ITEMS DETAILS</h3>
+                </div>
+ 
+
+                <div class="table-responsive">
+                    <table style="width:100%">
+                        <thead>
+                            <tr>
+                                <th width="10%">
+                                    # Our item ID
+                                </th>
+                                
+                                <th width="20%">
+                                    Description
+                                </th>
+                                <th width="10%">
+                                    Inner Qty
+                                </th>
+                                <th width="10%">
+                                    UOM
+                                </th>
+                                <th width="10%">
+                                    PO No.
+                                </th>
+                                <th width="15%">
+                                    File No.
+                                </th>
+                                <th width="15%">
+                                    Date in
+                                </th>
+                                <th width="20%">
+                                    Vessel Name
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.waybill_ids" t-as="wbi">
+                                <tr>
+                                    <td>
+                                        <h3 class="text-bold"><t t-esc="o.code"/>-<t t-esc="wbi.id"/></h3>
+                                    </td>
+                                    <td>
+                                        <h3 class="text-bold"><t t-esc="wbi.item"/></h3>
+                                    </td>
+                                    <td>
+                                        <h3 class="text-bold"><t t-esc="wbi.quantity"/></h3>
+                                    </td>
+                                    
+                                    <td>
+                                        <h3 class="text-bold"><t t-esc="wbi.uom"/></h3>
+                                    </td>
+                                    <td>
+                                        <h3 class="text-bold"><t t-esc="wbi.waybill_number"/></h3>
+                                    </td>
+                                    <td>
+                                        <h3 class="text-bold"><t t-esc="o.code"/></h3>
+                                    </td>
+                                    <td>
+                                        <h3 class="text-bold"><t t-esc="wbi.loaded_date.strftime('%B %d, %Y')"/></h3>
+                                    </td>
+                                    <td>
+                                        <h3 class="text-bold"><t t-esc="o.client_id.name"/></h3>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>  
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 flex-grow-1 bd-highlight">
+                        <h3 class="text-bold flex-color p-2">Signature Box</h3>
+                        <div class="table-responsive">
+                            <table class="table align-items-left mb-0">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">
+                                        </th>
+                                        <th width="50%">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Client Name:</h3>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Date/Time</h3>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3 class="text-bold">Signature</h3>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+      </t>
+
+    </template>
+
+ 
+  </data>
+</odoo>

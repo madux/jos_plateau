@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="company_memo.TaskDoughnutFieldMemo">
+        <!-- <div class="oe_gauge position-relative"> -->
+        <div style="width: 100%; max-width: 400px; margin: auto;" class="position-relative">
+            <canvas t-ref="canvasTaskDougnnut" style="height: 90px;"/>
+        </div>
+    </t>
+
+</templates>

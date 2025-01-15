@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="company_memo.GaugeFieldMemo">
+        <!-- <div class="oe_gauge position-relative">
+            <canvas t-ref="canvasMemo" style="height: 135px; width: 67px"/>
+            <span class="o_gauge_value position-absolute start-0 end-0 bottom-0 text-center mt-2" t-esc="props.record.data[props.name]"/> 
+        </div> -->
+        <!-- <div style="width: 100%; max-width: 400px; margin: auto;" class="position-relative"> -->
+            <div class="halfdoughnut">
+                <canvas t-ref="canvasMemo" style="height: 20px; width: 80px;"></canvas>
+                <div class="gauge-title">
+                    <t t-esc="props.record.data[props.guageInsideText]"/>
+                </div>
+            <!-- <t t-esc="props.record.data[props.name]"/> %</span> -->
+            </div>
+    </t>
+</templates>

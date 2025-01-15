@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1"> 
+        <record id="mtype_export_freezone_clearance_request" model="memo.type">
+            <field name="name">* EXPORT FREEZONE CLEARANCE</field>
+            <field name="memo_key">export_process</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_export_clearance_request" model="memo.type">
+            <field name="name">* EXPORT STANDARD CLEARANCE</field>
+            <field name="memo_key">export_process</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_export_clearance_crew_change_request" model="memo.type">
+            <field name="name">* CREW CHANGE</field>
+            <field name="memo_key">export_process</field>
+            <field name="active">0</field>
+        </record>
+        <record id="mtype_import_request" model="memo.type">
+            <field name="name">* IMPORT PROCESS</field>
+            <field name="memo_key">import_process</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_import_process_pi_standard" model="memo.type">
+            <field name="name">* IMPORT PROCESS - PI (STANDARD)</field>
+            <field name="memo_key">import_process</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_import_process_pi_direct" model="memo.type">
+            <field name="name">* IMPORT PROCESS - PI (DIRECT)</field>
+            <field name="memo_key">import_process</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_import_process_pi_bonded_warehouse" model="memo.type">
+            <field name="name">* IMPORT PROCESS - PI (BONDED WAREHOUSE)</field>
+            <field name="memo_key">import_process</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_agency_request" model="memo.type">
+            <field name="name">* AGENCY</field>
+            <field name="memo_key">agency_process</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="mtype_agency_port_inward_port_agent_request" model="memo.type">
+            <field name="name">* PORT CALL INWARD &amp; OUTWARD CLEARANCE (Port Agent - VESSEL CLEARANCE)</field>
+            <field name="memo_key">agency_process</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_agency_port_inward_port_agent_tanker_req" model="memo.type">
+            <field name="name">* PORT CALL INWARD &amp; OUTWARD CLEARANCE (Port Agent - TANKER CLEARANCE)</field>
+            <field name="memo_key">agency_process</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_agency_port_inward_protecting_agent_request" model="memo.type">
+            <field name="name">* PORT CALL INWARD  &amp; OUTWARD (Protecting Agent - VESSEL CLEARANCE)</field>
+            <field name="memo_key">agency_process</field>
+            <field name="active">1</field>
+        </record> 
+        <record id="mtype_agency_port_inward_protecting_agent_tanker_request" model="memo.type">
+            <field name="name">* PORT CALL INWARD  &amp; OUTWARD (Protecting Agent - TANKER CLEARANCE)</field>
+            <field name="memo_key">agency_process</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_travel_crew_change_request" model="memo.type">
+            <field name="name">* TRAVEL: CREW CHANGE</field>
+            <field name="memo_key">travel</field>
+            <field name="active">1</field>
+        </record> 
+
+        <record id="mtype_Payment" model="memo.type">
+            <field name="name">* Payment Process</field>
+            <field name="memo_key">Payment</field>
+            <field name="active">0</field>
+        </record>
+        <record id="mtype_loan" model="memo.type">
+            <field name="name">* Loan</field>
+            <field name="memo_key">loan</field>
+            <field name="active">0</field>
+        </record>
+        <record id="mtype_employee_update" model="memo.type">
+            <field name="name">Employee Update Request</field>
+            <field name="memo_key">employee_update</field>
+            <field name="active">0</field>
+        </record>
+        <record id="mtype_material_request" model="memo.type">
+            <field name="name">Material request</field>
+            <field name="memo_key">material_request</field>
+            <field name="active">0</field>
+        </record>
+        <record id="mtype_procurement_request" model="memo.type">
+            <field name="name">* PROCUREMENT</field>
+            <field name="memo_key">procurement</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_transport_type" model="memo.type">
+            <field name="name">* TRANSPORT / WAYBILL</field>
+            <field name="memo_key">transport</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_vehicle_request" model="memo.type">
+            <field name="name">Vehicle request</field>
+            <field name="memo_key">vehicle_request</field>
+            <field name="active">0</field>
+        </record>
+        <record id="mtype_leave_request" model="memo.type">
+            <field name="name">leave_request</field>
+            <field name="memo_key">leave_request</field>
+            <field name="active">0</field>
+        </record>
+        <record id="mtype_server_access" model="memo.type">
+            <field name="name">Server Access Request</field>
+            <field name="memo_key">server_access</field>
+            <field name="active">0</field>
+        </record>
+        
+        <record id="mtype_Cashadvance" model="memo.type">
+            <field name="name">CASH ADVANCE</field>
+            <field name="memo_key">cash_advance</field>
+            <field name="active">0</field>
+        </record>
+        <record id="mtype_soe" model="memo.type">
+            <field name="name">STATEMENT OF EXPENSE</field>
+            <field name="memo_key">soe</field>
+            <field name="active">0</field>
+        </record>
+        <record id="mtype_recruitment_request" model="memo.type">
+            <field name="name">RECRUITMENT REQUEST</field>
+            <field name="memo_key">recruitment_request</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="mtype_additional_po_request" model="memo.type">
+            <field name="name">* ADDITIONAL PO PROCESS</field>
+            <field name="memo_key">procurement_request</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_travel_sea_landing_permit_request" model="memo.type">
+            <field name="name">* TRAVEL VISA: SEA - LANDING PERMIT/TWP</field>
+            <field name="memo_key">travel</field>
+            <field name="active">1</field>
+        </record>
+
+        <record id="mtype_travel_air_visa_on_arrival_request" model="memo.type">
+            <field name="name">* TRAVEL VISA: AIR - VISA ON ARRIVAL</field>
+            <field name="memo_key">travel</field>
+            <field name="active">1</field>
+        </record>
+
+        <record id="mtype_travel_air_business_visa" model="memo.type">
+            <field name="name">* TRAVEL VISA: AIR - BUSINESS VISA</field>
+            <field name="memo_key">travel</field>
+            <field name="active">1</field>
+        </record>
+
+        <record id="mtype_travel_air_twp_cablegram" model="memo.type">
+            <field name="name">* TRAVEL VISA: AIR - TWP CABLEGRAM</field>
+            <field name="memo_key">travel</field>
+            <field name="active">1</field>
+        </record>
+        <record id="mtype_travel_extension" model="memo.type">
+            <field name="name">* TRAVEL VISA - EXTENSION</field>
+            <field name="memo_key">travel</field>
+            <field name="active">1</field>
+        </record>
+     </data>
+</odoo>

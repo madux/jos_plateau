@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="halfdonut.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="halfdonut.js"></script> -->
+    <style>
+        body {
+            background-color: rgb(255, 255, 255);
+            font-size: 15px;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        }
+        .card-header {
+            background-color: #b51c1c;
+            color: white;
+            font-weight: bold;
+            /* box-shadow: 5px 5px 3px #888787; */
+        }
+        .card{
+            height: 100%;
+        }
+        .progress-bar {
+            background-color: #b51c1c;
+        }
+        .finance-card .circle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        .finance-card .circle h5 {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .inner{
+            font-size: 11px;
+        }
+        .halfdoughnut__title{
+            color: #131010;
+            position: relative;
+            bottom: 50%;
+            font-size: 10px;
+        }
+        .consignment strong{
+            font-size: 13px;
+            /* color: #91f552; */
+            /* color: #db6f6f; */
+            /* color: #d64545; */
+            /* color: #b94b4b; */
+        }
+
+        .finance{
+            background-color: rgb(236, 234, 234);
+            /* background-color: inherit; */
+        } 
+
+        
+
+.halfdoughnut {
+  position: relative;
+  height: 100px;
+  width: 100%;
+  margin: 1em auto;
+  overflow: hidden;
+  /* margin-top: 6px; */
+  /* border: 1px dashed rgba(0,0,0,.1); */
+  
+  &__title {
+    position: absolute;
+    z-index: 1;
+    top: 55%;
+    left: 50%;
+    font-family: Comfortaa, sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+    color: rgb(44, 241, 159);
+    transform: translate(-50%,-50%);
+       
+    span {
+      display: block;
+      font-size: .8em;
+      color: rgb(44, 241, 159);
+    }
+  }
+}
+
+
+    </style>
+</head>
+<body>
+<div class="container py-4">
+    <div class="row g-3">
+        <!-- General Info -->
+        <div class="col-md-4">
+            <div class="card border-0">
+                <div class="card-header">General Info</div>
+                <div class="card-body shadow rounded">
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Name:</strong>
+                        </div>
+                        <div class="col-8"><field name="name" readonly="1"/></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Initiator:</strong>
+                        </div>
+                        <div class="col-8"><field name="employee_id" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Department:</strong>
+                        </div>
+                        <div class="col-8"><field name="dept_ids" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Reference:</strong>
+                        </div>
+                        <div class="col-8"><field name="code" readonly="1"/></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Project Type:</strong>
+                        </div>
+                        <div class="col-8"><field name="memo_type" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-4">
+                            <strong>Operational Status:</strong>
+                        </div>
+                        <div class="col-8"><field name="stage_id" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Customer Info -->
+        <div class="col-md-4">
+            <div class="card border-0">
+                <div class="card-header">Customer Info</div>
+                <div class="card-body shadow rounded">
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Client Name:</strong>
+                        </div>
+                        <div class="col-8"><field name="client_id" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Client Address:</strong>
+                        </div>
+                        <div class="col-8"><field name="client_address" readonly="1"/></div>
+                    </div>
+                     
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Phone:</strong>
+                        </div>
+                        <div class="col-8"><field name="client_phone" readonly="1"/></div>
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-4">
+                            <strong>Country:</strong>
+                        </div>
+                        <div class="col-8"><field name="client_country_id" readonly="1"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Consignment Info -->
+        <div class="col-md-4">
+            <div class="card border-0 consignment">
+                <div class="card-header">Consignment Info</div>
+                <div class="card-body shadow rounded">
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Consignment Type:</strong>
+                        </div>
+                        <div class="col-8"></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Transport Mode:</strong>
+                        </div>
+                        <div class="col-8"></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>No. of Packages:</strong>
+                        </div>
+                        <div class="col-8"><field name="waybill_items" readonly="1" /></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Company:</strong>
+                        </div>
+                        <div class="col-8"><field name="truck_company_name" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Pick Location:</strong>
+                        </div>
+                        <div class="col-8"><field name="waybill_from" readonly="1" />  </div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Drop off Location:</strong>
+                        </div>
+                        <div class="col-8"><field name="waybill_to" readonly="1" /></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Transport Date:</strong>
+                        </div>
+                        <div class="col-8"><field name="waybill_date" readonly="1" /></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mt-3">
+        <!-- Task -->
+        <div class="col-md-6">
+            <div class="card border-0">
+                <div class="card-header">Tasks</div>
+                <div class="card-body shadow rounded">
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Todo:</strong>
+                        </div>
+                        <div class="col-8"><field name="task_todo" readonly="0" force_save="1"/></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Active:</strong>
+                        </div>
+                        <div class="col-8"><field name="task_active" readonly="1" force_save="1"/></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Done:</strong>
+                        </div>
+                        <div class="col-8"><field name="task_done" readonly="0" force_save="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                    </div>
+                    <div class="row border-bottom py-2">
+                        <div class="col-4">
+                            <strong>Overdue:</strong>
+                        </div>
+                        <div class="col-8">0</div>
+                    </div>
+                    <div class="row pt-3 pb-2">
+                        <div class="col-6">
+                            <div class="h5">Project Duration</div>
+                            <p class="py-2">Remaining Days: <field name="remaining_task_duration" readonly="1" invisible="0"/></p>
+                            <div class="progress" style="height: 20px;">
+                                <!-- <div class="progress-bar" role="progressbar" style="width: 10%;">10%</div> -->
+                                <field name="percentage_of_remaining_task" readonly="0" invisible="0" widget="progressbar" class="progress-bar" role="progressbar" style="width: 10%;"/>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="h5">Task</div>
+                            <field name="task_todo_percentage" invisible="1"/> 
+                            <field name="task_active_percentage" invisible="1"/> 
+                            <field name="task_done_percentage" invisible="1"/>
+                            <div class="text-center">
+                                <!-- <canvas id="taskDonutChart" width="240" height="100"></canvas> -->
+                                <field name="task_active" widget="taskdoughnutMemo" 
+                                options="{'title': 'Task Title', 'todo_field_red': 'task_todo_percentage', 'active_field_yellow': 'task_active_percentage', 'done_field_green': 'task_done_percentage', 'max_field': 'default_percentage_target', 'style': 'width:10px; height: 40px;'}" nolabel="1" force_save="1"/>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Finance -->
+       
+        <div class="col-md-6">
+            <div class="card border-0 shadow rounded finance">
+                <div class="card-header">Finance</div>
+                <div class="card-body text-center row" >
+                    <!-- BUDGETED -->
+                    
+                    <div class="col-6 rounded">
+                        <div class="row bg-white rounded" style="margin-right: 1px; margin-left: 1px;">
+                            <div class="col-6 text-start align-self-end">
+                                <h5 class="text-danger">Budgeted</h5>
+                                <p class="fst-italic m-0 inner">Cost (₦): <field name="total_cost" force_save="1" readonly="1"/></p>
+                                <p class="fst-italic inner">Revenue (₦): <field name="total_revenue" force_save="1" readonly="1"/></p>
+                                <field name="default_percentage_target" invisible="1"/>
+                                <field name="displayed_cost_revenue_margin" invisible="1"/>
+                            </div>
+                            <div class="col-6 pb-5 align-self-end" style="padding-left: 0px;">
+                                <div class="halfdoughnut">
+                                    <field name="cost_revenue_margin" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_cost_revenue_margin', 'field_green': 'Revenue', 'field_red': 'Cost', 'max_field': 'default_percentage_target', 'style': 'width:10px; height: 40px;'}" nolabel="1" force_save="1"/><br/>
+                                    <!-- <canvas id="budgeted"></canvas> -->
+                                    <!-- <div class="halfdoughnut__title">N100,000,000</div> -->
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-1"></div> -->
+                    <!-- BILLED COST -->
+                    <div class="col-6">
+                        <div class="row bg-white rounded" style="margin-right: 1px;">
+                            <div class="col-6 text-start align-self-end">
+                                <h5 class="text-danger">Billed Cost</h5>
+                                <p class="fst-italic m-0 inner">Billed (₦): <field name="total_cost" force_save="1" readonly="1"/></p>
+                                <p class="fst-italic inner">Not Billed (₦): <field name="total_po_to_be_invoiced" force_save="1" readonly="1"/></p>
+                            </div>
+                            <div class="col-6 pb-5" style="padding-left: 0px;">
+                                <div class="halfdoughnut">
+                                    <field name="displayed_second_quad_percentage" invisible="1"/>
+                                    <field name="second_quad_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_second_quad_percentage', 'field_green': 'Billed', 'field_red': 'Not Billed', 'max_field': 'default_percentage_target', 'style': 'width:10px; height: 40px;'}" nolabel="1" force_save="1"/>
+                                    <!-- <canvas id="billed"></canvas> 
+                                    <div class="halfdoughnut__title">N100,000,000</div> -->
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- REALIZED -->
+                    <div class="col-6">
+                        <div class="row bg-white rounded" style="margin: auto; margin-top: 10px;">
+                            <div class="col-6 text-start align-self-end">
+                                <h5 class="text-danger">Realized</h5>
+                                <p class="fst-italic m-0 inner">Cost (₦): <field name="total_closed_paid_cost" force_save="1" readonly="1"/></p>
+                                <p class="fst-italic inner">Revenue (₦): <field name="total_closed_paid_revenue" force_save="1" readonly="1"/></p>
+                            </div>
+                            <div class="col-6 pb-5" style="padding-left: 0px;">
+                                <div class="halfdoughnut">
+                                    <field name="displayed_third_quad_percentage" invisible="1"/>
+                                    <field name="third_quad_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_third_quad_percentage', 'field_green': 'Realized', 'field_red': 'Not Realized', 'max_field': 'default_percentage_target', 'style': 'width:10px; height: 40px;'}" nolabel="1" force_save="1"/>
+                                    <!-- <canvas id="realized"></canvas>
+                                    
+                                    <div class="halfdoughnut__title">N100,000,000</div> -->
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- REVENUE -->
+                    <div class="col-6">
+                        <div class="row bg-white rounded" style="margin-right: 1px; margin-top: 10px;">
+                            <div class="col-6 text-start align-self-end">
+                                <h5 class="text-danger">Revenue</h5>
+                                <p class="fst-italic m-0 inner">Invoiced (₦): <field name="total_paid_revenue" force_save="1" readonly="1"/></p>
+                                <p class="fst-italic inner">Not Invoiced (₦): <field name="total_so_to_be_invoiced" force_save="1" readonly="1"/></p>
+                            </div>
+                            <div class="col-6 pb-5" style="padding-left: 0px;">
+                                <div class="halfdoughnut">
+                                    <field name="displayed_fourth_quad_percentage" invisible="1"/>
+                                    <field name="fourth_quad_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_fourth_quad_percentage', 'field_green': 'Invoiced', 'field_red': 'Not Invoiced', 'max_field': 'default_percentage_target'}" nolabel="1" force_save="1"/>
+
+                                    <!-- <canvas id="revenue"></canvas>
+                                    
+                                    <div class="halfdoughnut__title">N100,000,000</div> -->
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // JavaScript to create the donut chart
+    const ctx = document.getElementById('taskDonutChart').getContext('2d');
+    // const half = document.getElementById('halfCircleChart').getContext('2d');
+
+
+    const taskDonutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Remaining', 'Completed'],
+            datasets: [{
+                data: [80, 20], // Task distribution percentages
+                backgroundColor: ['#b51c1c', '#ffc107'], // Red and Yellow
+                hoverBackgroundColor: ['#9e1717', '#e6a607'], // Hover colors
+                borderWidth: 0 // No border
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false // Hide the legend
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.label}: ${context.raw}%`; // Custom tooltip format
+                        }
+                    }
+                }
+            },
+            cutout: '70%', // Creates the donut effect
+        }
+    });
+
+    const circuference = 260; // deg
+
+    // FOR BUDGETED
+
+const data = {
+//   labels: ["Red", "Blue", "Yellow"],
+  datasets: [
+    {
+    //   label: "My First Dataset",
+      data: [225,225],
+    backgroundColor: [
+        "#91f552",
+        "#d44c4c",
+    ]
+      
+    }
+  ]
+};
+
+const config = {
+  type: "doughnut",
+  data: data,
+  options: {   
+    reponsive: true,
+    maintainAspectRatio: false,
+    rotation: (circuference / 2) * -1,
+    circumference: circuference,
+    cutout: "73%",
+    borderWidth: 0,
+    borderRadius: function (context, options) {
+      const index = context.dataIndex;
+      let radius = {};
+      if (index == 0) {
+        radius.innerStart = 50;
+        radius.outerStart = 50;
+      }
+      if (index === context.dataset.data.length - 1) {
+        radius.innerEnd = 50;
+        radius.outerEnd = 50;
+      }
+      return radius;
+    },
+    plugins: {
+      title: false,
+      subtitle: false,
+      legend: false
+    },
+  }
+};
+
+const myChart = new Chart("budgeted", config);
+
+
+// For Billed
+
+const billed_data = {
+//   labels: ["Red", "Blue", "Yellow"],
+  datasets: [
+    {
+    //   label: "My First Dataset",
+      data: [225, 225],
+    // backgroundColor: [
+    //     "#5DCB18",
+    //     "#5DCB18",
+    //     "#5DCB18",
+    // ]
+    backgroundColor: [
+        "#91f552",
+        "#d44c4c",
+      ]
+      
+    }
+  ]
+};
+
+
+const billed = {
+  type: "doughnut",
+  data: billed_data,
+  options: {   
+    reponsive: true,
+    maintainAspectRatio: false,
+    rotation: (circuference / 2) * -1,
+    circumference: circuference,
+    cutout: "73%",
+    borderWidth: 0,
+    borderRadius: function (context, options) {
+      const index = context.dataIndex;
+      let radius = {};
+      if (index == 0) {
+        radius.innerStart = 50;
+        radius.outerStart = 50;
+      }
+      if (index === context.dataset.data.length - 1) {
+        radius.innerEnd = 50;
+        radius.outerEnd = 50;
+      }
+      return radius;
+    },
+    plugins: {
+      title: false,
+      subtitle: false,
+      legend: false
+    },
+  }
+};
+
+const billed_cost = new Chart("billed", billed);
+
+// FOR REALIZED
+
+const realized = {
+  type: "doughnut",
+  data: billed_data,
+  options: {   
+    reponsive: true,
+    maintainAspectRatio: false,
+    rotation: (circuference / 2) * -1,
+    circumference: circuference,
+    cutout: "73%",
+    borderWidth: 0,
+    borderRadius: function (context, options) {
+      const index = context.dataIndex;
+      let radius = {};
+      if (index == 0) {
+        radius.innerStart = 50;
+        radius.outerStart = 50;
+      }
+      if (index === context.dataset.data.length - 1) {
+        radius.innerEnd = 50;
+        radius.outerEnd = 50;
+      }
+      return radius;
+    },
+    plugins: {
+      title: false,
+      subtitle: false,
+      legend: false
+    },
+  }
+};
+
+const realized_rev = new Chart("realized", realized);
+
+// FOR REVENUE
+
+const revenue = {
+  type: "doughnut",
+  data: data,
+  options: {   
+    reponsive: true,
+    maintainAspectRatio: false,
+    rotation: (circuference / 2) * -1,
+    circumference: circuference,
+    cutout: "73%",
+    borderWidth: 0,
+    borderRadius: function (context, options) {
+      const index = context.dataIndex;
+      let radius = {};
+      if (index == 0) {
+        radius.innerStart = 50;
+        radius.outerStart = 50;
+      }
+      if (index === context.dataset.data.length - 1) {
+        radius.innerEnd = 50;
+        radius.outerEnd = 50;
+      }
+      return radius;
+    },
+    plugins: {
+      title: false,
+      subtitle: false,
+      legend: false
+    },
+  }
+};
+
+const revenue_sec = new Chart("revenue", revenue);
+
+//     var myChart = new Chart(half, {
+//     type: 'doughnut',
+//     data: {
+//         labels: ["ALERTS", "Other Applications"],
+//         datasets: [{
+//             label: '# of Votes',
+//             data: [11, 47],
+//             backgroundColor: [
+//                 '#FF6E6E',
+//                 '#f0f0f0'
+//             ],
+//             borderWidth: 0
+//         }]
+//     },
+//     options: {
+//       legend: {
+//         labels: {
+//                 fontFamily: 'Roboto',
+//                 boxWidth: 0,
+//                 fontSize: 16,
+//                 fontColor: '#FF6E6E'
+//             },
+//             display: false
+//             },
+//     		cutoutPercentage: 75,
+//         rotation: 1 * Math.PI,
+//         circumference: 1 * Math.PI
+//     }
+// });
+    
+        // new Chart(half, {
+        //     type: 'doughnut',
+        //     data: {
+        //         labels: ['Value', 'Remaining'],
+        //         datasets: [{
+        //             data: [12502462.81, 87497537.19], // Adjust these values as needed
+        //             backgroundColor: ['#4caf50', '#e0e0e0'], // Green and light gray
+        //             hoverBackgroundColor: ['#4caf50', '#e0e0e0'],
+        //             borderWidth: 0
+        //         }]
+        //     },
+        //     options: {
+        //         rotation: Math.PI, // Start at the top
+        //         circumference: Math.PI, // Half-circle
+        //         cutout: '80%', // Thickness of the gauge
+        //         plugins: {
+        //             tooltip: { enabled: false },
+        //             legend: { display: false }
+        //         },
+        //         responsive: true
+        //     }
+        // });
+</script>
+</body>
+</html>
