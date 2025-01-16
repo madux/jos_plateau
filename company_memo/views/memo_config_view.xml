@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <form string="Memo Setting">
                     <header>
-                        <button name="auto_configuration" type="object" class="oe_highlight" string="Auto Configure" 
+                        <button name="auto_configuration" invisible="1" type="object" class="oe_highlight" string="Auto Configure" 
                         confirm="Are you sure? Note this will auto generate all department not yet configured"
                         groups="company_memo.licensed_user"/>
                         <button name="custom_duplicate" type="object" class="oe_highlight" string="Custom Duplicate"/>
@@ -21,6 +21,8 @@
                                 <field name="active" default="1" readonly="1"/> 
                                 <!-- <field name="code" default="eg. SHIPPING starts with P, CFWD starts with " readonly="0"/>  -->
                                 <field name="department_id" required="1" options="{'no_create':True, 'no_open': False}"/> 
+                                <field name="branch_ids" string="MDA Sectors" widget="many2many_tags"
+                                help="Add MDA branches, during request, only memo type set for this branches will appear"/>
                                 <field name="approver_ids" string="Employees for Follow up" required="0" widget="many2many_tags" options="{'no_create':True, 'no_open': False}"/>
                             </group>
                             <group>

@@ -428,6 +428,7 @@ class MemoConfig(models.Model):
     def get_publish_memo_types(self):
         return [('allow_for_publish', '=', True)]
 
+    branch_ids = fields.Many2many('multi.branch', string='MDA Sectors', required=False)
     memo_type = fields.Many2one(
         'memo.type',
         string='Memo type',
@@ -519,13 +520,14 @@ class MemoConfig(models.Model):
 
     @api.constrains('memo_type')
     def _check_duplicate_memo_type(self):
-        memo = self.env['memo.config'].sudo()
-        for rec in self:
-            duplicate = memo.search([
-                ('memo_type', '=', rec.memo_type.id),
-                ('department_id', '=', rec.department_id.id)], limit=2)
-            if len([r for r in duplicate]) > 1:
-                raise ValidationError("A memo type has already been configured for this record, kindly locate it and select the approvers")
+        pass 
+        # memo = self.env['memo.config'].sudo()
+        # for rec in self:
+        #     duplicate = memo.search([
+        #         ('memo_type', '=', rec.memo_type.id),
+        #         ('department_id', '=', rec.department_id.id)], limit=2)
+        #     if len([r for r in duplicate]) > 1:
+        #         raise ValidationError("A memo type has already been configured for this record, kindly locate it and select the approvers")
 
     def _get_related_stages(self):
         for rec in self:

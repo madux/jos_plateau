@@ -299,10 +299,18 @@
                                         <field name="alert_option" invisible="1" force_save="1" readonly="0"/>
                                         <field name="dummy_memo_types" invisible="1" widget="many2many_tags" force_save="1"/>
                                         <field name="demo_staff" invisible="1"/>
+                                        <field name="is_internal_transfer" invisible="0"/>
+                                        <field name="external_memo_request" invisible="0"/> 
+
+                                        <field name="user_is_approver" invisible="0"/> 
+                                        <field name="is_request_completed" invisible="0"/> 
+                                        <field name="state" invisible="0"/> 
+
                                         <field name="approver_id" invisible="1" readonly="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" groups="base.group_system"/>
                                         <field name="approver_ids" invisible="1" widget="many2many_tags" readonly="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" groups="base.group_system"/>
                                         <field name="currency_id" invisible="1"/>
-                                        <field name="memo_setting_id" invisible="1" force_save="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                        
+                                        <field name="memo_setting_id" invisible="0" force_save="1" options="{&quot;no_open&quot;: False, &quot;no_create&quot;: True}"/>
                                         <field name="direct_employee_id" required="0" invisible="1" string="Through" readonly="state in ['Done', 'Approve']"/>
                                         <field name="move_id" invisible="1"/>
                                         <field name="active" invisible="1" groups="base.group_system"/>

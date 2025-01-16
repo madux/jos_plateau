@@ -134,5 +134,6 @@ class DummyMemoStage(models.TransientModel):
     approver_ids = fields.Many2many('hr.employee', 'employee_wizard_rel', 'employee_id', 'employee_wizard_id', string="Approvers")
     is_approved_stage = fields.Boolean(string="Is Approved Stage")
     main_stage_id = fields.Many2one('memo.stage', string="Main Stage")
+    branch_ids = fields.Many2many('multi.branch', string='MDA Sectors', required=False)
 
 

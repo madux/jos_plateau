@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="memo_config_form_view_plateau_addons">
+            <field name="name">memo config view inherited</field>
+            <field name="model">memo.config</field>
+            <field name="inherit_id" ref="company_memo.memo_config_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='department_id']" position="before">
+                    <field name="allowed_for_company_ids" string="Allow companies" domain="[('is_company','=', True)]" widget="many2many_tags" options="{'no_create':True, 'no_open': False}"/>
+                </xpath> 
+            </field>
+        </record>
+
+        
+    </data>
+</odoo>

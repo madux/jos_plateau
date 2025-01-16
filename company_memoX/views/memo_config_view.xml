@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <form string="Memo Setting">
                     <header>
-                        <button name="auto_configuration" type="object" class="oe_highlight" string="Auto Configure" confirm="Are you sure? Note this will auto generate all department not yet configured"/>
+                        <button name="auto_configuration" invisible="1" type="object" class="oe_highlight" string="Auto Configure" confirm="Are you sure? Note this will auto generate all department not yet configured"/>
                         <button name="custom_duplicate" type="object" class="oe_highlight" string="Custom Duplicate"/>
                     </header>
                     <sheet>

@@ -91,37 +91,27 @@ class Memo_Model(models.Model):
     def _default_user(self):
         return self.env.context.get('default_user_id') or \
          self.env['res.users'].search([('id', '=', self.env.uid)], limit=1)
-    
-    # memo_type = fields.Selection(
-    #     [
-    #     ("Payment", "Payment"), 
-    #     ("loan", "Loan"), 
-    #     ("Internal", "Internal Memo"),
-    #     ("employee_update", "Employee Update Request"),
-    #     ("material_request", "Material request"),
-    #     ("procurement_request", "Procurement Request"),
-    #     ("vehicle_request", "Vehicle request"),
-    #     ("leave_request", "Leave request"),
-    #     ("server_access", "Server Access Request"), 
-    #     ("cash_advance", "Cash Advance"),
-    #     ("soe", "Statement of Expense"),
-    #     ("recruitment_request", "Recruitment Request"),
-    #     ("transport", "Transport"),
-    #     ], string="Memo Type", required=True)
-    def get_publish_memo_types(self):
-        memo_configs = self.env['memo.config'].search([('active', '=', True)])
-        memo_type_ids = [r.memo_type.id for r in memo_configs]
-        return [('id', 'in', memo_type_ids)]
+     
+    # def get_publish_memo_types(self):
+    #     user_branches = list(self.env.user.branch_id.id)
+    #     memo_configs = self.env['memo.config'].search([
+    #         ('active', '=', True),
+    #         ('branch_ids', 'in', user_branches)
+    #         ])
+    #     memo_type_ids = [r.memo_type.id for r in memo_configs]
+    #     return [('id', 'in', memo_type_ids)]
     
     @api.model
     def default_get(self, fields):
         res = super(Memo_Model, self).default_get(fields)
         memo_project_type = self.env.context.get('default_memo_project_type')
+        # user_branches = list(self.env.user.branch_id.id)
         domain = [('active', '=', True)]
-        if memo_project_type:
-            domain = [('active', '=', True), ('project_type', '=', memo_project_type)]
+        # if memo_project_type: , ('branch_ids', 'in', user_branches)
+        #     domain = [('active', '=', True), ('project_type', '=', memo_project_type)]
         memo_configs = self.env['memo.config'].search(domain)
-        res.update({'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs])]})
+        user_branch_id = self.env.user.branch_id
+        res.update({'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs if user_branch_id.id in rec.branch_ids.ids])]})
         return res
         
     memo_type = fields.Many2one(
@@ -1844,7 +1834,10 @@ class Memo_Model(models.Model):
     def validate_payment_line(self):
         '''Ensures a payment line is added if is_internal transfer'''
         if self.is_internal_transfer and not self.payment_ids:
-            raise ValidationError("Please ensure at least one payment line is added !!!")
+            raise ValidationError("""
+            Please ensure at least one payment line is added!!!.
+            Use the Payment tab
+            """)
         
     def validate_sub_stage(self):
         for count, rec in enumerate(self.memo_sub_stage_ids, 1):
@@ -1860,16 +1853,17 @@ class Memo_Model(models.Model):
             raise ValidationError("Please kindly ensure procurement amount is added")
         if self.stage_id.enabled_date_paid_config and not self.enabled_date_paid:
             raise ValidationError("Please kindly ensure date paid is added")
-            
+    
+    # self.validate_waybill_details()
+    # self.validate_po_line()
+    # self.validate_so_line()
+    # self.validate_invoice_line()
+    # self.validate_other_validity()
+    
     def forward_memo(self):
-        self.validate_waybill_details()
-        self.validate_po_line()
-        self.validate_so_line()
-        self.validate_invoice_line()
         self.validate_compulsory_document()
         self.validate_payment_line()
         self.validate_sub_stage()
-        self.validate_other_validity()
         user_exist = self.mapped('res_users').filtered(
             lambda user: user.id == self.env.uid
             )
@@ -1877,10 +1871,10 @@ class Memo_Model(models.Model):
             raise ValidationError(
                 """You cannot forward this memo again unless returned / cancelled!!!"""
                 )
-        if self.memo_project_type in ['project_pro'] and not self.po_ids.ids:
-            raise ValidationError(
-                """You cannot forward this memo without Purchase lines added"""
-                )
+        # if self.memo_project_type in ['project_pro'] and not self.po_ids.ids:
+        #     raise ValidationError(
+        #         """You cannot forward this memo without Purchase lines added"""
+        #         )
         if self.document_folder and not self.env['ir.attachment'].sudo().search([
                 ('res_id', '=', self.id), 
                 ('res_model', '=', self._name)
@@ -1888,9 +1882,19 @@ class Memo_Model(models.Model):
             raise ValidationError(
                 """Please attach at least one document"""
                 )
-        if self.to_unfreezed_budget and not self.po_ids:
-            raise ValidationError("Please add PO and Provide reasons for Additional PO approval")
-        
+        memo_setting_id = self.memo_setting_id
+        first_stage = memo_setting_id.stage_ids.ids.index(self.stage_id.id)      
+        if self.external_memo_request:
+            """Check if the first stage has governors approval"""
+            if first_stage == 0 and not self.env['ir.attachment'].sudo().search([
+                ('res_id', '=', self.id), 
+                ('res_model', '=', self._name)]):
+                raise ValidationError(
+                    """Please attach governors consent form"""
+                    )
+
+        # if self.to_unfreezed_budget and not self.po_ids:
+        #     raise ValidationError("Please add PO and Provide reasons for Additional PO approval")
         if self.memo_type.memo_key == "Payment":
             if self.payment_ids or self.invoice_ids:# self.amountfig <= 0:
                 pass 

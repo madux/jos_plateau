@@ -57,6 +57,7 @@ class MemoConfigDuplicationWizard(models.TransientModel):
                 new_config = self.env['memo.config'].create({
                 'department_id': dept.id,
                 'memo_type': memo_type.id,
+                'branch_ids': self.branch_ids.ids,
                 'approver_ids': [(6, 0, self.employees_follow_up_ids.ids)],
                 'allowed_for_company_ids': self.allowed_companies_ids,
                 

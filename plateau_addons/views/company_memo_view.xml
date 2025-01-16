@@ -47,7 +47,7 @@
             <field name="res_model">memo.model</field>
             <field name="type">ir.actions.act_window</field>
            <field name="domain">[('external_memo_request','=',True)]</field>
-            <field name="context">{'default_external_memo_request': True, 'default_is_internal_transfer': True}</field>
+            <field name="context">{'default_external_memo_request': True, 'default_is_internal_transfer': False}</field>
              <field name="view_mode">tree,form</field>
         </record>
         <record model="ir.actions.act_window" id="internal_memo_model_internal_mda_action">
@@ -55,7 +55,7 @@
             <field name="res_model">memo.model</field>
             <field name="type">ir.actions.act_window</field>
            <field name="domain">[]</field>
-            <field name="context">{'default_external_memo_request': True, 'default_is_internal_transfer': False}</field>
+            <field name="context">{'default_external_memo_request': False, 'default_is_internal_transfer': True}</field>
              <field name="view_mode">tree,form</field>
         </record>
 
