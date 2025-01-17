@@ -9,12 +9,20 @@
                 <xpath expr="//field[@name='currency_id']" position="before">
                 <field name="partner_id" string="Partner" invisible="0" readonly="1" required="0"
                     options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" force_save="1"/> 
-                    <field name="branch_id" string="MDA" invisible="0" readonly="1" required="1"
+                    <field name="branch_id" string="Beneficiary MDA" invisible="0" readonly="1" required="1"
                     options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
+                    <field name="request_mda_from" string="Requesting From MDA" invisible="0" readonly="0" required="external_memo_request == True"
+                    options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
+                    <field name="external_memo_request" invisible="0"/>
+                    <field name="is_internal_transfer" invisible="0"/>
                     <field name="is_top_account_user" invisible="1"/>
                 </xpath> 
                 <xpath expr="//field[@name='invoice_ids']" position="attributes">
                     <attribute name="context">{'default_move_type': 'in_invoice', 'default_memo_id': active_id,'default_partner_id': partner_id, 'form_view_ref': 'account.view_move_form'}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='payment_ids']" position="attributes">
+                    <attribute name="context">{'default_request_mda_from': request_mda_from}</attribute>
                 </xpath>
                 <!-- 'default_external_memo_request': True, -->
                 <xpath expr="//field[@name='journal_id']" position="attributes">
@@ -29,6 +37,7 @@
                     invisible="is_top_account_user == False" readonly="state != 'draft'"
                         options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
                     string="Source Journal"/>
+                    <field name="request_mda_from" invisible="0" required="external_memo_request == True"/> 
                 </xpath>
                 <xpath expr="//field[@name='invoice_ids']" position="attributes">
                     <!-- <attribute name="context">{'default_move_type': 'in_invoice', 'default_memo_id': active_id,  'default_branch_id': branch_id, 'form_view_ref': 'account.view_move_form'}</attribute>  -->

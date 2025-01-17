@@ -197,12 +197,12 @@ class AccountMoveLine(models.Model):
     #     res.exchange_move_id.update({'branch_id' : self.branch_id.id})
     #     return res
     
-    def _prepare_exchange_difference_move_vals(self, amounts_list, company=None, exchange_date=None):
-        res = super(AccountMoveLine, self)._prepare_exchange_difference_move_vals(amounts_list, company, exchange_date)
-        res['move_vals']['branch_id'] = self.move_id.branch_id.id 
-        _logger.info(f" ttttttt si {self.move_id} {res['move_vals']}")
-        # raise ValidationError(self.id)
-        return res
+    # def _prepare_exchange_difference_move_vals(self, amounts_list, company=None, exchange_date=None):
+    #     res = super(AccountMoveLine, self)._prepare_exchange_difference_move_vals(amounts_list, company, exchange_date)
+    #     res['move_vals']['branch_id'] = self.move_id.branch_id.id 
+    #     # _logger.info(f" ttttttt si {self.move_id} {res['move_vals']}")
+    #     # raise ValidationError(self.id)
+    #     return res
     
     @api.model
     def _create_exchange_difference_move(self, exchange_diff_vals):

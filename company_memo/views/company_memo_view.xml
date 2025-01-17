@@ -17,7 +17,8 @@
                          string="Approve" type="object" class="oe_highlight"/>
                         <button name="generate_recruitment_request" invisible= "memo_type_key not in ['recruitment_request'] or state not in ['Done', 'Approve2'] or not user_is_approver" string="View / Generate Recruitment Request" type="object" class="oe_highlight"/>
                         <button name="action_post_and_vallidate_payment" string="Register Payment" type="object" class="oe_highlight" confirm="Are you sure you want to make Payment?" 
-                        invisible="not user_is_approver or state not in ['Approve'] or memo_type_key not in ['Payment'] or not is_request_completed"/>
+                        invisible="not user_is_approver or state not in ['Approve', 'Approve2']"/>
+                        <!-- invisible="not user_is_approver or state not in ['Approve', 'Approve2'] or memo_type_key not in ['Payment'] or not is_request_completed"/> -->
                         <button name="send_memo_to_contacts" string="Send Memo" type="object" class="oe_highlight" confirm="Are you sure you want to make send memo?" 
                         invisible="not user_is_approver or state not in ['Approve2'] or memo_type_key not in ['internal', 'Internal'] or internal_memo_option not in ['all', 'selected']"/>
                         <button name="complete_memo_transactions" string="Generate &amp; Comfirm Entries" type="object" class="oe_highlight" confirm="Are you sure you want to generate?" invisible="state not in ['Done'] or is_request_completed or memo_type_key not in ['material_request', 'procurement_request', 'procurement', 'vehicle_request'] or not user_is_approver"/>

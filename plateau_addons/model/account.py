@@ -109,6 +109,8 @@ class AccountPayment(models.Model):
         domain="[('id', 'in', suitable_journal_ids)]",
         check_company=True,
     )
+    request_mda_from = fields.Many2one('multi.branch', string='Requesting From MDA?')
+
     # domain="[('type', 'in', ('bank','cash')), ('company_id', '=', company_id), ('id', '!=', journal_id)]",
 
     # payment_journal_id = fields.Many2one(
@@ -134,8 +136,9 @@ class AccountPayment(models.Model):
 
     def action_post(self):
         account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
-        if self.external_memo_request and not account_major_user:
-            raise ValidationError("Ops. You are not allowed confirm this Bill. Only Accountant General Group is responsible to do this.")
+        if self.memo_reference and self.memo_reference.stage_id.is_approved_stage and self.env.user.id not in [r.user_id.id for r in self.memo_reference.stage_id.approver_ids]: 
+        # if self.external_memo_request and not account_major_user or if self.memo_id.stage_id.approver_ids.ids :
+            raise ValidationError("Ops. You are not allowed confirm this Bill. Ensure system admin adds you to the list approvers for this stage")
         res = super(AccountPayment, self).action_post()
         return res
     
@@ -145,26 +148,35 @@ class AccountPayment(models.Model):
             journal_type = m.invoice_filter_type_domain or 'general'
             company_id = m.company_id.id or self.env.company.id
             Journals = self.env['account.journal'].sudo()
-            domain = [('company_id', '=', company_id), ('type', 'in', ('bank','cash')),('id', '!=', m.journal_id.id)]
+            domain = [
+                ('company_id', '=', company_id), 
+                ('type', 'in', ('bank','cash')),
+                ('id', '!=', m.journal_id.id),
+                ]
+                
             account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
             branch_ids = [rec.id for rec in self.env.user.branch_ids if rec] + [self.env.user.branch_id.id]
             journal_ids = []
-            for journal in Journals.search([]):
+            Journal_Search =Journals.search([])
+            
+            for journal in Journal_Search:
+                 
                 journal_branches = [rec.id for rec in journal.allowed_branch_ids] + [journal.branch_id.id]
                 if set(branch_ids).intersection(set(journal_branches)):
                     journal_ids.append(journal.id)
-                 
+                
                 if journal.for_public_use:
                     journal_ids.append(journal.id)
+                 
             if account_major_user:
-                domain = domain
+                domain = domain 
             else:
                 # journal_ids = journal_ids.remove(self.journal_id.id) # removed the id of already selected journal id
                 domain = [
                     ('company_id', '=', company_id),
                     ('type', 'in', ('bank','cash')),
-                    ('id', 'in', journal_ids)
-                ]
+                    ('id', 'in', journal_ids),
+                    ]
 
             m.suitable_journal_ids = self.env['account.journal'].search(domain)
 

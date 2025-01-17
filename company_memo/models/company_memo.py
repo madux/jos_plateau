@@ -181,7 +181,7 @@ class Memo_Model(models.Model):
                                 ('Sent', 'Sent'),
                                 ('Approve', 'Waiting For Payment / Confirmation'),
                                 ('Approve2', 'Memo Approved'),
-                                ('Done', 'Awaiting System Validation'),
+                                ('Done', 'Completed'),
                                 ('Refuse', 'Refused'),
                               ], string='Status', index=True, readonly=True,
                              copy=False, default='submit',
@@ -2798,26 +2798,47 @@ class Memo_Model(models.Model):
         # subtype='mt_comment',message_type='notification',partner_ids=followers)
      
     def validate_account_invoices(self):
-        if not self.is_internal_transfer:
-            if not self.invoice_ids:
-                raise ValidationError("Please ensure the invoice lines are added")
-            else:
-                invalid_record = self.mapped('invoice_ids').filtered(
-                    lambda s: not s.partner_id or not s.journal_id) # payment_journal_id
-                if invalid_record:
-                    raise ValidationError("""
-                                          Partner, Payment journal must be selected. 
-                                          Also ensure the status is in draft""")
-        
+        if not self.payment_ids:
+            raise ValidationError("Please ensure the payment lines are added")
+        '''If internal payment transfer, system displays the payment line'''
+        not_done = self.mapped('payment_ids').filtered(lambda se: se.state in ['draft'])
+        if not_done:
+            raise ValidationError("Payments should be posted manually to ensure data accuracy")
         else:
-            if not self.payment_ids or self.invoice_ids:
-                raise ValidationError("Please ensure the payment lines are added")
-            '''If internal payment transfer, system displays the payment line'''
-            nodone = self.mapped('payment_ids').filtered(lambda se: se.state in ['draft'])
-            if nodone:
-                raise ValidationError("Payments should be handled manually to ensure accuracy")
-            else:
-                self.state = 'Done'
+            self.state = 'Done'
+            self.is_request_completed = True
+            body = "MEMO APPROVE NOTIFICATION: -Approved By ;\n %s on %s" %(self.env.user.name,fields.Date.today())
+            type = "request"
+            body_msg = f"""Dear {self.employee_id.name}, <br/>I wish to notify you that a {type} with description, '{self.name}',\
+                    from {self.employee_id.department_id.name} department (MDA: {self.branch_id.name}) have been approved by {self.env.user.name}.<br/>\
+                    Respective authority should take note. \
+                    <br/>Kindly {self.get_url(self.id)} <br/>\
+                    Yours Faithfully<br/>{self.env.user.name}"""
+            self.update_final_state_and_approver()
+            self.update_memo_type_approver()
+            self.mail_sending_direct(body_msg)
+
+        # if not self.is_internal_transfer:
+        #     if not self.invoice_ids:
+        #         raise ValidationError("Please ensure the invoice lines are added")
+        #     else:
+        #         invalid_record = self.mapped('invoice_ids').filtered(
+        #             lambda s: not s.partner_id or not s.journal_id) # payment_journal_id
+        #         if invalid_record:
+        #             raise ValidationError("""
+        #                                   Partner, Payment journal must be selected. 
+        #                                   Also ensure the status is in draft""")
+        
+        # else:
+        #     if not self.payment_ids or self.invoice_ids:
+        #         raise ValidationError("Please ensure the payment lines are added")
+        #     '''If internal payment transfer, system displays the payment line'''
+        #     nodone = self.mapped('payment_ids').filtered(lambda se: se.state in ['draft'])
+        #     if nodone:
+        #         raise ValidationError("Payments should be handled manually to ensure accuracy")
+        #     else:
+        #         self.state = 'Done'
+
                 
     def action_post_and_vallidate_payment(self): # Register Payment
         self.validate_account_invoices()

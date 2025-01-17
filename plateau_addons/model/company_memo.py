@@ -13,6 +13,7 @@ class CompanyMemo(models.Model):
     
     branch_id = fields.Many2one('multi.branch', string='MDA Sector',
                                 default=lambda self: self.env.user.branch_id.id, required=False)
+    request_mda_from = fields.Many2one('multi.branch', string='MDA Sector')
     partner_id = fields.Many2one('res.partner', string='Partner',
                                 default=lambda self: self.env.user.partner_id.id)
     
