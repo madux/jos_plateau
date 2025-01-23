@@ -22,30 +22,6 @@
         <field name="type">expense</field>
     </record> -->
 
-    <!-- Chart of Accounts -->
-
-
-    <record id="account_account_mda_board_commission_expense" model="account.account">
-        <field name="name">Board Commission - Expense</field>
-        <field name="code">09999</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_board_commission"/>
-
-    </record>
-    <record id="account_account_mda_board_commission_income" model="account.account">
-        <field name="name">Board Commission - Income</field>
-        <field name="code">09999In</field>
-        <field name="account_type">income</field>
-        <field name="branch_id" ref="company_memo.mda_board_commission"/>
-
-    </record>
-    <record id="account_account_mda_board_commission_bank_cash" model="account.account">
-        <field name="name">Board Commission Bank/Cash</field>
-        <field name="code">09999A</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_board_commission"/>
-    </record> 
-
     <!-- Ministries -->
     <record id="account_mda_ministry_of_finance_expense" model="account.account">
         <field name="name">Ministry of Finance - Expense</field>
@@ -66,7 +42,7 @@
         <field name="account_type">expense</field>
         <field name="branch_id" ref="company_memo.mda_ministry_of_information_and_communication"/>
     </record>
-    <record id="account_mda_ministry_of_information_and_communication_cash" model="account.account">
+    <record id="account_mda_ministry_of_information_and_communication_bank_cash" model="account.account">
         <field name="name">Ministry of Information and Communication - Bank/Cash</field>
         <field name="code">1019341908_cash</field>
         <field name="account_type">asset_cash</field>
@@ -359,6 +335,7 @@
         <field name="account_type">asset_cash</field>
         <field name="branch_id" ref="company_memo.mda_teachers_service_commission"/>
     </record>
+
     <!-- Boards and Paratastals -->
     <record id="account_mda_government_printing_press_expense" model="account.account">
         <field name="name">Plateau State Government Printing Press - Expense</field>

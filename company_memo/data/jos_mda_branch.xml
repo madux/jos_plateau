@@ -79,6 +79,15 @@
     <record id="mda_governors_office" model="multi.branch">
         <field name="name">Governor's Office</field>
     </record>
+    <record id="mda_deputy_governors_office" model="multi.branch">
+        <field name="name">Deputy Governor's Office</field>
+    </record>
+    <record id="mda_plateau_state_house_of_assembly" model="multi.branch">
+        <field name="name">Plateau State House of Assembly</field>
+    </record>
+    <record id="mda_office_of_the_auditor_general_state" model="multi.branch">
+        <field name="name">0ffice of the Auditor-General (State)</field>
+    </record>
 
     <!-- Commissions -->
     <record id="mda_house_of_assembly_service_commission" model="multi.branch">

@@ -49,14 +49,14 @@
         <field name="name">Ministry of Finance - Bank</field>
         <field name="type">bank</field>
         <field name="code">MF-BNK</field>
-        <field name="default_account_id" ref="company_memo.account_account_mda_board_commission_bank_cash"/>
-        <field name="allowed_branch_ids" eval="[(6,0, ref())]"/>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_finance_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_finance))]"/>
     </record>
     <record id="journal_ministry_of_finance_expense" model="account.journal">
         <field name="name">Ministry of Finance - EXP</field>
         <field name="type">purchase</field>
-        <field name="code">MF-CSH</field>
-        <field name="default_account_id" ref="company_memo.account_account_mda_board_commission_bank_cash"/>
+        <field name="code">MF-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_finance_expense"/>
         <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_finance))]"/>
     </record>
 
@@ -64,105 +64,224 @@
         <field name="name">Ministry of Information and Communication - Bank</field>
         <field name="type">bank</field>
         <field name="code">MIC-BNK</field>
-        <field name="branch_id" ref="mda_ministry_of_information_and_communication"/>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_information_and_communication_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo,mda_ministry_of_information_and_communication))]"/>
     </record>
-    <record id="journal_ministry_of_information_and_communication_cash" model="account.journal">
-        <field name="name">Ministry of Information and Communication - Cash</field>
-        <field name="type">cash</field>
-        <field name="code">MIC-CSH</field>
-        <field name="branch_id" ref="mda_ministry_of_information_and_communication"/>
+    <record id="journal_ministry_of_information_and_communication_expense" model="account.journal">
+        <field name="name">Ministry of Information and Communication - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MIC-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_information_and_communication_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_information_and_communication))]"/>
     </record>
 
     <record id="journal_ministry_of_health_bank" model="account.journal">
         <field name="name">Ministry of Health - Bank</field>
         <field name="type">bank</field>
         <field name="code">MH-BNK</field>
-        <field name="branch_id" ref="mda_ministry_of_health"/>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_health_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_health))]"/>
     </record>
-    <record id="journal_ministry_of_health_cash" model="account.journal">
-        <field name="name">Ministry of Health - Cash</field>
-        <field name="type">cash</field>
-        <field name="code">MH-CSH</field>
-        <field name="branch_id" ref="mda_ministry_of_health"/>
+    <record id="journal_ministry_of_health_expense" model="account.journal">
+        <field name="name">Ministry of Health - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MH-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_health_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_health))]"/>
     </record>
 
     <record id="journal_ministry_of_water_resources_and_energy_bank" model="account.journal">
         <field name="name">Ministry of Water Resources and Energy - Bank</field>
         <field name="type">bank</field>
         <field name="code">MWRE-BNK</field>
-        <field name="branch_id" ref="mda_ministry_of_water_resources_and_energy"/>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_water_resources_and_energy_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_water_resources_and_energy))]"/>
     </record>
-    <record id="journal_ministry_of_water_resources_and_energy_cash" model="account.journal">
-        <field name="name">Ministry of Water Resources and Energy - Cash</field>
-        <field name="type">cash</field>
-        <field name="code">MWRE-CSH</field>
-        <field name="branch_id" ref="mda_ministry_of_water_resources_and_energy"/>
+    <record id="journal_ministry_of_water_resources_and_energy_expense" model="account.journal">
+        <field name="name">Ministry of Water Resources and Energy - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MWRE-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_water_resources_and_energy_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_water_resources_and_energy))]"/>
     </record>
 
     <record id="journal_ministry_of_justice_bank" model="account.journal">
         <field name="name">Ministry of Justice - Bank</field>
         <field name="type">bank</field>
-        <field name="code">MOJ-BNK</field>
-        <field name="branch_id" ref="mda_ministry_of_justice"/>
+        <field name="code">MJ-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_justice_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_justice))]"/>
     </record>
-    <record id="journal_ministry_of_justice_cash" model="account.journal">
-        <field name="name">Ministry of Justice - Cash</field>
-        <field name="type">cash</field>
-        <field name="code">MOJ-CSH</field>
-        <field name="branch_id" ref="mda_ministry_of_justice"/>
+    <record id="journal_ministry_of_justice_expense" model="account.journal">
+        <field name="name">Ministry of Justice - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MJ-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_justice_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_justice))]"/>
     </record>
 
     <record id="journal_ministry_of_housing_bank" model="account.journal">
         <field name="name">Ministry of Housing - Bank</field>
         <field name="type">bank</field>
-        <field name="code">MOH-BNK</field>
-        <field name="branch_id" ref="mda_ministry_of_housing"/>
+        <field name="code">MH-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_housing_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_housing))]"/>
     </record>
-    <record id="journal_ministry_of_housing_cash" model="account.journal">
-        <field name="name">Ministry of Housing - Cash</field>
-        <field name="type">cash</field>
-        <field name="code">MOH-CSH</field>
-        <field name="branch_id" ref="mda_ministry_of_housing"/>
+    <record id="journal_ministry_of_housing_expense" model="account.journal">
+        <field name="name">Ministry of Housing - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MH-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_housing_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_housing))]"/>
     </record>
 
     <record id="journal_ministry_of_agriculture_and_rural_development_bank" model="account.journal">
         <field name="name">Ministry of Agriculture and Rural Development - Bank</field>
         <field name="type">bank</field>
         <field name="code">MARD-BNK</field>
-        <field name="branch_id" ref="mda_ministry_of_agriculture_and_rural_development"/>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_agriculture_and_rural_development_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_agriculture_and_rural_development))]"/>
     </record>
-    <record id="journal_ministry_of_agriculture_and_rural_development_cash" model="account.journal">
-        <field name="name">Ministry of Agriculture and Rural Development - Cash</field>
-        <field name="type">cash</field>
-        <field name="code">MARD-CSH</field>
-        <field name="branch_id" ref="mda_ministry_of_agriculture_and_rural_development"/>
+    <record id="journal_ministry_of_agriculture_and_rural_development_expense" model="account.journal">
+        <field name="name">Ministry of Agriculture and Rural Development - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MARD-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_agriculture_and_rural_development_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_agriculture_and_rural_development))]"/>
     </record>
-
     <record id="journal_ministry_of_works_bank" model="account.journal">
         <field name="name">Ministry of Works - Bank</field>
         <field name="type">bank</field>
         <field name="code">MW-BNK</field>
-        <field name="branch_id" ref="mda_ministry_of_works"/>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_works_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_works))]"/>
     </record>
-    <record id="journal_ministry_of_works_cash" model="account.journal">
-        <field name="name">Ministry of Works - Cash</field>
-        <field name="type">cash</field>
-        <field name="code">MW-CSH</field>
-        <field name="branch_id" ref="mda_ministry_of_works"/>
+    <record id="journal_ministry_of_works_expense" model="account.journal">
+        <field name="name">Ministry of Works - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MW-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_works_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_works))]"/>
     </record>
 
-    <record id="journal_ministry_of_education_bank" model="account.journal">
-        <field name="name">Ministry of Education - Bank</field>
+    <record id="journal_ministry_of_education_higher_education_bank" model="account.journal">
+        <field name="name">Ministry of Education (Higher Education) - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MEHE-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_education_higher_education_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_education_higher_education))]"/>
+    </record>
+    <record id="journal_ministry_of_education_higher_education_expense" model="account.journal">
+        <field name="name">Ministry of Education (Higher Education) - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MEHE-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_education_higher_education_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_education_higher_education))]"/>
+    </record>
+
+    <record id="journal_ministry_of_education_secondary_education_bank" model="account.journal">
+        <field name="name">Ministry of Education (Secondary Education) - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MESE-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_education_secondary_education_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_education_secondary_education))]"/>
+    </record>
+    <record id="journal_ministry_of_education_secondary_education_expense" model="account.journal">
+        <field name="name">Ministry of Education (Secondary Education) - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MESE-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_education_secondary_education_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_education_secondary_education))]"/>
+    </record>
+        <record id="journal_ministry_of_women_affairs_and_social_development_bank" model="account.journal">
+        <field name="name">Ministry of Women Affairs and Social Development - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MWASD-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_women_affairs_and_social_development_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_women_affairs_and_social_development))]"/>
+    </record>
+    <record id="journal_ministry_of_women_affairs_and_social_development_expense" model="account.journal">
+        <field name="name">Ministry of Women Affairs and Social Development - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MWASD-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_women_affairs_and_social_development_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_women_affairs_and_social_development))]"/>
+    </record>
+
+    <record id="journal_ministry_of_sports_and_youth_development_bank" model="account.journal">
+        <field name="name">Ministry of Sports and Youth Development - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MSYD-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_sports_and_youth_development_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_sports_and_youth_development))]"/>
+    </record>
+    <record id="journal_ministry_of_sports_and_youth_development_expense" model="account.journal">
+        <field name="name">Ministry of Sports and Youth Development - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MSYD-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_sports_and_youth_development_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_sports_and_youth_development))]"/>
+    </record>
+
+    <record id="journal_ministry_of_environment_bank" model="account.journal">
+        <field name="name">Ministry of Environment - Bank</field>
         <field name="type">bank</field>
         <field name="code">ME-BNK</field>
-        <field name="branch_id" ref="mda_ministry_of_education"/>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_environment_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_environment))]"/>
     </record>
-    <record id="journal_ministry_of_education_cash" model="account.journal">
-        <field name="name">Ministry of Education - Cash</field>
-        <field name="type">cash</field>
-        <field name="code">ME-CSH</field>
-        <field name="branch_id" ref="mda_ministry_of_education"/>
+    <record id="journal_ministry_of_environment_expense" model="account.journal">
+        <field name="name">Ministry of Environment - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">ME-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_environment_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_environment))]"/>
     </record>
+
+    <record id="journal_ministry_for_local_government_and_chieftaincy_affairs_bank" model="account.journal">
+        <field name="name">Ministry for Local Government and Chieftaincy Affairs - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MLGCA-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_for_local_government_and_chieftaincy_affairs_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_for_local_government_and_chieftaincy_affairs))]"/>
+    </record>
+    <record id="journal_ministry_for_local_government_and_chieftaincy_affairs_expense" model="account.journal">
+        <field name="name">Ministry for Local Government and Chieftaincy Affairs - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MLGCA-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_for_local_government_and_chieftaincy_affairs_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_for_local_government_and_chieftaincy_affairs))]"/>
+    </record>
+        <record id="journal_ministry_of_commerce_and_industry_bank" model="account.journal">
+        <field name="name">Ministry of Commerce and Industry - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MCI-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_commerce_and_industry_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_commerce_and_industry))]"/>
+    </record>
+    <record id="journal_ministry_of_commerce_and_industry_expense" model="account.journal">
+        <field name="name">Ministry of Commerce and Industry - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MCI-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_commerce_and_industry_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_commerce_and_industry))]"/>
+    </record>
+
+    <record id="journal_ministry_of_lands_survey_and_town_planning_bank" model="account.journal">
+        <field name="name">Ministry of Lands, Survey and Town Planning - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MLSTP-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_lands_survey_and_town_planning_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_lands_survey_and_town_planning))]"/>
+    </record>
+    <record id="journal_ministry_of_lands_survey_and_town_planning_expense" model="account.journal">
+        <field name="name">Ministry of Lands, Survey and Town Planning - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MLSTP-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_mda_ministry_of_lands_survey_and_town_planning_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_lands_survey_and_town_planning))]"/>
+    </record>
+
 
     <!-- Journals for Commissions -->
     <record id="journal_house_of_assembly_service_commission_bank" model="account.journal">
@@ -205,7 +324,6 @@
         <field name="branch_id" ref="mda_government_printing_press"/>
     </record>
     
-
 
     <!-- Journals for Tertiary Institutions -->
     <record id="journal_plateau_state_university_bank" model="account.journal">
