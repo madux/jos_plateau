@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Journal Types for MDAs -->
+    <!-- <record id="journal_type_bank" model="account.journal.type">
+        <field name="name">Bank</field>
+        <field name="type">bank</field>
+    </record>
+    <record id="journal_type_cash" model="account.journal.type">
+        <field name="name">Cash</field>
+        <field name="type">cash</field>
+    </record>
+    <record id="journal_type_miscellaneous" model="account.journal.type">
+        <field name="name">Miscellaneous</field>
+        <field name="type">miscellaneous</field>
+    </record> -->
+
+    <!-- Journals for Ministries -->
+
+    <record id="journal_board_commission_bank" model="account.journal">
+        <field name="name">Board Commission - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">BC-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_account_mda_board_commission_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0,[
+        ref(company_memo.mda_board_commission),
+        ])]"/>
+    </record>
+    <record id="journal_board_commission_expense" model="account.journal">
+        <field name="name">Board Commission - Expense</field>
+        <field name="type">purchase</field>
+        <field name="code">BC-EXP</field>
+        <field name="default_account_id" ref="company_memo.account_account_mda_board_commission_expense"/>
+        <field name="allowed_branch_ids" eval="[(6,0,[
+        ref(company_memo.mda_board_commission),
+        ])]"/>
+    </record>
+    <record id="journal_board_commission_sale" model="account.journal">
+        <field name="name">Board Commission - Sale</field>
+        <field name="type">sale</field>
+        <field name="code">BC-INC</field>
+        <field name="default_account_id" ref="company_memo.account_account_mda_board_commission_income"/>
+        <field name="allowed_branch_ids" eval="[(6,0,[
+        ref(company_memo.mda_board_commission),
+        ])]"/>
+    </record>
+
+
+    <record id="journal_ministry_of_finance_bank" model="account.journal">
+        <field name="name">Ministry of Finance - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MF-BNK</field>
+        <field name="default_account_id" ref="company_memo.account_account_mda_board_commission_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref())]"/>
+    </record>
+    <record id="journal_ministry_of_finance_expense" model="account.journal">
+        <field name="name">Ministry of Finance - EXP</field>
+        <field name="type">purchase</field>
+        <field name="code">MF-CSH</field>
+        <field name="default_account_id" ref="company_memo.account_account_mda_board_commission_bank_cash"/>
+        <field name="allowed_branch_ids" eval="[(6,0, ref(company_memo.mda_ministry_of_finance))]"/>
+    </record>
+
+    <record id="journal_ministry_of_information_and_communication_bank" model="account.journal">
+        <field name="name">Ministry of Information and Communication - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MIC-BNK</field>
+        <field name="branch_id" ref="mda_ministry_of_information_and_communication"/>
+    </record>
+    <record id="journal_ministry_of_information_and_communication_cash" model="account.journal">
+        <field name="name">Ministry of Information and Communication - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">MIC-CSH</field>
+        <field name="branch_id" ref="mda_ministry_of_information_and_communication"/>
+    </record>
+
+    <record id="journal_ministry_of_health_bank" model="account.journal">
+        <field name="name">Ministry of Health - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MH-BNK</field>
+        <field name="branch_id" ref="mda_ministry_of_health"/>
+    </record>
+    <record id="journal_ministry_of_health_cash" model="account.journal">
+        <field name="name">Ministry of Health - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">MH-CSH</field>
+        <field name="branch_id" ref="mda_ministry_of_health"/>
+    </record>
+
+    <record id="journal_ministry_of_water_resources_and_energy_bank" model="account.journal">
+        <field name="name">Ministry of Water Resources and Energy - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MWRE-BNK</field>
+        <field name="branch_id" ref="mda_ministry_of_water_resources_and_energy"/>
+    </record>
+    <record id="journal_ministry_of_water_resources_and_energy_cash" model="account.journal">
+        <field name="name">Ministry of Water Resources and Energy - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">MWRE-CSH</field>
+        <field name="branch_id" ref="mda_ministry_of_water_resources_and_energy"/>
+    </record>
+
+    <record id="journal_ministry_of_justice_bank" model="account.journal">
+        <field name="name">Ministry of Justice - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MOJ-BNK</field>
+        <field name="branch_id" ref="mda_ministry_of_justice"/>
+    </record>
+    <record id="journal_ministry_of_justice_cash" model="account.journal">
+        <field name="name">Ministry of Justice - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">MOJ-CSH</field>
+        <field name="branch_id" ref="mda_ministry_of_justice"/>
+    </record>
+
+    <record id="journal_ministry_of_housing_bank" model="account.journal">
+        <field name="name">Ministry of Housing - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MOH-BNK</field>
+        <field name="branch_id" ref="mda_ministry_of_housing"/>
+    </record>
+    <record id="journal_ministry_of_housing_cash" model="account.journal">
+        <field name="name">Ministry of Housing - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">MOH-CSH</field>
+        <field name="branch_id" ref="mda_ministry_of_housing"/>
+    </record>
+
+    <record id="journal_ministry_of_agriculture_and_rural_development_bank" model="account.journal">
+        <field name="name">Ministry of Agriculture and Rural Development - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MARD-BNK</field>
+        <field name="branch_id" ref="mda_ministry_of_agriculture_and_rural_development"/>
+    </record>
+    <record id="journal_ministry_of_agriculture_and_rural_development_cash" model="account.journal">
+        <field name="name">Ministry of Agriculture and Rural Development - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">MARD-CSH</field>
+        <field name="branch_id" ref="mda_ministry_of_agriculture_and_rural_development"/>
+    </record>
+
+    <record id="journal_ministry_of_works_bank" model="account.journal">
+        <field name="name">Ministry of Works - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">MW-BNK</field>
+        <field name="branch_id" ref="mda_ministry_of_works"/>
+    </record>
+    <record id="journal_ministry_of_works_cash" model="account.journal">
+        <field name="name">Ministry of Works - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">MW-CSH</field>
+        <field name="branch_id" ref="mda_ministry_of_works"/>
+    </record>
+
+    <record id="journal_ministry_of_education_bank" model="account.journal">
+        <field name="name">Ministry of Education - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">ME-BNK</field>
+        <field name="branch_id" ref="mda_ministry_of_education"/>
+    </record>
+    <record id="journal_ministry_of_education_cash" model="account.journal">
+        <field name="name">Ministry of Education - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">ME-CSH</field>
+        <field name="branch_id" ref="mda_ministry_of_education"/>
+    </record>
+
+    <!-- Journals for Commissions -->
+    <record id="journal_house_of_assembly_service_commission_bank" model="account.journal">
+        <field name="name">Plateau State House of Assembly Service Commission - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">PSHASC-BNK</field>
+        <field name="branch_id" ref="mda_house_of_assembly_service_commission"/>
+    </record>
+    <record id="journal_house_of_assembly_service_commission_cash" model="account.journal">
+        <field name="name">Plateau State House of Assembly Service Commission - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">PSHASC-CSH</field>
+        <field name="branch_id" ref="mda_house_of_assembly_service_commission"/>
+    </record>
+
+    <record id="journal_judicial_service_commission_bank" model="account.journal">
+        <field name="name">Judicial Service Commission - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">JSC-BNK</field>
+        <field name="branch_id" ref="mda_judicial_service_commission"/>
+    </record>
+    <record id="journal_judicial_service_commission_cash" model="account.journal">
+        <field name="name">Judicial Service Commission - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">JSC-CSH</field>
+        <field name="branch_id" ref="mda_judicial_service_commission"/>
+    </record>
+
+    <!-- Journals for Boards and Parastatals -->
+    <record id="journal_government_printing_press_bank" model="account.journal">
+        <field name="name">Plateau State Government Printing Press - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">PSGPP-BNK</field>
+        <field name="branch_id" ref="mda_government_printing_press"/>
+    </record>
+    <record id="journal_government_printing_press_cash" model="account.journal">
+        <field name="name">Plateau State Government Printing Press - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">PSGPP-CSH</field>
+        <field name="branch_id" ref="mda_government_printing_press"/>
+    </record>
+    
+
+
+    <!-- Journals for Tertiary Institutions -->
+    <record id="journal_plateau_state_university_bank" model="account.journal">
+        <field name="name">Plateau State University - Bank</field>
+        <field name="type">bank</field>
+        <field name="code">PSU-BNK</field>
+        <field name="branch_id" ref="mda_plateau_state_university"/>
+    </record>
+    <record id="journal_plateau_state_university_cash" model="account.journal">
+        <field name="name">Plateau State University - Cash</field>
+        <field name="type">cash</field>
+        <field name="code">PSU-CSH</field>
+        <field name="branch_id" ref="mda_plateau_state_university"/>
+    </record>
+
+
+</odoo>

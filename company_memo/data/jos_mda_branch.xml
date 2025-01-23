@@ -1,0 +1,147 @@
+<odoo>
+    <!-- MDA Branches -->
+    <!-- Ministries -->
+    <record id="mda_ministry_of_finance" model="multi.branch">
+        <field name="name">Ministry of Finance</field>
+    </record>
+    <record id="mda_ministry_of_information_and_communication" model="multi.branch">
+        <field name="name">Ministry of Information and Communication</field>
+    </record>
+    <record id="mda_ministry_of_health" model="multi.branch">
+        <field name="name">Ministry of Health</field>
+    </record>
+    <record id="mda_ministry_of_water_resources_and_energy" model="multi.branch">
+        <field name="name">Ministry of Water Resources and Energy</field>
+    </record>
+    <record id="mda_ministry_of_justice" model="multi.branch">
+        <field name="name">Ministry of Justice</field>
+    </record>
+    <record id="mda_ministry_of_housing" model="multi.branch">
+        <field name="name">Ministry of Housing</field>
+    </record>
+    <record id="mda_ministry_of_agriculture_and_rural_development" model="multi.branch">
+        <field name="name">Ministry of Agriculture and Rural Development</field>
+    </record>
+    <record id="mda_ministry_of_works" model="multi.branch">
+        <field name="name">Ministry of Works</field>
+    </record>
+    <record id="mda_ministry_of_education_higher" model="multi.branch">
+        <field name="name">Ministry of Education (Higher Education)</field>
+    </record>
+    <record id="mda_ministry_of_education_secondary" model="multi.branch">
+        <field name="name">Ministry of Education (Secondary Education)</field>
+    </record>
+    <record id="mda_ministry_of_women_affairs_and_social_development" model="multi.branch">
+        <field name="name">Ministry of Women Affairs and Social Development</field>
+    </record>
+    <record id="mda_ministry_of_sports_and_youth_development" model="multi.branch">
+        <field name="name">Ministry of Sports and Youth Development</field>
+    </record>
+    <record id="mda_ministry_of_environment" model="multi.branch">
+        <field name="name">Ministry of Environment</field>
+    </record>
+    <record id="mda_ministry_for_local_government_and_chieftaincy_affairs" model="multi.branch">
+        <field name="name">Ministry for Local Government and Chieftaincy Affairs</field>
+    </record>
+    <record id="mda_ministry_of_commerce_and_industry" model="multi.branch">
+        <field name="name">Ministry of Commerce and Industry</field>
+    </record>
+    <record id="mda_ministry_of_lands_survey_and_town_planning" model="multi.branch">
+        <field name="name">Ministry of Lands, Survey and Town Planning</field>
+    </record>
+    <record id="mda_ministry_of_tourism_culture_and_hospitality" model="multi.branch">
+        <field name="name">Ministry of Tourism, Culture and Hospitality</field>
+    </record>
+    <record id="mda_ministry_of_physical_planning_and_urban_development" model="multi.branch">
+        <field name="name">Ministry of Physical Planning and Urban Development</field>
+    </record>
+    <record id="mda_ministry_of_transport" model="multi.branch">
+        <field name="name">Ministry of Transport</field>
+    </record>
+    <record id="mda_ministry_of_science_and_technology" model="multi.branch">
+        <field name="name">Ministry of Science and Technology</field>
+    </record>
+    <record id="mda_ministry_of_mineral_and_development" model="multi.branch">
+        <field name="name">Ministry of Mineral and Development</field>
+    </record>
+    <record id="mda_ministry_of_special_duties" model="multi.branch">
+        <field name="name">Ministry of Special Duties</field>
+    </record>
+    <record id="mda_ministry_of_budget_and_economic_planning" model="multi.branch">
+        <field name="name">Ministry of Budget and Economic Planning</field>
+    </record>
+    <record id="mda_office_of_the_head_of_civil_service" model="multi.branch">
+        <field name="name">Office of the Head of Civil Service</field>
+    </record>
+    <record id="mda_office_of_the_secretary_to_the_government_of_the_state" model="multi.branch">
+        <field name="name">Office of the Secretary to the Government of the State</field>
+    </record>
+    <record id="mda_governors_office" model="multi.branch">
+        <field name="name">Governor's Office</field>
+    </record>
+
+    <!-- Commissions -->
+    <record id="mda_house_of_assembly_service_commission" model="multi.branch">
+        <field name="name">Plateau State House of Assembly Service Commission</field>
+    </record>
+    <record id="mda_judicial_service_commission" model="multi.branch">
+        <field name="name">Judicial Service Commission</field>
+    </record>
+    <record id="mda_local_government_service_commission" model="multi.branch">
+        <field name="name">Local Government Service Commission</field>
+    </record>
+    <record id="mda_civil_service_commission" model="multi.branch">
+        <field name="name">Civil Service Commission</field>
+    </record>
+    <record id="mda_teachers_service_commission" model="multi.branch">
+        <field name="name">Teachers Service Commission</field>
+    </record>
+
+    <record id="mda_board_commission" model="multi.branch">
+        <field name="name">Boundary Commission</field>
+    </record>
+
+    <!-- Boards and Parastatals -->
+    <record id="mda_government_printing_press" model="multi.branch">
+        <field name="name">Plateau State Government Printing Press</field>
+    </record>
+    <record id="mda_broadcasting_corporation" model="multi.branch">
+        <field name="name">Plateau State Broadcasting Corporation</field>
+    </record>
+    <record id="mda_water_board" model="multi.branch">
+        <field name="name">Plateau State Water Board</field>
+    </record>
+    <record id="mda_housing_corporation" model="multi.branch">
+        <field name="name">Plateau State Housing Corporation</field>
+    </record>
+    <record id="mda_investment_company" model="multi.branch">
+        <field name="name">Plateau State Investment and Property Development Company</field>
+    </record>
+    <record id="mda_tourism_corporation" model="multi.branch">
+        <field name="name">Plateau State Tourism Corporation</field>
+    </record>
+    <record id="mda_library_board" model="multi.branch">
+        <field name="name">Plateau State Library Board</field>
+    </record>
+    <record id="mda_hospital_management_board" model="multi.branch">
+        <field name="name">Plateau State Hospital Management Board</field>
+    </record>
+    <record id="mda_primary_healthcare_board" model="multi.branch">
+        <field name="name">Plateau State Primary Healthcare Development Board</field>
+    </record>
+
+    <!-- Tertiary Institutions -->
+    <record id="mda_plateau_state_university" model="multi.branch">
+        <field name="name">Plateau State University, Bokkos</field>
+    </record>
+    <record id="mda_plateau_state_polytechnic" model="multi.branch">
+        <field name="name">Plateau State Polytechnic, Barkin Ladi</field>
+    </record>
+    <record id="mda_college_of_health_technology" model="multi.branch">
+        <field name="name">Plateau State College of Health Technology, Zawan</field>
+    </record>
+    <record id="mda_college_of_nursing_and_midwifery" model="multi.branch">
+        <field name="name">Plateau State College of Nursing and Midwifery, Vom</field>
+    </record>
+    
+</odoo>

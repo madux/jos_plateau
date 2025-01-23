@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Account Types -->
+    <!-- <record id="account_type_asset" model="account.account.type">
+        <field name="name">Asset</field>
+        <field name="type">asset</field>
+    </record>
+    <record id="account_type_liability" model="account.account.type">
+        <field name="name">Liability</field>
+        <field name="type">liability</field>
+    </record>
+    <record id="account_type_equity" model="account.account.type">
+        <field name="name">Equity</field>
+        <field name="type">equity</field>
+    </record>
+    <record id="account_type_income" model="account.account.type">
+        <field name="name">Income</field>
+        <field name="type">income</field>
+    </record>
+    <record id="account_type_expense" model="account.account.type">
+        <field name="name">Expense</field>
+        <field name="type">expense</field>
+    </record> -->
+
+    <!-- Chart of Accounts -->
+    <record id="account_mda_ministry_of_finance_expense" model="account.account">
+        <field name="name">Ministry of Finance - Expense</field>
+        <field name="code">1014524508</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_finance"/>
+
+    </record>
+    <record id="account_mda_ministry_of_finance_bank_cash" model="account.account">
+        <field name="name">Ministry of Finance - Bank/Cash</field>
+        <field name="code">1014524508csh</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_finance"/>
+
+    </record>
+
+
+    <record id="account_account_mda_board_commission_expense" model="account.account">
+        <field name="name">Board Commission - Expense</field>
+        <field name="code">09999</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_board_commission"/>
+
+    </record>
+    <record id="account_account_mda_board_commission_income" model="account.account">
+        <field name="name">Board Commission - Income</field>
+        <field name="code">09999In</field>
+        <field name="account_type">income</field>
+        <field name="branch_id" ref="company_memo.mda_board_commission"/>
+
+    </record>
+    <record id="account_account_mda_board_commission_bank_cash" model="account.account">
+        <field name="name">Board Commission Bank/Cash</field>
+        <field name="code">09999A</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_board_commission"/>
+    </record>  
+
+
+
+    <record id="account_adult_non_formal_education" model="account.account">
+        <field name="name">Adult &amp; Non-Formal Education</field>
+        <field name="code">1011763834</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+    <record id="account_boundary_commission" model="account.account">
+        <field name="name">Boundary Commission</field>
+        <field name="code">5900003882</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+    <record id="account_christian_pilgrims_welfare_board" model="account.account">
+        <field name="name">Christian Pilgrims Welfare Board</field>
+        <field name="code">1014518437</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+    <record id="account_civil_service_commission" model="account.account">
+        <field name="name">Civil Service Commission</field>
+        <field name="code">1019341898</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+    <record id="account_college_of_agriculture_garkawa" model="account.account">
+        <field name="name">College of Agriculture, Garkawa</field>
+        <field name="code">0047819602</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+    <record id="account_college_of_arts_science_and_technology" model="account.account">
+        <field name="name">College of Arts, Science and Technology, Kurgwi</field>
+        <field name="code">2029685323</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+    <record id="account_college_of_education_gindiri" model="account.account">
+        <field name="name">College of Education, Gindiri</field>
+        <field name="code">2029695387</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+    <record id="account_college_of_health_technology_zawan" model="account.account">
+        <field name="name">College of Health Technology, Zawan</field>
+        <field name="code">0701931357</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+    <record id="account_college_of_health_technology_pankshin" model="account.account">
+        <field name="name">College of Health Technology, Pankshin</field>
+        <field name="code">1019341836</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+    <record id="account_college_of_nursing_midwifery" model="account.account">
+        <field name="name">College of Nursing &amp; Midwifery, Vom</field>
+        <field name="code">5030131376</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+    <record id="account_community_social_development_agency" model="account.account">
+        <field name="name">Community and Social Development Agency</field>
+        <field name="code">1215849107</field>
+        <field name="user_type_id" ref="account_type_expense"/>
+    </record>
+
+</odoo>
