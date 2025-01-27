@@ -1,6 +1,5 @@
 <odoo>
-    <!-- MDA Branches -->
-    <!-- Ministries -->
+    <!-- MINISTRIES -->
     <record id="mda_ministry_of_finance" model="multi.branch">
         <field name="name">Ministry of Finance</field>
     </record>
@@ -25,10 +24,10 @@
     <record id="mda_ministry_of_works" model="multi.branch">
         <field name="name">Ministry of Works</field>
     </record>
-    <record id="mda_ministry_of_education_higher" model="multi.branch">
+    <record id="mda_ministry_of_education_higher_education" model="multi.branch">
         <field name="name">Ministry of Education (Higher Education)</field>
     </record>
-    <record id="mda_ministry_of_education_secondary" model="multi.branch">
+    <record id="mda_ministry_of_education_secondary_education" model="multi.branch">
         <field name="name">Ministry of Education (Secondary Education)</field>
     </record>
     <record id="mda_ministry_of_women_affairs_and_social_development" model="multi.branch">
@@ -46,10 +45,10 @@
     <record id="mda_ministry_of_commerce_and_industry" model="multi.branch">
         <field name="name">Ministry of Commerce and Industry</field>
     </record>
-    <record id="mda_ministry_of_lands_survey_and_town_planning" model="multi.branch">
+    <record id="mda_ministry_of_lands,_survey_and_town_planning" model="multi.branch">
         <field name="name">Ministry of Lands, Survey and Town Planning</field>
     </record>
-    <record id="mda_ministry_of_tourism_culture_and_hospitality" model="multi.branch">
+    <record id="mda_ministry_of_tourism,_culture_and_hospitality" model="multi.branch">
         <field name="name">Ministry of Tourism, Culture and Hospitality</field>
     </record>
     <record id="mda_ministry_of_physical_planning_and_urban_development" model="multi.branch">
@@ -58,8 +57,8 @@
     <record id="mda_ministry_of_transport" model="multi.branch">
         <field name="name">Ministry of Transport</field>
     </record>
-    <record id="mda_ministry_of_science_and_technology" model="multi.branch">
-        <field name="name">Ministry of Science and Technology</field>
+    <record id="mda_ministry_of_science_and_technology_" model="multi.branch">
+        <field name="name">Ministry of Science and Technology </field>
     </record>
     <record id="mda_ministry_of_mineral_and_development" model="multi.branch">
         <field name="name">Ministry of Mineral and Development</field>
@@ -70,27 +69,41 @@
     <record id="mda_ministry_of_budget_and_economic_planning" model="multi.branch">
         <field name="name">Ministry of Budget and Economic Planning</field>
     </record>
-    <record id="mda_office_of_the_head_of_civil_service" model="multi.branch">
-        <field name="name">Office of the Head of Civil Service</field>
+    <record id="mda_0ffice_of_the_head_of_civil_service" model="multi.branch">
+        <field name="name">0ffice of the Head of Civil Service</field>
     </record>
-    <record id="mda_office_of_the_secretary_to_the_government_of_the_state" model="multi.branch">
-        <field name="name">Office of the Secretary to the Government of the State</field>
+    <record id="mda_0ffice_of_the_secretary_to_the_government_of_the_state" model="multi.branch">
+        <field name="name">0ffice of the Secretary to the Government of the State</field>
     </record>
     <record id="mda_governors_office" model="multi.branch">
-        <field name="name">Governor's Office</field>
+        <field name="name">Governor's office</field>
     </record>
     <record id="mda_deputy_governors_office" model="multi.branch">
-        <field name="name">Deputy Governor's Office</field>
+        <field name="name">Deputy Governors' Office</field>
     </record>
     <record id="mda_plateau_state_house_of_assembly" model="multi.branch">
         <field name="name">Plateau State House of Assembly</field>
     </record>
-    <record id="mda_office_of_the_auditor_general_state" model="multi.branch">
+    <record id="mda_0ffice_of_the_auditor_general_state" model="multi.branch">
         <field name="name">0ffice of the Auditor-General (State)</field>
     </record>
-
-    <!-- Commissions -->
-    <record id="mda_house_of_assembly_service_commission" model="multi.branch">
+    <record id="mda_0ffice_of_the_accountant_general" model="multi.branch">
+        <field name="name">0ffice of the Accountant General</field>
+    </record>
+    <record id="mda_high_court_of_justice" model="multi.branch">
+        <field name="name">High Court of Justice</field>
+    </record>
+    <record id="mda_customary_court_of_appeal" model="multi.branch">
+        <field name="name">Customary Court of Appeal</field>
+    </record>
+    <record id="mda_sharia_court_of_appeal" model="multi.branch">
+        <field name="name">Sharia Court of Appeal</field>
+    </record>
+    <record id="mda_local_government_audit" model="multi.branch">
+        <field name="name">Local Government Audit</field>
+    </record>
+    <!-- COMMISSIONS -->
+    <record id="mda_plateau_state_house_of_assembly_service_commission" model="multi.branch">
         <field name="name">Plateau State House of Assembly Service Commission</field>
     </record>
     <record id="mda_judicial_service_commission" model="multi.branch">
@@ -105,52 +118,177 @@
     <record id="mda_teachers_service_commission" model="multi.branch">
         <field name="name">Teachers Service Commission</field>
     </record>
-
-    <record id="mda_board_commission" model="multi.branch">
-        <field name="name">Boundary Commission</field>
+    <record id="mda_plateau_state_boundary_commission" model="multi.branch">
+        <field name="name">Plateau State Boundary Commission</field>
     </record>
-
-    <!-- Boards and Parastatals -->
-    <record id="mda_government_printing_press" model="multi.branch">
+    <record id="mda_plateau_state_disability_rights_commission" model="multi.branch">
+        <field name="name">Plateau State Disability Rights Commission</field>
+    </record>
+    <record id="mda_plateau_state_electoral_independent_commission" model="multi.branch">
+        <field name="name">Plateau State Electoral Independent Commission</field>
+    </record>
+    <!-- BOARDS AND PARASTATALS -->
+    <record id="mda_plateau_state_government_printing_press" model="multi.branch">
         <field name="name">Plateau State Government Printing Press</field>
     </record>
-    <record id="mda_broadcasting_corporation" model="multi.branch">
-        <field name="name">Plateau State Broadcasting Corporation</field>
+    <record id="mda_plateau_radio_television_corporation" model="multi.branch">
+        <field name="name">Plateau Radio Television Corporation</field>
     </record>
-    <record id="mda_water_board" model="multi.branch">
-        <field name="name">Plateau State Water Board</field>
+    <record id="mda_plateau_rural_water_and_sanitation_agency" model="multi.branch">
+        <field name="name">Plateau Rural Water And Sanitation Agency</field>
     </record>
-    <record id="mda_housing_corporation" model="multi.branch">
-        <field name="name">Plateau State Housing Corporation</field>
+    <record id="mda_fire_service_directorate" model="multi.branch">
+        <field name="name">Fire Service Directorate</field>
     </record>
-    <record id="mda_investment_company" model="multi.branch">
-        <field name="name">Plateau State Investment and Property Development Company</field>
+    <record id="mda_adult_and_non_formal_education" model="multi.branch">
+        <field name="name">Adult and Non Formal Education</field>
     </record>
-    <record id="mda_tourism_corporation" model="multi.branch">
-        <field name="name">Plateau State Tourism Corporation</field>
+    <record id="mda_plateau_agricultural_development_programme" model="multi.branch">
+        <field name="name">Plateau Agricultural Development Programme</field>
     </record>
-    <record id="mda_library_board" model="multi.branch">
+    <record id="mda_plateau_agricultural_mechanization_service" model="multi.branch">
+        <field name="name">Plateau Agricultural Mechanization Service</field>
+    </record>
+    <record id="mda_plateau_state_road_maintenance_agency" model="multi.branch">
+        <field name="name">Plateau State Road Maintenance Agency</field>
+    </record>
+    <record id="mda_jos_metropolitan_development_board" model="multi.branch">
+        <field name="name">Jos Metropolitan Development Board</field>
+    </record>
+    <record id="mda_plateau_state_sport_council" model="multi.branch">
+        <field name="name">Plateau State Sport Council</field>
+    </record>
+    <record id="mda_plateau_united_football_club" model="multi.branch">
+        <field name="name">Plateau United Football Club</field>
+    </record>
+    <record id="mda_plateau_state_mineral_development_company" model="multi.branch">
+        <field name="name">Plateau State Mineral Development Company</field>
+    </record>
+    <record id="mda_jos_main_market_authority" model="multi.branch">
+        <field name="name">Jos Main Market Authority</field>
+    </record>
+    <record id="mda_plateau_publishing_corporation" model="multi.branch">
+        <field name="name">Plateau Publishing Corporation</field>
+    </record>
+    <record id="mda_plateau_express_service_limited" model="multi.branch">
+        <field name="name">Plateau Express Service Limited</field>
+    </record>
+    <record id="mda_plateau_aids_control_agency" model="multi.branch">
+        <field name="name">Plateau Aids Control Agency</field>
+    </record>
+    <record id="mda_plateau_state_community_and_social_development_agency" model="multi.branch">
+        <field name="name">Plateau State Community and Social Development Agency</field>
+    </record>
+    <record id="mda_plateau_state_emergency_and_relief_management_agency" model="multi.branch">
+        <field name="name">Plateau State Emergency and Relief Management Agency</field>
+    </record>
+    <record id="mda_plateau_environmental_protection_and_sanitation_agency" model="multi.branch">
+        <field name="name">Plateau Environmental Protection and Sanitation Agency</field>
+    </record>
+    <record id="mda_plateau_state_specialist_hospital" model="multi.branch">
+        <field name="name">Plateau State Specialist Hospital</field>
+    </record>
+    <record id="mda_0peration_rainbow" model="multi.branch">
+        <field name="name">0peration Rainbow</field>
+    </record>
+    <record id="mda_plateau_state_afforestation_programme" model="multi.branch">
+        <field name="name">Plateau State Afforestation Programme</field>
+    </record>
+    <record id="mda_public_sector_reform_and_development_project" model="multi.branch">
+        <field name="name">Public Sector Reform and Development Project</field>
+    </record>
+    <record id="mda_plateau_state_library_board" model="multi.branch">
         <field name="name">Plateau State Library Board</field>
     </record>
-    <record id="mda_hospital_management_board" model="multi.branch">
-        <field name="name">Plateau State Hospital Management Board</field>
+    <record id="mda_plateau_state_hospitals_management_board" model="multi.branch">
+        <field name="name">Plateau State Hospitals Management Board</field>
     </record>
-    <record id="mda_primary_healthcare_board" model="multi.branch">
-        <field name="name">Plateau State Primary Healthcare Development Board</field>
+    <record id="mda_jos_water_services_corporation" model="multi.branch">
+        <field name="name">Jos Water Services Corporation</field>
     </record>
-
-    <!-- Tertiary Institutions -->
-    <record id="mda_plateau_state_university" model="multi.branch">
-        <field name="name">Plateau State University, Bokkos</field>
+    <record id="mda_plateau_state_water_board" model="multi.branch">
+        <field name="name">Plateau State Water Board</field>
     </record>
-    <record id="mda_plateau_state_polytechnic" model="multi.branch">
-        <field name="name">Plateau State Polytechnic, Barkin Ladi</field>
+    <record id="mda_local_government_pension_board" model="multi.branch">
+        <field name="name">Local Government Pension Board</field>
     </record>
+    <record id="mda_plateau_state_christian_pilgrims_welfare_board" model="multi.branch">
+        <field name="name">Plateau State Christian Pilgrims Welfare Board</field>
+    </record>
+    <record id="mda_plateau_state_muslim_pilgrims_welfare_board" model="multi.branch">
+        <field name="name">Plateau State Muslim Pilgrims Welfare Board</field>
+    </record>
+    <record id="mda_plateau_state_universal_basic_education_board" model="multi.branch">
+        <field name="name">Plateau State Universal Basic Education Board</field>
+    </record>
+    <record id="mda_relevant_technology_board" model="multi.branch">
+        <field name="name">Relevant Technology Board</field>
+    </record>
+    <record id="mda_plateau_state_scholarship_board" model="multi.branch">
+        <field name="name">Plateau State Scholarship Board</field>
+    </record>
+    <record id="mda_plateau_state_pension_board" model="multi.branch">
+        <field name="name">Plateau State Pension Board</field>
+    </record>
+    <record id="mda_bureau_of_statistics" model="multi.branch">
+        <field name="name">Bureau of Statistics</field>
+    </record>
+    <record id="mda_plateau_state_peace_building_agency" model="multi.branch">
+        <field name="name">Plateau State Peace Building Agency</field>
+    </record>
+    <record id="mda_sustainable_development_goals" model="multi.branch">
+        <field name="name">Sustainable Development Goals</field>
+    </record>
+    <record id="mda_plateau_investment_and_property_development_company" model="multi.branch">
+        <field name="name">Plateau Investment and Property Development Company</field>
+    </record>
+    <record id="mda_plateau_state_tourism_corporation" model="multi.branch">
+        <field name="name">Plateau State Tourism Corporation</field>
+    </record>
+    <record id="mda_agricultural_services_training_centre" model="multi.branch">
+        <field name="name">Agricultural Services Training Centre</field>
+    </record>
+    <record id="mda_plateau_state_primary_health_care" model="multi.branch">
+        <field name="name">Plateau State Primary Health Care</field>
+    </record>
+    <record id="mda_plateau_state_micro_finance_agency" model="multi.branch">
+        <field name="name">Plateau State Micro Finance Agency</field>
+    </record>
+    <record id="mda_public_procurement" model="multi.branch">
+        <field name="name">Public Procurement</field>
+    </record>
+    <record id="mda_plateau_state_contributory_health_care_management_agency" model="multi.branch">
+        <field name="name">Plateau State Contributory Health Care Management Agency</field>
+    </record>
+    <record id="mda_plateau_state_information_and_communication_development_agency_" model="multi.branch">
+        <field name="name">Plateau State Information and Communication Development Agency </field>
+    </record>
+    <record id="mda_plateau_state_municipal_water_supply_and_sanitation_agency" model="multi.branch">
+        <field name="name">Plateau State Municipal Water Supply and Sanitation Agency</field>
+    </record>
+    <!-- TERTIARY INSTITUTIONS -->
     <record id="mda_college_of_health_technology" model="multi.branch">
-        <field name="name">Plateau State College of Health Technology, Zawan</field>
+        <field name="name">COLLEGE OF Health Technology</field>
     </record>
-    <record id="mda_college_of_nursing_and_midwifery" model="multi.branch">
-        <field name="name">Plateau State College of Nursing and Midwifery, Vom</field>
+    <record id="mda_college_of_health_technology_zawan" model="multi.branch">
+        <field name="name">College of Health Technology Zawan</field>
     </record>
-    
+    <record id="mda_college_of_agriculture_garkawa" model="multi.branch">
+        <field name="name">College of Agriculture Garkawa</field>
+    </record>
+    <record id="mda_college_of_education_gindiri" model="multi.branch">
+        <field name="name">College of Education Gindiri</field>
+    </record>
+    <record id="mda_college_of_arts,_science_and_remedial_studies_kurgwi" model="multi.branch">
+        <field name="name">College of Arts, Science and Remedial Studies Kurgwi</field>
+    </record>
+    <record id="mda_plateau_state_polytechnic_barkin_ladi" model="multi.branch">
+        <field name="name">Plateau State Polytechnic Barkin-Ladi</field>
+    </record>
+    <record id="mda_plateau_state_university_bokkos" model="multi.branch">
+        <field name="name">Plateau State University Bokkos</field>
+    </record>
+    <record id="mda_college_of_nursing_and_midwifery_vom" model="multi.branch">
+        <field name="name">College of Nursing and Midwifery Vom</field>
+    </record>
 </odoo>
