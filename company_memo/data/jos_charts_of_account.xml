@@ -1,1027 +1,965 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Account Types -->
-    <!-- <record id="account_type_asset" model="account.account.type">
-        <field name="name">Asset</field>
-        <field name="type">asset</field>
-    </record>
-    <record id="account_type_liability" model="account.account.type">
-        <field name="name">Liability</field>
-        <field name="type">liability</field>
-    </record>
-    <record id="account_type_equity" model="account.account.type">
-        <field name="name">Equity</field>
-        <field name="type">equity</field>
-    </record>
-    <record id="account_type_income" model="account.account.type">
-        <field name="name">Income</field>
-        <field name="type">income</field>
-    </record>
-    <record id="account_type_expense" model="account.account.type">
-        <field name="name">Expense</field>
-        <field name="type">expense</field>
-    </record> -->
-
-    <!-- Ministries -->
-    <record id="account_mda_ministry_of_finance_expense" model="account.account">
-        <field name="name">Ministry of Finance - Expense</field>
-        <field name="code">1014524508</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_finance"/>
-    </record>
-    <record id="account_mda_ministry_of_finance_bank_cash" model="account.account">
-        <field name="name">Ministry of Finance - Bank/Cash</field>
-        <field name="code">1014524508_cash</field>
+    <!-- ADULT & NON-FORMAL EDUCATION -->
+    <record id="account_mda_adult_and_non_formal_education_bank_cash" model="account.account">
+        <field name="name">ADULT & NON-FORMAL EDUCATION - Bank/Cash</field>
+        <field name="code">1011763834_cash</field>
         <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_finance"/>
+        <field name="branch_id" ref="company_memo.mda_adult_and_non_formal_education"/>
     </record>
-
-    <record id="account_mda_ministry_of_information_and_communication_expense" model="account.account">
-        <field name="name">Ministry of Information and Communication - Expense</field>
-        <field name="code">1019341908</field>
+    <record id="account_mda_adult_and_non_formal_education_expense" model="account.account">
+        <field name="name">ADULT & NON-FORMAL EDUCATION - Expense</field>
+        <field name="code">1011763834</field>
         <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_information_and_communication"/>
+        <field name="branch_id" ref="company_memo.mda_adult_and_non_formal_education"/>
     </record>
-    <record id="account_mda_ministry_of_information_and_communication_bank_cash" model="account.account">
-        <field name="name">Ministry of Information and Communication - Bank/Cash</field>
-        <field name="code">1019341908_cash</field>
+    <!-- BOUNDARY COMMISSION -->
+    <record id="account_mda_boundary_commission_bank_cash" model="account.account">
+        <field name="name">BOUNDARY COMMISSION - Bank/Cash</field>
+        <field name="code">5900003882_cash</field>
         <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_information_and_communication"/>
+        <field name="branch_id" ref="company_memo.mda_boundary_commission"/>
     </record>
-
-    <record id="account_mda_ministry_of_health_expense" model="account.account">
-        <field name="name">Ministry of Health - Expense</field>
-        <field name="code">1014517791</field>
+    <record id="account_mda_boundary_commission_expense" model="account.account">
+        <field name="name">BOUNDARY COMMISSION - Expense</field>
+        <field name="code">5900003882</field>
         <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_health"/>
+        <field name="branch_id" ref="company_memo.mda_boundary_commission"/>
     </record>
-    <record id="account_mda_ministry_of_health_bank_cash" model="account.account">
-        <field name="name">Ministry of Health - Bank/Cash</field>
-        <field name="code">1014517791_cash</field>
+    <!-- CHRISTIAN PILGRIMS WELFARE BOARD -->
+    <record id="account_mda_christian_pilgrims_welfare_board_bank_cash" model="account.account">
+        <field name="name">CHRISTIAN PILGRIMS WELFARE BOARD - Bank/Cash</field>
+        <field name="code">1014518437_cash</field>
         <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_health"/>
+        <field name="branch_id" ref="company_memo.mda_christian_pilgrims_welfare_board"/>
     </record>
-
-    <record id="account_mda_ministry_of_water_resources_and_energy_expense" model="account.account">
-        <field name="name">Ministry of Water Resources and Energy - Expense</field>
-        <field name="code">1015442186</field>
+    <record id="account_mda_christian_pilgrims_welfare_board_expense" model="account.account">
+        <field name="name">CHRISTIAN PILGRIMS WELFARE BOARD - Expense</field>
+        <field name="code">1014518437</field>
         <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_water_resources_and_energy"/>
+        <field name="branch_id" ref="company_memo.mda_christian_pilgrims_welfare_board"/>
     </record>
-    <record id="account_mda_ministry_of_water_resources_and_energy_bank_cash" model="account.account">
-        <field name="name">Ministry of Water Resources and Energy - Bank/Cash</field>
-        <field name="code">1015442186_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_water_resources_and_energy"/>
-    </record>
-
-    <record id="account_mda_ministry_of_justice_expense" model="account.account">
-        <field name="name">Ministry of Justice - Expense</field>
-        <field name="code">0211125618</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_justice"/>
-    </record>
-    <record id="account_mda_ministry_of_justice_bank_cash" model="account.account">
-        <field name="name">Ministry of Justice - Bank/Cash</field>
-        <field name="code">0211125618_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_justice"/>
-    </record>
-
-    <record id="account_mda_ministry_of_housing_expense" model="account.account">
-        <field name="name">Ministry of Housing - Expense</field>
-        <field name="code">1015885400</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_housing"/>
-    </record>
-    <record id="account_mda_ministry_of_housing_bank_cash" model="account.account">
-        <field name="name">Ministry of Housing - Bank/Cash</field>
-        <field name="code">1015885400_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_housing"/>
-    </record>
-
-    <record id="account_mda_ministry_of_agriculture_and_rural_development_expense" model="account.account">
-        <field name="name">Ministry of Agriculture and Rural Development - Expense</field>
-        <field name="code">0049449692</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_agriculture_and_rural_development"/>
-    </record>
-    <record id="account_mda_ministry_of_agriculture_and_rural_development_bank_cash" model="account.account">
-        <field name="name">Ministry of Agriculture and Rural Development - Bank/Cash</field>
-        <field name="code">0049449692_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_agriculture_and_rural_development"/>
-    </record>
-
-    <record id="account_mda_ministry_of_works_expense" model="account.account">
-        <field name="name">Ministry of Works - Expense</field>
-        <field name="code">1014520500</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_works"/>
-    </record>
-    <record id="account_mda_ministry_of_works_bank_cash" model="account.account">
-        <field name="name">Ministry of Works - Bank/Cash</field>
-        <field name="code">1014520500_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_works"/>
-    </record>
-
-    <record id="account_mda_ministry_of_education_higher_expense" model="account.account">
-        <field name="name">Ministry of Education (Higher Education) - Expense</field>
-        <field name="code">1026556074</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_education_higher"/>
-    </record>
-    <record id="account_mda_ministry_of_education_higher_bank_cash" model="account.account">
-        <field name="name">Ministry of Education (Higher Education) - Bank/Cash</field>
-        <field name="code">1026556074_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_education_higher"/>
-    </record>
-
-    <record id="account_mda_ministry_of_education_secondary_expense" model="account.account">
-        <field name="name">Ministry of Education (Secondary Education) - Expense</field>
-        <field name="code">0212152457</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_education_secondary"/>
-    </record>
-    <record id="account_mda_ministry_of_education_secondary_bank_cash" model="account.account">
-        <field name="name">Ministry of Education (Secondary Education) - Bank/Cash</field>
-        <field name="code">0212152457_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_education_secondary"/>
-    </record>
-
-    <record id="account_mda_ministry_of_women_affairs_and_social_development_expense" model="account.account">
-        <field name="name">Ministry of Women Affairs and Social Development - Expense</field>
-        <field name="code">1006633100</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_women_affairs_and_social_development"/>
-    </record>
-    <record id="account_mda_ministry_of_women_affairs_and_social_development_bank_cash" model="account.account">
-        <field name="name">Ministry of Women Affairs and Social Development - Bank/Cash</field>
-        <field name="code">1006633100_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_women_affairs_and_social_development"/>
-    </record>
-
-    <record id="account_mda_ministry_of_sports_and_youth_development_expense" model="account.account">
-        <field name="name">Ministry of Sports and Youth Development - Expense</field>
-        <field name="code">1021295954</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_sports_and_youth_development"/>
-    </record>
-    <record id="account_mda_ministry_of_sports_and_youth_development_bank_cash" model="account.account">
-        <field name="name">Ministry of Sports and Youth Development - Bank/Cash</field>
-        <field name="code">1021295954_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_sports_and_youth_development"/>
-    </record>
-
-    <record id="account_mda_ministry_of_environment_expense" model="account.account">
-        <field name="name">Ministry of Environment - Expense</field>
-        <field name="code">1009000811</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_environment"/>
-    </record>
-    <record id="account_mda_ministry_of_environment_bank_cash" model="account.account">
-        <field name="name">Ministry of Environment - Bank/Cash</field>
-        <field name="code">1009000811_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_environment"/>
-    </record>
-
-    <record id="account_mda_ministry_of_commerce_and_industry_expense" model="account.account">
-        <field name="name">Ministry of Commerce and Industry - Expense</field>
-        <field name="code">2393006743</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_commerce_and_industry"/>
-    </record>
-    <record id="account_mda_ministry_of_commerce_and_industry_bank_cash" model="account.account">
-        <field name="name">Ministry of Commerce and Industry - Bank/Cash</field>
-        <field name="code">2393006743_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_commerce_and_industry"/>
-    </record>
-
-    <record id="account_mda_ministry_of_lands_survey_and_town_planning_expense" model="account.account">
-        <field name="name">Ministry of Lands, Survey and Town Planning - Expense</field>
-        <field name="code">1022545443</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_lands_survey_and_town_planning"/>
-    </record>
-    <record id="account_mda_ministry_of_lands_survey_and_town_planning_bank_cash" model="account.account">
-        <field name="name">Ministry of Lands, Survey and Town Planning - Bank/Cash</field>
-        <field name="code">1022545443_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_lands_survey_and_town_planning"/>
-    </record>
-
-    <record id="account_mda_ministry_of_tourism_culture_and_hospitality_expense" model="account.account">
-        <field name="name">Ministry of Tourism, Culture and Hospitality - Expense</field>
-        <field name="code">1006633090</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_tourism_culture_and_hospitality"/>
-    </record>
-    <record id="account_mda_ministry_of_tourism_culture_and_hospitality_bank_cash" model="account.account">
-        <field name="name">Ministry of Tourism, Culture and Hospitality - Bank/Cash</field>
-        <field name="code">1006633090_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_ministry_of_tourism_culture_and_hospitality"/>
-    </record>
-
-    <record id="account_mda_office_of_the_head_of_civil_service_expense" model="account.account">
-        <field name="name">Office of the Head of Civil Service - Expense</field>
-        <field name="code">5843465019</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_office_of_the_head_of_civil_service"/>
-    </record>
-    <record id="account_mda_office_of_the_head_of_civil_service_bank_cash" model="account.account">
-        <field name="name">Office of the Head of Civil Service - Bank/Cash</field>
-        <field name="code">5843465019_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_office_of_the_head_of_civil_service"/>
-    </record>
-
-    <record id="account_mda_office_of_the_secretary_to_the_government_expense" model="account.account">
-        <field name="name">Office of the Secretary to the Government of the State - Expense</field>
-        <field name="code">1021478665</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_office_of_the_secretary_to_the_government_of_the_state"/>
-    </record>
-    <record id="account_mda_office_of_the_secretary_to_the_government_bank_cash" model="account.account">
-        <field name="name">Office of the Secretary to the Government of the State - Bank/Cash</field>
-        <field name="code">1021478665_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_office_of_the_secretary_to_the_government_of_the_state"/>
-    </record>
-
-    <record id="account_mda_governors_office_expense" model="account.account">
-        <field name="name">Governor's Office - Expense</field>
-        <field name="code">1019341843</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_governors_office"/>
-    </record>
-    <record id="account_mda_governors_office_bank_cash" model="account.account">
-        <field name="name">Governor's Office - Bank/Cash</field>
-        <field name="code">1019341843_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_governors_office"/>
-    </record>
-
-    <!-- Commissions -->
-    <record id="account_mda_house_of_assembly_service_commission_expense" model="account.account">
-        <field name="name">Plateau State House of Assembly Service Commission - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_house_of_assembly_service_commission"/>
-    </record>
-    <record id="account_mda_house_of_assembly_service_commission_bank_cash" model="account.account">
-        <field name="name">Plateau State House of Assembly Service Commission - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_house_of_assembly_service_commission"/>
-    </record>
-
-    <record id="account_mda_judicial_service_commission_expense" model="account.account">
-        <field name="name">Judicial Service Commission - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_judicial_service_commission"/>
-    </record>
-    <record id="account_mda_judicial_service_commission_bank_cash" model="account.account">
-        <field name="name">Judicial Service Commission - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_judicial_service_commission"/>
-    </record>
-
-    <record id="account_mda_local_government_service_commission_expense" model="account.account">
-        <field name="name">Local Government Service Commission - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_local_government_service_commission"/>
-    </record>
-    <record id="account_mda_local_government_service_commission_bank_cash" model="account.account">
-        <field name="name">Local Government Service Commission - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_local_government_service_commission"/>
-    </record>
-
-    <record id="account_mda_civil_service_commission_expense" model="account.account">
-        <field name="name">Civil Service Commission - Expense</field>
-        <field name="code">1019341898</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_civil_service_commission"/>
-    </record>
+    <!-- CIVIL SERVICE COMMISSION -->
     <record id="account_mda_civil_service_commission_bank_cash" model="account.account">
-        <field name="name">Civil Service Commission - Bank/Cash</field>
+        <field name="name">CIVIL SERVICE COMMISSION - Bank/Cash</field>
         <field name="code">1019341898_cash</field>
         <field name="account_type">asset_cash</field>
         <field name="branch_id" ref="company_memo.mda_civil_service_commission"/>
     </record>
-
-    <record id="account_mda_teachers_service_commission_expense" model="account.account">
-        <field name="name">Teachers Service Commission - Expense</field>
-        <field name="code">5900003291</field>
+    <record id="account_mda_civil_service_commission_expense" model="account.account">
+        <field name="name">CIVIL SERVICE COMMISSION - Expense</field>
+        <field name="code">1019341898</field>
         <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_teachers_service_commission"/>
+        <field name="branch_id" ref="company_memo.mda_civil_service_commission"/>
     </record>
-    <record id="account_mda_teachers_service_commission_bank_cash" model="account.account">
-        <field name="name">Teachers Service Commission - Bank/Cash</field>
-        <field name="code">5900003291_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_teachers_service_commission"/>
-    </record>
-
-    <!-- Boards and Paratastals -->
-    <record id="account_mda_government_printing_press_expense" model="account.account">
-        <field name="name">Plateau State Government Printing Press - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_government_printing_press"/>
-    </record>
-    <record id="account_mda_government_printing_press_bank_cash" model="account.account">
-        <field name="name">Plateau State Government Printing Press - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_government_printing_press"/>
-    </record>
-
-    <record id="account_mda_broadcasting_corporation_expense" model="account.account">
-        <field name="name">Plateau Radio Television Corporation - Expense</field>
-        <field name="code">0012913429</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_broadcasting_corporation"/>
-    </record>
-    <record id="account_mda_broadcasting_corporation_bank_cash" model="account.account">
-        <field name="name">Plateau Radio Television Corporation - Bank/Cash</field>
-        <field name="code">0012913429_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_broadcasting_corporation"/>
-    </record>
-
-    <record id="account_mda_rural_water_supply_expense" model="account.account">
-        <field name="name">Plateau Rural Water And Sanitation Agency - Expense</field>
-        <field name="code">1015558786</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_rural_water_supply"/>
-    </record>
-    <record id="account_mda_rural_water_supply_bank_cash" model="account.account">
-        <field name="name">Plateau Rural Water And Sanitation Agency - Bank/Cash</field>
-        <field name="code">1015558786_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_rural_water_supply"/>
-    </record>
-
-    <record id="account_mda_fire_service_directorate_expense" model="account.account">
-        <field name="name">Fire Service Directorate - Expense</field>
-        <field name="code">4683060251</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_fire_service_directorate"/>
-    </record>
-    <record id="account_mda_fire_service_directorate_bank_cash" model="account.account">
-        <field name="name">Fire Service Directorate - Bank/Cash</field>
-        <field name="code">4683060251_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_fire_service_directorate"/>
-    </record>
-
-    <record id="account_mda_adult_non_formal_education_expense" model="account.account">
-        <field name="name">Adult and Non Formal Education - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_adult_non_formal_education"/>
-    </record>
-    <record id="account_mda_adult_non_formal_education_bank_cash" model="account.account">
-        <field name="name">Adult and Non Formal Education - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_adult_non_formal_education"/>
-    </record>
-
-    <record id="account_mda_agricultural_development_programme_expense" model="account.account">
-        <field name="name">Plateau Agricultural Development Programme - Expense</field>
-        <field name="code">6001204136</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_agricultural_development_programme"/>
-    </record>
-    <record id="account_mda_agricultural_development_programme_bank_cash" model="account.account">
-        <field name="name">Plateau Agricultural Development Programme - Bank/Cash</field>
-        <field name="code">6001204136_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_agricultural_development_programme"/>
-    </record>
-
-    <record id="account_mda_agricultural_mechanization_service_expense" model="account.account">
-        <field name="name">Plateau Agricultural Mechanization Service - Expense</field>
-        <field name="code">5030064753</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_agricultural_mechanization_service"/>
-    </record>
-    <record id="account_mda_agricultural_mechanization_service_bank_cash" model="account.account">
-        <field name="name">Plateau Agricultural Mechanization Service - Bank/Cash</field>
-        <field name="code">5030064753_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_agricultural_mechanization_service"/>
-    </record>
-
-    <record id="account_mda_road_maintenance_agency_expense" model="account.account">
-        <field name="name">Plateau State Road Maintenance Agency - Expense</field>
-        <field name="code">1026382741</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_road_maintenance_agency"/>
-    </record>
-    <record id="account_mda_road_maintenance_agency_bank_cash" model="account.account">
-        <field name="name">Plateau State Road Maintenance Agency - Bank/Cash</field>
-        <field name="code">1026382741_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_road_maintenance_agency"/>
-    </record>
-
-    <record id="account_mda_metropolitan_development_board_expense" model="account.account">
-        <field name="name">Jos Metropolitan Development Board - Expense</field>
-        <field name="code">2043171095</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_metropolitan_development_board"/>
-    </record>
-    <record id="account_mda_metropolitan_development_board_bank_cash" model="account.account">
-        <field name="name">Jos Metropolitan Development Board - Bank/Cash</field>
-        <field name="code">2043171095_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_metropolitan_development_board"/>
-    </record>
-
-    <record id="account_mda_sports_council_expense" model="account.account">
-        <field name="name">Plateau State Sports Council - Expense</field>
-        <field name="code">1017628476</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_sports_council"/>
-    </record>
-    <record id="account_mda_sports_council_bank_cash" model="account.account">
-        <field name="name">Plateau State Sports Council - Bank/Cash</field>
-        <field name="code">1017628476_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_sports_council"/>
-    </record>
-
-    <record id="account_mda_plateau_united_football_club_expense" model="account.account">
-        <field name="name">Plateau United Football Club - Expense</field>
-        <field name="code">1014519142</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_united_football_club"/>
-    </record>
-    <record id="account_mda_plateau_united_football_club_bank_cash" model="account.account">
-        <field name="name">Plateau United Football Club - Bank/Cash</field>
-        <field name="code">1014519142_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_united_football_club"/>
-    </record>
-
-    <record id="account_mda_mineral_development_company_expense" model="account.account">
-        <field name="name">Plateau State Mineral Development Company - Expense</field>
-        <field name="code">1011531637</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_mineral_development_company"/>
-    </record>
-    <record id="account_mda_mineral_development_company_bank_cash" model="account.account">
-        <field name="name">Plateau State Mineral Development Company - Bank/Cash</field>
-        <field name="code">1011531637_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_mineral_development_company"/>
-    </record>
-
-    <record id="account_mda_main_market_authority_expense" model="account.account">
-        <field name="name">Jos Main Market Authority - Expense</field>
-        <field name="code">0049449386</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_main_market_authority"/>
-    </record>
-    <record id="account_mda_main_market_authority_bank_cash" model="account.account">
-        <field name="name">Jos Main Market Authority - Bank/Cash</field>
-        <field name="code">0049449386_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_main_market_authority"/>
-    </record>
-
-    <record id="account_mda_publishing_corporation_expense" model="account.account">
-        <field name="name">Plateau Publishing Corporation - Expense</field>
-        <field name="code">5900003784</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_publishing_corporation"/>
-    </record>
-    <record id="account_mda_publishing_corporation_bank_cash" model="account.account">
-        <field name="name">Plateau Publishing Corporation - Bank/Cash</field>
-        <field name="code">5900003784_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_publishing_corporation"/>
-    </record>
-    <record id="account_mda_express_service_limited_expense" model="account.account">
-        <field name="name">Plateau Express Service Limited - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_express_service_limited"/>
-    </record>
-    <record id="account_mda_express_service_limited_bank_cash" model="account.account">
-        <field name="name">Plateau Express Service Limited - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_express_service_limited"/>
-    </record>
-
-    <record id="account_mda_aids_control_agency_expense" model="account.account">
-        <field name="name">Plateau Aids Control Agency - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_aids_control_agency"/>
-    </record>
-    <record id="account_mda_aids_control_agency_bank_cash" model="account.account">
-        <field name="name">Plateau Aids Control Agency - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_aids_control_agency"/>
-    </record>
-
-    <record id="account_mda_community_and_social_development_agency_expense" model="account.account">
-        <field name="name">Plateau State Community and Social Development Agency - Expense</field>
-        <field name="code">1215849107</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_community_and_social_development_agency"/>
-    </record>
-    <record id="account_mda_community_and_social_development_agency_bank_cash" model="account.account">
-        <field name="name">Plateau State Community and Social Development Agency - Bank/Cash</field>
-        <field name="code">1215849107_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_community_and_social_development_agency"/>
-    </record>
-
-    <record id="account_mda_emergency_and_relief_management_agency_expense" model="account.account">
-        <field name="name">Plateau State Emergency and Relief Management Agency - Expense</field>
-        <field name="code">1014529807</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_emergency_and_relief_management_agency"/>
-    </record>
-    <record id="account_mda_emergency_and_relief_management_agency_bank_cash" model="account.account">
-        <field name="name">Plateau State Emergency and Relief Management Agency - Bank/Cash</field>
-        <field name="code">1014529807_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_emergency_and_relief_management_agency"/>
-    </record>
-
-    <record id="account_mda_environmental_protection_agency_expense" model="account.account">
-        <field name="name">Plateau Environmental Protection and Sanitation Agency - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_environmental_protection_agency"/>
-    </record>
-    <record id="account_mda_environmental_protection_agency_bank_cash" model="account.account">
-        <field name="name">Plateau Environmental Protection and Sanitation Agency - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_environmental_protection_agency"/>
-    </record>
-
-    <record id="account_mda_specialist_hospital_expense" model="account.account">
-        <field name="name">Plateau State Specialist Hospital - Expense</field>
-        <field name="code">1015232592</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_specialist_hospital"/>
-    </record>
-    <record id="account_mda_specialist_hospital_bank_cash" model="account.account">
-        <field name="name">Plateau State Specialist Hospital - Bank/Cash</field>
-        <field name="code">1015232592_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_specialist_hospital"/>
-    </record>
-
-    <record id="account_mda_operation_rainbow_expense" model="account.account">
-        <field name="name">Operation Rainbow - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_operation_rainbow"/>
-    </record>
-    <record id="account_mda_operation_rainbow_bank_cash" model="account.account">
-        <field name="name">Operation Rainbow - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_operation_rainbow"/>
-    </record>
-
-    <record id="account_mda_afforestation_programme_expense" model="account.account">
-        <field name="name">Plateau State Afforestation Programme - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_afforestation_programme"/>
-    </record>
-    <record id="account_mda_afforestation_programme_bank_cash" model="account.account">
-        <field name="name">Plateau State Afforestation Programme - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_afforestation_programme"/>
-    </record>
-
-    <record id="account_mda_public_sector_reform_development_project_expense" model="account.account">
-        <field name="name">Public Sector Reform and Development Project - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_public_sector_reform_development_project"/>
-    </record>
-    <record id="account_mda_public_sector_reform_development_project_bank_cash" model="account.account">
-        <field name="name">Public Sector Reform and Development Project - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_public_sector_reform_development_project"/>
-    </record>
-    <record id="account_mda_plateau_state_library_board_expense" model="account.account">
-        <field name="name">Plateau State Library Board - Expense</field>
-        <field name="code">4030012883</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_library_board"/>
-    </record>
-    <record id="account_mda_plateau_state_library_board_bank_cash" model="account.account">
-        <field name="name">Plateau State Library Board - Bank/Cash</field>
-        <field name="code">4030012883_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_library_board"/>
-    </record>
-
-    <record id="account_mda_plateau_state_hospitals_management_board_expense" model="account.account">
-        <field name="name">Plateau State Hospitals Management Board - Expense</field>
-        <field name="code">1014527183</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_hospitals_management_board"/>
-    </record>
-    <record id="account_mda_plateau_state_hospitals_management_board_bank_cash" model="account.account">
-        <field name="name">Plateau State Hospitals Management Board - Bank/Cash</field>
-        <field name="code">1014527183_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_hospitals_management_board"/>
-    </record>
-
-    <record id="account_mda_jos_water_services_corporation_expense" model="account.account">
-        <field name="name">Jos Water Services Corporation - Expense</field>
-        <field name="code">4030012302</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_jos_water_services_corporation"/>
-    </record>
-    <record id="account_mda_jos_water_services_corporation_bank_cash" model="account.account">
-        <field name="name">Jos Water Services Corporation - Bank/Cash</field>
-        <field name="code">4030012302_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_jos_water_services_corporation"/>
-    </record>
-
-    <record id="account_mda_plateau_state_water_board_expense" model="account.account">
-        <field name="name">Plateau State Water Board - Expense</field>
-        <field name="code">1015558786</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_water_board"/>
-    </record>
-    <record id="account_mda_plateau_state_water_board_bank_cash" model="account.account">
-        <field name="name">Plateau State Water Board - Bank/Cash</field>
-        <field name="code">1015558786_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_water_board"/>
-    </record>
-
-    <record id="account_mda_local_government_pension_board_expense" model="account.account">
-        <field name="name">Local Government Pension Board - Expense</field>
-        <field name="code">2032382857</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_local_government_pension_board"/>
-    </record>
-    <record id="account_mda_local_government_pension_board_bank_cash" model="account.account">
-        <field name="name">Local Government Pension Board - Bank/Cash</field>
-        <field name="code">2032382857_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_local_government_pension_board"/>
-    </record>
-
-    <record id="account_mda_plateau_state_christian_pilgrims_welfare_board_expense" model="account.account">
-        <field name="name">Plateau State Christian Pilgrims Welfare Board - Expense</field>
-        <field name="code">1014518437</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_christian_pilgrims_welfare_board"/>
-    </record>
-    <record id="account_mda_plateau_state_christian_pilgrims_welfare_board_bank_cash" model="account.account">
-        <field name="name">Plateau State Christian Pilgrims Welfare Board - Bank/Cash</field>
-        <field name="code">1014518437_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_christian_pilgrims_welfare_board"/>
-    </record>
-
-    <record id="account_mda_plateau_state_muslim_pilgrims_welfare_board_expense" model="account.account">
-        <field name="name">Plateau State Muslim Pilgrims Welfare Board - Expense</field>
-        <field name="code">5030067187</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_muslim_pilgrims_welfare_board"/>
-    </record>
-    <record id="account_mda_plateau_state_muslim_pilgrims_welfare_board_bank_cash" model="account.account">
-        <field name="name">Plateau State Muslim Pilgrims Welfare Board - Bank/Cash</field>
-        <field name="code">5030067187_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_muslim_pilgrims_welfare_board"/>
-    </record>
-    <record id="account_mda_plateau_state_universal_basic_education_board_expense" model="account.account">
-        <field name="name">Plateau State Universal Basic Education Board - Expense</field>
-        <field name="code">1014518217</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_universal_basic_education_board"/>
-    </record>
-    <record id="account_mda_plateau_state_universal_basic_education_board_bank_cash" model="account.account">
-        <field name="name">Plateau State Universal Basic Education Board - Bank/Cash</field>
-        <field name="code">1014518217_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_universal_basic_education_board"/>
-    </record>
-
-    <record id="account_mda_relevant_technology_board_expense" model="account.account">
-        <field name="name">Relevant Technology Board - Expense</field>
-        <field name="code">0076171917</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_relevant_technology_board"/>
-    </record>
-    <record id="account_mda_relevant_technology_board_bank_cash" model="account.account">
-        <field name="name">Relevant Technology Board - Bank/Cash</field>
-        <field name="code">0076171917_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_relevant_technology_board"/>
-    </record>
-
-    <record id="account_mda_plateau_state_scholarship_board_expense" model="account.account">
-        <field name="name">Plateau State Scholarship Board - Expense</field>
-        <field name="code">1228548075</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_scholarship_board"/>
-    </record>
-    <record id="account_mda_plateau_state_scholarship_board_bank_cash" model="account.account">
-        <field name="name">Plateau State Scholarship Board - Bank/Cash</field>
-        <field name="code">1228548075_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_scholarship_board"/>
-    </record>
-
-    <record id="account_mda_plateau_state_pension_board_expense" model="account.account">
-        <field name="name">Plateau State Pension Board - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_pension_board"/>
-    </record>
-    <record id="account_mda_plateau_state_pension_board_bank_cash" model="account.account">
-        <field name="name">Plateau State Pension Board - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_pension_board"/>
-    </record>
-
-    <record id="account_mda_bureau_of_statistics_expense" model="account.account">
-        <field name="name">Bureau of Statistics - Expense</field>
-        <field name="code">5030065014</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_bureau_of_statistics"/>
-    </record>
-    <record id="account_mda_bureau_of_statistics_bank_cash" model="account.account">
-        <field name="name">Bureau of Statistics - Bank/Cash</field>
-        <field name="code">5030065014_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_bureau_of_statistics"/>
-    </record>
-    <record id="account_mda_plateau_state_peace_building_agency_expense" model="account.account">
-        <field name="name">Plateau State Peace Building Agency - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_peace_building_agency"/>
-    </record>
-    <record id="account_mda_plateau_state_peace_building_agency_bank_cash" model="account.account">
-        <field name="name">Plateau State Peace Building Agency - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_peace_building_agency"/>
-    </record>
-
-    <record id="account_mda_sustainable_development_goals_expense" model="account.account">
-        <field name="name">Sustainable Development Goals - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_sustainable_development_goals"/>
-    </record>
-    <record id="account_mda_sustainable_development_goals_bank_cash" model="account.account">
-        <field name="name">Sustainable Development Goals - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_sustainable_development_goals"/>
-    </record>
-
-    <record id="account_mda_plateau_investment_and_property_development_company_expense" model="account.account">
-        <field name="name">Plateau Investment and Property Development Company - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_investment_and_property_development_company"/>
-    </record>
-    <record id="account_mda_plateau_investment_and_property_development_company_bank_cash" model="account.account">
-        <field name="name">Plateau Investment and Property Development Company - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_investment_and_property_development_company"/>
-    </record>
-
-    <record id="account_mda_plateau_state_tourism_corporation_expense" model="account.account">
-        <field name="name">Plateau State Tourism Corporation - Expense</field>
-        <field name="code">0012854713</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_tourism_corporation"/>
-    </record>
-    <record id="account_mda_plateau_state_tourism_corporation_bank_cash" model="account.account">
-        <field name="name">Plateau State Tourism Corporation - Bank/Cash</field>
-        <field name="code">0012854713_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_tourism_corporation"/>
-    </record>
-
-    <record id="account_mda_agricultural_services_training_centre_expense" model="account.account">
-        <field name="name">Agricultural Services Training Centre - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_agricultural_services_training_centre"/>
-    </record>
-    <record id="account_mda_agricultural_services_training_centre_bank_cash" model="account.account">
-        <field name="name">Agricultural Services Training Centre - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_agricultural_services_training_centre"/>
-    </record>
-
-    <record id="account_mda_plateau_state_primary_health_care_expense" model="account.account">
-        <field name="name">Plateau State Primary Health Care - Expense</field>
-        <field name="code">1019341850</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_primary_health_care"/>
-    </record>
-    <record id="account_mda_plateau_state_primary_health_care_bank_cash" model="account.account">
-        <field name="name">Plateau State Primary Health Care - Bank/Cash</field>
-        <field name="code">1019341850_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_primary_health_care"/>
-    </record>
-
-    <record id="account_mda_plateau_state_micro_finance_agency_expense" model="account.account">
-        <field name="name">Plateau State Micro Finance Agency - Expense</field>
-        <field name="code">1014866035</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_micro_finance_agency"/>
-    </record>
-    <record id="account_mda_plateau_state_micro_finance_agency_bank_cash" model="account.account">
-        <field name="name">Plateau State Micro Finance Agency - Bank/Cash</field>
-        <field name="code">1014866035_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_micro_finance_agency"/>
-    </record>
-
-    <record id="account_mda_public_procurement_expense" model="account.account">
-        <field name="name">Public Procurement - Expense</field>
-        <field name="code">1015344417</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_public_procurement"/>
-    </record>
-    <record id="account_mda_public_procurement_bank_cash" model="account.account">
-        <field name="name">Public Procurement - Bank/Cash</field>
-        <field name="code">1015344417_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_public_procurement"/>
-    </record>
-
-    <record id="account_mda_plateau_state_contributory_health_care_management_agency_expense" model="account.account">
-        <field name="name">Plateau State Contributory Health Care Management Agency - Expense</field>
-        <field name="code">0096734765</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_contributory_health_care_management_agency"/>
-    </record>
-    <record id="account_mda_plateau_state_contributory_health_care_management_agency_bank_cash" model="account.account">
-        <field name="name">Plateau State Contributory Health Care Management Agency - Bank/Cash</field>
-        <field name="code">0096734765_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_contributory_health_care_management_agency"/>
-    </record>
-
-    <record id="account_mda_plateau_state_information_and_communication_development_agency_expense" model="account.account">
-        <field name="name">Plateau State Information and Communication Development Agency - Expense</field>
-        <field name="code">4060013582</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_information_and_communication_development_agency"/>
-    </record>
-    <record id="account_mda_plateau_state_information_and_communication_development_agency_bank_cash" model="account.account">
-        <field name="name">Plateau State Information and Communication Development Agency - Bank/Cash</field>
-        <field name="code">4060013582_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_information_and_communication_development_agency"/>
-    </record>
-
-    <record id="account_mda_plateau_state_municipal_water_supply_and_sanitation_agency_expense" model="account.account">
-        <field name="name">Plateau State Municipal Water Supply and Sanitation Agency - Expense</field>
-        <field name="code">UNAVAILABLE</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_municipal_water_supply_and_sanitation_agency"/>
-    </record>
-    <record id="account_mda_plateau_state_municipal_water_supply_and_sanitation_agency_bank_cash" model="account.account">
-        <field name="name">Plateau State Municipal Water Supply and Sanitation Agency - Bank/Cash</field>
-        <field name="code">UNAVAILABLE_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_municipal_water_supply_and_sanitation_agency"/>
-    </record>
-
-
-    <!-- Tertiary Institutions -->
-    <record id="account_mda_college_of_health_technology_expense" model="account.account">
-        <field name="name">College of Health Technology Pankshin - Expense</field>
-        <field name="code">1019341836</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_college_of_health_technology"/>
-    </record>
-    <record id="account_mda_college_of_health_technology_bank_cash" model="account.account">
-        <field name="name">College of Health Technology Pankshin - Bank/Cash</field>
-        <field name="code">1019341836_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_college_of_health_technology"/>
-    </record>
-
-    <record id="account_mda_college_of_health_technology_zawan_expense" model="account.account">
-        <field name="name">College of Health Technology Zawan - Expense</field>
-        <field name="code">0701931357</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_college_of_health_technology_zawan"/>
-    </record>
-    <record id="account_mda_college_of_health_technology_zawan_bank_cash" model="account.account">
-        <field name="name">College of Health Technology Zawan - Bank/Cash</field>
-        <field name="code">0701931357_cash</field>
-        <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_college_of_health_technology_zawan"/>
-    </record>
-
-    <record id="account_mda_college_of_agriculture_garkawa_expense" model="account.account">
-        <field name="name">College of Agriculture Garkawa - Expense</field>
-        <field name="code">0047819602</field>
-        <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_college_of_agriculture_garkawa"/>
-    </record>
+    <!-- COLLEGE OF AGRICULTURE, GARKAWA -->
     <record id="account_mda_college_of_agriculture_garkawa_bank_cash" model="account.account">
-        <field name="name">College of Agriculture Garkawa - Bank/Cash</field>
-        <field name="code">0047819602_cash</field>
+        <field name="name">COLLEGE OF AGRICULTURE, GARKAWA - Bank/Cash</field>
+        <field name="code">47819602_cash</field>
         <field name="account_type">asset_cash</field>
         <field name="branch_id" ref="company_memo.mda_college_of_agriculture_garkawa"/>
     </record>
-
-    <record id="account_mda_college_of_education_gindiri_expense" model="account.account">
-        <field name="name">College of Education Gindiri - Expense</field>
-        <field name="code">2029695387</field>
+    <record id="account_mda_college_of_agriculture_garkawa_expense" model="account.account">
+        <field name="name">COLLEGE OF AGRICULTURE, GARKAWA - Expense</field>
+        <field name="code">47819602</field>
         <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_college_of_education_gindiri"/>
+        <field name="branch_id" ref="company_memo.mda_college_of_agriculture_garkawa"/>
     </record>
+    <!-- COLLEGE OF ARTS,SCIENCE AND TECHNOLOGY, KURGWI -->
+    <record id="account_mda_college_of_artsscience_and_technology_kurgwi_bank_cash" model="account.account">
+        <field name="name">COLLEGE OF ARTS,SCIENCE AND TECHNOLOGY, KURGWI - Bank/Cash</field>
+        <field name="code">2029685323_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_college_of_artsscience_and_technology_kurgwi"/>
+    </record>
+    <record id="account_mda_college_of_artsscience_and_technology_kurgwi_expense" model="account.account">
+        <field name="name">COLLEGE OF ARTS,SCIENCE AND TECHNOLOGY, KURGWI - Expense</field>
+        <field name="code">2029685323</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_college_of_artsscience_and_technology_kurgwi"/>
+    </record>
+    <!-- COLLEGE OF EDUCATION, GINDIRI -->
     <record id="account_mda_college_of_education_gindiri_bank_cash" model="account.account">
-        <field name="name">College of Education Gindiri - Bank/Cash</field>
+        <field name="name">COLLEGE OF EDUCATION, GINDIRI - Bank/Cash</field>
         <field name="code">2029695387_cash</field>
         <field name="account_type">asset_cash</field>
         <field name="branch_id" ref="company_memo.mda_college_of_education_gindiri"/>
     </record>
-
-    <record id="account_mda_college_of_arts_science_and_remedial_studies_kurgwi_expense" model="account.account">
-        <field name="name">College of Arts, Science and Remedial Studies Kurgwi - Expense</field>
-        <field name="code">2029685323</field>
+    <record id="account_mda_college_of_education_gindiri_expense" model="account.account">
+        <field name="name">COLLEGE OF EDUCATION, GINDIRI - Expense</field>
+        <field name="code">2029695387</field>
         <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_college_of_arts_science_and_remedial_studies_kurgwi"/>
+        <field name="branch_id" ref="company_memo.mda_college_of_education_gindiri"/>
     </record>
-    <record id="account_mda_college_of_arts_science_and_remedial_studies_kurgwi_bank_cash" model="account.account">
-        <field name="name">College of Arts, Science and Remedial Studies Kurgwi - Bank/Cash</field>
-        <field name="code">2029685323_cash</field>
+    <!-- COLLEGE OF HEALTH TECHNOLOGY ZAWAN -->
+    <record id="account_mda_college_of_health_technology_zawan_bank_cash" model="account.account">
+        <field name="name">COLLEGE OF HEALTH TECHNOLOGY ZAWAN - Bank/Cash</field>
+        <field name="code">701931357_cash</field>
         <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_college_of_arts_science_and_remedial_studies_kurgwi"/>
+        <field name="branch_id" ref="company_memo.mda_college_of_health_technology_zawan"/>
     </record>
-
-    <record id="account_mda_plateau_state_polytechnic_barkin_ladi_expense" model="account.account">
-        <field name="name">Plateau State Polytechnic Barkin-Ladi - Expense</field>
-        <field name="code">1017775950</field>
+    <record id="account_mda_college_of_health_technology_zawan_expense" model="account.account">
+        <field name="name">COLLEGE OF HEALTH TECHNOLOGY ZAWAN - Expense</field>
+        <field name="code">701931357</field>
         <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_polytechnic_barkin_ladi"/>
+        <field name="branch_id" ref="company_memo.mda_college_of_health_technology_zawan"/>
     </record>
-    <record id="account_mda_plateau_state_polytechnic_barkin_ladi_bank_cash" model="account.account">
-        <field name="name">Plateau State Polytechnic Barkin-Ladi - Bank/Cash</field>
-        <field name="code">1017775950_cash</field>
+    <!-- COLLEGE OF HEALTH TECHNOLOGY, PANKSHIN -->
+    <record id="account_mda_college_of_health_technology_pankshin_bank_cash" model="account.account">
+        <field name="name">COLLEGE OF HEALTH TECHNOLOGY, PANKSHIN - Bank/Cash</field>
+        <field name="code">1019341836_cash</field>
         <field name="account_type">asset_cash</field>
-        <field name="branch_id" ref="company_memo.mda_plateau_state_polytechnic_barkin_ladi"/>
+        <field name="branch_id" ref="company_memo.mda_college_of_health_technology_pankshin"/>
     </record>
-
-    <record id="account_mda_college_of_nursing_and_midwifery_vom_expense" model="account.account">
-        <field name="name">College of Nursing and Midwifery Vom - Expense</field>
-        <field name="code">5030131376</field>
+    <record id="account_mda_college_of_health_technology_pankshin_expense" model="account.account">
+        <field name="name">COLLEGE OF HEALTH TECHNOLOGY, PANKSHIN - Expense</field>
+        <field name="code">1019341836</field>
         <field name="account_type">expense</field>
-        <field name="branch_id" ref="company_memo.mda_college_of_nursing_and_midwifery_vom"/>
+        <field name="branch_id" ref="company_memo.mda_college_of_health_technology_pankshin"/>
     </record>
+    <!-- COLLEGE OF NURSING & MIDWIFERY VOM -->
     <record id="account_mda_college_of_nursing_and_midwifery_vom_bank_cash" model="account.account">
-        <field name="name">College of Nursing and Midwifery Vom - Bank/Cash</field>
+        <field name="name">COLLEGE OF NURSING & MIDWIFERY VOM - Bank/Cash</field>
         <field name="code">5030131376_cash</field>
         <field name="account_type">asset_cash</field>
         <field name="branch_id" ref="company_memo.mda_college_of_nursing_and_midwifery_vom"/>
     </record>
-
+    <record id="account_mda_college_of_nursing_and_midwifery_vom_expense" model="account.account">
+        <field name="name">COLLEGE OF NURSING & MIDWIFERY VOM - Expense</field>
+        <field name="code">5030131376</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_college_of_nursing_and_midwifery_vom"/>
+    </record>
+    <!-- COMMUNITY AND SOCIAL DEVELOPMENT AGENCY -->
+    <record id="account_mda_community_and_social_development_agency_bank_cash" model="account.account">
+        <field name="name">COMMUNITY AND SOCIAL DEVELOPMENT AGENCY - Bank/Cash</field>
+        <field name="code">1215849107_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_community_and_social_development_agency"/>
+    </record>
+    <record id="account_mda_community_and_social_development_agency_expense" model="account.account">
+        <field name="name">COMMUNITY AND SOCIAL DEVELOPMENT AGENCY - Expense</field>
+        <field name="code">1215849107</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_community_and_social_development_agency"/>
+    </record>
+    <!-- JOS MAIN MARKET AUTHORITY -->
+    <record id="account_mda_jos_main_market_authority_bank_cash" model="account.account">
+        <field name="name">JOS MAIN MARKET AUTHORITY - Bank/Cash</field>
+        <field name="code">49449386_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_jos_main_market_authority"/>
+    </record>
+    <record id="account_mda_jos_main_market_authority_expense" model="account.account">
+        <field name="name">JOS MAIN MARKET AUTHORITY - Expense</field>
+        <field name="code">49449386</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_jos_main_market_authority"/>
+    </record>
+    <!-- JOS METROPOLITAN DEVELOPMENT BOARD -->
+    <record id="account_mda_jos_metropolitan_development_board_bank_cash" model="account.account">
+        <field name="name">JOS METROPOLITAN DEVELOPMENT BOARD - Bank/Cash</field>
+        <field name="code">2043171095_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_jos_metropolitan_development_board"/>
+    </record>
+    <record id="account_mda_jos_metropolitan_development_board_expense" model="account.account">
+        <field name="name">JOS METROPOLITAN DEVELOPMENT BOARD - Expense</field>
+        <field name="code">2043171095</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_jos_metropolitan_development_board"/>
+    </record>
+    <!-- JOS WATER SERVICES CORPORATION -->
+    <record id="account_mda_jos_water_services_corporation_bank_cash" model="account.account">
+        <field name="name">JOS WATER SERVICES CORPORATION - Bank/Cash</field>
+        <field name="code">4030012302_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_jos_water_services_corporation"/>
+    </record>
+    <record id="account_mda_jos_water_services_corporation_expense" model="account.account">
+        <field name="name">JOS WATER SERVICES CORPORATION - Expense</field>
+        <field name="code">4030012302</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_jos_water_services_corporation"/>
+    </record>
+    <!-- LOCAL GOVERNMENT AUDIT DEPARTMENT -->
+    <record id="account_mda_local_government_audit_department_bank_cash" model="account.account">
+        <field name="name">LOCAL GOVERNMENT AUDIT DEPARTMENT - Bank/Cash</field>
+        <field name="code">5030138069_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_local_government_audit_department"/>
+    </record>
+    <record id="account_mda_local_government_audit_department_expense" model="account.account">
+        <field name="name">LOCAL GOVERNMENT AUDIT DEPARTMENT - Expense</field>
+        <field name="code">5030138069</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_local_government_audit_department"/>
+    </record>
+    <!-- LOCAL GOVERNMENT STAFF PENSION BOARD -->
+    <record id="account_mda_local_government_staff_pension_board_bank_cash" model="account.account">
+        <field name="name">LOCAL GOVERNMENT STAFF PENSION BOARD - Bank/Cash</field>
+        <field name="code">2032382857_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_local_government_staff_pension_board"/>
+    </record>
+    <record id="account_mda_local_government_staff_pension_board_expense" model="account.account">
+        <field name="name">LOCAL GOVERNMENT STAFF PENSION BOARD - Expense</field>
+        <field name="code">2032382857</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_local_government_staff_pension_board"/>
+    </record>
+    <!-- MIGHTY JETS -->
+    <record id="account_mda_mighty_jets_bank_cash" model="account.account">
+        <field name="name">MIGHTY JETS - Bank/Cash</field>
+        <field name="code">79058598_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_mighty_jets"/>
+    </record>
+    <record id="account_mda_mighty_jets_expense" model="account.account">
+        <field name="name">MIGHTY JETS - Expense</field>
+        <field name="code">79058598</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_mighty_jets"/>
+    </record>
+    <!-- MIN. OF LANDS, SURVEY & TOWN PLANNING -->
+    <record id="account_mda_min._of_lands_survey_and_town_planning_bank_cash" model="account.account">
+        <field name="name">MIN. OF LANDS, SURVEY & TOWN PLANNING - Bank/Cash</field>
+        <field name="code">1022545443_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_min._of_lands_survey_and_town_planning"/>
+    </record>
+    <record id="account_mda_min._of_lands_survey_and_town_planning_expense" model="account.account">
+        <field name="name">MIN. OF LANDS, SURVEY & TOWN PLANNING - Expense</field>
+        <field name="code">1022545443</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_min._of_lands_survey_and_town_planning"/>
+    </record>
+    <!-- MINISTRY FOR TOURISM, CULTURE & HOSPITALITY -->
+    <record id="account_mda_ministry_for_tourism_culture_and_hospitality_bank_cash" model="account.account">
+        <field name="name">MINISTRY FOR TOURISM, CULTURE & HOSPITALITY - Bank/Cash</field>
+        <field name="code">1006633090_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_for_tourism_culture_and_hospitality"/>
+    </record>
+    <record id="account_mda_ministry_for_tourism_culture_and_hospitality_expense" model="account.account">
+        <field name="name">MINISTRY FOR TOURISM, CULTURE & HOSPITALITY - Expense</field>
+        <field name="code">1006633090</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_for_tourism_culture_and_hospitality"/>
+    </record>
+    <!-- MINISTRY FOR YOUTH & SPORTS DEVELOPMENT -->
+    <record id="account_mda_ministry_for_youth_and_sports_development_bank_cash" model="account.account">
+        <field name="name">MINISTRY FOR YOUTH & SPORTS DEVELOPMENT - Bank/Cash</field>
+        <field name="code">1021295954_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_for_youth_and_sports_development"/>
+    </record>
+    <record id="account_mda_ministry_for_youth_and_sports_development_expense" model="account.account">
+        <field name="name">MINISTRY FOR YOUTH & SPORTS DEVELOPMENT - Expense</field>
+        <field name="code">1021295954</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_for_youth_and_sports_development"/>
+    </record>
+    <!-- MINISTRY OF AGRICULTURE AND NATURAL RESOURCES -->
+    <record id="account_mda_ministry_of_agriculture_and_natural_resources_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF AGRICULTURE AND NATURAL RESOURCES - Bank/Cash</field>
+        <field name="code">49449692_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_agriculture_and_natural_resources"/>
+    </record>
+    <record id="account_mda_ministry_of_agriculture_and_natural_resources_expense" model="account.account">
+        <field name="name">MINISTRY OF AGRICULTURE AND NATURAL RESOURCES - Expense</field>
+        <field name="code">49449692</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_agriculture_and_natural_resources"/>
+    </record>
+    <!-- MINISTRY OF BUDGET AND ECONOMIC PLANNING -->
+    <record id="account_mda_ministry_of_budget_and_economic_planning_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF BUDGET AND ECONOMIC PLANNING - Bank/Cash</field>
+        <field name="code">5030064760_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_budget_and_economic_planning"/>
+    </record>
+    <record id="account_mda_ministry_of_budget_and_economic_planning_expense" model="account.account">
+        <field name="name">MINISTRY OF BUDGET AND ECONOMIC PLANNING - Expense</field>
+        <field name="code">5030064760</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_budget_and_economic_planning"/>
+    </record>
+    <!-- MINISTRY OF COMMERCE & INDUSTRIES -->
+    <record id="account_mda_ministry_of_commerce_and_industries_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF COMMERCE & INDUSTRIES - Bank/Cash</field>
+        <field name="code">2393006743_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_commerce_and_industries"/>
+    </record>
+    <record id="account_mda_ministry_of_commerce_and_industries_expense" model="account.account">
+        <field name="name">MINISTRY OF COMMERCE & INDUSTRIES - Expense</field>
+        <field name="code">2393006743</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_commerce_and_industries"/>
+    </record>
+    <!-- MINISTRY OF EDUCATION (HIGHER) -->
+    <record id="account_mda_ministry_of_education_higher_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF EDUCATION (HIGHER) - Bank/Cash</field>
+        <field name="code">1026556074_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_education_higher"/>
+    </record>
+    <record id="account_mda_ministry_of_education_higher_expense" model="account.account">
+        <field name="name">MINISTRY OF EDUCATION (HIGHER) - Expense</field>
+        <field name="code">1026556074</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_education_higher"/>
+    </record>
+    <!-- MINISTRY OF EDUCATION (SECONDARY) -->
+    <record id="account_mda_ministry_of_education_secondary_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF EDUCATION (SECONDARY) - Bank/Cash</field>
+        <field name="code">212152457_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_education_secondary"/>
+    </record>
+    <record id="account_mda_ministry_of_education_secondary_expense" model="account.account">
+        <field name="name">MINISTRY OF EDUCATION (SECONDARY) - Expense</field>
+        <field name="code">212152457</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_education_secondary"/>
+    </record>
+    <!-- MINISTRY OF ENVIRONMENT, CLIMATE CHANGE -->
+    <record id="account_mda_ministry_of_environment_climate_change_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF ENVIRONMENT, CLIMATE CHANGE - Bank/Cash</field>
+        <field name="code">1009000811_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_environment_climate_change"/>
+    </record>
+    <record id="account_mda_ministry_of_environment_climate_change_expense" model="account.account">
+        <field name="name">MINISTRY OF ENVIRONMENT, CLIMATE CHANGE - Expense</field>
+        <field name="code">1009000811</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_environment_climate_change"/>
+    </record>
+    <!-- MINISTRY OF FINANCE -->
+    <record id="account_mda_ministry_of_finance_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF FINANCE - Bank/Cash</field>
+        <field name="code">1014524508_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_finance"/>
+    </record>
+    <record id="account_mda_ministry_of_finance_expense" model="account.account">
+        <field name="name">MINISTRY OF FINANCE - Expense</field>
+        <field name="code">1014524508</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_finance"/>
+    </record>
+    <!-- MINISTRY OF HEALTH -->
+    <record id="account_mda_ministry_of_health_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF HEALTH - Bank/Cash</field>
+        <field name="code">1014517791_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_health"/>
+    </record>
+    <record id="account_mda_ministry_of_health_expense" model="account.account">
+        <field name="name">MINISTRY OF HEALTH - Expense</field>
+        <field name="code">1014517791</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_health"/>
+    </record>
+    <!-- MINISTRY OF HOUSING -->
+    <record id="account_mda_ministry_of_housing_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF HOUSING - Bank/Cash</field>
+        <field name="code">1015885400_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_housing"/>
+    </record>
+    <record id="account_mda_ministry_of_housing_expense" model="account.account">
+        <field name="name">MINISTRY OF HOUSING - Expense</field>
+        <field name="code">1015885400</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_housing"/>
+    </record>
+    <!-- MINISTRY OF INFORMATION -->
+    <record id="account_mda_ministry_of_information_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF INFORMATION - Bank/Cash</field>
+        <field name="code">1019341908_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_information"/>
+    </record>
+    <record id="account_mda_ministry_of_information_expense" model="account.account">
+        <field name="name">MINISTRY OF INFORMATION - Expense</field>
+        <field name="code">1019341908</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_information"/>
+    </record>
+    <!-- MINISTRY OF JUSTICE -->
+    <record id="account_mda_ministry_of_justice_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF JUSTICE - Bank/Cash</field>
+        <field name="code">211125618_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_justice"/>
+    </record>
+    <record id="account_mda_ministry_of_justice_expense" model="account.account">
+        <field name="name">MINISTRY OF JUSTICE - Expense</field>
+        <field name="code">211125618</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_justice"/>
+    </record>
+    <!-- MINISTRY OF MINERAL DEVELOPMENT -->
+    <record id="account_mda_ministry_of_mineral_development_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF MINERAL DEVELOPMENT - Bank/Cash</field>
+        <field name="code">1015710135_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_mineral_development"/>
+    </record>
+    <record id="account_mda_ministry_of_mineral_development_expense" model="account.account">
+        <field name="name">MINISTRY OF MINERAL DEVELOPMENT - Expense</field>
+        <field name="code">1015710135</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_mineral_development"/>
+    </record>
+    <!-- MINISTRY OF SCIENCE AND TECHNOLOGY -->
+    <record id="account_mda_ministry_of_science_and_technology_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF SCIENCE AND TECHNOLOGY - Bank/Cash</field>
+        <field name="code">5900004346_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_science_and_technology"/>
+    </record>
+    <record id="account_mda_ministry_of_science_and_technology_expense" model="account.account">
+        <field name="name">MINISTRY OF SCIENCE AND TECHNOLOGY - Expense</field>
+        <field name="code">5900004346</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_science_and_technology"/>
+    </record>
+    <!-- MINISTRY OF TRANSPORT -->
+    <record id="account_mda_ministry_of_transport_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF TRANSPORT - Bank/Cash</field>
+        <field name="code">1015700781_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_transport"/>
+    </record>
+    <record id="account_mda_ministry_of_transport_expense" model="account.account">
+        <field name="name">MINISTRY OF TRANSPORT - Expense</field>
+        <field name="code">1015700781</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_transport"/>
+    </record>
+    <!-- MINISTRY OF WATER RESOURCES & ENERGY -->
+    <record id="account_mda_ministry_of_water_resources_and_energy_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF WATER RESOURCES & ENERGY - Bank/Cash</field>
+        <field name="code">1015442186_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_water_resources_and_energy"/>
+    </record>
+    <record id="account_mda_ministry_of_water_resources_and_energy_expense" model="account.account">
+        <field name="name">MINISTRY OF WATER RESOURCES & ENERGY - Expense</field>
+        <field name="code">1015442186</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_water_resources_and_energy"/>
+    </record>
+    <!-- MINISTRY OF WOMEN AFFAIRS & SOCIAL DEVELOPMENT -->
+    <record id="account_mda_ministry_of_women_affairs_and_social_development_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF WOMEN AFFAIRS & SOCIAL DEVELOPMENT - Bank/Cash</field>
+        <field name="code">1006633100_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_women_affairs_and_social_development"/>
+    </record>
+    <record id="account_mda_ministry_of_women_affairs_and_social_development_expense" model="account.account">
+        <field name="name">MINISTRY OF WOMEN AFFAIRS & SOCIAL DEVELOPMENT - Expense</field>
+        <field name="code">1006633100</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_women_affairs_and_social_development"/>
+    </record>
+    <!-- MINISTRY OF WORKS -->
+    <record id="account_mda_ministry_of_works_bank_cash" model="account.account">
+        <field name="name">MINISTRY OF WORKS - Bank/Cash</field>
+        <field name="code">1014520500_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_works"/>
+    </record>
+    <record id="account_mda_ministry_of_works_expense" model="account.account">
+        <field name="name">MINISTRY OF WORKS - Expense</field>
+        <field name="code">1014520500</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_ministry_of_works"/>
+    </record>
+    <!-- OFFICE OF THE ACCOUNTANT GENERAL -->
+    <record id="account_mda_office_of_the_accountant_general_bank_cash" model="account.account">
+        <field name="name">OFFICE OF THE ACCOUNTANT GENERAL - Bank/Cash</field>
+        <field name="code">1019343919_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_office_of_the_accountant_general"/>
+    </record>
+    <record id="account_mda_office_of_the_accountant_general_expense" model="account.account">
+        <field name="name">OFFICE OF THE ACCOUNTANT GENERAL - Expense</field>
+        <field name="code">1019343919</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_office_of_the_accountant_general"/>
+    </record>
+    <!-- OFFICE OF THE EXECUTIVE GOVERNOR -->
+    <record id="account_mda_office_of_the_executive_governor_bank_cash" model="account.account">
+        <field name="name">OFFICE OF THE EXECUTIVE GOVERNOR - Bank/Cash</field>
+        <field name="code">1019341843_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_office_of_the_executive_governor"/>
+    </record>
+    <record id="account_mda_office_of_the_executive_governor_expense" model="account.account">
+        <field name="name">OFFICE OF THE EXECUTIVE GOVERNOR - Expense</field>
+        <field name="code">1019341843</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_office_of_the_executive_governor"/>
+    </record>
+    <!-- OFFICE OF THE HEAD OF CIVIL SERVICE -->
+    <record id="account_mda_office_of_the_head_of_civil_service_bank_cash" model="account.account">
+        <field name="name">OFFICE OF THE HEAD OF CIVIL SERVICE - Bank/Cash</field>
+        <field name="code">5843465019_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_office_of_the_head_of_civil_service"/>
+    </record>
+    <record id="account_mda_office_of_the_head_of_civil_service_expense" model="account.account">
+        <field name="name">OFFICE OF THE HEAD OF CIVIL SERVICE - Expense</field>
+        <field name="code">5843465019</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_office_of_the_head_of_civil_service"/>
+    </record>
+    <!-- OFFICE OF THE SECRETARY TO THE STATE GOVERNMENT -->
+    <record id="account_mda_office_of_the_secretary_to_the_state_government_bank_cash" model="account.account">
+        <field name="name">OFFICE OF THE SECRETARY TO THE STATE GOVERNMENT - Bank/Cash</field>
+        <field name="code">1014634876_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_office_of_the_secretary_to_the_state_government"/>
+    </record>
+    <record id="account_mda_office_of_the_secretary_to_the_state_government_expense" model="account.account">
+        <field name="name">OFFICE OF THE SECRETARY TO THE STATE GOVERNMENT - Expense</field>
+        <field name="code">1014634876</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_office_of_the_secretary_to_the_state_government"/>
+    </record>
+    <!-- PL. STATE CONTRI. HEALTH CARE MANAGEMENT AGENCY -->
+    <record id="account_mda_pl._state_contri._health_care_management_agency_bank_cash" model="account.account">
+        <field name="name">PL. STATE CONTRI. HEALTH CARE MANAGEMENT AGENCY - Bank/Cash</field>
+        <field name="code">96734765_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_pl._state_contri._health_care_management_agency"/>
+    </record>
+    <record id="account_mda_pl._state_contri._health_care_management_agency_expense" model="account.account">
+        <field name="name">PL. STATE CONTRI. HEALTH CARE MANAGEMENT AGENCY - Expense</field>
+        <field name="code">96734765</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_pl._state_contri._health_care_management_agency"/>
+    </record>
+    <!-- PL.RURAL WATER SUPPLY & SANITATION AGENCY -->
+    <record id="account_mda_pl.rural_water_supply_and_sanitation_agency_bank_cash" model="account.account">
+        <field name="name">PL.RURAL WATER SUPPLY & SANITATION AGENCY - Bank/Cash</field>
+        <field name="code">1015558786_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_pl.rural_water_supply_and_sanitation_agency"/>
+    </record>
+    <record id="account_mda_pl.rural_water_supply_and_sanitation_agency_expense" model="account.account">
+        <field name="name">PL.RURAL WATER SUPPLY & SANITATION AGENCY - Expense</field>
+        <field name="code">1015558786</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_pl.rural_water_supply_and_sanitation_agency"/>
+    </record>
+    <!-- PL.ST. HOSPITAL MANAGEMENT BOARD -->
+    <record id="account_mda_pl.st._hospital_management_board_bank_cash" model="account.account">
+        <field name="name">PL.ST. HOSPITAL MANAGEMENT BOARD - Bank/Cash</field>
+        <field name="code">1014527183_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_pl.st._hospital_management_board"/>
+    </record>
+    <record id="account_mda_pl.st._hospital_management_board_expense" model="account.account">
+        <field name="name">PL.ST. HOSPITAL MANAGEMENT BOARD - Expense</field>
+        <field name="code">1014527183</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_pl.st._hospital_management_board"/>
+    </record>
+    <!-- PL.ST. INDEPENDENT ELECTORAL COMMISSION -->
+    <record id="account_mda_pl.st._independent_electoral_commission_bank_cash" model="account.account">
+        <field name="name">PL.ST. INDEPENDENT ELECTORAL COMMISSION - Bank/Cash</field>
+        <field name="code">1014720032_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_pl.st._independent_electoral_commission"/>
+    </record>
+    <record id="account_mda_pl.st._independent_electoral_commission_expense" model="account.account">
+        <field name="name">PL.ST. INDEPENDENT ELECTORAL COMMISSION - Expense</field>
+        <field name="code">1014720032</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_pl.st._independent_electoral_commission"/>
+    </record>
+    <!-- PL.ST. SPECIALIST HOSPITAL -->
+    <record id="account_mda_pl.st._specialist_hospital_bank_cash" model="account.account">
+        <field name="name">PL.ST. SPECIALIST HOSPITAL - Bank/Cash</field>
+        <field name="code">1015232592_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_pl.st._specialist_hospital"/>
+    </record>
+    <record id="account_mda_pl.st._specialist_hospital_expense" model="account.account">
+        <field name="name">PL.ST. SPECIALIST HOSPITAL - Expense</field>
+        <field name="code">1015232592</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_pl.st._specialist_hospital"/>
+    </record>
+    <!-- PLATEA STATE FADAMA NG-CARES -->
+    <record id="account_mda_platea_state_fadama_ng_cares_bank_cash" model="account.account">
+        <field name="name">PLATEA STATE FADAMA NG-CARES - Bank/Cash</field>
+        <field name="code">1014151238_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_platea_state_fadama_ng_cares"/>
+    </record>
+    <record id="account_mda_platea_state_fadama_ng_cares_expense" model="account.account">
+        <field name="name">PLATEA STATE FADAMA NG-CARES - Expense</field>
+        <field name="code">1014151238</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_platea_state_fadama_ng_cares"/>
+    </record>
+    <!-- PLATEAU AGRICULTURAL DEVELOPMENT PROGRAMME -->
+    <record id="account_mda_plateau_agricultural_development_programme_bank_cash" model="account.account">
+        <field name="name">PLATEAU AGRICULTURAL DEVELOPMENT PROGRAMME - Bank/Cash</field>
+        <field name="code">6001204136_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_agricultural_development_programme"/>
+    </record>
+    <record id="account_mda_plateau_agricultural_development_programme_expense" model="account.account">
+        <field name="name">PLATEAU AGRICULTURAL DEVELOPMENT PROGRAMME - Expense</field>
+        <field name="code">6001204136</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_agricultural_development_programme"/>
+    </record>
+    <!-- PLATEAU AGRICULTURAL MECHANIZATION SERV.CORP. -->
+    <record id="account_mda_plateau_agricultural_mechanization_serv.corp._bank_cash" model="account.account">
+        <field name="name">PLATEAU AGRICULTURAL MECHANIZATION SERV.CORP. - Bank/Cash</field>
+        <field name="code">5030064753_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_agricultural_mechanization_serv.corp."/>
+    </record>
+    <record id="account_mda_plateau_agricultural_mechanization_serv.corp._expense" model="account.account">
+        <field name="name">PLATEAU AGRICULTURAL MECHANIZATION SERV.CORP. - Expense</field>
+        <field name="code">5030064753</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_agricultural_mechanization_serv.corp."/>
+    </record>
+    <!-- PLATEAU MINERAL DEVELOPMENT COMPANY -->
+    <record id="account_mda_plateau_mineral_development_company_bank_cash" model="account.account">
+        <field name="name">PLATEAU MINERAL DEVELOPMENT COMPANY - Bank/Cash</field>
+        <field name="code">1011531637_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_mineral_development_company"/>
+    </record>
+    <record id="account_mda_plateau_mineral_development_company_expense" model="account.account">
+        <field name="name">PLATEAU MINERAL DEVELOPMENT COMPANY - Expense</field>
+        <field name="code">1011531637</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_mineral_development_company"/>
+    </record>
+    <!-- PLATEAU RADIO TELEVISION CORPORATION -->
+    <record id="account_mda_plateau_radio_television_corporation_bank_cash" model="account.account">
+        <field name="name">PLATEAU RADIO TELEVISION CORPORATION - Bank/Cash</field>
+        <field name="code">12913429_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_radio_television_corporation"/>
+    </record>
+    <record id="account_mda_plateau_radio_television_corporation_expense" model="account.account">
+        <field name="name">PLATEAU RADIO TELEVISION CORPORATION - Expense</field>
+        <field name="code">12913429</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_radio_television_corporation"/>
+    </record>
+    <!-- PLATEAU STATE BUREAU OF PUBLIC PROCUREMENT -->
+    <record id="account_mda_plateau_state_bureau_of_public_procurement_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE BUREAU OF PUBLIC PROCUREMENT - Bank/Cash</field>
+        <field name="code">1015344417_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_bureau_of_public_procurement"/>
+    </record>
+    <record id="account_mda_plateau_state_bureau_of_public_procurement_expense" model="account.account">
+        <field name="name">PLATEAU STATE BUREAU OF PUBLIC PROCUREMENT - Expense</field>
+        <field name="code">1015344417</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_bureau_of_public_procurement"/>
+    </record>
+    <!-- PLATEAU STATE BUREAU OF STATISTICS -->
+    <record id="account_mda_plateau_state_bureau_of_statistics_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE BUREAU OF STATISTICS - Bank/Cash</field>
+        <field name="code">5030065014_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_bureau_of_statistics"/>
+    </record>
+    <record id="account_mda_plateau_state_bureau_of_statistics_expense" model="account.account">
+        <field name="name">PLATEAU STATE BUREAU OF STATISTICS - Expense</field>
+        <field name="code">5030065014</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_bureau_of_statistics"/>
+    </record>
+    <!-- PLATEAU STATE DISABILITY RIGHTS COMMISSION -->
+    <record id="account_mda_plateau_state_disability_rights_commission_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE DISABILITY RIGHTS COMMISSION - Bank/Cash</field>
+        <field name="code">1020518896_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_disability_rights_commission"/>
+    </record>
+    <record id="account_mda_plateau_state_disability_rights_commission_expense" model="account.account">
+        <field name="name">PLATEAU STATE DISABILITY RIGHTS COMMISSION - Expense</field>
+        <field name="code">1020518896</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_disability_rights_commission"/>
+    </record>
+    <!-- PLATEAU STATE EMERGENCY AGENCY -->
+    <record id="account_mda_plateau_state_emergency_agency_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE EMERGENCY AGENCY - Bank/Cash</field>
+        <field name="code">1014529807_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_emergency_agency"/>
+    </record>
+    <record id="account_mda_plateau_state_emergency_agency_expense" model="account.account">
+        <field name="name">PLATEAU STATE EMERGENCY AGENCY - Expense</field>
+        <field name="code">1014529807</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_emergency_agency"/>
+    </record>
+    <!-- PLATEAU STATE FIRE SERVICE DIRECTORATE -->
+    <record id="account_mda_plateau_state_fire_service_directorate_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE FIRE SERVICE DIRECTORATE - Bank/Cash</field>
+        <field name="code">4683060251_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_fire_service_directorate"/>
+    </record>
+    <record id="account_mda_plateau_state_fire_service_directorate_expense" model="account.account">
+        <field name="name">PLATEAU STATE FIRE SERVICE DIRECTORATE - Expense</field>
+        <field name="code">4683060251</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_fire_service_directorate"/>
+    </record>
+    <!-- PLATEAU STATE ICT DEVELOPMENT AGENCY -->
+    <record id="account_mda_plateau_state_ict_development_agency_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE ICT DEVELOPMENT AGENCY - Bank/Cash</field>
+        <field name="code">4060013582_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_ict_development_agency"/>
+    </record>
+    <record id="account_mda_plateau_state_ict_development_agency_expense" model="account.account">
+        <field name="name">PLATEAU STATE ICT DEVELOPMENT AGENCY - Expense</field>
+        <field name="code">4060013582</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_ict_development_agency"/>
+    </record>
+    <!-- PLATEAU STATE LIBRARY BOARD -->
+    <record id="account_mda_plateau_state_library_board_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE LIBRARY BOARD - Bank/Cash</field>
+        <field name="code">4030012883_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_library_board"/>
+    </record>
+    <record id="account_mda_plateau_state_library_board_expense" model="account.account">
+        <field name="name">PLATEAU STATE LIBRARY BOARD - Expense</field>
+        <field name="code">4030012883</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_library_board"/>
+    </record>
+    <!-- PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY -->
+    <record id="account_mda_plateau_state_microfinance_development_agency_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY - Bank/Cash</field>
+        <field name="code">1014866035_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_microfinance_development_agency"/>
+    </record>
+    <record id="account_mda_plateau_state_microfinance_development_agency_expense" model="account.account">
+        <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY - Expense</field>
+        <field name="code">1014866035</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_microfinance_development_agency"/>
+    </record>
+    <!-- PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY NG-CARES -->
+    <record id="account_mda_plateau_state_microfinance_development_agency_ng_cares_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY NG-CARES - Bank/Cash</field>
+        <field name="code">83294238_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_microfinance_development_agency_ng_cares"/>
+    </record>
+    <record id="account_mda_plateau_state_microfinance_development_agency_ng_cares_expense" model="account.account">
+        <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY NG-CARES - Expense</field>
+        <field name="code">83294238</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_microfinance_development_agency_ng_cares"/>
+    </record>
+    <!-- PLATEAU STATE MUSLIM PILGRIMS WELFARE BOARD -->
+    <record id="account_mda_plateau_state_muslim_pilgrims_welfare_board_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE MUSLIM PILGRIMS WELFARE BOARD - Bank/Cash</field>
+        <field name="code">5030067187_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_muslim_pilgrims_welfare_board"/>
+    </record>
+    <record id="account_mda_plateau_state_muslim_pilgrims_welfare_board_expense" model="account.account">
+        <field name="name">PLATEAU STATE MUSLIM PILGRIMS WELFARE BOARD - Expense</field>
+        <field name="code">5030067187</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_muslim_pilgrims_welfare_board"/>
+    </record>
+    <!-- PLATEAU STATE NG-CARES COORDINATING UNIT -->
+    <record id="account_mda_plateau_state_ng_cares_coordinating_unit_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE NG-CARES COORDINATING UNIT - Bank/Cash</field>
+        <field name="code">7809963018_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_ng_cares_coordinating_unit"/>
+    </record>
+    <record id="account_mda_plateau_state_ng_cares_coordinating_unit_expense" model="account.account">
+        <field name="name">PLATEAU STATE NG-CARES COORDINATING UNIT - Expense</field>
+        <field name="code">7809963018</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_ng_cares_coordinating_unit"/>
+    </record>
+    <!-- PLATEAU STATE POLYTECHNIC, BARKIN LADI -->
+    <record id="account_mda_plateau_state_polytechnic_barkin_ladi_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE POLYTECHNIC, BARKIN LADI - Bank/Cash</field>
+        <field name="code">1017775950_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_polytechnic_barkin_ladi"/>
+    </record>
+    <record id="account_mda_plateau_state_polytechnic_barkin_ladi_expense" model="account.account">
+        <field name="name">PLATEAU STATE POLYTECHNIC, BARKIN LADI - Expense</field>
+        <field name="code">1017775950</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_polytechnic_barkin_ladi"/>
+    </record>
+    <!-- PLATEAU STATE PRIMARY HEALTH CARE BOARD -->
+    <record id="account_mda_plateau_state_primary_health_care_board_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE PRIMARY HEALTH CARE BOARD - Bank/Cash</field>
+        <field name="code">1019341850_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_primary_health_care_board"/>
+    </record>
+    <record id="account_mda_plateau_state_primary_health_care_board_expense" model="account.account">
+        <field name="name">PLATEAU STATE PRIMARY HEALTH CARE BOARD - Expense</field>
+        <field name="code">1019341850</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_primary_health_care_board"/>
+    </record>
+    <!-- PLATEAU STATE PUBLISHING COOPERATION -->
+    <record id="account_mda_plateau_state_publishing_cooperation_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE PUBLISHING COOPERATION - Bank/Cash</field>
+        <field name="code">5900003784_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_publishing_cooperation"/>
+    </record>
+    <record id="account_mda_plateau_state_publishing_cooperation_expense" model="account.account">
+        <field name="name">PLATEAU STATE PUBLISHING COOPERATION - Expense</field>
+        <field name="code">5900003784</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_publishing_cooperation"/>
+    </record>
+    <!-- PLATEAU STATE ROAD MAINT. AGENCY (DIRECT LABOUR) -->
+    <record id="account_mda_plateau_state_road_maint._agency_direct_labour_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE ROAD MAINT. AGENCY (DIRECT LABOUR) - Bank/Cash</field>
+        <field name="code">1026382741_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_road_maint._agency_direct_labour"/>
+    </record>
+    <record id="account_mda_plateau_state_road_maint._agency_direct_labour_expense" model="account.account">
+        <field name="name">PLATEAU STATE ROAD MAINT. AGENCY (DIRECT LABOUR) - Expense</field>
+        <field name="code">1026382741</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_road_maint._agency_direct_labour"/>
+    </record>
+    <!-- PLATEAU STATE SCHOLARSHIP BOARD -->
+    <record id="account_mda_plateau_state_scholarship_board_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE SCHOLARSHIP BOARD - Bank/Cash</field>
+        <field name="code">1228548075_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_scholarship_board"/>
+    </record>
+    <record id="account_mda_plateau_state_scholarship_board_expense" model="account.account">
+        <field name="name">PLATEAU STATE SCHOLARSHIP BOARD - Expense</field>
+        <field name="code">1228548075</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_scholarship_board"/>
+    </record>
+    <!-- PLATEAU STATE SPORTS COUNCIL -->
+    <record id="account_mda_plateau_state_sports_council_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE SPORTS COUNCIL - Bank/Cash</field>
+        <field name="code">1017628476_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_sports_council"/>
+    </record>
+    <record id="account_mda_plateau_state_sports_council_expense" model="account.account">
+        <field name="name">PLATEAU STATE SPORTS COUNCIL - Expense</field>
+        <field name="code">1017628476</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_sports_council"/>
+    </record>
+    <!-- PLATEAU STATE TOURISM CORPORATION -->
+    <record id="account_mda_plateau_state_tourism_corporation_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE TOURISM CORPORATION - Bank/Cash</field>
+        <field name="code">12854713_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_tourism_corporation"/>
+    </record>
+    <record id="account_mda_plateau_state_tourism_corporation_expense" model="account.account">
+        <field name="name">PLATEAU STATE TOURISM CORPORATION - Expense</field>
+        <field name="code">12854713</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_tourism_corporation"/>
+    </record>
+    <!-- PLATEAU STATE UNIVERSAL BASIC EDUCATION -->
+    <record id="account_mda_plateau_state_universal_basic_education_bank_cash" model="account.account">
+        <field name="name">PLATEAU STATE UNIVERSAL BASIC EDUCATION - Bank/Cash</field>
+        <field name="code">1014518217_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_universal_basic_education"/>
+    </record>
+    <record id="account_mda_plateau_state_universal_basic_education_expense" model="account.account">
+        <field name="name">PLATEAU STATE UNIVERSAL BASIC EDUCATION - Expense</field>
+        <field name="code">1014518217</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_state_universal_basic_education"/>
+    </record>
+    <!-- PLATEAU UNITED FOOTBALL CLUB -->
+    <record id="account_mda_plateau_united_football_club_bank_cash" model="account.account">
+        <field name="name">PLATEAU UNITED FOOTBALL CLUB - Bank/Cash</field>
+        <field name="code">1014519142_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_united_football_club"/>
+    </record>
+    <record id="account_mda_plateau_united_football_club_expense" model="account.account">
+        <field name="name">PLATEAU UNITED FOOTBALL CLUB - Expense</field>
+        <field name="code">1014519142</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_plateau_united_football_club"/>
+    </record>
+    <!-- RELEVANT TECHNOLOGY BOARD -->
+    <record id="account_mda_relevant_technology_board_bank_cash" model="account.account">
+        <field name="name">RELEVANT TECHNOLOGY BOARD - Bank/Cash</field>
+        <field name="code">76171917_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_relevant_technology_board"/>
+    </record>
+    <record id="account_mda_relevant_technology_board_expense" model="account.account">
+        <field name="name">RELEVANT TECHNOLOGY BOARD - Expense</field>
+        <field name="code">76171917</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_relevant_technology_board"/>
+    </record>
+    <!-- STATE AUDIT DEPARTMENT -->
+    <record id="account_mda_state_audit_department_bank_cash" model="account.account">
+        <field name="name">STATE AUDIT DEPARTMENT - Bank/Cash</field>
+        <field name="code">1019341874_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_state_audit_department"/>
+    </record>
+    <record id="account_mda_state_audit_department_expense" model="account.account">
+        <field name="name">STATE AUDIT DEPARTMENT - Expense</field>
+        <field name="code">1019341874</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_state_audit_department"/>
+    </record>
+    <!-- TEACHERS SERVICE COMMISSION -->
+    <record id="account_mda_teachers_service_commission_bank_cash" model="account.account">
+        <field name="name">TEACHERS SERVICE COMMISSION - Bank/Cash</field>
+        <field name="code">5900003291_cash</field>
+        <field name="account_type">asset_cash</field>
+        <field name="branch_id" ref="company_memo.mda_teachers_service_commission"/>
+    </record>
+    <record id="account_mda_teachers_service_commission_expense" model="account.account">
+        <field name="name">TEACHERS SERVICE COMMISSION - Expense</field>
+        <field name="code">5900003291</field>
+        <field name="account_type">expense</field>
+        <field name="branch_id" ref="company_memo.mda_teachers_service_commission"/>
+    </record>
 </odoo>
