@@ -6,6 +6,7 @@
             <field name="inherit_id" ref="account.view_account_payment_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='ref']" position="before">
+                    <field name="ng_budget_id" invisible="0" required="0"/> 
                     <field name="external_memo_request" readonly="0" invisible="1" help="Determines if memo comes from external finance payment request"/>
                     <field name="suitable_journal_ids" invisible="0" widget="many2many_tags"/>
                     <field name="is_top_account_user" invisible="1"/> 
@@ -20,6 +21,7 @@
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
                 <field name="invoice_date" position="after">
+                    <field name="ng_budget_id" invisible="0" required="0"/> 
                     <field name="external_memo_request" invisible="1" force_save="1"/> 
                     <field name="is_top_account_user" invisible="1" force_save="1"/>
                 </field>
@@ -120,8 +122,58 @@
                 </tree>
             </field>
         </record>
+
+        <record id="ng_account_budget_form" model="ir.ui.view">
+        <field name="name">ng.account.budget.form</field>
+        <field name="model">ng.account.budget</field>
+            <field name="arch" type="xml">
+                <form string="" create="1">
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="budget_id"/>
+                            <field name="general_account_id" required="1"/>
+                            <field name="general_journal_id" required="1"/>
+                            <field name="date_from" required="1"/>
+                            <field name="date_to" required="1"/>
+                        </group>
+                        <group>
+                            <field name="paid_date" required="0"/>
+                            <field name="branch_id" required="1"/>
+                            <field name="move_id" required="0"/>
+                            <field name="budget_amount" required="1"/>
+                            <field name="budget_used_amount"/>
+                            <field name="budget_variance"/> 
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Budget Allocation" string="Budget Account Move Lines">
+                            <field name="budget_allocation_line" readonly="1">
+                                <tree string="" create="0">
+                                    <field name="name" required="1"/>
+                                    <field name="invoice_date" required="0"/>
+                                    <field name="amount_total"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="Budget Request" string="Budget Allocation" invisible="1">
+                            <field name="ng_account_budget_line" readonly="1">
+                                <tree string="" create="0">
+                                    <field name="ng_budget_id" required="1"/>
+                                    <field name="approved_date" required="0"/>
+                                    <field name="reviewer_id"/>
+                                    <field name="approver_id"/>
+                                    <field name="budget_allocation_date" required="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
         <record id="action_ng_account_budget_line" model="ir.actions.act_window">
-            <field name="name">Budget Line</field>
+            <field name="name">NG Budget Head</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">ng.account.budget</field>
             <field name="view_mode">tree,form</field>
@@ -132,6 +184,12 @@
               </p>
             </field>
         </record>
+        <menuitem
+            id="ng_account_budget_line_memo_menu"
+            name="Budget Head"
+            parent="company_memo.memo_configuration"
+            action="plateau_addons.action_ng_account_budget_line"
+            sequence="105"/>
 
         <menuitem action="action_ng_account_budget_line" id="ng_account_budget_line_menu" sequence="103" parent="account.menu_finance_entries_accounting_miscellaneous"/>
 

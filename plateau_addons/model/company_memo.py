@@ -17,8 +17,10 @@ class CompanyMemo(models.Model):
     partner_id = fields.Many2one('res.partner', string='Partner',
                                 default=lambda self: self.env.user.partner_id.id)
     
-    external_memo_request = fields.Boolean(string='External request')
+    external_memo_request = fields.Boolean(string='Is External request')
+    is_contract_memo_request = fields.Boolean(string='Is Contract request')
     is_top_account_user = fields.Boolean('Is top account user?', compute="compute_top_account_user")
+    bank_partner_id = fields.Many2one('res.partner', string='Bank', help="Select the bank to send payment schedule")
 
     @api.depends('external_memo_request', 'is_internal_transfer')
     def compute_top_account_user(self):
@@ -32,6 +34,11 @@ class CompanyMemo(models.Model):
             else:
                 rec.is_top_account_user = False
 
-    
-    
+    def generate_bank_schedule(self):
+        # will be used to generate bank schedule and send to bank
+        for rec in self:
+            if not self.bank_partner_id:
+                raise ValidationError("Please select bank to send Bank schedule to")
+            if not self.bank_partner_id.email:
+                raise ValidationError(f"Selected bank must also have a bank partner: Record id {rec.id}")
      

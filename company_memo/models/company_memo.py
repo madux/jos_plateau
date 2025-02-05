@@ -16,6 +16,14 @@ import json
 
 _logger = logging.getLogger(__name__)
 
+class ngAccountBudget(models.Model):
+    _name = "ng.account.budget"
+    
+class NgAccountBudgetLine(models.Model):
+    _name = "ng.account.budget.line"
+    _description = "To hold the budget allocation lines"
+    
+
     
 class Memo_Model(models.Model):
     _name = "memo.model"
@@ -111,7 +119,12 @@ class Memo_Model(models.Model):
         #     domain = [('active', '=', True), ('project_type', '=', memo_project_type)]
         memo_configs = self.env['memo.config'].search(domain)
         user_branch_id = self.env.user.branch_id
-        res.update({'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs if user_branch_id.id in rec.branch_ids.ids])]})
+        res.update({
+            'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs if user_branch_id.id in rec.branch_ids.ids])],
+            'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search([
+                '|', ('branch_id', '=', self.env.user.branch_id.id),
+                ('branch_id', 'in', self.env.user.branch_ids.ids)])
+                                         ])]})
         return res
         
     memo_type = fields.Many2one(
@@ -139,6 +152,13 @@ class Memo_Model(models.Model):
         'memo_type_id', 
         'memo_id',
         string='Dummy Memo type',
+        )
+    dummy_budget_ids = fields.Many2many(
+        'ng.account.budget',
+        'ng_account_budget_rel',
+        'ng_account_budget_id', 
+        'budget_id',
+        string='Dummy budget',
         )
     memo_type_key = fields.Char('Memo type key', readonly=True)
     name = fields.Char('Subject', size=400)
@@ -176,7 +196,8 @@ class Memo_Model(models.Model):
         'memo.model',
         'project_memo_id',
         string='Additional PO process')
-    
+
+    is_contract_memo_request = fields.Boolean(string='Is Contract request') 
     state = fields.Selection([('submit', 'Draft'),
                                 ('Sent', 'Sent'),
                                 ('Approve', 'Waiting For Payment / Confirmation'),
@@ -190,6 +211,7 @@ class Memo_Model(models.Model):
                              help='Request Report state')
     date = fields.Datetime('Request Date', default=fields.Datetime.now())
     client_id = fields.Many2one('res.partner', 'Client')
+    contractor_id = fields.Many2one('res.partner', 'Contractor', help="Always available if the request is for contract payment")
     client_address = fields.Char('Client Address', related="client_id.street", store=True)
     client_address2 = fields.Char('Address 2', related="client_id.street2", store=True)
     client_phone = fields.Char('Client Phone', related="client_id.phone", store=True)
@@ -1860,6 +1882,176 @@ class Memo_Model(models.Model):
     # self.validate_invoice_line()
     # self.validate_other_validity()
     
+    ################### BUDGET ##############
+    '''
+    If is budget verification process, system auto set the field
+    budget_id will show only budget heads of MDAs,
+    Once you select budget_has_allocation, throws an error if no budget allocation
+    amount is found
+    '''
+    is_budget_verification_memo_request = fields.Boolean(
+        string='Is Budget Verification Process',
+        default=False)
+    budget_has_allocation = fields.Boolean(
+        string='Has Allocation', 
+        default=False, store=True)
+    budget_id = fields.Many2one(
+        'ng.account.budget', 
+        string='Budget Head', 
+        store=True, 
+        # domain=lambda self: self._get_related_stage(),
+        )
+    is_budget_allocation_request = fields.Boolean(
+        string='Is Budget Allocation Process',
+        default=False)
+    # required and visible if budget allocation is set
+    # if completed, system generates a line in ng.account.budget.line with the budget head Id selected
+    budget_amount = fields.Float(
+        string='Budget Amount', 
+        store=True, 
+        )
+    def check_aprrover_user(self):
+        if self.env.user.id not in [r.user_id.id for r in self.stage_id.approver_ids]:
+            raise ValidationError(
+                """You are not responsible to validate this record"""
+                )
+            
+    # the budget approved by request MDA
+    # visible if is_budget_allocation_request is true
+    
+    def approve_budget_allocation(self):
+        self.check_aprrover_user()
+        for rec in self:
+            if not any([rec.budget_amount, rec.budget_id]):
+                raise ValidationError(f"""
+                                      Record with code number {rec.code} does not have 
+                                      Budget head or budget amount
+                                      """)
+            if not rec.request_mda_from.default_journal_id or not self.request_mda_from.default_account_id:
+                raise ValidationError(f"""
+                                      Ensure the {rec.request_mda_from.name} has default journal and default account id set
+                                      Contact Admin to properly set it in the multi branch setting
+                                      """)
+            account_move = self.env['account.move'].sudo()
+            inv = account_move.search([('memo_id', '=', rec.id)], limit=1)
+            if not inv:
+                inv = account_move.create({ 
+                    'memo_id': self.id,
+                    'ref': self.code,
+                    'origin': self.code,
+                    'partner_id': self.env.user.partner_id.id,
+                    'company_id': self.env.user.company_id.id,
+                    'currency_id': self.env.user.company_id.currency_id.id,
+                    # Do not set default name to account move name, because it
+                    # is unique 
+                    # 'name': f"CADV/ {self.code}",
+                    # 'move_type': 'in_receipt',
+                    'invoice_date': fields.Date.today(),
+                    'ng_budget_id': rec.budget_id.id,
+                    'date': fields.Date.today(),
+                    'journal_id': self.request_mda_from.default_journal_id.id,
+                    'line_ids': [
+                        (0, 0, vals) for vals in [
+                            {
+                                # 'move_id': inv.id,
+                                'name': rec.description,
+                                'ref': f'{self.code}',
+                                'account_id': self.request_mda_from.default_account_id.id or self.request_mda_from.default_account_id.id,
+                                'debit': rec.budget_amount,
+                                'quantity': 1,
+                                'code': rec.code,
+                                # 'product_uom_id': pr.product_id.uom_id.id if pr.product_id else None,
+                                # 'product_id': pr.product_id.id if pr.product_id else None,
+                            }, 
+                            {
+                                # 'move_id': inv.id,
+                                'name': rec.description,
+                                'ref': f'{self.code}',
+                                'account_id': self.branch_id.default_account_id.id or self.branch_id.default_journal.default_account_id.id,
+                                'credit': rec.budget_amount, 
+                                'code': rec.code, 
+                            }
+                        ]
+                    ]
+                })
+                    
+                # debit     
+                # self.env['account.move.line'].create({
+                #                 'move_id': inv.id,
+                #                 'name': rec.description,
+                #                 'ref': f'{self.code}',
+                #                 'account_id': self.request_mda_from.default_account_id.id or self.request_mda_from.default_account_id.id,
+                #                 'debit': rec.budget_amount,
+                #                 'quantity': 1,
+                #                 'code': rec.code,
+                #                 # 'product_uom_id': pr.product_id.uom_id.id if pr.product_id else None,
+                #                 # 'product_id': pr.product_id.id if pr.product_id else None,
+                #         })
+                # credit
+                # self.env['account.move.line'].create({
+                #                 'move_id': inv.id,
+                #                 'name': rec.description,
+                #                 'ref': f'{self.code}',
+                #                 'account_id': self.branch_id.default_account_id.id or self.branch_id.default_journal.default_account_id.id,
+                #                 'credit': rec.budget_amount, 
+                #                 'code': rec.code, 
+                #         })
+            view_id = self.env.ref('account.view_move_form').id
+            ret = {
+                'name': "Account Move",
+                'view_mode': 'form',
+                'view_id': view_id,
+                'view_type': 'form',
+                'res_model': 'account.move',
+                'res_id': inv.id,
+                'type': 'ir.actions.act_window',
+                'target': 'current'
+                }
+            return ret
+   
+    @api.onchange('budget_id')
+    def check_budget_funds(self):
+        if self.budget_id:
+            if self.budget_id.budget_variance <= 0:
+                raise ValidationError("""
+                                  There is no budget allocated for the budget head
+                                  """)
+            else:
+                self.budget_has_allocation = True
+        else:
+            self.budget_has_allocation = False
+            
+    # def _get_related_budget(self):
+    #     # user = self.env.user
+    #     # branch = self.branch_id
+    #     # if user.branch_id or user.allowed_branch_ids:
+    #     #     ng_budget_ids = self.env['ng.account.budget'].search([
+    #     #         '|',('branch_id', 'in', user.allowed_branch_ids.ids),
+    #     #         ('branch_id', '=', user.branch_id.id)])
+    #     #     branch_budget_ids = [rec.id for rec in ng_budget_ids]
+    #     #     domain = [('id', 'in', branch_budget_ids)] 
+    #     #     raise ValidationError(user.branch_id.name)
+    #     # else:
+    #     #     domain=[('id', '=', 1112)]
+    #     return []
+    
+    def print_budget_certifcation(self):
+        pass
+    
+    ################################
+    
+    def confirm_budget_verification(self):
+        self.check_aprrover_user()
+        memo_setting_id = self.memo_setting_id
+        last_stage = memo_setting_id.stage_ids.ids[-1]
+        self.memo_id.confirm_memo(self.env.user.employee_id, "Record is now finally validated")
+        
+        # self.sudo().write({
+        #                     'state': 'Done',
+        #                     'closing_date': fields.Date.today(),
+        #                     'stage_id': last_stage
+        #                     })
+                
     def forward_memo(self):
         self.validate_compulsory_document()
         self.validate_payment_line()
@@ -1892,6 +2084,13 @@ class Memo_Model(models.Model):
                 raise ValidationError(
                     """Please attach governors consent form"""
                     )
+        if self.is_contract_memo_request:
+            if first_stage == 0 and not self.env['ir.attachment'].sudo().search([
+                ('res_id', '=', self.id), 
+                ('res_model', '=', self._name)]):
+                raise ValidationError(
+                    """Please attach contract verification document"""
+                    )
 
         # if self.to_unfreezed_budget and not self.po_ids:
         #     raise ValidationError("Please add PO and Provide reasons for Additional PO approval")
@@ -1904,6 +2103,9 @@ class Memo_Model(models.Model):
             raise ValidationError("Please add request line") 
         view_id = self.env.ref('company_memo.memo_model_forward_wizard')
         condition_stages = [self.stage_id.yes_conditional_stage_id.id, self.stage_id.no_conditional_stage_id.id] or []
+        # if not self.is_budget_verification_memo_request:
+        #     self.confirm_budget_verification()
+        # else:  
         return {
                 'name': 'Forward Memo',
                 'view_type': 'form',
@@ -2600,7 +2802,7 @@ class Memo_Model(models.Model):
                     'currency_id': self.env.user.company_id.currency_id.id,
                     # Do not set default name to account move name, because it
                     # is unique 
-                    'name': f"CADV/ {self.code}",
+                    # 'name': f"CADV/ {self.code}",
                     'move_type': 'in_receipt',
                     'invoice_date': fields.Date.today(),
                     'date': fields.Date.today(),

@@ -19,6 +19,8 @@ class EhaBranch(models.Model):
     city = fields.Char(required=False)
     state_id = fields.Many2one("res.country.state", string='State', domain="[('country_id', '=?', country_id)]")
     country_id = fields.Many2one('res.country', string='Country')
+    default_account_id = fields.Many2one('account.account', string='Account', required=True)
+    default_journal_id = fields.Many2one('account.journal', string='Journal', required=True)
     is_testcenter = fields.Boolean('Is Test Center?')
     is_online_store = fields.Boolean('Is Online store?')
     alias_display = fields.Char(string="Alias", 

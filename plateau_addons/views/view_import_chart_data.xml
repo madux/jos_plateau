@@ -75,11 +75,5 @@
             parent="company_memo.memo_configuration"
             action="plateau_addons.action_pl_import_applicants"
             sequence="102"/>
-    <menuitem
-            id="menu_journal_and_chart_of_account_records"
-            name="Import Journal and COA"
-            parent="account.menu_finance_entries_accounting_miscellaneous"
-            action="plateau_addons.action_pl_import_applicants"
-            sequence="102"/>
-
+     
 </odoo>

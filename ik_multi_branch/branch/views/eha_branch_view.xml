@@ -14,9 +14,10 @@
                                     <field name="company_id"/>
                                     <field name="telephone_no"/>
                                     <field name="parent_id" options="{'no_create': True, 'no_open': True}"/>
-                                     
                                 </group>
                                 <group>
+                                    <field name="default_account_id" />
+                                    <field name="default_journal_id" />
                                     <field name="active" />
                                     <label for="street" string="Address"/>
                                     <div>
@@ -30,6 +31,7 @@
                                            
                                         </div>
                                     </div>
+
                                 </group>
                             </group>
                         </sheet>

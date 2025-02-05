@@ -12,6 +12,7 @@ class AccountPayment(models.Model):
 
     memo_reference = fields.Many2one('memo.model', string="Memo Reference")
     external_memo_request = fields.Boolean(string="External memo request")
+    is_contract_memo_request = fields.Boolean(string="Is contract request")
 
     @api.depends('partner_id', 'journal_id', 'destination_journal_id')
     def _compute_is_internal_transfer(self):

@@ -11,13 +11,14 @@
                 <form string="Memo Record" js_class="memo_model_form_view_3">
                     <header>
                         <button name="forward_memo" id="forward_memo" string="Proceed" icon="fa-forward" 
-                        invisible="state in ['Done', 'Refuse'] or user_is_approver == True" type="object" class="oe_highlight fwm"/>
+                        invisible="state in ['Done', 'Refuse'] or user_is_approver == True or is_budget_verification_memo_request == True" type="object" class="oe_highlight fwm"/>
                         <button name="approve_memo"
-                        invisible="memo_type_key not in ['cash_advance', 'loan', 'Payment', 'server_access', 'material_request', 'procurement_request','procurement', 'vehicle_request', 'employee_update', 'Internal', 'export_process', 'import_process', 'agency_process', 'travel', 'transport', 'procurement', 'warehouse', 'cfwd', 'agency', 'all', 'project_pro'] or state in ['submit', 'Approve', 'Done', 'Refuse'] or not user_is_approver" 
+                        invisible="memo_type_key not in ['cash_advance', 'loan', 'Payment', 'server_access', 'material_request', 'procurement_request','procurement', 'vehicle_request', 'employee_update', 'Internal', 'export_process', 'import_process', 'agency_process', 'travel', 'transport', 'procurement', 'warehouse', 'cfwd', 'agency', 'all', 'project_pro'] or state in ['submit', 'Approve', 'Done', 'Refuse'] or not user_is_approver
+                        or is_contract_memo_request == True or is_budget_verification_memo_request == True or is_budget_allocation_request == True" 
                          string="Approve" type="object" class="oe_highlight"/>
                         <button name="generate_recruitment_request" invisible= "memo_type_key not in ['recruitment_request'] or state not in ['Done', 'Approve2'] or not user_is_approver" string="View / Generate Recruitment Request" type="object" class="oe_highlight"/>
                         <button name="action_post_and_vallidate_payment" string="Register Payment" type="object" class="oe_highlight" confirm="Are you sure you want to make Payment?" 
-                        invisible="not user_is_approver or state not in ['Approve', 'Approve2']"/>
+                        invisible="not user_is_approver or state not in ['Approve', 'Approve2'] or is_contract_memo_request == True or is_budget_verification_memo_request == True or is_budget_allocation_request == True"/>
                         <!-- invisible="not user_is_approver or state not in ['Approve', 'Approve2'] or memo_type_key not in ['Payment'] or not is_request_completed"/> -->
                         <button name="send_memo_to_contacts" string="Send Memo" type="object" class="oe_highlight" confirm="Are you sure you want to make send memo?" 
                         invisible="not user_is_approver or state not in ['Approve2'] or memo_type_key not in ['internal', 'Internal'] or internal_memo_option not in ['all', 'selected']"/>
@@ -28,10 +29,16 @@
                          invisible="state not in ['Done'] or memo_type_key not in ['loan']"/>
                         <button name="set_draft" invisible="state != 'Refuse'" string="ReSet &amp; Forward" type="object" class="btn-primary"/>
                         <button name="return_memo" id="return_id" string="Return Memo" icon="fa-redo" invisible="state not in ['Sent', 'Approve', 'Approve2']" type="object"/>
+                        <button name="print_budget_certifcation" id="printbudget" string="Print Budget Certification" invisible="is_budget_verification_memo_request != True" type="object"/>
+                        <button name="confirm_budget_verification" class="oe_highlight" id="confirmbudget" string="Confirm Budget" 
+                        invisible="is_budget_verification_memo_request != True or state != 'submit'" type="object"/>
+
+                        <button name="approve_budget_allocation" class="oe_highlight" id="approveBudgetAllocation" string="Confirm Budget Allocation" 
+                        invisible="is_budget_allocation_request != True or state not in ['Approve2'] or not user_is_approver" type="object"/>
                         <button name="Cancel" string="Cancel" type="object" invisible="state != ['sent']"/>
                         <!-- <button name="print_memo" string="Print" icon="fa-print" invisible="state in ['submit', 'Refuse']" type="object" class="oe_highlight"/> -->
                         <!-- <button name="print_work_instruction" string="Print Work Instruction" icon="fa-print" invisible="state in ['Refuse']" type="object" class="btn-primary"/> -->
-                        <button name="print_po" string="Print Payment" icon="fa-print" invisible="state in ['Refuse']" type="object" class="btn-primary"/>
+                        <button name="print_po" string="Print" icon="fa-print" invisible="state in ['Refuse'] or is_budget_verification_memo_request == True" type="object" class="btn-primary"/>
                         <!-- <field name="stage_id" widget="statusbar" force_save="1" readonly="1" domain="[('id', 'in', computed_stage_ids)]"/> -->
                         <field name="stage_id" widget="statusbar" readonly="0" options="{'clickable': '1'}"/>
                     </header>
@@ -94,6 +101,12 @@
                                                                 </div>
                                                                 <div class="col-8"><field name="memo_type" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
                                                             </div> 
+                                                            <div class="row border-bottom py-2" invisible="is_budget_verification_memo_request == False">
+                                                                <div class="col-4">
+                                                                    <strong>budget Head:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="budget_id" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                                                            </div> 
                                                         </div>
                                                     </div>
                                                 </div>
@@ -114,8 +127,7 @@
                                                                     <strong>MDA:</strong>
                                                                 </div>
                                                                 <div class="col-8"></div>
-                                                            </div>
-
+                                                            </div> 
                                                             <!-- <div class="row py-2"> -->
                                                             <div class="row border-bottom py-2">
                                                                 <div class="col-4">
@@ -139,7 +151,7 @@
                                                                 <div class="col-4">
                                                                     <strong>Todo:</strong>
                                                                 </div>
-                                                                <div class="col-8"><field name="task_todo" readonly="0" force_save="1"/></div>
+                                                                <div class="col-8"><field name="task_todo" readonly="1" force_save="1"/></div>
                                                             </div>
                                                             <div class="row border-bottom py-2">
                                                                 <div class="col-4">
@@ -283,6 +295,9 @@
                                         <field name="name" required="1" force_save="1" placeholder="e.g. Description" readonly="state not in ['submit']"/>
                                     </h1>
                                 </div>
+                                <div class='alert alert-info' role="alert" invisible="is_budget_verification_memo_request == False or budget_has_allocation == False or state in ['Done']">
+                                    Validation Status: Success - Budget Funds Available. You can proceed with your request. GoodLuck !!!
+                                </div>
                                 <group>
                                     <group>
                                         <label for="memo_type"/>
@@ -300,28 +315,36 @@
                                         <field name="alert_option" invisible="1" force_save="1" readonly="0"/>
                                         <field name="dummy_memo_types" invisible="1" widget="many2many_tags" force_save="1"/>
                                         <field name="demo_staff" invisible="1"/>
-                                        <field name="is_internal_transfer" invisible="0"/>
-                                        <field name="external_memo_request" invisible="0"/> 
-
-                                        <field name="user_is_approver" invisible="0"/> 
-                                        <field name="is_request_completed" invisible="0"/> 
-                                        <field name="state" invisible="0"/> 
-
+                                        <field name="is_internal_transfer" invisible="1"/>
+                                        <field name="external_memo_request" invisible="1"/> 
+                                        <field name="is_contract_memo_request" readonly="0" invisible="1"/>
+                                        <field name="is_budget_verification_memo_request" readonly="0" invisible="1"/>
+                                        <field name="budget_has_allocation" invisible="1"/> 
+                                        <field name="dummy_budget_ids" invisible="1" widget="many2many_tags" force_save="1"/>
+                                        <field name="user_is_approver" invisible="1"/> 
+                                        <field name="is_request_completed" invisible="1"/> 
+                                        <field name="state" invisible="1"/> 
+                                        <field name="employee_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state not in ['submit']" string="Initiator"/>
                                         <field name="approver_id" invisible="1" readonly="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" groups="base.group_system"/>
                                         <field name="approver_ids" invisible="1" widget="many2many_tags" readonly="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" groups="base.group_system"/>
                                         <field name="currency_id" invisible="1"/>
                                         
-                                        <field name="memo_setting_id" invisible="0" force_save="1" options="{&quot;no_open&quot;: False, &quot;no_create&quot;: True}"/>
+                                        <field name="memo_setting_id" invisible="1" force_save="1" options="{&quot;no_open&quot;: False, &quot;no_create&quot;: True}"/>
                                         <field name="direct_employee_id" required="0" invisible="1" string="Through" readonly="state in ['Done', 'Approve']"/>
                                         <field name="move_id" invisible="1"/>
+                                        
+                                        <field name="contractor_id" readonly="state not in ['submit']" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                        invisible="is_contract_memo_request == False" required="is_contract_memo_request == True"/>
+                                        <field name="budget_id" readonly="state not in ['submit']" domain="[('id', 'in', dummy_budget_ids)]" 
+                                        invisible="is_budget_verification_memo_request != True and is_budget_allocation_request != True" 
+                                        required="is_budget_verification_memo_request == True or is_budget_allocation_request == True"
+                                        options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                        
                                         <field name="active" invisible="1" groups="base.group_system"/>
                                         <field name="has_sub_stage" invisible="1"/> 
                                         <field name="qr_code_commonpass" invisible="1"/> 
                                         <field name="validity_set" required="0" invisible="1"/> 
-                                        <field name="user_is_approver" invisible="1" readonly="0"/>
                                         <field name="state" invisible="1" force_save="1" readonly="0"/>
-                                        <field name="is_request_completed" readonly="1" invisible="1"/>
-                                        <field name="is_internal_transfer" readonly="0" invisible="1"/>
                                         <field name="memo_project_type" readonly="0" invisible="1"/>
                                         <field name="freeze_po_budget" readonly="0" invisible="1"/>
                                         <field name="to_unfreezed_budget" readonly="0" invisible="1"/>
@@ -330,15 +353,14 @@
 
                                         <field name="internal_memo_option" string="Memo Option" invisible="memo_type_key not in ['Internal', 'internal']" readonly="state not in ['submit']"/>
                                          <!-- <field name="partner_ids" string="Reciepients" widget="many2many_tags" 
-                                         readonly="state not in ['submit']" invisible="internal_memo_option not in ['selected']"  -->
+                                         readonly="state not in ['submit']" invisible="internal_memo_option not in ['selected']"
                                          required="not user_is_approver or internal_memo_option in ['selected'] or memo_type_key in ['Internal', 'internal']" 
-                                         options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
+                                         options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> -->
                                         <!-- <field name="client_id" string="Client" readonly="state not in ['submit']" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />  -->
                                         <field name="client_id" string="Client" invisible="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" /> 
-                                        <field name="employee_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state not in ['submit']"/>
                                         <field name="phone" readonly="1"/>
                                         <field name="email" readonly="1"/>
-                                        <field name="dept_ids" widget="selection" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="1"/>
+                                        <field name="dept_ids" widget="selection" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="1" invisible="1"/>
                                         <field name="loan_type" invisible="memo_type_key != 'loan'" required="memo_type_key == 'loan'"/>
                                         <field name="loan_amount" invisible="memo_type_key != 'loan'" required="memo_type_key == 'loan'"/>
                                         <field name="periods" invisible="memo_type_key != 'loan'" required="memo_type_key == 'loan'"/>
@@ -357,6 +379,13 @@
                                         <field name="leave_start_date" widget="daterange" options="{&quot;related_end_date&quot;: &quot;leave_end_date&quot;, &quot;datepicker&quot;: {&quot;daysOfWeekDisabled&quot;: [5, 6]}}" required="memo_type_key in ['leave_request']" invisible="memo_type_key not in ['leave_request']" readonly="state not in ['submit']"/>
                                         <field name="leave_end_date" required="memo_type_key in ['leave_request']" invisible="memo_type_key not in ['leave_request']" readonly="state not in ['submit']"/>
                                         <field name="user_ids" readonly="1" invisible="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                        
+                                        <field name="is_budget_allocation_request" invisible="0"/> 
+                                        <field name="budget_amount" string="Budget Amount" 
+                                        readonly="state not in ['submit']" 
+                                        required="is_budget_allocation_request == True" 
+                                        invisible="is_budget_allocation_request != True"
+                                        />
                                         <field name="amountfig" string="Amount" readonly="1" invisible="memo_type_key not in ['Payment']"/>
                                         <field name="project_id" readonly="state not in ['submit']" invisible="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                                         <field name="project_memo_id" string="Parent Project" invisible="1" required="0" readonly="state not in ['submit']" domain="[('memo_project_type', 'in', ['vehicle_request', 'employee_update', 'Internal', 'export_process', 'import_process', 'agency_process', 'travel', 'transport', 'procurement', 'warehouse', 'cfwd', 'agency'])]"/>  
@@ -372,10 +401,10 @@
                                         <field name="enabled_date_procured" required="0" readonly="0" invisible="validity_set == False"/> 
                                         <field name="enable_procurment_amount" required="0" readonly="0" invisible="validity_set == False"/> 
                                         <field name="enabled_date_paid" required="0" readonly="0" invisible="validity_set == False"/> 
-                                        <field name="task_start_date" readonly="0" invisible="0" string="Start date"/> 
-                                        <field name="task_end_date" readonly="0" invisible="0" string="End date"/> 
+                                        <field name="task_start_date" readonly="0" invisible="1" string="Start date"/> 
+                                        <field name="task_end_date" readonly="0" invisible="1" string="End date"/> 
                                         <field name="closing_date" readonly="0" invisible="1" required="0" string="Closed Date"/> 
-                                        <field name="remaining_task_duration" readonly="0" invisible="0"/> 
+                                        <field name="remaining_task_duration" readonly="0" invisible="1"/> 
                                         <field name="percentage_of_remaining_task" readonly="0" invisible="1" widget="progressbar"/> 
 
                                     </group>
@@ -412,7 +441,7 @@
                                                         <field name="sub_stage_id" invisible="1"/>
                                                     </group>
                                                     <notebook>
-                                                        <page name="Invoices" string="Finances">
+                                                        <page name="Invoices" string="Finances" invisible="0">
                                                             <field name="invoice_ids" context="{'default_move_type': 'in_invoice', 'default_memo_id': active_id, 'form_view_ref': 'account.view_move_form'}">
                                                                 <tree string="Invoices">
                                                                     <field name="memo_id" string="Memo" invisible="1" column_invisible="1"/>  
@@ -779,7 +808,7 @@
                                     </page>
                                     <!--ADDD-->
                                     <!-- <page name="Invoices" string="Finance" invisible="memo_type_key not in ['Payment', 'payment', 'pay', 'export_process', 'import_process', 'agency_process', 'procurement_request', 'procurement', 'transport', 'travel']"> -->
-                                    <page name="Invoices" string="Finance">
+                                    <page name="Invoices" string="Finance" invisible="1">
                                         <field name="invoice_ids" context="{'default_move_type': 'in_invoice', 'default_memo_id': active_id, 'default_partner_id': client_id, 'form_view_ref': 'account.view_move_form'}" readonly="state in ['Done', 'Approve2']">
                                             <tree string="Invoices">
                                                 <field name="memo_id" string="Memo" invisible="1" column_invisible="1"/>  
@@ -802,11 +831,11 @@
                                     </page>
                                     <!--ADDD-->
                                     <!-- <page name="payment_ids" string="Payment Request" invisible="memo_type_key not in ['Payment', 'payment', 'pay']"> -->
-                                    <page name="payment_ids" string="Payment Request">
+                                    <page name="payment_ids" string="Payment Request" invisible="memo_type_key not in ['Payment', 'payment', 'pay'] or is_budget_verification_memo_request == True">
                                         <!-- <field name="payment_ids" context="{'default_external_memo_request': 1, 'default_payment_type': 'outbound', 'default_is_internal_transfer': 1, 'default_memo_reference': active_id}" domain="[('state', '=', 'draft')]" readonly="state in ['Done', 'Approve2']"> -->
-                                        <field name="payment_ids" invisible="1" readonly="0" context="{'default_external_memo_request': 1, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}" domain="[('state', '=', 'draft')]">
+                                        <field name="payment_ids" invisible="1" readonly="0" context="{'default_partner_type': 'supplier','default_is_contract_memo_request': is_contract_memo_request, 'default_external_memo_request': 1, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}" domain="[('state', '=', 'draft')]">
                                             <tree string="Payments" edit="1">
-                                                <field name="is_internal_transfer" string="Is transfer" readonly="1" force_save="1" invisible="0" default="True"/>  
+                                                <field name="is_internal_transfer" string="Is transfer" readonly="1" force_save="1" invisible="1"/>  
                                                 <field name="payment_type" string="Payment type" invisible="0"/>  
                                                 <field name="date" string="Date" invisible="0"/>
                                                 <field name="ref" string="Ref#" invisible="0"/> 
@@ -818,7 +847,7 @@
                                                 <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" groups="base.group_system" invisible="state != 'draft'"/>
                                             </tree>
                                         </field>
-                                        <field name="payment_ids" readonly="0" context="{'default_external_memo_request': 1, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}" domain="[('state', '=', 'draft')]">
+                                        <field name="payment_ids" readonly="0" context="{'default_partner_type': 'supplier', 'default_external_memo_request': external_memo_request, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}" domain="[('state', '=', 'draft')]">
                                             <form string="Items"> 
                                                 <header>
                                                     <!-- <button name="action_post" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'" data-hotkey="v"/> -->
@@ -845,7 +874,7 @@
                                                     <field name="available_partner_bank_ids" invisible="1"/>
                                                     <field name="suitable_journal_ids" invisible="1"/>
                                                     <field name="country_code" invisible="1"/>
-                                                    <field name="partner_type" invisible="1"/>
+                                                    <field name="partner_type" invisible="1" context="{'default_partner_type': 'supplier'}"/>
                                                     <field name="posted_before" invisible="1"/>
                                                     <field name="reconciled_invoices_type" invisible="1"/>
                                                     <field name="company_id" invisible="1"/>
@@ -899,12 +928,13 @@
         
                                                     <group>
                                                         <group name="group1">
-                                                            <field name="external_memo_request" invisible="1"/>
+                                                            <field name="external_memo_request" invisible="1" context="{'default_partner_type': external_memo_request}"/>
+                                                            <field name="is_contract_memo_request" invisible="0" context="{'default_partner_type': is_contract_memo_request}"/>
                                                         
-                                                            <field name="is_internal_transfer" invisible="external_memo_request" readonly="state != 'draft'" force_save="1" default="True"/>
-                                                            <field name="payment_type" widget="radio" options="{'horizontal': True}" invisible="external_memo_request" readonly="state != 'draft'"/>
-                                                            <field name="partner_id" context="{'default_is_company': True}" string="Customer" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state != 'draft'" invisible="partner_type != 'customer' or is_internal_transfer"/>
-                                                            <field name="partner_id" context="{'default_is_company': True}" string="Vendor" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state != 'draft'" invisible="partner_type != 'supplier' or is_internal_transfer"/>
+                                                            <field name="is_internal_transfer" invisible="1" readonly="state != 'draft'" force_save="1" default="True"/>
+                                                            <field name="payment_type" widget="radio" options="{'horizontal': True}" readonly="state != 'draft'"/>
+                                                            <field name="partner_id" context="{'default_is_company': True}" string="Customer" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state != 'draft'" invisible="partner_type != 'customer' or is_internal_transfer == True"/>
+                                                            <field name="partner_id" context="{'default_is_company': True}" string="Vendor / Contractor" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state != 'draft'" invisible="partner_type != 'supplier' or is_internal_transfer == True"/>
                                                             <label for="amount"/>
                                                             <div name="amount_div" class="o_row">
                                                                 <field name="amount" readonly="state != 'draft'" default=""/>
@@ -1157,7 +1187,7 @@
                     <field name="date"/> 
                     <field name="employee_id" invisible="0" string="Initiator"/>
                     <field name="set_staff" string="Assigned to"/>
-                    <field name="dept_ids"/>
+                    <field name="dept_ids" invisible="1"/>
                     <field name="stage_id"/>
                     <field name="total_so_amount" sum="total"/>
                     <!-- <field name="status_progress" widget="progressbar" string="Progress(%)" invisible="1"/> -->

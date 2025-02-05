@@ -71,7 +71,7 @@ class AccountMoveMemo(models.Model):
                 '''This is added to help send the soe reference to the related cash advance'''
                 self.sudo().memo_id.cash_advance_reference.soe_advance_reference = self.memo_id.id
                 # self.memo_id.is_request_completed = True
-            # self.memo_id.state = "Done"
+            self.memo_id.confirm_memo(self.env.user.employee_id, "Record is now finally validated")
         return super(AccountMoveMemo, self).action_post()
     
     def _prepare_po_vals(self):
