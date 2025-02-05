@@ -63,7 +63,15 @@
         </record>
 
         
-
+        <record id="branch_user_see_own_mda_journal" model="ir.rule">
+            <field name="name">branch: top account users See own journal</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="global" eval="True"/>
+            <field name="groups" eval="[
+            (4, ref('ik_multi_branch.account_mda_user')),
+            ]"/>
+            <field name="domain_force">[('allowed_branch_ids', 'in', user.branch_ids.ids)]</field>
+        </record>
         <record id="branch_user_see_all_acount_journal" model="ir.rule">
             <field name="name">branch: top account users See all journal</field>
             <field name="model_id" ref="account.model_account_journal"/>

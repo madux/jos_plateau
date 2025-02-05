@@ -14,5 +14,14 @@
             (4, ref('account.group_account_manager')),
             ]" />
         </record>
+
+        <record id="account_mda_user" model="res.groups">
+            <field name="name">Accountant (MDA user)</field>
+            <field name="category_id" ref="ik_multi_branch.module_category_ik_branch"/>
+             <!-- <field name="users" eval="[(4, ref('base.group_system'))]"/> -->
+			<field name="implied_ids" eval="[
+            (4, ref('base.group_user'))
+            ]" />
+        </record>
     </data>
 </odoo>
