@@ -327,10 +327,10 @@
             <field name="account_type">expense</field>
             <field name="branch_id" ref="plateau_addons.mda_ministry_of_education_secondary_education"/>
         </record>
-        <!-- MINISTRY OF ENVIRONMENT, CLIMATE CHANGE -->
-        <record id="account_mda_ministry_of_environment_climate_change_bank_cash" model="account.account">
-            <field name="name">MINISTRY OF ENVIRONMENT, CLIMATE CHANGE - Bank/Cash</field>
-            <field name="code">1009000811cash</field>
+        <!-- MINISTRY OF local_government_and_chieftaincy -->
+        <record id="account_mda_ministry_of_local_government_and_chieftaincy_affairs_bank_cash" model="account.account">
+            <field name="name">MINISTRY OF LOCAL GOVERNMENT AND Chieftaincy AFFAIRS - Bank/Cash</field>
+            <field name="code">100900031cash</field>
             <field name="account_type">asset_cash</field>
             <field name="branch_id" ref="plateau_addons.mda_ministry_for_local_government_and_chieftaincy_affairs"/>
         </record>
