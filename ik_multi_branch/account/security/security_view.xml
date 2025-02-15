@@ -23,5 +23,15 @@
             (4, ref('base.group_user'))
             ]" />
         </record>
+
+        <record id="account_dto_user" model="res.groups">
+            <field name="name">DTO</field>
+            <field name="category_id" ref="ik_multi_branch.module_category_ik_branch"/>
+             <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+        <record id="account_dia_user" model="res.groups">
+            <field name="name">Director Internal Auditor</field>
+            <field name="category_id" ref="ik_multi_branch.module_category_ik_branch"/>
+        </record>
     </data>
 </odoo>

@@ -1175,11 +1175,11 @@ class Memo_Model(models.Model):
         is_config_approver = self.determine_if_user_is_config_approver()
         if self.env.uid == self.employee_id.user_id.id and not is_config_approver:
             raise ValidationError(
-                """You are not Permitted to approve a Payment Memo. 
+                """You are not Permitted to approve this request. 
                 Forward it to the authorized Person""")
         if self.env.uid not in [r.user_id.id for r in self.stage_id.approver_ids]:
             raise ValidationError(
-                """You are not Permitted to approve this Memo. Contact the authorized Person"""
+                """You are not Permitted to approve this request. Contact the authorized Person"""
                 )
         '''Memo notication hardcorded'''
         body = "MEMO APPROVE NOTIFICATION: -Approved By ;\n %s on %s" %(self.env.user.name,fields.Date.today())

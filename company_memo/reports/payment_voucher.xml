@@ -1,0 +1,134 @@
+<odoo>
+  <data> 
+    <record id="print_payment_voucher_memo_model_report" model="ir.actions.report">
+        <field name="name">Print Voucher</field>
+        <field name="model">memo.model</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">company_memo.memomodel_print_payment_voucher_template</field>
+        <field name="report_file">company_memo.memomodel_print_payment_voucher_template</field>
+        <field name="print_report_name">'Print Memo - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="company_memo.model_memo_model"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+    </record>
+    <template id="memomodel_print_payment_voucher_template">
+      <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="o">
+              <t t-call="company_memo.report_payment_voucher_template"/>
+          </t>
+      </t>
+    </template>
+    <template id="report_payment_voucher_template">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div style="text-align: left;">
+                    <h3><strong>DEPARTMENT NO:</strong> <t t-esc="o.code"/> / <t t-esc="datetime.datetime.now().strftime('%Y')"/></h3>
+                </div>
+                
+                <div style="text-align: left; font-size:25px; font-weight: bold; background:rgb(243, 243, 243); padding: 5px;">
+                    PAYMENT TO BE MADE TO: <t t-esc="o.branch_id.name.upper()"/> 
+                </div>
+                <div class="row flex-color p-3">
+                    <div class="table-responsive">
+                        <table border="1" style="font-size:25px; width: 100%; border-collapse: collapse; margin-top: 10px; margin: 5px;">
+                            <thead>
+                                <tr style="background: #f0f0f0;">
+                                    <th style="padding: 10px; border: 1px solid black;">Date</th>
+                                    <th style="padding: 30px; border: 1px solid black;">Description</th>
+                                    <th style="padding: 10px; border: 1px solid black;">Rate</th>
+                                    <th style="padding: 20px; border: 1px solid black;">Amount ₦</th>
+                                    <th style="padding: 5px; border: 1px solid black;">K</th>
+                                    <th style="padding: 20px; border: 1px solid black;">Station  <t t-esc="o.request_mda_from.name"/></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.payment_ids" t-as="pay">
+                                    <tr>
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="datetime.datetime.strftime(pay.date, '%d/%m/%Y')"/></td>
+                                        <td style="margin: 5px; border: 1px solid black; padding: 30px;">
+                                            Payment of (₦ <t t-esc="'{0:,}'.format(float(pay.amount_total))"/>) from <t t-esc="o.request_mda_from.name"/> 
+                                            to <t t-esc="o.branch_id.name"/>  for <t t-esc="o.name"/>
+                                            <t t-esc="pay.narration or o.description"/><br/><br/>
+                                             
+                                            <strong>Payment ID <t t-esc="pay.name"/></strong><br/>
+                                            <strong>Total Sum: <t t-esc="'{0:,}'.format(float(pay.amount_total))"/></strong><br/>
+                                            
+                                        </td>
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"></td> 
+                                        <td style="text-align: right; padding: 25px; margin: 5px; border: 1px solid black"><t t-esc="'{0:,}'.format(float(pay.amount_total))"/></td>
+                                        <td style="text-align: right; padding: 10px; margin: 5px; border: 1px solid black"></td>
+                                        <td style="padding: 20px; margin: 5px; border: 1px solid black">
+                                            <div class="col-10">
+                                                <strong>Month/Year: <t t-esc="datetime.datetime.now().strftime('%B')"/>/ <t t-esc="datetime.datetime.now().strftime('%Y')"/></strong><br/><br/>
+                                                <strong>PV Number: </strong><p/><br/> 
+                                            </div>  
+                                            <div class="col-10">
+                                                <strong>Head: </strong><t t-esc="pay.destination_journal_id.code"/><br/> 
+                                                <strong>Sub Head: </strong><p/>  
+                                            </div> <p/><p/>
+
+                                            <div class="col-10">
+                                                <strong>Date Received in Treasury: </strong><t t-esc="datetime.datetime.now().strftime('%B %d, %Y')"/><br/> 
+                                            </div><p/><br/><br/>
+                                            <div class="col-10">
+                                                <strong>Checked and Passed By:</strong> <t t-esc="o.approver_id.name"/>  
+                                                <strong>at: </strong><t t-esc="o.date_assigned or o.date"/><p/> 
+                                            </div> <p/> 
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <table border="1" style="font-size:25px; width: 100%; border-collapse: collapse; margin-top: 10px;">
+                            <tr style="background: #f0f0f0;">
+                                <th style="padding: 10px;"/>
+                                <th style="text-align: left; padding: 50px;">
+                                    <span>Total amount in words</span><br/>
+                                    <strong><u><t t-esc="o.amount_in_words"/> NAIRA ONLY </u></strong>
+                                </th>
+                                <th style="padding: 10px;"/>
+                                <th style="padding: 10px;"/>
+                                <th style="padding: 10px;"/>
+                                <th style="padding: 10px;"/>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br/>
+                <div class="row" style="font-size: 17px;">
+                   
+                    <h5>Certificated that the details above are in accordance with the relevant contract, <br/>
+                        regulations or other authority under which the Service/Goods were provided/purchased.</h5>
+                    <br/><br/>
+                </div>
+                <div class="row" style="font-size: 17px;">
+                    <h5>Officer who prepared voucher: </h5>
+                    <br/><br/><br/>
+                 </div>
+                <div class="row" style="font-size: 17px;">
+                    <strong>Signature: ...................................................................</strong><br/><br/>
+                    <strong>Name: <t t-esc="o.write_uid.name"/></strong><br/><br/><br/>
+
+                    <strong>Signature: ...................................................................</strong><br/><br/>
+                    <strong>Manager</strong><br/><br/>
+                </div>
+                <div class="row" style="font-size: 17px;">
+                    <h5>I certify that the Service/Good have been duly performed/received, that financial authority.........................................................................<br/>
+                    is held to incur this.</h5><br/><p/><br/>
+                </div>
+                <div class="row" style="font-size: 17px;">
+                    Authorized Officer: ...................................................................<br/><br/><br/>
+                    <strong>Name: <t t-esc="o.write_uid.name"/></strong><br/><br/><br/>
+                </div><br/>
+
+                <!--<div class="row" style="font-size: 17px;">-->
+                   
+                <!--</div>-->
+                <br/>
+            </div>
+        </t>
+    </template>
+
+ 
+  </data>
+</odoo>

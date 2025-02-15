@@ -38,6 +38,7 @@
         'reports/work_instruction_item_report.xml',
         'reports/waybill.xml',
         'reports/po_bill.xml',
+        'reports/payment_voucher.xml',
         'views/assets.xml',
         'security/ir.model.access.csv',
         'data/memo_tag.xml',

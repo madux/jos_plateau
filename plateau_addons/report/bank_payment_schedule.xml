@@ -1,0 +1,129 @@
+<odoo>
+  <data> 
+    <record id="print_payment_schedule_report" model="ir.actions.report">
+        <field name="name">Bank Mandate</field>
+        <field name="model">memo.model</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">plateau_addons.memomodel_print_main_payment_schedule_template</field>
+        <field name="report_file">plateau_addons.memomodel_print_main_payment_schedule_template</field>
+        <field name="print_report_name">'Print Bank Schedule - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="company_memo.model_memo_model"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+    </record>
+    <template id="memomodel_print_main_payment_schedule_template">
+      <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="o">
+              <t t-call="plateau_addons.memomodel_print_payment_schedule_template"/>
+          </t>
+      </t>
+    </template>
+    <template id="memomodel_print_payment_schedule_template">
+        <t t-call="web.internal_layout">
+            <t t-foreach="o.contractor_ids" t-as="con">
+                <div class="page">
+                    <div class="row">
+                        <div class="col-2 pt-0">
+                            <img t-if="user.company_id" t-att-src="image_data_uri(user.company_id.logo)" style="max-height: 100px;max-width: 200px;" alt="Logo"/>
+                        </div>
+                        <div class="col-4 offset-2 text-center">
+                            <span style="font-size:15px;"> PLATEAU STATE GOVERNMENT </span> 
+                            <span> OFFICE OF THE ACCOUNTANT GENERAL </span> 
+                            <span style="font-size:25px;"> <t t-esc="o.branch_id.name.upper()"/><br/><br/>  </span> 
+                            <!-- <img t-if="user.company_id" t-att-src="image_data_uri(user.company_id.logo)" style="max-height: 100px;max-width: 200px;" alt="Logo"/> -->
+                        </div>
+                        <div class="col-2 offset-2">
+                            <img t-att-src="/plateau_addons/static/img/coatarm.jpg" style="max-height: 100px;max-width: 200px;" alt="Logo"/>
+                            <!-- <img class="logo" t-attf-src="data:image/*;base64,{{o.memo_id.qr_code_commonpass}}" style="width:80px;height:80px" align="center"/>  -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 pt-2">
+                            The Manager
+                            <span> <t t-esc="con.bank_id.name.upper()"/><br/><br/></span> 
+                            <span><t t-if="con.bank_id.street"><t t-esc="con.bank_id.street.upper()"/></t><br/><br/></span> 
+                        </div> 
+                        <div class="col-2 offset-2 text-center">
+                            
+                        </div>
+                        <div class="col-2 offset-3 text-end p-3">
+                            <span><t t-esc="o.code"/><br/><br/></span>
+                            <span><t t-if="con.scheduled_pay_date">
+                                    <t t-esc="datetime.datetime.strftime(con.scheduled_pay_date, '%d/%m/%Y')"/>
+                                </t>
+                                <br/>
+                            </span>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <h3><strong>PAYMENT MANDATE</strong> </h3>
+                    </div>
+                    <div style="text-align: left;" class="p-3">
+                        <h5>Please credit the account(s) of the under-listed beneficiaries and debit our <t t-esc="con.debit_account_number"/> 
+                            with the Sum of ₦ <t t-esc="'{0:,}'.format(float(con.amount_total))"/> 
+                            (<strong><t t-esc="con.amount_in_words"/> NAIRA ONLY</strong>
+                        </h5>)
+                    </div>
+                    <div class="row flex-color p-3">
+                        <div class="table-responsive p-3" >
+                            <table border="1" style="font-size:15px; width: 100%; border-collapse: collapse; margin-top: 10px; margin: 5px;">
+                                <thead>
+                                    <tr style="background: #f0f0f0;">
+                                        <th style="padding: 5px; border: 1px solid black;">S/No.</th>
+                                        <th style="padding: 25px; border: 1px solid black;">Beneficiary</th>
+                                        <th style="padding: 15px; border: 1px solid black;">Bank</th>
+                                        <th style="padding: 15px; border: 1px solid black;">Account Number</th>
+                                        <th style="padding: 20px; border: 1px solid black;">Amount(₦)</th>
+                                        <th style="padding: 20px; border: 1px solid black;">Purpose of Payment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"/> 
+                                        <!-- <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="datetime.datetime.strftime(pay.date, '%d/%m/%Y')"/></td> -->
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="con.contractor_id.name.upper()"/></td>
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="con.bank_id.name.upper()"/></td>
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="con.credit_account_number"/></td>
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="'{0:,}'.format(float(con.amount_total))"/></td>
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="con.description"/></td>
+                                    </tr>
+                                    <!-- </t> -->
+                                </tbody>
+                            </table>
+                            <table border="1" style="font-size:15px; width: 100%; border-collapse: collapse; margin-top: 10px;">
+                                <tr style="background: #f0f0f0;">
+                                    <th style="padding: 10px;"/> 
+                                    <th style="padding: 10px;"/>
+                                    <th style="padding: 10px;"/>
+                                    <th style="padding: 20px;">
+                                        <span>Total</span>
+                                    </th>
+                                    <th style="text-align: right; padding: 50px;">
+                                        <span><t t-esc="'{0:,}'.format(float(con.amount_total))"/></span>
+                                    </th>
+                                    <th style="padding: 10px;"/>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row p-3">
+                        <div class="col-3 pt-4">
+                            Name: <strong> <t t-esc="o.write_uid.name"/></strong>
+                        </div>
+                        <div class="col-2 offset-2 text-center">
+                            
+                        </div>
+                        <div class="col-2 offset-3 text-end">
+                            Authorized Signature<p/><p/>
+                            <strong>Signature: ...................................................................</strong>
+                        </div>
+                    </div>
+                     
+                    <br/>
+                </div>
+            </t>
+        </t>
+    </template>
+  </data>
+</odoo>

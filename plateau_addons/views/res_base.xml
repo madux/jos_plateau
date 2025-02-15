@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="res_partner_form_view_plateau_addons">
+            <field name="name">res.partner view inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='function']" position="before">
+                    <field name="is_bank" string="Is bank"/>
+                </xpath> 
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="internal_memo_res_partner_bank_action">
+            <field name="name">Bank</field>
+            <field name="res_model">res.partner</field>
+            <field name="type">ir.actions.act_window</field>
+           <field name="domain">[('is_bank','=',True)]</field>
+            <field name="context">{'default_is_bank': True}</field>
+             <field name="view_mode">kanban,tree,form</field>
+        </record>
+        	
+        <menuitem id="internal_memo_account_setup_menu" sequence= "80" name="Setup"
+            parent="company_memo.internal_memo_menu_model_main2" groups="ik_multi_branch.account_major_user,base.group_system,company_memo.mainmemo_manager"/>
+        <menuitem id="internal_memo_bank_menu" sequence= "10" name="Bank"
+            parent="plateau_addons.internal_memo_account_setup_menu" action="internal_memo_res_partner_bank_action"/>
+
+        <menuitem
+            id="ng_account_budget_line_memo_menu2"
+            name="Budget Head"
+            parent="plateau_addons.internal_memo_account_setup_menu"
+            action="plateau_addons.action_ng_account_budget_line"
+            sequence="20"/>
+        
+    </data>
+</odoo>

@@ -124,7 +124,7 @@ class AccountPayment(models.Model):
     def compute_top_account_user(self):
         for rec in self:
             account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
-            if self.external_memo_request and account_major_user:
+            if rec.external_memo_request and account_major_user:
                 rec.is_top_account_user = True
             else:
                 rec.is_top_account_user = False
@@ -136,9 +136,15 @@ class AccountPayment(models.Model):
 
     def action_post(self):
         account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
-        if self.memo_reference and self.memo_reference.stage_id.is_approved_stage and self.env.user.id not in [r.user_id.id for r in self.memo_reference.stage_id.approver_ids]: 
-        # if self.external_memo_request and not account_major_user or if self.memo_id.stage_id.approver_ids.ids :
-            raise ValidationError("Ops. You are not allowed confirm this Bill. Ensure system admin adds you to the list approvers for this stage")
+        # if self.memo_reference:
+        #     # if not self.memo_reference.stage_id.is_approved_stage:
+        #     #     raise ValidationError("Ops. You are not allowed confirm this Bill at this stage")
+        #     if self.memo_reference.stage_id.is_approved_stage and self.env.user.id not in [r.user_id.id for r in self.memo_reference.stage_id.approver_ids]: 
+        #         # if self.external_memo_request and not account_major_user or if self.memo_id.stage_id.approver_ids.ids :
+        #         raise ValidationError("Ops. You are not allowed confirm this Bill. Ensure system admin adds you to the list approvers for this stage")
+        # else:
+        #     raise ValidationError("ddddEnsure system admin adds you to the lithis stage")
+            
         res = super(AccountPayment, self).action_post()
         return res
     

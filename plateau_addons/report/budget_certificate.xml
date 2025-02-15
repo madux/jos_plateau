@@ -1,0 +1,71 @@
+<odoo>
+  <data> 
+    <record id="print_budget_certificate_report" model="ir.actions.report">
+        <field name="name">Budget Certificate</field>
+        <field name="model">memo.model</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">plateau_addons.memomodel_print_main_budget_cert_template</field>
+        <field name="report_file">plateau_addons.memomodel_print_main_budget_cert_template</field>
+        <field name="print_report_name">'Budget-Certificate - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="company_memo.model_memo_model"/>
+        <field name="binding_type">report</field>
+        <field name="attachment_use">True</field>
+    </record>
+    <template id="memomodel_print_main_budget_cert_template">
+      <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="o">
+              <t t-call="plateau_addons.memomodel_print_budget_cert_template"/>
+          </t>
+      </t>
+    </template>
+    <template id="memomodel_print_budget_cert_template">
+        <t t-call="web.internal_layout">
+            <!-- <t t-foreach="o.contractor_ids" t-as="con"> -->
+            <div class="page">
+                <div class="row">
+                    <div class="col-2 pt-0">
+                        <img t-if="user.company_id" t-att-src="image_data_uri(user.company_id.logo)" style="max-height: 100px;max-width: 200px;" alt="Logo"/>
+                    </div>
+                    
+                    <div class="col-4 offset-2 text-center">
+                        <span style="font-size:15px;"> PLATEAU STATE GOVERNMENT </span> 
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <h2><strong>CERTIFICATION</strong> </h2>
+                </div>
+                
+                <div style="text-align: left;" class="p-3">
+                    <h3><strong>TO WHOM IT MAY CONCERN</strong>
+                    </h3>
+                </div>
+
+                <div style="text-align: center; font-size: 20px;" class="pt-3">
+                    <p>
+                        <span>THIS IS TO CERTIFY that the budget Verification with head <t t-esc="o.budget_id.code"/> from <t t-esc="o.branch_id.name"/> </span>
+                        <span>has been Verified.</span>
+
+                        This certification is issued in compliance to the requirement of the State government for the reason <t t-esc="o.name"/>.
+                        Issued this <t t-esc="datetime.datetime.now().strftime('%d')"/> day of <t t-esc="datetime.datetime.now().strftime('%B')"/>, <t t-esc="datetime.datetime.now().strftime('%Y')"/>
+                    </p>
+                </div>
+                <br/>
+                <div class="row p-3">
+                    <div class="col-3">
+                        Name: <strong> <t t-esc="o.write_uid.name"/></strong>
+                    </div>
+                    <div class="col-2 offset-2 text-center">
+                        
+                    </div>
+                    <div class="col-4 text-end p-2">
+                        Authorized Signature<p/><p/>
+                        <strong>Signature: ...................................................................</strong>
+                    </div>
+                </div>
+                <br/>
+            </div>
+        </t>
+    </template>
+  </data>
+</odoo>

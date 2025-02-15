@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <record id="ir_action_server_account_transaction" model="ir.actions.server">
+			<field name="name">Account Transactions</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="account.model_account_journal" />
+            <field name="state">code</field>
+			<field name="groups_id" eval="[(6, 0, [
+			ref('account.group_account_manager'),
+			ref('account.group_account_invoice'),
+			ref('account.group_account_readonly'),
+			])]"/>
+            <field name="code">action=model.sudo().get_filtered_journal_record()</field>
+        </record>
+        <record id="account.menu_board_journal_1" model="ir.ui.menu">
+            <field name="action" ref="plateau_addons.ir_action_server_account_transaction"/>
+        </record>
+        <record id="account.menu_board_journal_1" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+			ref('account.group_account_manager'),
+			ref('account.group_account_invoice'),
+			ref('account.group_account_readonly'),
+			])]"/>
+        </record>
+
+        <record id="account.menu_finance_payables" model="ir.ui.menu">
+            <field name="name">Billing / Expenses</field>
+        </record>
+
+        <record id="account.menu_finance_entries_management" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('ik_multi_branch.account_major_user')])]"/>
+        </record>
+
+        <record id="account.menu_finance_reports" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('ik_multi_branch.account_major_user')])]"/>
+        </record>
+
+        <record id="account.product_product_menu_sellable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('ik_multi_branch.account_major_user')])]"/>
+        </record>
+
+        <record id="account.product_product_menu_purchasable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('ik_multi_branch.account_major_user')])]"/>
+        </record>
+
+        <!-- <menuitem id="menu_board_journal_for_non_top_user" name="All Journal transactions"
+            parent="account_accountant.menu_accounting" sequence="2" action="ik_multi_branch.ir_action_server_account_transaction"
+            groups="ik_multi_branch.account_major_user"/> -->
+         <!-- <menuitem id="menu_board_journal_for_non_top_user" name="All Journal transactions"
+            parent="account_accountant.menu_accounting" sequence="2" action="ik_multi_branch.ir_action_server_account_transaction"
+            groups="account.group_account_manager,account.group_account_invoice,account.group_account_readonly"/>
+           -->
+        <!-- <field name="groups_id" eval="[(6, 0, [
+            ref('ik_multi_branch.account_major_user'),
+            ])]"/> -->
+    </data>
+</odoo>

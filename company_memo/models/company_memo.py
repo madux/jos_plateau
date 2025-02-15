@@ -12,6 +12,8 @@ import qrcode
 import logging
 from datetime import date, datetime, timedelta
 import json
+from dateutil.relativedelta import relativedelta
+from num2words import num2words
 
 
 _logger = logging.getLogger(__name__)
@@ -113,6 +115,11 @@ class Memo_Model(models.Model):
     def default_get(self, fields):
         res = super(Memo_Model, self).default_get(fields)
         memo_project_type = self.env.context.get('default_memo_project_type')
+        default_budget_allocation = self.env.context.get('default_is_budget_allocation_request')
+        external_payment_request = self.env.context.get('default_external_memo_request')
+        
+        ministry_of_finance = self.env.ref('plateau_addons.mda_ministry_of_finance')
+        # finance_budget_head = self.env['ng.budget'].search(domain)
         # user_branches = list(self.env.user.branch_id.id)
         domain = [('active', '=', True)]
         # if memo_project_type: , ('branch_ids', 'in', user_branches)
@@ -124,7 +131,9 @@ class Memo_Model(models.Model):
             'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search([
                 '|', ('branch_id', '=', self.env.user.branch_id.id),
                 ('branch_id', 'in', self.env.user.branch_ids.ids)])
-                                         ])]})
+                                         ])],
+            'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request else False,
+            })
         return res
         
     memo_type = fields.Many2one(
@@ -777,8 +786,24 @@ class Memo_Model(models.Model):
     def print_po(self):
         if not self.po_ids:
             raise ValidationError("Sorry !!! There is no PO to print")
+        self._compute_amount_in_words()
         return self.env.ref('company_memo.print_po_bill_report').report_action(self)
+    
+    amount_in_words = fields.Char(compute="_compute_amount_in_words")
 
+    def _compute_amount_in_words(self):
+        for record in self:
+            payment_amount = sum([r.amount_total for r in self.payment_ids])
+            total = payment_amount if payment_amount > 0 else self.amountfig
+            amount_in_words = num2words(total, lang='en')
+            record.amount_in_words = amount_in_words.upper() if amount_in_words and total > 0 else ""
+    
+    def print_payment_voucher(self):
+        if not self.payment_ids:
+            raise ValidationError("Sorry !!! There is no payment to print")
+        return self.env.ref('company_memo.print_payment_voucher_memo_model_report').report_action(self)
+    
+    
     def send_client_mail_gate_pass(self):
         pass
     
@@ -1855,12 +1880,12 @@ class Memo_Model(models.Model):
 
     def validate_payment_line(self):
         '''Ensures a payment line is added if is_internal transfer'''
-        if self.is_internal_transfer and not self.payment_ids:
+        if self.is_internal_transfer or self.external_memo_request and not self.payment_ids:
             raise ValidationError("""
             Please ensure at least one payment line is added!!!.
-            Use the Payment tab
-            """)
-        
+            Use the Payment request tab
+            """) 
+            
     def validate_sub_stage(self):
         for count, rec in enumerate(self.memo_sub_stage_ids, 1):
             if not rec.sub_stage_done:
@@ -1906,15 +1931,30 @@ class Memo_Model(models.Model):
         default=False)
     # required and visible if budget allocation is set
     # if completed, system generates a line in ng.account.budget.line with the budget head Id selected
+    budget_balance_amount = fields.Float(
+        string='Budget Balance Amount', 
+        store=True, 
+        )
     budget_amount = fields.Float(
         string='Budget Amount', 
         store=True, 
         )
+    
+    @api.onchange("budget_id")
+    def change_budget_record(self):
+        if self.budget_id:
+            self.budget_balance_amount = self.budget_id.budget_variance
+        else:
+            self.budget_balance_amount = 0
+            
     def check_aprrover_user(self):
-        if self.env.user.id not in [r.user_id.id for r in self.stage_id.approver_ids]:
-            raise ValidationError(
-                """You are not responsible to validate this record"""
-                )
+        # if self.env.user.id not in [r.user_id.id for r in self.stage_id.approver_ids]:
+        # if self.env.user.id != self.create_uid.id:
+        #     raise ValidationError(
+        #         f"""You are not responsible to validate this record. \n\
+        #         Current User ID: {self.env.user.name} and {self.create_uid.name}"""
+        #         )
+        pass
             
     # the budget approved by request MDA
     # visible if is_budget_allocation_request is true
@@ -1922,7 +1962,20 @@ class Memo_Model(models.Model):
     def approve_budget_allocation(self):
         self.check_aprrover_user()
         for rec in self:
-            if not any([rec.budget_amount, rec.budget_id]):
+            
+            # budget = self.env['ng.account.budget'].create({
+            #     'name': f"{self.branch_id.name} - f{datetime.strftime(fields.Date.today(), '%Y-%m-%d')}", 
+            #     'date_from': fields.Date.today(),
+            #     'date_to': fields.Date.today() + relativedelta(months=5), 
+            #     'general_journal_id': self.branch_id.default_journal_id.id,
+            #     'general_account_id': self.branch_id.default_account_id.id,
+            #     'budget_amount': self.budget_amount,
+            #     'active': True,
+            #     'branch_id': self.branch_id.id,
+            #     'paid_date': fields.Date.today(),
+            # })
+            
+            if not any([rec.budget_amount, self.budget_id]):
                 raise ValidationError(f"""
                                       Record with code number {rec.code} does not have 
                                       Budget head or budget amount
@@ -1947,7 +2000,7 @@ class Memo_Model(models.Model):
                     # 'name': f"CADV/ {self.code}",
                     # 'move_type': 'in_receipt',
                     'invoice_date': fields.Date.today(),
-                    'ng_budget_id': rec.budget_id.id,
+                    'ng_budget_id': self.budget_id.id,
                     'date': fields.Date.today(),
                     'journal_id': self.request_mda_from.default_journal_id.id,
                     'line_ids': [
@@ -1973,29 +2026,7 @@ class Memo_Model(models.Model):
                             }
                         ]
                     ]
-                })
-                    
-                # debit     
-                # self.env['account.move.line'].create({
-                #                 'move_id': inv.id,
-                #                 'name': rec.description,
-                #                 'ref': f'{self.code}',
-                #                 'account_id': self.request_mda_from.default_account_id.id or self.request_mda_from.default_account_id.id,
-                #                 'debit': rec.budget_amount,
-                #                 'quantity': 1,
-                #                 'code': rec.code,
-                #                 # 'product_uom_id': pr.product_id.uom_id.id if pr.product_id else None,
-                #                 # 'product_id': pr.product_id.id if pr.product_id else None,
-                #         })
-                # credit
-                # self.env['account.move.line'].create({
-                #                 'move_id': inv.id,
-                #                 'name': rec.description,
-                #                 'ref': f'{self.code}',
-                #                 'account_id': self.branch_id.default_account_id.id or self.branch_id.default_journal.default_account_id.id,
-                #                 'credit': rec.budget_amount, 
-                #                 'code': rec.code, 
-                #         })
+                }) 
             view_id = self.env.ref('account.view_move_form').id
             ret = {
                 'name': "Account Move",
@@ -2034,27 +2065,46 @@ class Memo_Model(models.Model):
     #     # else:
     #     #     domain=[('id', '=', 1112)]
     #     return []
+    has_print_budget_certificate = fields.Boolean('budget certificated print', store=True)
+
+    def generate_memo_attachment(self, attachment_name, pdf_content):
+        attachmentObj = self.env['ir.attachment'].create({
+            'name': attachment_name,
+            'type': 'binary',
+            'datas': pdf_content,
+            'store_fname': attachment_name,
+            'res_model': self._name,
+            'res_id': self.id,
+            'mimetype': 'application/x-pdf'
+        })
+        return attachmentObj
     
     def print_budget_certifcation(self):
-        pass
-    
-    ################################
-    
+        pass 
+        # create report 
+        # generate the report as attachment
+        # create attachment on the attachment line
+        # self.has_print_budget_certificate = True
+        # pdf = self.env.ref('plateau_addons.print_budget_certificate_report').report_action(self) 
+        # pdf_content = base64.b64encode(pdf)
+        # attachment = self.generate_attachment(pdf_content)
+        # if attachment:
+        #     self.attachment_ids = [(4, attachment.id)]
+        
     def confirm_budget_verification(self):
         self.check_aprrover_user()
         memo_setting_id = self.memo_setting_id
         last_stage = memo_setting_id.stage_ids.ids[-1]
-        self.memo_id.confirm_memo(self.env.user.employee_id, "Record is now finally validated")
+        if not self.has_print_budget_certificate:
+            raise ValidationError("Please ensure you have printed the budget certification recommended to be attached to physical document(s) sent to the governor")
+        self.confirm_memo(self.env.user.employee_id, "Record is now finally validated")
         
-        # self.sudo().write({
-        #                     'state': 'Done',
-        #                     'closing_date': fields.Date.today(),
-        #                     'stage_id': last_stage
-        #                     })
+    
+    ################################
+    
                 
     def forward_memo(self):
         self.validate_compulsory_document()
-        self.validate_payment_line()
         self.validate_sub_stage()
         user_exist = self.mapped('res_users').filtered(
             lambda user: user.id == self.env.uid
@@ -2063,6 +2113,7 @@ class Memo_Model(models.Model):
             raise ValidationError(
                 """You cannot forward this memo again unless returned / cancelled!!!"""
                 )
+        self.validate_payment_line()
         # if self.memo_project_type in ['project_pro'] and not self.po_ids.ids:
         #     raise ValidationError(
         #         """You cannot forward this memo without Purchase lines added"""
@@ -2091,14 +2142,22 @@ class Memo_Model(models.Model):
                 raise ValidationError(
                     """Please attach contract verification document"""
                     )
+            # did another check here to ensure user selects payment line
+            if not self.contractor_ids:
+                raise ValidationError(
+                    """Please Add contractor request lines"""
+                    )
 
         # if self.to_unfreezed_budget and not self.po_ids:
         #     raise ValidationError("Please add PO and Provide reasons for Additional PO approval")
         if self.memo_type.memo_key == "Payment":
-            if self.payment_ids or self.invoice_ids:# self.amountfig <= 0:
-                pass 
+            if self.contractor_ids or self.payment_ids or self.invoice_ids:# self.amountfig <= 0:
+                # raise ValidationError(
+                #     """Please Add payment request lines"""
+                #     ) 
+                pass
             else:
-                raise ValidationError("Please add invoice or payment lines")
+                raise ValidationError("Please add the payment lines or contractor lines")
         elif self.memo_type.memo_key == "material_request" and not self.product_ids:
             raise ValidationError("Please add request line") 
         view_id = self.env.ref('company_memo.memo_model_forward_wizard')
@@ -2702,9 +2761,17 @@ class Memo_Model(models.Model):
                 raise ValidationError(
                     """Kindly click each of the payment lines to ensure payments are posted manually to avoid errors
                 """)
-        
+        elif self.contractor_ids:
+            contractor_ids = self.mapped('contractor_ids')
+            for pnp in contractor_ids:
+                payment_without_post = pnp.mapped('payment_ids').filtered(
+                    lambda se: se.state not in ['posted'])
+                if payment_without_post:
+                    raise ValidationError(
+                        """Kindly click each of the contractor lines to ensure payments are posted manually to avoid errors
+                    """)
         else:
-            raise ValidationError("No payment invoice to validate")
+            raise ValidationError("No payment/Contractors to validate")
         self.state = 'Done'
         self.is_request_completed = True
         self.update_memo_type_approver()

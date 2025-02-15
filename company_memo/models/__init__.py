@@ -16,3 +16,4 @@ from . import stock_location
 from . import waybill
 from . import sale_order
 from . import crm
+from . import res_partner

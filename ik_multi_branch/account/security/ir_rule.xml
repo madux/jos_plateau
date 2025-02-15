@@ -70,7 +70,7 @@
             <field name="groups" eval="[
             (4, ref('ik_multi_branch.account_mda_user')),
             ]"/>
-            <field name="domain_force">[('allowed_branch_ids', 'in', user.branch_ids.ids)]</field>
+            <field name="domain_force">['|',('allowed_branch_ids.id', 'in', [user.branch_id.id]),('allowed_branch_ids', '=', False)]</field>
         </record>
         <record id="branch_user_see_all_acount_journal" model="ir.rule">
             <field name="name">branch: top account users See all journal</field>
@@ -79,7 +79,9 @@
             <field name="groups" eval="[
             (4, ref('ik_multi_branch.account_major_user')),
             ]"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">
+            ['|',('allowed_branch_ids', 'in', user.branch_ids.ids), ('allowed_branch_ids', '=', False)]
+            </field>
         </record>
 
         <record id="branch_user_see_all_acount_payment" model="ir.rule">

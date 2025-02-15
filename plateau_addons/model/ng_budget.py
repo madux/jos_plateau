@@ -39,6 +39,7 @@ class ngAccountBudget(models.Model):
     
     is_migrated = fields.Boolean(string="Is migrated")
     name = fields.Char(string="Name", store=True, readonly="0")
+    code = fields.Char(string="Code", store=True, readonly="0")
     general_journal_id = fields.Many2one('account.journal', string='Journal')
     general_account_id = fields.Many2one('account.account', string='Account')
     budget_id = fields.Many2one('account.budget.post', string='Budget')
