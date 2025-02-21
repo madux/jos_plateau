@@ -102,6 +102,12 @@
             parent="plateau_addons.internal_memo_account_setup_menu" sequence="25" 
             action="ng_account_budget_line_action"/>
 
+        <menuitem
+            id="report_account_memo"
+            name="Report"
+            parent="company_memo.internal_memo_menu_model_main2"
+            sequence="70"/>
+            
         <menuitem id="budget_overview_report_menu" name="Budget Overview"
             parent="plateau_addons.report_account_memo" sequence="25" 
             action="plateau_addons.ng_account_budget_line_action"/>
