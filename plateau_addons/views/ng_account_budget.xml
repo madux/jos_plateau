@@ -5,12 +5,17 @@
         <field name="model">ng.account.budget</field>
             <field name="arch" type="xml">
                 <tree string="" create="1">
+                    <field name="branch_id"/>
                     <field name="name"/>
-                    <field name="general_account_id"/>
-                    <field name="general_journal_id"/>
-                    <field name="budget_amount"/>
-                    <field name="budget_used_amount"/>
-                    <field name="budget_variance"/>
+                    <!-- <field name="general_account_id"/>
+                    <field name="general_journal_id"/> -->
+                    <field name="previous_budget_amount" string="Previous Year Budget"/>
+                    <!-- <field name="current_budget_amount" string="Current Year Budget"/> -->
+                    <field name="budget_amount" string="Current Year Budget"/>
+                    <field name="previous_budget_performance" string="Previous Year Budget Performance"/>
+                    <field name="budget_adjustment"/>
+                    <field name="budget_used_amount" string="Current Budget Performance"/>
+                    <field name="budget_variance" string="Variance"/>
                 </tree>
             </field>
         </record>
@@ -25,18 +30,23 @@
                             <field name="name" required="1" readonly="0"/>
                             <field name="code" invisible="0"/>
                             <field name="branch_id" required="1"/>
+                            <field name="fiscal_year" readonly="0" force_save="1"/>
                             <field name="budget_id" invisible="1"/>
-                            <field name="general_journal_id" required="1"/>
-                            <field name="general_account_id" required="1"/>
-                            <field name="date_from" required="1"/>
-                            <field name="date_to" required="1"/>
+                            <field name="general_journal_id" required="0" invisible="0"/>
+                            <field name="general_account_id" required="0" invisible="0"/>
+                            <field name="date_from" required="0"/>
+                            <field name="date_to" required="0"/>
                         </group>
                         <group>
                             <field name="move_id" invisible="1" required="0"/>
                             <field name="budget_amount" required="1"/>
                             <field name="budget_used_amount"/>
                             <field name="budget_variance"/> 
+                            <field name="budget_adjustment"/>
                             <field name="paid_date" required="0"/>
+                            <field name="previous_budget_amount"/>
+                            <field name="previous_budget_performance"/>
+                            <field name="revise_previous_budget"/>
                         </group>
                     </group>
                     <notebook>
@@ -50,14 +60,17 @@
                                 </tree>
                             </field>
                         </page>
-                        <page name="Budget Request" string="Budget Allocation" invisible="1">
+                        <page name="Budget Request" string="Budget Lines" invisible="0">
                             <field name="ng_account_budget_line" readonly="1">
                                 <tree string="" create="0">
+                                    <field name="account_id"/>
                                     <field name="ng_budget_id" required="1"/>
                                     <field name="approved_date" required="0"/>
                                     <field name="reviewer_id"/>
                                     <field name="approver_id"/>
                                     <field name="budget_allocation_date" required="1"/>
+                                    <field name="fiscal_year" required="1"/>
+                                    <field name="allocated_amount" required="1"/>
                                 </tree>
                             </field>
                         </page>
@@ -77,12 +90,35 @@
               </p>
             </field>
         </record>
+        <record id="action_budget_chart_of_account" model="ir.actions.act_window">
+            <field name="name">Chart of Accounts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.account</field>
+            <field name="view_mode">tree,form</field>
+            <field name="limit">300</field>
+            <field name="domain">[('is_migrated', '=', True)]</field>
+            <!-- <field name="context">{'search_default_is_migrated': 1}</field> -->
+            <field name="context">{'search_default_accounttype': 1, 'default_is_migrated': 1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Chart of account
+              </p><p>
+              </p>
+            </field>
+        </record>
         <menuitem
             id="ng_account_budget_line_memo_menu"
             name="Budget Head"
             parent="company_memo.memo_configuration"
             action="plateau_addons.action_ng_account_budget_line"
             sequence="105"/>
+
+        <menuitem
+            id="menu_budget_chart_of_account"
+            name="Chart of Account"
+            parent="company_memo.memo_configuration"
+            action="plateau_addons.action_budget_chart_of_account"
+            sequence="106"/>
 
         <menuitem action="action_ng_account_budget_line" id="ng_account_budget_line_menu" sequence="103" parent="account.menu_finance_entries_accounting_miscellaneous"/>
     </data>

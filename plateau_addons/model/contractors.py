@@ -23,7 +23,7 @@ class resContractors(models.Model):
     
     branch_id = fields.Many2one(
         'multi.branch', 
-        string='Branch', 
+        string='MDA', 
         default=lambda self: self.env.user.branch_id
         )
     branch_account_id = fields.Many2one(

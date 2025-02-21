@@ -5,7 +5,7 @@ _logger = logging.getLogger(__name__)
 _BRANCH_KAFKA_KEY = "branch"
 
 class EhaBranch(models.Model):
-    _name = 'multi.branch'
+    _name = "multi.branch"
     _description = 'Branch'
 
     name = fields.Char('Name', required=False)

@@ -17,72 +17,18 @@ class accountPayment(models.Model):
     _inherit = "account.payment"
 
 
-    def action_post(self):
-        res = super(accountPayment, self).action_post()
-        if self.external_memo_request and self.is_internal_transfer:
-            self.create_generate_statement_line()
-        return res
-
-    def create_generate_statement_line(self):
-        if self.external_memo_request and self.is_internal_transfer:
-            # create first statement for negative debit 
-            account_bank_statement_line = self.env['account.bank.statement.line'].sudo()
-            debit_vals = {
-                'journal_id': self.journal_id.id, 
-                'amount': -self.amount,
-                'payment_ref': self.narration,
-                'date': self.date
-            }
-            credit_vals = {
-                'journal_id': self.destination_journal_id.id, 
-                'amount': self.amount,
-                'payment_ref': self.narration,
-                'date': self.date
-            }
-            account_bank_statement_line.create(debit_vals) 
-            account_bank_statement_line.create(credit_vals) 
-
-
 class accountAccount(models.Model):
     _inherit = "account.account"
     
     is_migrated = fields.Boolean(string="Is migrated")
     ng_budget_lines = fields.One2many('ng.account.budget', 'general_account_id', string='Budget lines')
-
-
-# class ngAccountBudget(models.Model):
-#     _name = "ng.account.budget"
-#     _rec_name = "general_journal_id"
-#     _description = "To hold the budget of accounts and journal"
-    
-#     is_migrated = fields.Boolean(string="Is migrated")
-#     name = fields.Char(string="Name")
-#     general_journal_id = fields.Many2one('account.journal', string='Journal')
-#     general_account_id = fields.Many2one('account.account', string='Account')
-#     budget_id = fields.Many2one('account.budget.post', string='Budget')
-#     budget_amount = fields.Float(string="Budget Amount")
-#     budget_used_amount = fields.Float(string="Utilized Amount")
-#     budget_variance = fields.Float(string="Budget Variance", compute="compute_variance")
-#     active = fields.Boolean(string="Active", default=True)
-#     date_from = fields.Date(string="Date from")
-#     date_to = fields.Date(string="Date To")
-#     paid_date = fields.Date(string="Paid Date")
-#     branch_id = fields.Many2one('multi.branch', string='MDA Sector',required=False)
-#     move_id = fields.Many2one('account.move', string='Move')
-
-#     @api.depends('budget_amount', 'budget_used_amount')
-#     def compute_variance(self):
-#         for rec in self:
-#             if rec.budget_amount and rec.budget_used_amount:
-#                 rec.budget_variance = rec.budget_amount - rec.budget_used_amount
-#             else:
-#                 rec.budget_variance = False
+    ng_budget_line_ids = fields.One2many('ng.account.budget.line', 'account_id', string='Account Budget lines')
 
 
 class accountJournal(models.Model):
     _inherit = "account.journal"
     
-    is_migrated = fields.Boolean(string="Is migrated")
+    is_migrated = fields.Boolean(string="Is migrated", help="Used to determine if the record is migrated or created on odoo")
 
 class accountAnalytic(models.Model):
     _inherit = "account.analytic.account"
@@ -109,11 +55,13 @@ class ImportPLCharts(models.TransientModel):
 
     data_file = fields.Binary(string="Upload File (.xls)")
     filename = fields.Char("Filename")
+    budget_name = fields.Char("Name")
     index = fields.Integer("Sheet Index", default=0)
     import_type = fields.Selection(
         selection=[
             ("chart", "Chart/Journal Approved Budget"),
             ("transaction", "MDA Account transactions"),
+            ("budget", "Only Budget"),
         ],
         string="Import Type", tracking=True,
         required=False, default = "chart"
@@ -363,14 +311,22 @@ class ImportPLCharts(models.TransientModel):
             # raise ValidationError(code)
 
             account_existing = account_chart_obj.search([('code', '=', code)], limit = 1)
+            
+            '''
+            12 ==income,
+            22, 21, = expense
+            31 == current asset
+            41 liability
+            '''
+            structure_type = 'income' if code.startswith('12') else 'expense' if code.startswith('22') or  code.startswith('21') else 'asset_current' \
+                if code.startswith('31') else 'liability_current' if code.startswith('41') else 'asset_cash'
             account = account_chart_obj.create({
                         "name": name.strip().upper(),
                         "code": code,
                         'is_migrated': True,
                         'company_id': self.env.company.id,
-                        # "company_id": self.env.user.company_id.id,
                         "reconcile": False,
-                        "account_type": self.account_type if not type else type, # use type expenses
+                        "account_type": structure_type, # type if type else structure_type if structure_type else self.account_type if not type else type, # use type expenses
                     }) if not account_existing else account_existing
             return account
         else:
@@ -402,14 +358,162 @@ class ImportPLCharts(models.TransientModel):
     def import_records_action(self):
         if self.import_type == "chart":
             self.import_charts_journal()
+        elif self.import_type == "budget":
+            self.import_budget_journal()
         else:
             self.import_account_transaction() 
 
     # def import_charts_journal(self):
     #     for rec in self.env['account.account'].search([]):
     #         rec.code = rec.code.replace('.0', '')
+    
+    def import_budget_journal(self):
+        # file sample => wizard / 2025plateau2025_budget
+        '''
+        [0: mda, 1: mda:xmlid, 2: accountcode, 3: accountname, 4: 2024, 5 2025 budget amount]
+        0. First update the MDA codes 
+        1. create chart of account
+        2. create budget head for each mda to link this to
+        2. Import the budget transactions to account budget lines
+        
+        []
+        
+        '''
+        if self.data_file:
+            file_datas = base64.b64decode(self.data_file)
+            workbook = xlrd.open_workbook(file_contents=file_datas)
+            sheet_index = int(self.index) if self.index else 0
+            sheet = workbook.sheet_by_index(sheet_index)
+            data = [[sheet.cell_value(r, c) for c in range(sheet.ncols)] for r in range(sheet.nrows)]
+            data.pop(0)
+            file_data = data
+        else:
+            raise ValidationError('Please select file and type of file')
+        errors = ['The Following messages occurred']
+        unimport_count, count = 0, 0
+        success_records = []
+        unsuccess_records = []
+        def create_account_economic(name, code):
+            '''first load the economic code unto the system before the upload operation 
+            for accuracy'''
+            if name and code:
+                economic = self.env['account.economic']
+                economic_id = economic.search([('code', '=', code), ('name', '=', name)], limit=1)
+                structure_type = 'income' if code.startswith('12') else 'expense' if code.startswith('22') or  code.startswith('21') else 'asset_current' \
+                    if code.startswith('31') else 'liability_current' if code.startswith('41') else 'asset_cash'
+                if economic_id:
+                    return economic_id
+                else:
+                    economic_id = economic.create({
+                        'name': name,
+                        'code': code,
+                        'account_type': structure_type,
+                    })
+                    return economic_id
+            return False
+            
+        for row in file_data:
+            # [0: mda, 1: mda:xmlid, 2: accountcode, 3: accountname, 4: 2024, 5: 2025 budget amount]
+            mda = row[0]
+            mda_code = row[1]
+            mdaxmlid = row[2]
+            accountcode = row[3]
+            accountname = row[4]
+            previous_budget_amount = row[5]
+            revised_budget = row[6]
+            previous_budget_performance = row[7]
+            current_budget_amount = row[8]
+            fund_code = row[9]
+            
+            if mda and accountcode and accountname and current_budget_amount:
+                branch = False
+                if mdaxmlid: 
+                    branch = self.env.ref(mdaxmlid) # mda by xml id , if mda has been already loaded
+                    if mda_code:
+                        branch.code = mda_code
+                elif mda_code:
+                    branch = self.create_branch(mda.strip(), mda_code)
+                if not branch:
+                    raise ValidationError(f'No MDA found with reference or code at row {row}')
+                # Creating the main charts of accounts id for main company account 
+                account_code = str(accountcode).replace('.0', '')
+                # if confirmed to be chart of account, use it
+                # account_id = self.create_chart_of_account(accountname, account_code)
+                
+                economic_id = create_account_economic(accountname, account_code)
+                
+                _logger.info(
+                    f"testing new account import {row} and new account id {economic_id and economic_id.id} created "
+                )
+                
+                budget_amount = float(current_budget_amount) if type(current_budget_amount) in [int, float] else 0
+                previous_budget_amount = float(previous_budget_amount) if type(previous_budget_amount) in [int, float] else 0
+                revised_budget = float(revised_budget) if type(revised_budget) in [int, float] else 0
+                previous_budget_performance = float(previous_budget_performance) if type(previous_budget_performance) in [int, float] else 0
+                date_from= fields.Date.today() + rd(months=-1)
+                date_to= fields.Date.today() + rd(months = 10)
+                paid_date= fields.Date.today()
+                
+                budget = self.env['ng.account.budget'].search([('branch_id', '=', branch.id)], limit=1)
+                if economic_id:
+                    if not budget:
+                        self.env['ng.account.budget'].create({ 
+                            'name': self.budget_name +'-'+ branch.name +'-'+fund_code, 
+                            'general_journal_id': branch.default_journal_id.id, 
+                            'general_account_id': branch.default_account_id.id, 
+                            'budget_amount': budget_amount, 
+                            'previous_budget_amount': previous_budget_amount, 
+                            'current_budget_amount': budget_amount, 
+                            'branch_id': branch.id,
+                            'active': True, 
+                            'date_from': date_from,
+                            'date_to': date_to,
+                            'paid_date': paid_date,
+                            'code': fund_code,
+                        })
+                    
+                        
+                    ### do update of the budget head 
+                    else:
+                        budget.update({
+                            'budget_amount': budget.budget_amount + budget_amount, 
+                            'previous_budget_amount': budget.previous_budget_amount + previous_budget_amount, 
+                            'current_budget_amount': budget.budget_amount + budget_amount, 
+                        })
+                    # create budget transactions line
+                    self.env['ng.account.budget.line'].create({ 
+                            # 'account_id': account_id.id, 
+                            'economic_id': economic_id and economic_id.id, 
+                            'allocated_amount': budget_amount, 
+                            'branch_id': branch.id,
+                            'ng_budget_id': budget.id,
+                            'previous_budget_amount': previous_budget_amount,
+                            'revise_previous_budget': revised_budget,
+                            'previous_budget_performance': previous_budget_performance,
+                            'approved_date': fields.Date.today() + rd(months=-1),
+                            'budget_allocation_date': fields.Date.today() + rd(months=-1),
+                            'code': fund_code,
+                        })
+                    budget.previous_budget_amount += previous_budget_amount
+                    budget.revise_previous_budget += revised_budget
+                    budget.previous_budget_performance += previous_budget_performance
+                    economic_id.update({
+                        'branch_ids': [(4, branch.id)]
+                    })
+                    _logger.info(f'data artifacts generated: {economic_id and economic_id.name}')
+                    count += 1
+                    success_records.append(row)
+                else:
+                    unsuccess_records.append("Economic record not found")
+            else:
+                unsuccess_records.append(row)
+        errors.append('Successful Import(s): '+str(count)+' Record(s): See Records Below \n {}'.format(success_records))
+        errors.append('Unsuccessful Import(s): '+str(unsuccess_records)+' Record(s)')
+        if len(errors) > 1:
+            message = '\n'.join(errors)
+    
+    
     def import_charts_journal(self):
-
         if self.data_file:
             # file_datas = base64.decodestring(self.data_file)
             file_datas = base64.decodebytes(self.data_file)

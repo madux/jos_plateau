@@ -2,322 +2,506 @@
     <data noupdate="1">
     
         <!-- MINISTRIES -->
+        <record id="mda_ministry_of_debt" model="multi.branch">
+            <field name="name">PLATEAU STATE DEBT MANAGEMENT DEPARTMENT</field>
+            <field name="code">022000200100</field>
+        </record>
+
         <record id="mda_ministry_of_finance" model="multi.branch">
-            <field name="name">Ministry of Finance</field>
+            <field name="name">MINISTRY OF FINANCE</field>
+            <field name="code">022000100100</field>
         </record>
         <record id="mda_ministry_of_information_and_communication" model="multi.branch">
-            <field name="name">Ministry of Information and Communication</field>
+            <field name="name">MINISTRY OF INFORMATION AND COMMUNICATION</field>
+            <field name="code">012300100100</field>
         </record>
         <record id="mda_ministry_of_health" model="multi.branch">
-            <field name="name">Ministry of Health</field>
+            <field name="name">MINISTRY OF HEALTH</field>
+            <field name="code">52100100100</field>
+        </record>
+        <record id="mda_colledge_agric_garkawa" model="multi.branch">
+            <field name="name">COLLEGE OF AGRICULTURE, GARKAWA</field>
+            <field name="code">021502100100</field>
+        </record>
+        <record id="mda_plateau_drugs_medical_comodities_management" model="multi.branch">
+            <field name="name">PLATEAU STATE DRUGS AND MEDICAL COMMODITIES MANAGEMENT AGENCY</field>
+            <field name="code">052100200100</field>
         </record>
         <record id="mda_ministry_of_water_resources_and_energy" model="multi.branch">
-            <field name="name">Ministry of Water Resources and Energy</field>
+            <field name="name">MINISTRY OF WATER RESOURCES AND ENERGY(WATER)</field>
+            <field name="code">025200100100</field>
+        </record>
+        <record id="mda_ministry_of_water_resources_energy_and_energy" model="multi.branch">
+            <field name="name">MINISTRY OF WATER RESOURCES AND ENERGY(ENERGY)</field>
+            <field name="code">025200100200</field>
+        </record>
+        <record id="mda_ministry_of_energy_corporation_and_energy" model="multi.branch">
+            <field name="name">PLATEAU STATE ENERGY CORPORATION</field>
+            <field name="code">025200300100</field>
         </record>
         <record id="mda_ministry_of_justice" model="multi.branch">
             <field name="name">Ministry of Justice</field>
+            <field name="code">032600100100</field>
         </record>
         <record id="mda_ministry_of_housing" model="multi.branch">
-            <field name="name">Ministry of Housing</field>
+            <field name="name">MINISTRY OF HOUSING AND URBAN DEVELOPMENT</field>
+            <field name="code">025700100100</field>
         </record>
+
         <record id="mda_ministry_of_agriculture_and_rural_development" model="multi.branch">
-            <field name="name">Ministry of Agriculture and Rural Development</field>
+            <field name="name">MINISTRY OF AGRICULTURE AND RURAL DEVELOPMENT</field>
+            <field name="code">021500000000</field>
         </record>
         <record id="mda_ministry_of_works" model="multi.branch">
-            <field name="name">Ministry of Works</field>
+            <field name="name">MINISTRY OF WORKS</field>
+            <field name="code">023400100100</field>
         </record>
-        <record id="mda_ministry_of_education_higher_education" model="multi.branch">
-            <field name="name">Ministry of Education (Higher Education)</field>
+        <record id="mda_ministry_of_works_engineering" model="multi.branch">
+            <field name="name">MINISTRY OF WORKS (ENGINEERING DEPARTMENT)</field>
+            <field name="code">023400100200</field>
         </record>
-        <record id="mda_ministry_of_education_secondary_education" model="multi.branch">
-            <field name="name">Ministry of Education (Secondary Education)</field>
-        </record>
+        
+        <record id="mda_barkin_ladi_polytechnic" model="multi.branch">
+            <field name="name">PLATEAU STATE POLYTECHNIC, BARKIN LADI</field>
+            <field name="code">056400400100</field>
+        </record> 
         <record id="mda_ministry_of_women_affairs_and_social_development" model="multi.branch">
             <field name="name">Ministry of Women Affairs and Social Development</field>
+            <field name="code">051400100100</field>
         </record>
         <record id="mda_ministry_of_sports_and_youth_development" model="multi.branch">
-            <field name="name">Ministry of Sports and Youth Development</field>
+            <field name="name">MINISTRY OF YOUTH AND SPORT DEVELOPMENT(YOUTH)</field>
+            <field name="code">051300100100</field>
+        </record>
+        <record id="mda_ministry_of_sports_and_youth_development_sport" model="multi.branch">
+            <field name="name">MINISTRY OF YOUTH AND SPORT DEVELOPMENT(SPORT)</field>
+            <field name="code">051300500100</field>
         </record>
         <record id="mda_ministry_of_environment" model="multi.branch">
             <field name="name">Ministry of Environment</field>
+            <field name="code">053500000000</field>
         </record>
         <record id="mda_ministry_for_local_government_and_chieftaincy_affairs" model="multi.branch">
-            <field name="name">Ministry for Local Government and Chieftaincy Affairs</field>
+            <field name="name">MINISTRY FOR LOCAL GOVERNMENT AND CHIEFTAINCY AFFAIRS</field>
+            <field name="code">055100100100</field>
         </record>
         <record id="mda_ministry_of_commerce_and_industry" model="multi.branch">
-            <field name="name">Ministry of Commerce and Industry</field>
+            <field name="name">MINISTRY OF COMMERCE AND INDUSTRIES</field>
+            <field name="code">022200100100</field>
         </record>
         <record id="mda_ministry_of_lands_survey_and_town_planning" model="multi.branch">
             <field name="name">Ministry of Lands, Survey and Town Planning</field>
+            <field name="code">026000100100</field>
         </record>
         <record id="mda_ministry_of_tourism_culture_and_hospitality" model="multi.branch">
-            <field name="name">Ministry of Tourism, Culture and Hospitality</field>
+            <field name="name">MINISTRY OF TOURISM, CULTURE AND  HOSPITALITY</field>
+            <field name="code">023600100100</field>
         </record>
         <record id="mda_ministry_of_physical_planning_and_urban_development" model="multi.branch">
             <field name="name">Ministry of Physical Planning and Urban Development</field>
+            <field name="code">025300100100</field>
         </record>
         <record id="mda_ministry_of_transport" model="multi.branch">
-            <field name="name">Ministry of Transport</field>
+            <field name="name">MINISTRY OF TRANSPORT</field>
+            <field name="code">022900100100</field>
         </record>
         <record id="mda_ministry_of_science_and_technology" model="multi.branch">
-            <field name="name">Ministry of Science and Technology </field>
+            <field name="name">MINISTRY OF SCIENCE AND TECHNOLOGY</field>
+            <field name="code">22800100100</field>
+        </record>
+        <record id="mda_info_commu_and_technology_agency" model="multi.branch">
+            <field name="name">PLATEAU STATE INFORMATION AND COMMUNICATION TECHNOLOGY DEVELOPMENT AGENCY</field>
+            <field name="code">022800200100</field>
         </record>
         <record id="mda_ministry_of_mineral_and_development" model="multi.branch">
-            <field name="name">Ministry of Mineral and Development</field>
+            <field name="name">MINISTRY OF MINERAL DEVELOPMENT</field>
+            <field name="code">023300100100</field>
         </record>
         <record id="mda_ministry_of_special_duties" model="multi.branch">
             <field name="name">Ministry of Special Duties</field>
+            <field name="code">xxxxx</field>
         </record>
         <record id="mda_ministry_of_budget_and_economic_planning" model="multi.branch">
-            <field name="name">Ministry of Budget and Economic Planning</field>
+            <field name="name">MINISTRY OF BUDGET AND ECONOMIC PLANNING</field>
+            <field name="code">023800100100</field>
         </record>
         <record id="mda_0ffice_of_the_head_of_civil_service" model="multi.branch">
-            <field name="name">0ffice of the Head of Civil Service</field>
+            <field name="name">OFFICE OF THE HEAD OF CIVIL SERVICE</field>
+            <field name="code">012500100100</field>
         </record>
         <record id="mda_0ffice_of_the_secretary_to_the_government_of_the_state" model="multi.branch">
-            <field name="name">0ffice of the Secretary to the Government of the State</field>
+            <field name="name">OFFICE OF THE SECRETARY TO THE GOVERNMENT OF THE STATE</field>
+            <field name="code">016100100100</field>
         </record>
         <record id="mda_governors_office" model="multi.branch">
-            <field name="name">Governor's office</field>
+            <field name="name">OFFICE OF THE EXECUTIVE GOVERNOR</field>
+            <field name="code">011100100100</field>
         </record>
         <record id="mda_deputy_governors_office" model="multi.branch">
-            <field name="name">Deputy Governors' Office</field>
+            <field name="name">OFFICE OF THE DEPUTY GOVERNOR</field>
+            <field name="code">011100100200</field>
         </record>
         <record id="mda_plateau_state_house_of_assembly" model="multi.branch">
-            <field name="name">Plateau State House of Assembly</field>
+            <field name="name">PLATEAU STATE HOUSE OF ASSEMBLY</field>
+            <field name="code">011200400100</field>
         </record>
         <record id="mda_0ffice_of_the_auditor_general_state" model="multi.branch">
             <field name="name">0ffice of the Auditor-General (State)</field>
+            <field name="code">AUDTI001</field>
         </record>
         <record id="mda_office_of_the_accountant_general" model="multi.branch">
-            <field name="name">0ffice of the Accountant General</field>
+            <field name="name">OFFICE OF THE ACCOUNTANT-GENERAL</field>
+            <field name="code">022000700100</field>
         </record>
         <record id="mda_high_court_of_justice" model="multi.branch">
-            <field name="name">High Court of Justice</field>
+            <field name="name">PLATEAU STATE HIGH COURT OF JUSTICE</field>
+            <field name="code">031805100100</field>
         </record>
         <record id="mda_customary_court_of_appeal" model="multi.branch">
             <field name="name">Customary Court of Appeal</field>
+            <field name="code">031805200100</field>
         </record>
         <record id="mda_sharia_court_of_appeal" model="multi.branch">
             <field name="name">Sharia Court of Appeal</field>
+            <field name="code">031805300100</field>
+        </record>
+        <record id="mda_multidoor_court_of_appeal" model="multi.branch">
+            <field name="name">MULTI-DOOR COURT HOUSE</field>
+            <field name="code">031805400100</field>
         </record>
         <record id="mda_local_government_audit" model="multi.branch">
-            <field name="name">Local Government Audit</field>
+            <field name="name">PLATEAU STATE LOCAL GOVERNMENT AUDIT</field>
+            <field name="code">014000200100</field>
         </record>
         <!-- COMMISSIONS -->
         <record id="mda_plateau_state_house_of_assembly_service_commission" model="multi.branch">
             <field name="name">Plateau State House of Assembly Service Commission</field>
+            <field name="code">11200300100</field>
         </record>
         <record id="mda_judicial_service_commission" model="multi.branch">
-            <field name="name">Judicial Service Commission</field>
+            <field name="name">PLATEAU STATE JUDICIAL SERVICE COMMISSION</field>
+            <field name="code">031801100100</field>
         </record>
         <record id="mda_local_government_service_commission" model="multi.branch">
-            <field name="name">Local Government Service Commission</field>
+            <field name="name">PLATEAU STATE LOCAL GOVERNMENT SERVICE COMMISSION</field>
+            <field name="code">014900100100</field>
         </record>
         <record id="mda_civil_service_commission" model="multi.branch">
-            <field name="name">Civil Service Commission</field>
+            <field name="name">PLATEAU STATE CIVIL SERVICE COMMISSION</field>
+            <field name="code">014700100100</field>
         </record>
         <record id="mda_teachers_service_commission" model="multi.branch">
-            <field name="name">Teachers Service Commission</field>
+            <field name="name">PLATEAU STATE TEACHERS SERVICE COMMISSION</field>
+            <field name="code">051705400100</field>
         </record>
         <record id="mda_plateau_state_boundary_commission" model="multi.branch">
-            <field name="name">Plateau State Boundary Commission</field>
+            <field name="name">PLATEAU STATE BOUNDARY COMMISSION</field>
+            <field name="code">011100400100</field>
         </record>
         <record id="mda_plateau_state_disability_rights_commission" model="multi.branch">
             <field name="name">Plateau State Disability Rights Commission</field>
+            <field name="code">032600300100</field>
         </record>
         <record id="mda_plateau_state_electoral_independent_commission" model="multi.branch">
-            <field name="name">Plateau State Electoral Independent Commission</field>
+            <field name="name">PLATEAU STATE INDEPENDENT ELECTORAL COMMISSION</field>
+            <field name="code">014800100100</field>
         </record>
         <!-- BOARDS AND PARASTATALS -->
         <record id="mda_plateau_state_government_printing_press" model="multi.branch">
-            <field name="name">Plateau State Government Printing Press</field>
+            <field name="name">PLATEAU STATE PRINTING PRESS</field>
+            <field name="code">012301300100</field>
         </record>
         <record id="mda_plateau_radio_television_corporation" model="multi.branch">
-            <field name="name">Plateau Radio Television Corporation</field>
+            <field name="name">PLATEAU RADIO TELEVISION CORPORATION</field>
+            <field name="code">012300300100</field>
+        </record>
+        <record id="mda_plateau_radio_television_corporation_radio" model="multi.branch">
+            <field name="name">PLATEAU RADIO TELEVISION CORPORATION(RADIO)</field>
+            <field name="code">012300400100</field>
         </record>
         <record id="mda_plateau_rural_water_and_sanitation_agency" model="multi.branch">
-            <field name="name">Plateau Rural Water And Sanitation Agency</field>
+            <field name="name">PLATEAU STATE RURAL WATER SUPPLY AND SANITATION AGENCY</field>
+            <field name="code">025200500100</field>
         </record>
         <record id="mda_fire_service_directorate" model="multi.branch">
-            <field name="name">Fire Service Directorate</field>
+            <field name="name">PLATEAU STATE FIRE SERVICE DIRECTORATE</field>
+            <field name="code">016103900100</field>
         </record>
         <record id="mda_adult_and_non_formal_education" model="multi.branch">
-            <field name="name">Adult and Non Formal Education</field>
+            <field name="name">PLATEAU STATE ADULT AND NON-FORMAL EDUCATION AGENCY</field>
+            <field name="code">051706700100</field>
         </record>
         <record id="mda_plateau_agricultural_development_programme" model="multi.branch">
-            <field name="name">Plateau Agricultural Development Programme</field>
+            <field name="name">PLATEAU STATE AGRICULTURAL DEVELOPMENT PROGRAMME</field>
+            <field name="code">021502200100</field>
+        </record>
+        <record id="mda_plateau_state_internal_revenue" model="multi.branch">
+            <field name="name">PLATEAU STATE INTERNAL REVENUE SERVICES</field>
+            <field name="code">022000800100</field>
         </record>
         <record id="mda_plateau_agricultural_mechanization_service" model="multi.branch">
-            <field name="name">Plateau Agricultural Mechanization Service</field>
+            <field name="name">PLATEAU STATE AGRICULTURAL MECHANIZATION SERVICES COMPANY</field>
+            <field name="code">021500400100</field>
         </record>
         <record id="mda_plateau_state_road_maintenance_agency" model="multi.branch">
-            <field name="name">Plateau State Road Maintenance Agency</field>
+            <field name="name">PLATEAU STATE ROAD MAINTENANCE AGENCY</field>
+            <field name="code">023400400100</field>
         </record>
         <record id="mda_jos_metropolitan_development_board" model="multi.branch">
-            <field name="name">Jos Metropolitan Development Board</field>
+            <field name="name">JOS METROPOLITAN DEVELOPMENT BOARD</field>
+            <field name="code">025705600100</field>
         </record>
         <record id="mda_plateau_state_sport_council" model="multi.branch">
             <field name="name">Plateau State Sport Council</field>
+            <field name="code">xxxxx</field>
         </record>
         <record id="mda_plateau_united_football_club" model="multi.branch">
             <field name="name">Plateau United Football Club</field>
+            <field name="code">051300300100</field>
         </record>
         <record id="mda_plateau_state_mineral_development_company" model="multi.branch">
-            <field name="name">Plateau State Mineral Development Company</field>
+            <field name="name">PLATEAU STATE MINERAL DEVELOPMENT COMPANY</field>
+            <field name="code">023305100100</field>
         </record>
         <record id="mda_jos_main_market_authority" model="multi.branch">
-            <field name="name">Jos Main Market Authority</field>
+            <field name="name">JOS MAIN MARKET AUTHORITY</field>
+            <field name="code">022200400100</field>
+        </record>
+        <record id="mda_kabong_market_authority" model="multi.branch">
+            <field name="name">KABONG MARKET AUTHORITY</field>
+            <field name="code">022200300100</field>
+        </record>
+        <record id="mda_one_stop_investment_center" model="multi.branch">
+            <field name="name">PLATEAU STATE ONE STOP INVESTMENT CENTRE</field>
+            <field name="code">022200400100</field>
         </record>
         <record id="mda_plateau_publishing_corporation" model="multi.branch">
-            <field name="name">Plateau Publishing Corporation</field>
+            <field name="name">PLATEAU STATE PUBLISHING CORPORATION</field>
+            <field name="code">012305500100</field>
         </record>
         <record id="mda_plateau_express_service_limited" model="multi.branch">
             <field name="name">Plateau Express Service Limited</field>
+            <field name="code">xxxxx</field>
         </record>
         <record id="mda_plateau_aids_control_agency" model="multi.branch">
-            <field name="name">Plateau Aids Control Agency</field>
+            <field name="name">PLATEAU STATE AIDS CONTROL AGENCY</field>
+            <field name="code">011103300100</field>
         </record>
         <record id="mda_plateau_state_community_and_social_development_agency" model="multi.branch">
             <field name="name">Plateau State Community and Social Development Agency</field>
+            <field name="code">11108600100</field>
         </record>
         <record id="mda_plateau_state_emergency_and_relief_management_agency" model="multi.branch">
-            <field name="name">Plateau State Emergency and Relief Management Agency</field>
+            <field name="name">PLATEAU STATE EMERGENCY RELIEF AND MANAGEMENT AGENCY</field>
+            <field name="code">011100800100</field>
         </record>
         <record id="mda_plateau_environmental_protection_and_sanitation_agency" model="multi.branch">
-            <field name="name">Plateau Environmental Protection and Sanitation Agency</field>
+            <field name="name">PLATEAU STATE ENVIRONMENTAL PROTECTION AND SANITATION AGENCY</field>
+            <field name="code">053501600100</field>
         </record>
         <record id="mda_plateau_state_specialist_hospital" model="multi.branch">
             <field name="name">Plateau State Specialist Hospital</field>
+            <field name="code">052100400100</field>
         </record>
         <record id="mda_0peration_rainbow" model="multi.branch">
-            <field name="name">0peration Rainbow</field>
+            <field name="name">PLATEAU STATE OPERATION RAINBOW</field>
+            <field name="code">011108400100</field>
         </record>
         <record id="mda_plateau_state_afforestation_programme" model="multi.branch">
             <field name="name">Plateau State Afforestation Programme</field>
+            <field name="code">xxxxx</field>
         </record>
         <record id="mda_public_sector_reform_and_development_project" model="multi.branch">
             <field name="name">Public Sector Reform and Development Project</field>
+            <field name="code">xxxxx</field>
         </record>
-        <record id="mda_plateau_state_library_board" model="multi.branch">
-            <field name="name">Plateau State Library Board</field>
-        </record>
+        
         <record id="mda_plateau_state_hospitals_management_board" model="multi.branch">
             <field name="name">Plateau State Hospitals Management Board</field>
+            <field name="code">052100500100</field>
         </record>
         <record id="mda_jos_water_services_corporation" model="multi.branch">
             <field name="name">Jos Water Services Corporation</field>
+            <field name="code">025200400100</field>
         </record>
         <record id="mda_plateau_state_water_board" model="multi.branch">
             <field name="name">Plateau State Water Board</field>
+            <field name="code">WB0001</field>
         </record>
         <record id="mda_local_government_pension_board" model="multi.branch">
-            <field name="name">Local Government Pension Board</field>
+            <field name="name">PLATEAU STATE LOCAL GOVERNMENT STAFF PENSION BOARD</field>
+            <field name="code">014900200100</field>
         </record>
         <record id="mda_plateau_state_christian_pilgrims_welfare_board" model="multi.branch">
-            <field name="name">Plateau State Christian Pilgrims Welfare Board</field>
+            <field name="name">PLATEAU STATE CHRISTIAN PILGRIMS WELFARE BOARD</field>
+            <field name="code">016103800100</field>
         </record>
         <record id="mda_plateau_state_muslim_pilgrims_welfare_board" model="multi.branch">
-            <field name="name">Plateau State Muslim Pilgrims Welfare Board</field>
+            <field name="name">PLATEAU STATE MUSLIM PILGRIMS WELFARE BOARD</field>
+            <field name="code">016103700100</field>
         </record>
         <record id="mda_plateau_state_universal_basic_education_board" model="multi.branch">
-            <field name="name">Plateau State Universal Basic Education Board</field>
+            <field name="name">PLATEAU STATE UNIVERSAL BASIC EDUCATION BOARD</field>
+            <field name="code">051700300100</field>
+        </record>
+        <record id="mda_ministry_of_education_higher_education" model="multi.branch">
+            <field name="name">MINISTRY OF HIGHER EDUCATION</field>
+            <field name="code">056400100100</field>
+        </record>
+        <record id="mda_ministry_of_education_secondary_education" model="multi.branch">
+            <field name="name">MINISTRY OF EDUCATION (SECONDARY EDUCATION)</field>
+            <field name="code">051700100100</field>
+        </record>
+        <record id="mda_plateau_state_library_board" model="multi.branch">
+            <field name="name">Plateau State Library Board</field>
+            <field name="code">051700800100</field>
         </record>
         <record id="mda_relevant_technology_board" model="multi.branch">
-            <field name="name">Relevant Technology Board</field>
+            <field name="name">PLATEAU STATE RELEVANT TECHNOLOGY BOARD</field>
+            <field name="code">022800300100</field>
         </record>
         <record id="mda_plateau_state_scholarship_board" model="multi.branch">
             <field name="name">Plateau State Scholarship Board</field>
+            <field name="code">056400800100</field>
         </record>
         <record id="mda_plateau_state_pension_board" model="multi.branch">
-            <field name="name">Plateau State Pension Board</field>
+            <field name="name">PLATEAU STATE PENSION BOARD
+</field>
+            <field name="code">011103500100</field>
         </record>
         <record id="mda_bureau_of_statistics" model="multi.branch">
-            <field name="name">Bureau of Statistics</field>
+            <field name="name">PLATEAU STATE BUREAU OF STATISTICS</field>
+            <field name="code">023800400100</field>
         </record>
         <record id="mda_plateau_state_peace_building_agency" model="multi.branch">
-            <field name="name">Plateau State Peace Building Agency</field>
+            <field name="name">PLATEAU STATE PEACE BUILDING AGENCY</field>
+            <field name="code">011108500100</field>
         </record>
         <record id="mda_sustainable_development_goals" model="multi.branch">
             <field name="name">Sustainable Development Goals</field>
+            <field name="code">SDG001</field>
         </record>
         <record id="mda_plateau_investment_and_property_development_company" model="multi.branch">
             <field name="name">Plateau Investment and Property Development Company</field>
+            <field name="code">IPD001</field>
         </record>
         <record id="mda_plateau_state_tourism_corporation" model="multi.branch">
-            <field name="name">Plateau State Tourism Corporation</field>
+            <field name="name">PLATEAU STATE TOURISM CORPORATION</field>
+            <field name="code">023600200100</field>
         </record>
         <record id="mda_agricultural_services_training_centre" model="multi.branch">
             <field name="name">Agricultural Services Training Centre</field>
+            <field name="code">SETC001</field>
         </record>
         <record id="mda_plateau_state_primary_health_care" model="multi.branch">
-            <field name="name">Plateau State Primary Health Care</field>
+            <field name="name">PLATEAU STATE PRIMARY HEALTH CARE DEVELOPMENT AGENCY</field>
+            <field name="code">52100800100</field>
         </record>
         <record id="mda_plateau_state_micro_finance_agency" model="multi.branch">
-            <field name="name">Plateau State Micro Finance Agency</field>
+            <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY</field>
+            <field name="code">011103100100</field>
+        </record>
+        <!-- NEW -->
+        <record id="mda_plateau_promotion_and_regulatory_agency" model="multi.branch">
+            <field name="name">INFRASTRUCTURE PROMOTION AND REGULATORY AGENCY</field>
+            <field name="code">011103200100</field>
         </record>
         <record id="mda_public_procurement" model="multi.branch">
-            <field name="name">Public Procurement</field>
+            <field name="name">PLATEAU STATE BUREAU OF PUBLIC PROCUREMENT</field>
+            <field name="code">022000600100</field>
         </record>
         <record id="mda_plateau_state_contributory_health_care_management_agency" model="multi.branch">
-            <field name="name">Plateau State Contributory Health Care Management Agency</field>
+            <field name="name">PLATEAU STATE CONTRIBUTORY HEALTH CARE MANAGEMENT AGENCY</field>
+            <field name="code">052100800100</field>
         </record>
         <record id="mda_plateau_state_information_and_communication_development_agency_" model="multi.branch">
             <field name="name">Plateau State Information and Communication Development Agency </field>
+            <field name="code">022800200100</field>
+        </record>
+        <record id="mda_plateau_state_rural_water_supply_and_sanitation_agency" model="multi.branch">
+            <field name="name">PLATEAU STATE RURAL WATER SUPPLY AND SANITATION AGENCY</field>
+            <field name="code">025200500100</field>
         </record>
         <record id="mda_plateau_state_municipal_water_supply_and_sanitation_agency" model="multi.branch">
             <field name="name">Plateau State Municipal Water Supply and Sanitation Agency</field>
+            <field name="code">025200600100</field>
         </record>
         <!-- TERTIARY INSTITUTIONS -->
         <record id="mda_college_of_health_technology_pankshin" model="multi.branch">
             <field name="name">COLLEGE OF Health Technology, PANKSHIN</field>
+            <field name="code">052100900100
+</field>
+        </record>
+        <record id="mda_climate_change_mineral_development" model="multi.branch">
+            <field name="name">MINISTRY OF ENVIRONMENT, CLIMATE CHANGE AND MINERAL DEVELOPMENT</field>
+            <field name="code">053500000000</field>
+        </record>
+        <record id="mda_newmap_development_agency" model="multi.branch">
+            <field name="name">PLATEAU STATE NEWMAP DEVELOPMENT AGENCY</field>
+            <field name="code">053505600100</field>
         </record>
         <record id="mda_college_of_health_technology_zawan" model="multi.branch">
             <field name="name">College of Health Technology Zawan</field>
+            <field name="code">052100700100</field>
         </record>
         <record id="mda_college_of_agriculture_garkawa" model="multi.branch">
             <field name="name">College of Agriculture Garkawa</field>
+            <field name="code">021502100100</field>
         </record>
         <record id="mda_college_of_education_gindiri" model="multi.branch">
             <field name="name">College of Education Gindiri</field>
+            <field name="code">056400500100</field>
         </record>
         <record id="mda_college_of_arts_science_and_remedial_studies_kurgwi" model="multi.branch">
             <field name="name">College of Arts, Science and Remedial Studies Kurgwi</field>
+            <field name="code">056400700100</field>
         </record>
         <record id="mda_plateau_state_polytechnic_barkin_ladi" model="multi.branch">
             <field name="name">Plateau State Polytechnic Barkin-Ladi</field>
+            <field name="code">056400400100</field>
         </record>
         <record id="mda_plateau_state_university_bokkos" model="multi.branch">
-            <field name="name">Plateau State University Bokkos</field>
+            <field name="name">PLATEAU STATE UNIVERSITY, BOKKOS</field>
+            <field name="code">056400600100</field>
         </record>
+        
         <record id="mda_college_of_nursing_and_midwifery_vom" model="multi.branch">
             <field name="name">College of Nursing and Midwifery Vom</field>
+            <field name="code">052100600100</field>
         </record>
 
         <!-- unknown_classification -->
         <record id="mda_mighty_jets" model="multi.branch">
             <field name="name">Mighty Jets</field>
+            <field name="code">MJ001</field>
         </record>
         <record id="mda_platea_state_fadama_ng_cares" model="multi.branch">
             <field name="name">PLATEAU STATE FADAMA NG-CARES</field>
+            <field name="code">FADA001</field>
         </record>
         <record id="mda_plateau_state_ict_development_agency" model="multi.branch">
             <field name="name">PLATEAU STATE ICT DEVELOPMENT AGENCY</field>
+            <field name="code">T0ICT</field>
         </record>
-        <record id="mda_plateau_state_microfinance_development_agency" model="multi.branch">
-            <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY</field>
+        <record id="mda_plateau_state_microfinance_development_agency_2" model="multi.branch">
+            <field name="name">!! PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY</field>
+            <field name="code">T0</field>
         </record>
         <record id="mda_plateau_state_microfinance_development_agency_ng_cares" model="multi.branch">
             <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY NG-CARES</field>
+            <field name="code">PMA01</field>
         </record>
         <record id="mda_plateau_state_ng_cares_coordinating_unit" model="multi.branch">
             <field name="name">PLATEAU STATE NG-CARES COORDINATING UNIT</field>
+            <field name="code">001CNG</field>
         </record>
         <record id="mda_plateau_state_sports_council" model="multi.branch">
             <field name="name">PLATEAU STATE SPORTS COUNCIL</field>
+            <field name="code">SPCO1</field>
         </record>
         <record id="mda_state_audit_department" model="multi.branch">
-            <field name="name">STATE AUDIT DEPARTMENT</field>
+            <field name="name">PLATEAU STATE AUDIT DEPARTMENT</field>
+            <field name="code">014000100100</field>
         </record>
     
     </data>

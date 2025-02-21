@@ -1,0 +1,79 @@
+<odoo>
+    <data>
+        <record id="account_economic_tree" model="ir.ui.view">
+        <field name="name">account.economic.tree</field>
+        <field name="model">account.economic</field>
+            <field name="arch" type="xml">
+                <tree string="" create="1">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="account_economic_form" model="ir.ui.view">
+        <field name="name">account.economic.form</field>
+        <field name="model">account.economic</field>
+            <field name="arch" type="xml">
+                <form string="" create="1">
+                    <group>
+                        <group>
+                            <field name="name" required="1" readonly="0"/>
+                        </group>
+                        <group>
+                            <field name="code" invisible="0" required="1"/>
+                            <field name="account_type" invisible="0" readonly="0" required="1"/>
+                            <field name="account_id" invisible="0" readonly="0"/>
+                        </group>
+                    </group>
+                    <notebook>
+                         
+                        <page name="Budget Lines" string="Budget Lines" invisible="0">
+                            <field name="ng_budget_line_ids" readonly="1">
+                                <tree string="" create="0">
+                                    <field name="account_id"/>
+                                    <field name="ng_budget_id" required="1"/>
+                                    <field name="approved_date" required="0"/>
+                                    <field name="reviewer_id"/>
+                                    <field name="approver_id"/>
+                                    <field name="budget_allocation_date" required="1"/>
+                                    <field name="fiscal_year" required="1"/>
+                                    <field name="allocated_amount" required="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="MBAs" string="MBAs" invisible="0">
+                            <field name="branch_ids" readonly="0">
+                                <tree string="" create="0">
+                                    <field name="name"/>
+                                    <field name="code" string="Admin Code"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record id="action_account_economic_line" model="ir.actions.act_window">
+            <field name="name">Economic</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.economic</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record
+              </p><p>
+              </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_account_economic"
+            name="Economic"
+            parent="company_memo.memo_configuration"
+            action="plateau_addons.action_account_economic_line"
+            sequence="107"/>
+
+        <menuitem action="action_account_economic_line" id="account_economic_line_menu" sequence="105" parent="account.menu_finance_entries_accounting_miscellaneous"/>
+    </data>
+</odoo>

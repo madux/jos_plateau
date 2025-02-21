@@ -18,19 +18,20 @@
                     <field name="data_file" filename="filename" widget="binary"/>
                     <field name="index"/> 
                     <field name="import_type" required="0" invisible="0"/>
+                    <field name="budget_name" required="import_type == 'budget'" invisible="0" placeholder="e.g 2025 Capital Receipt or 2025 Personnel" />
                 </group>
-                <group> 
+                <group invisible="import_type != 'chart'"> 
                     <field name="account_type"
                     invisible="import_type != 'chart'" required="import_type == 'chart'"/>
-                    <field name="default_account" invisible="0" required="1"/>
+                    <field name="default_account" invisible="0" required="import_type == 'chart'"/>
                     <field name="budget_id" 
                     invisible="import_type != 'chart'" required="import_type == 'chart'"/>
-                    <field name="budget_position_id" invisible="budget_id == False" required="budget_id != False" />
+                    <field name="budget_position_id" invisible="budget_id == False" required="budget_id != False and import_type == 'chart'" />
                     <field name="account_analytic_plan_id" 
-                    invisible="budget_id == False" required="budget_id != False"/>
+                    invisible="budget_id == False" required="budget_id != False and import_type == 'chart'"/>
                     
                     <field name="running_journal_id"
-                    invisible="import_type == 'chart'" required="import_type != 'chart'"/>
+                    invisible="import_type == 'chart'" required="import_type not in ['chart', 'budget']"/>
                 </group>
                 <footer>
                     <button name="import_records_action" string="Import Account Record" type="object"  class="oe_highlight"/>
@@ -71,7 +72,7 @@
             sequence="102"/>
     <menuitem
             id="menu_memo_import_applicants_records"
-            name="Import Journal and COA"
+            name="Import Journal and COA, &amp; budget"
             parent="company_memo.memo_configuration"
             action="plateau_addons.action_pl_import_applicants"
             sequence="102"/>

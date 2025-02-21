@@ -46,15 +46,21 @@
     </record>
      <menuitem
             id="menu_public_chart"
-            name="Chart of Account Segment"
+            name="Account Segment"
             parent="account.menu_finance_configuration"
             sequence="3"/>
      
     <menuitem
-            id="menu_import_applicants_records"
+            id="public_account_accounting_segment"
             name="Public Chart of Account Segment"
             parent="plateau_addons.menu_public_chart"
             action="plateau_addons.action_account_public_segment"
             sequence="1"/>
+    <menuitem
+            id="menu_memo_public_account_segment"
+            name="Account Segment"
+            parent="plateau_addons.internal_memo_account_setup_menu"
+            action="plateau_addons.action_account_public_segment"
+            sequence="30"/>
 
 </odoo>

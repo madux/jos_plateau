@@ -28,10 +28,26 @@
 
         <menuitem
             id="ng_account_budget_line_memo_menu2"
-            name="Budget Head"
+            name="Budget Head (Allocation)"
             parent="plateau_addons.internal_memo_account_setup_menu"
             action="plateau_addons.action_ng_account_budget_line"
             sequence="20"/>
+        <menuitem 
+            id="memo_setup_menu_branch_form" 
+            action="ik_multi_branch.action_res_multi_branch_form" 
+            name="MDAs"
+            parent="plateau_addons.internal_memo_account_setup_menu"
+            sequence="40"
+            />
+
+        <menuitem 
+            id="memo_configuration_menu_branch_form" 
+            name="MDAs"
+            action="ik_multi_branch.action_res_multi_branch_form" 
+            parent="company_memo.memo_configuration"
+            sequence="107"
+            />
+        
         
     </data>
 </odoo>

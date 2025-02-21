@@ -21,6 +21,8 @@
         'views/account_segment_view.xml', 
         'views/res_base.xml',
         'views/security_rule.xml', 
+        'views/economic.xml',
+        'views/ng_account_budget_line.xml',
         'data/account_segment.xml', 
         'report/account_report_wizard_view.xml', 
         'report/account_report_template.xml', 
