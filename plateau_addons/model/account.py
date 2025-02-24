@@ -171,7 +171,11 @@ class AccountPayment(models.Model):
         #         raise ValidationError("Ops. You are not allowed confirm this Bill. Ensure system admin adds you to the list approvers for this stage")
         # else:
         #     raise ValidationError("ddddEnsure system admin adds you to the lithis stage")
-            
+        if self.memo_reference:
+            stage = self.memo_reference.stage_id
+            approval_users = [r.user_id.id for r in stage.approver_ids]
+            if self.env.user.id not in approval_users:
+                raise ValidationError(f"Only these users are allowed to post at this stage {[rec.name for rec in stage.approver_ids]}")
         res = super(AccountPayment, self).action_post()
         return res
     
@@ -213,7 +217,69 @@ class AccountPayment(models.Model):
 
             m.suitable_journal_ids = self.env['account.journal'].search(domain)
 
+   
+class AccountInvoiceLine(models.Model):
+    _inherit = 'account.move.line'
+    
+    ng_budget_line_id = fields.Many2one(
+        'ng.account.budget.line',
+        string='Budget',
+        readonly=False,
+        tracking=True,
+        ondelete='restrict')
+    
+    ng_budget_line_ids = fields.Many2many(
+        'ng.account.budget.line',
+        string='Budget Tag',
+        readonly=False,
+        compute="_compute_ng_budget_line")
+    
+    budget_balance = fields.Float('Budget Balance', related="ng_budget_line_id.budget_balance")
+    
+    @api.depends('account_id')
+    def _compute_ng_budget_line(self):
+        user = self.env.user
+        # if user.branch_id or user.branch_ids:
+            # for m in self:
+        if self.account_id:
+            budget_line_ids = self.env['ng.account.budget.line'].search([
+            ('branch_id', '=', self.branch_id.id),
+            # ('account_id', '=', self.account_id.id)
+            ])
+            if budget_line_ids:
+                self.ng_budget_line_ids = [(6, 0, budget_line_ids.ids)]
+            else:
+                self.ng_budget_line_ids = False
+        else:
+            self.ng_budget_line_ids = False
+         
+                
+    # @api.model
+    # def default_get(self, fields):
+    #     res = super(Memo_Model, self).default_get(fields)
+    #     memo_project_type = self.env.context.get('default_memo_project_type')
+    #     default_budget_allocation = self.env.context.get('default_is_budget_allocation_request')
+    #     external_payment_request = self.env.context.get('default_external_memo_request')
         
+    #     ministry_of_finance = self.env.ref('plateau_addons.mda_ministry_of_finance')
+    #     # finance_budget_head = self.env['ng.budget'].search(domain)
+    #     # user_branches = list(self.env.user.branch_id.id)
+    #     domain = [('active', '=', True)]
+    #     # if memo_project_type: , ('branch_ids', 'in', user_branches)
+    #     #     domain = [('active', '=', True), ('project_type', '=', memo_project_type)]
+    #     memo_configs = self.env['memo.config'].search(domain)
+    #     user_branch_id = self.env.user.branch_id
+    #     res.update({
+    #         'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs if user_branch_id.id in rec.branch_ids.ids])],
+    #         'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search([
+    #             '|', ('branch_id', '=', self.env.user.branch_id.id),
+    #             ('branch_id', 'in', self.env.user.branch_ids.ids)])
+    #                                      ])],
+    #         'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request else False,
+    #         'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request else False,
+    #         })
+    #     return res
+         
 class AccountInvoice(models.Model):
     _inherit = 'account.move'
      
@@ -250,6 +316,33 @@ class AccountInvoice(models.Model):
 
     external_memo_request = fields.Boolean('Is external memo request?')
     is_top_account_user = fields.Boolean('Is top account user?') #, compute="compute_top_account_user")
+    budget_id = fields.Many2one(
+        'ng.account.budget',
+        string='Budget',
+        readonly=False,
+        tracking=True
+        )
+    dummy_budget_ids = fields.Many2many(
+        'ng.account.budget',
+        string='Budget',
+        readonly=False,
+        compute="_compute_mda_budget")
+
+    @api.depends('company_id')
+    def _compute_mda_budget(self):
+        user = self.env.user
+        # for m in self:
+        # if user.branch_id or user.branch_ids:
+        if self.branch_id:
+            # branches = [rec.id for rec in user.branch_ids] + [user.branch_id.id]
+            mda_budget_ids = self.env['ng.account.budget'].search([('branch_id', '=', self.branch_id.id)])
+            if mda_budget_ids:
+                self.dummy_budget_ids = mda_budget_ids
+            else:
+                self.dummy_budget_ids = False
+        else:
+            self.dummy_budget_ids = False
+            
     partner_id = fields.Many2one(
         'res.partner',
         string='Beneficiary',
@@ -277,13 +370,44 @@ class AccountInvoice(models.Model):
     #     for rec in self.invoice_line_ids:
     #         _logger.info(rec.analytic_distribution)
     #         raise ValidationError(rec.analytic_distribution)
-
-                
+    
+    def cancel_budget_utilized_amount(self):
+        #  
+        for rec in self.invoice_line_ids:
+            if rec.ng_budget_line_id and rec.ng_budget_line_id.utilized_amount > 0:
+                rec.ng_budget_line_id.utilized_amount -= rec.price_subtotal
+                    
+    def check_budget_limit_and_post(self):
+        if self.ng_budget_id:
+            '''Check if budget head is selected and computes total of 
+            each budget against the budget balance
+            '''
+            already_checked = []
+            for rec in self.invoice_line_ids:
+                if rec.ng_budget_line_id and rec.ng_budget_line_id.id not in already_checked:
+                    budget_invoice_ids = self.mapped('invoice_line_ids').filtered(
+                        lambda bd: bd.ng_budget_line_id.id == rec.ng_budget_line_id.id
+                    )
+                    total_budget, total_balance_budget = 0.00, 0.00
+                    for r in budget_invoice_ids:
+                        total_balance_budget += r.budget_balance
+                        total_budget += r.price_subtotal
+                    already_checked.append(rec.ng_budget_line_id.id)
+                    if total_budget > rec.budget_balance:
+                        raise ValidationError(f"""
+                        Your move line with name {rec.name or "N/A"} account 
+                        {rec.ng_budget_line_id.economic_id.name or rec.ng_budget_line_id.account_id.name} budget {rec.ng_budget_line_id.economic_id.name or rec.ng_budget_line_id.account_id.name}
+                        has sub total amount greater than the Budget - {rec.ng_budget_line_id.economic_id.name or rec.ng_budget_line_id.account_id.name} balance
+                                          """)
+                    
+                    rec.ng_budget_line_id.utilized_amount += total_budget
+    
+             
     def action_post(self):
-        # self.check_budget_limit()
         account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
         if self.external_memo_request and not account_major_user:
             raise ValidationError("Ops. You are not allowed confirm this Bill. Only Accountant General Group is responsible to do this.")
+        self.check_budget_limit_and_post()
         res = super(AccountInvoice, self).action_post()
         return res
     
@@ -291,6 +415,7 @@ class AccountInvoice(models.Model):
         account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
         if self.external_memo_request and not account_major_user:
             raise ValidationError("Ops. You are not allowed cancel this Bill. Only Accountant General Group is responsible to do this.")
+        self.cancel_budget_utilized_amount()
         res = super(AccountInvoice, self).action_post()
         return res
     

@@ -28,6 +28,7 @@
         'report/account_report_template.xml', 
         'report/bank_payment_schedule.xml', 
         'report/budget_certificate.xml', 
+        'report/external_payment_bank_schedule.xml', 
         'data/jos_journal_data.xml',
     ],
 }

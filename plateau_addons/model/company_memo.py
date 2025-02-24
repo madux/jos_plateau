@@ -23,7 +23,9 @@ class CompanyMemo(models.Model):
     external_memo_request = fields.Boolean(string='Is External request')
     is_contract_memo_request = fields.Boolean(string='Is Contract request')
     is_top_account_user = fields.Boolean('Is top account user?', compute="compute_top_account_user")
+    
     bank_partner_id = fields.Many2one('res.partner', string='Bank-', help="Select the bank to send payment schedule")
+    scheduled_pay_date = fields.Date(string='Scheduled Pay date')
 
     @api.depends('external_memo_request', 'is_internal_transfer')
     def compute_top_account_user(self):
@@ -50,7 +52,25 @@ class CompanyMemo(models.Model):
                     #if payment_not_posted:
                     raise ValidationError("Each contractor payment lines must be posted")
         
+        # todo send mail 
         return self.env.ref('plateau_addons.print_payment_schedule_report').report_action(self)
+    
+    def generate_external_bank_payment_schedule(self):
+        # will be used to generate bank schedule and send to bank
+        for rec in self:
+            if not rec.bank_partner_id or not rec.scheduled_pay_date:
+                raise ValidationError("Please select bank to send Bank schedule to")
+            
+            if not rec.bank_partner_id.email:
+                raise ValidationError(f"Selected bank must also have an email: Record id {rec.id}")
+            if not rec.scheduled_pay_date:
+                raise ValidationError("Please select schedule date")
+            payment_not_posted = rec.mapped('payment_ids')
+            for pnp in payment_not_posted:
+                if pnp.state not in ['posted']: 
+                    raise ValidationError("Each payment lines must be posted before generating bank schedule")
+        # todo send mail 
+        return self.env.ref('plateau_addons.print_external_payment_schedule_report').report_action(self)
             
     def print_payment_schedule_report(self):
         if not self.contractor_ids:

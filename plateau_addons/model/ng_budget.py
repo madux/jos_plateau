@@ -73,6 +73,8 @@ class NgAccountBudgetLine(models.Model):
     )
     code = fields.Char(string="Fund Code", store=True, readonly="0")
     allocated_amount = fields.Float(string='Allocated Amount')
+    utilized_amount = fields.Float(string='Utilized Amount')
+    budget_balance = fields.Float(string='Balance Amount', compute="compute_variance")
     fiscal_year = fields.Char(
         string='Fiscal Year', 
         compute="compute_fiscal_year"
@@ -99,6 +101,14 @@ class NgAccountBudgetLine(models.Model):
         for rec in self:
             if rec.account_id:
                 rec.account_type = rec.account_id.account_type
+    
+    @api.depends('allocated_amount', 'utilized_amount')
+    def compute_variance(self):
+        for rec in self:
+            if rec.allocated_amount or rec.utilized_amount:
+                rec.budget_balance = rec.allocated_amount - rec.utilized_amount
+            else:
+                rec.budget_balance = 0
     
     
 class ngAccountBudget(models.Model):

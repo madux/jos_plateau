@@ -275,6 +275,13 @@ class MemoType(models.Model):
         """,
         )
     active = fields.Boolean("Active", default=True)
+    is_internal = fields.Boolean("Is internal payment", default=False)
+    is_external = fields.Boolean("Is External payment", default=False)
+    is_contractor = fields.Boolean("Is Contractor payment", default=False)
+    is_verification = fields.Boolean("Is budget verification", default=False)
+    is_allocation = fields.Boolean("Is budget allocation", default=False)
+    is_revenue = fields.Boolean("Is Revenue", default=False)
+    active = fields.Boolean("Active", default=True)
     allow_for_publish = fields.Boolean("Allow to be published?", default=True)
 
 class MemoStage(models.Model):

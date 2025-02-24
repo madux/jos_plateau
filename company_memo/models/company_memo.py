@@ -205,8 +205,6 @@ class Memo_Model(models.Model):
         'memo.model',
         'project_memo_id',
         string='Additional PO process')
-
-    is_contract_memo_request = fields.Boolean(string='Is Contract request') 
     state = fields.Selection([('submit', 'Draft'),
                                 ('Sent', 'Sent'),
                                 ('Approve', 'Waiting For Payment / Confirmation'),
@@ -274,7 +272,7 @@ class Memo_Model(models.Model):
         'Registered in Document Management',
         default=False,
         help="Used to create in Document Management")
-    external_memo_request = fields.Boolean(string='External request')
+    external_memo_request = fields.Boolean(string='External request', related="memo_type.is_external")
     # TRANSPORT
     truck_company_name = fields.Many2one('res.partner', string='Truck company Name')
     truck_reg = fields.Char(string='Truck registration No.')
@@ -588,7 +586,11 @@ class Memo_Model(models.Model):
         'memo_partner_id',
         string='Reciepients', 
         )
-    is_internal_transfer = fields.Boolean("Is internal payment ? ", help="""
+    is_contract_memo_request = fields.Boolean(string='Is Contract request', related="memo_type.is_contractor")
+    external_memo_request = fields.Boolean(string='External request', related="memo_type.is_external")
+    is_internal_transfer = fields.Boolean("Is internal payment ? ", 
+                                          related="memo_type.is_internal",
+                                          help="""
                                       This help to show if the payment is an internal payment 
                                       request or transfer to journals"""
                                       )
@@ -1880,11 +1882,14 @@ class Memo_Model(models.Model):
 
     def validate_payment_line(self):
         '''Ensures a payment line is added if is_internal transfer'''
-        if self.is_internal_transfer or self.external_memo_request and not self.payment_ids:
-            raise ValidationError("""
-            Please ensure at least one payment line is added!!!.
-            Use the Payment request tab
-            """) 
+        msg = """
+        Please ensure at least one payment line / Finance line is added!!!. 
+        Use the Payment request / Finance tab
+        """
+        if self.is_internal_transfer and not self.invoice_ids:
+            raise ValidationError(msg) 
+        if self.external_memo_request and not self.payment_ids:
+            raise ValidationError(msg) 
             
     def validate_sub_stage(self):
         for count, rec in enumerate(self.memo_sub_stage_ids, 1):
@@ -1916,6 +1921,7 @@ class Memo_Model(models.Model):
     '''
     is_budget_verification_memo_request = fields.Boolean(
         string='Is Budget Verification Process',
+        related="memo_type.is_verification",
         default=False)
     budget_has_allocation = fields.Boolean(
         string='Has Allocation', 
@@ -1928,6 +1934,7 @@ class Memo_Model(models.Model):
         )
     is_budget_allocation_request = fields.Boolean(
         string='Is Budget Allocation Process',
+        related="memo_type.is_allocation",
         default=False)
     # required and visible if budget allocation is set
     # if completed, system generates a line in ng.account.budget.line with the budget head Id selected
@@ -2101,11 +2108,19 @@ class Memo_Model(models.Model):
         
     
     ################################
-    
+    def validate_payments(self):
+        if self.stage_id.require_bill_payment: 
+            payment_unposted = self.mapped('payment_ids').filtered(
+                    lambda st: st.state in ['draft']
+                )
+            if payment_unposted:
+                raise ValidationError("Please kindly Post each payment on payment lines")
+            
                 
     def forward_memo(self):
         self.validate_compulsory_document()
         self.validate_sub_stage()
+        self.validate_payments()
         user_exist = self.mapped('res_users').filtered(
             lambda user: user.id == self.env.uid
             )
@@ -3067,25 +3082,34 @@ class Memo_Model(models.Model):
         # subtype='mt_comment',message_type='notification',partner_ids=followers)
      
     def validate_account_invoices(self):
-        if not self.payment_ids:
+        if self.external_memo_request and not self.payment_ids:
+            '''If external payment transfer, system displays the payment line'''
             raise ValidationError("Please ensure the payment lines are added")
-        '''If internal payment transfer, system displays the payment line'''
-        not_done = self.mapped('payment_ids').filtered(lambda se: se.state in ['draft'])
-        if not_done:
-            raise ValidationError("Payments should be posted manually to ensure data accuracy")
         else:
-            self.state = 'Done'
-            self.is_request_completed = True
-            body = "MEMO APPROVE NOTIFICATION: -Approved By ;\n %s on %s" %(self.env.user.name,fields.Date.today())
-            type = "request"
-            body_msg = f"""Dear {self.employee_id.name}, <br/>I wish to notify you that a {type} with description, '{self.name}',\
-                    from {self.employee_id.department_id.name} department (MDA: {self.branch_id.name}) have been approved by {self.env.user.name}.<br/>\
-                    Respective authority should take note. \
-                    <br/>Kindly {self.get_url(self.id)} <br/>\
-                    Yours Faithfully<br/>{self.env.user.name}"""
-            self.update_final_state_and_approver()
-            self.update_memo_type_approver()
-            self.mail_sending_direct(body_msg)
+            not_done = self.mapped('payment_ids').filtered(lambda se: se.state in ['draft'])
+            if not_done:
+                raise ValidationError("Payments should be posted manually to ensure data accuracy")
+        
+        if self.is_internal_transfer and not self.invoice_ids:
+            '''If external payment transfer, system displays the payment line'''
+            raise ValidationError("Please ensure the invoice lines are added")
+        else:
+            not_done = self.mapped('invoice_ids').filtered(lambda se: se.state in ['draft'])
+            if not_done:
+                raise ValidationError("Payments should be posted manually to ensure data accuracy")
+         
+        self.state = 'Done'
+        self.is_request_completed = True
+        body = "MEMO APPROVE NOTIFICATION: -Approved By ;\n %s on %s" %(self.env.user.name,fields.Date.today())
+        type = "request"
+        body_msg = f"""Dear {self.employee_id.name}, <br/>I wish to notify you that a {type} with description, '{self.name}',\
+                from {self.employee_id.department_id.name} department (MDA: {self.branch_id.name}) have been approved by {self.env.user.name}.<br/>\
+                Respective authority should take note. \
+                <br/>Kindly {self.get_url(self.id)} <br/>\
+                Yours Faithfully<br/>{self.env.user.name}"""
+        self.update_final_state_and_approver()
+        self.update_memo_type_approver()
+        self.mail_sending_direct(body_msg)
 
         # if not self.is_internal_transfer:
         #     if not self.invoice_ids:

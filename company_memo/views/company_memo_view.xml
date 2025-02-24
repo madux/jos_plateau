@@ -822,7 +822,7 @@
                                     </page>
                                     <!--ADDD-->
                                     <!-- <page name="Invoices" string="Finance" invisible="memo_type_key not in ['Payment', 'payment', 'pay', 'export_process', 'import_process', 'agency_process', 'procurement_request', 'procurement', 'transport', 'travel']"> -->
-                                    <page name="Invoices" string="Finance" invisible="1">
+                                    <page name="Invoices" string="Finance" invisible="is_internal_transfer != True">
                                         <field name="invoice_ids" context="{'default_move_type': 'in_invoice', 'default_memo_id': active_id, 'default_partner_id': client_id, 'form_view_ref': 'account.view_move_form'}" readonly="state in ['Done', 'Approve2']">
                                             <tree string="Invoices">
                                                 <field name="memo_id" string="Memo" invisible="1" column_invisible="1"/>  
@@ -837,7 +837,8 @@
                                                 <field name="amount_total" string="Amount" invisible="0" sum="total"/> 
                                                 <field name="state" string="Status" invisible="0"/> 
                                                 <field name="stage_invoice_name" invisible="1" column_invisible="1"/> 
-                                                <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" invisible="memo_state not in ['Approve']" groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
+                                                <!-- <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" invisible="memo_state not in ['Approve']" groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/> -->
+                                                <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" invisible="memo_state not in ['Approve']"/>
                                                 <field name="payment_state" string="Payment Status" invisible="0"/>  
                                                 <button name="action_register_payment" id="account_invoice_payment_btn" type="object" class="oe_highlight btn-sm" invisible="memo_state not in ['Approve'] or state != 'posted' or payment_state != 'not_paid' or move_type not in ['out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt']" string="Register Payment" groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
                                             </tree>
@@ -846,7 +847,7 @@
                                     <!--ADDD-->
                                     <!-- <page name="payment_ids" string="Payment Request" invisible="memo_type_key not in ['Payment', 'payment', 'pay']"> -->
                                     <page name="payment_ids" string="Payment Request-" 
-                                    invisible="memo_type_key not in ['Payment', 'payment', 'pay'] or is_budget_verification_memo_request == True or is_contract_memo_request == True"  >
+                                    invisible="memo_type_key not in ['Payment', 'payment', 'pay'] or is_budget_verification_memo_request == True or is_contract_memo_request == True or is_internal_transfer == True">
                                         <!-- <field name="payment_ids" context="{'default_external_memo_request': 1, 'default_payment_type': 'outbound', 'default_is_internal_transfer': 1, 'default_memo_reference': active_id}" domain="[('state', '=', 'draft')]" readonly="state in ['Done', 'Approve2']"> -->
                                         <field name="payment_ids" invisible="1" readonly="0" 
                                         context="{'default_partner_type': 'supplier','default_is_contract_memo_request': is_contract_memo_request, 'default_external_memo_request': 1, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}" 
@@ -864,7 +865,7 @@
                                                 <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" groups="base.group_system" invisible="state != 'draft'"/>
                                             </tree>
                                         </field>
-                                        <field name="payment_ids" readonly="[('state', 'not in', ['submit'])]" context="{'default_partner_type': 'supplier', 'default_external_memo_request': external_memo_request, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}"
+                                        <field name="payment_ids" readonly="state not in ['submit']" context="{'default_partner_type': 'supplier', 'default_external_memo_request': external_memo_request, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}"
                                          domain="[('state', '=', 'draft')]">
                                             <form string="Items"> 
                                                 <header>

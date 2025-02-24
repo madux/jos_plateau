@@ -22,6 +22,8 @@
                                 <field name="allocated_amount" default="0" readonly="1"/> 
                                 <field name="budget_adjustment" default="0" readonly="0"/> 
                                 <field name="revise_previous_budget" default="0" readonly="0"/> 
+                                <field name="utilized_amount"/>
+                                <field name="budget_balance" readonly="0" force_save="1"/>
                                 <field name="active" readonly="1"/> 
                             </group>
                             <group>
@@ -58,6 +60,8 @@
                     <field name="previous_budget_performance"/>
                     <field name="allocated_amount"/>
                     <field name="budget_adjustment"/>
+                    <field name="utilized_amount"/>
+                    <field name="budget_balance"/>
                     <field name="budget_allocation_date"/>
                     <field name="approved_date"/>
                 </tree>
@@ -76,7 +80,7 @@
                     <field name="code"/>
                     <field name="fiscal_year"/>
                     <field name="account_type" readonly="0" force_save="1"/> 
-                    <field name="allocated_amount"/>
+                    <field name="allocated_amount"/> 
                     <field name="budget_allocation_date"/>
                     <field name="approver_id"/>
                     <filter string="MDA" name="mda_budget_line_filter" domain="[('branch_id','!=', False)]"/>
@@ -107,7 +111,7 @@
             name="Report"
             parent="company_memo.internal_memo_menu_model_main2"
             sequence="70"/>
-            
+
         <menuitem id="budget_overview_report_menu" name="Budget Overview"
             parent="plateau_addons.report_account_memo" sequence="25" 
             action="plateau_addons.ng_account_budget_line_action"/>

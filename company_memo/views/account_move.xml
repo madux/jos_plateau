@@ -40,10 +40,11 @@
                         <field name="example_preview" invisible="example_invalid== True"/>
                     </div>
                     <div class="oe_right alert alert-info" role="alert" invisible="memo_id == False or state != 'draft'">
-                        <separator string="Populate PO lines"/>
+                        <separator string="Instruction"/>
                         <div>  
-                            Use this options to Automatically populate purchase orders by default or kindly select from the PO or project reference
-                            <button name="action_populate_all_project_pos" string="Populate Invoice Line" class="oe_highlight" type="object"/>
+                            When Budget head is selected, ensure you select on the account and budget line on the lines.
+                            During posting, system checks the budget funds Available on each line and limit based on funding available
+                            <!-- <button name="action_populate_all_project_pos" string="Populate Invoice Line" class="oe_highlight" type="object"/> -->
                         </div>
                     </div>
                 </xpath>
