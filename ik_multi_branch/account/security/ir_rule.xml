@@ -64,7 +64,7 @@
 
         
         <record id="branch_user_see_own_mda_journal" model="ir.rule">
-            <field name="name">branch: top account users See own journal</field>
+            <field name="name">branch: MDA users See own journal</field>
             <field name="model_id" ref="account.model_account_journal"/>
             <field name="global" eval="True"/>
             <field name="groups" eval="[

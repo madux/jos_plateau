@@ -191,7 +191,7 @@
             <menuitem id="internal_memo_menu_mda_request" sequence= "1" name="MDA Payment Requests"
             parent="internal_memo_mda_main_menu_model" action="internal_memo_model_mda_action"/>
 
-            <menuitem id="internal_memo_menu_internal_mda_request" sequence= "2" name="MDA Expense Payment"
+            <menuitem id="internal_memo_menu_internal_mda_request" sequence= "2" name="Expenditures"
             parent="internal_memo_mda_main_menu_model" action="internal_memo_model_internal_mda_action"/>
 
             <menuitem id="internal_memo_menu_internal_contract_payment_request" sequence= "3" name="Contract Payment Request"
@@ -202,7 +202,7 @@
 
             <menuitem id="internal_memo_budget_allocation_menu" sequence= "5" name="Application for UnAllocated Budget"
             parent="internal_memo_mda_main_menu_model" action="internal_memo_budget_allocation_action"/>
-            <menuitem id="internal_memo_revenue_menu" sequence= "6" name="Register Revenue (FAAC, FIRS...)"
+            <menuitem id="internal_memo_revenue_menu" sequence= "6" name="Register Revenue (FAAC, PSIRS...)"
             parent="internal_memo_mda_main_menu_model" action="internal_memo_revenue_register_action"
             groups="ik_multi_branch.account_dto_user"/>
     </data>

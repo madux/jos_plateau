@@ -50,9 +50,10 @@
                         <field name="stage_id" widget="statusbar" readonly="0" options="{'clickable': '1'}"/>
                     </header>
                     <sheet> 
-                        <p class="align-center" style="color: green;" invisible="alert_option != 'normal'">* On Track: (completion date met) </p>
+                        <p class="align-center" style="color: green; font-size=30px" invisible="alert_option != 'normal'"><h1><field name="memo_type" force_save="1" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></h1></p>
+                        <!-- <p class="align-center" style="color: green;" invisible="alert_option != 'normal'">* On Track: (completion date met) </p>
                         <p class="align-center" style="color: orange;" invisible = "alert_option != 'warning'">* At Risk: (completion date approaching) </p>
-                        <p class="align-center" style="color: red;" invisible = "alert_option != 'danger'">* Overdue: (completion date missed) </p>
+                        <p class="align-center" style="color: red;" invisible = "alert_option != 'danger'">* Overdue: (completion date missed) </p> -->
                         <notebook>
                             <page string="Dashboard">
                                 <div class="header text-center">
@@ -282,7 +283,7 @@
                                     </div>
                                 </div>
                             </page>
-                            <page string="Details">
+                            <page string="Transaction">
                                 <div class="row">
                                     <div class="col-xs-4 pull-left mt8">
                                         <button name="return_memo" class="btn-danger oe_stat_button sm" icon="fa-redo" invisible="memo_type_key not in ['Internal', 'server_access', 'employee_update', 'material_request', 'procurement_request','procurement', 'cash_advance', 'soe', 'vehicle_request'] or state != 'Sent' or not user_is_approver" type="object" string="Refuse" confirm="Are you sure you want to refuse with comments?">
@@ -298,7 +299,7 @@
                                 </div>
                                 <div class="oe_title">
                                 <label for="name"/>
-                                    <h1 style="color:Tomato;">
+                                    <h1 style="color: green;">
                                         <field name="name" required="1" force_save="1" placeholder="e.g. Description" readonly="state not in ['submit']"/>
                                     </h1>
                                 </div>
@@ -1296,7 +1297,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="internal_memo_menu_model_main2" name="JOS APP" groups="base.group_system,company_memo.mainmemo_manager,company_memo.mainmemo_account,company_memo.mainmemo_officer" action = "internal_memo_model_action" sequence = "2" web_icon="company_memo,static/description/icon2.png"/>
+        <menuitem id="internal_memo_menu_model_main2" name="PLAGFMIS" groups="base.group_system,company_memo.mainmemo_manager,company_memo.mainmemo_account,company_memo.mainmemo_officer" action = "internal_memo_model_action" sequence = "2" web_icon="company_memo,static/description/icon2.png"/>
         
         <record model="ir.actions.act_url" id="action_memo_open_my_request_url">
             <field name="name">Open URL for the</field>

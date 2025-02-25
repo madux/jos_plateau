@@ -39,9 +39,9 @@
                     </div>
                     <div class="row">
                         <div class="col-3 pt-2">
-                            The Manager
+                            The Manager<br/><br/>
                             <span> <t t-esc="con.bank_id.name.upper()"/><br/><br/></span> 
-                            <span><t t-if="con.bank_partner_id.street"><t t-esc="con.bank_id.street.upper()"/></t><br/><br/></span> 
+                            <span><t t-if="con.bank_id.street"><t t-esc="con.bank_id.street.upper()"/></t><br/><br/></span> 
                         </div> 
                         <div class="col-2 offset-2 text-center">
                             

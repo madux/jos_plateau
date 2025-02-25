@@ -8,7 +8,7 @@
                 <xpath expr="//field[@name='ref']" position="before">
                     <field name="ng_budget_id" invisible="0" required="0" readonly="state == 'posted'"/> 
                     <field name="external_memo_request" readonly="0" invisible="1" help="Determines if memo comes from external finance payment request"/>
-                    <field name="suitable_journal_ids" invisible="0" widget="many2many_tags"/>
+                    <field name="suitable_journal_ids" invisible="1" widget="many2many_tags"/>
                     <field name="is_top_account_user" invisible="1"/> 
                 </xpath>
             </field>

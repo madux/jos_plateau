@@ -2148,7 +2148,7 @@ class Memo_Model(models.Model):
                 ('res_id', '=', self.id), 
                 ('res_model', '=', self._name)]):
                 raise ValidationError(
-                    """Please attach governors consent form"""
+                    """Please attach governor's approval"""
                     )
         if self.is_contract_memo_request:
             if first_stage == 0 and not self.env['ir.attachment'].sudo().search([

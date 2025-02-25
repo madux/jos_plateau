@@ -136,6 +136,13 @@ class AccountPayment(models.Model):
         domain="[('id', 'in', suitable_journal_ids)]",
         check_company=True,
     )
+    
+    # destination_journal_id = fields.Many2one(
+    #     comodel_name='account.journal',
+    #     string='Destination Journal',
+    #     domain="[('type', 'in', ('bank','cash')), ('id', '!=', journal_id)]",
+    #     check_company=True,
+    # )
     request_mda_from = fields.Many2one('multi.branch', string='Requesting From MDA?')
 
     # domain="[('type', 'in', ('bank','cash')), ('company_id', '=', company_id), ('id', '!=', journal_id)]",
@@ -179,6 +186,62 @@ class AccountPayment(models.Model):
         res = super(AccountPayment, self).action_post()
         return res
     
+    # @api.depends('company_id')
+    # def _compute_suitable_journal_ids(self):
+    #     for m in self:
+    #         company_id = m.company_id.id or self.env.company.id
+    #         Journals = self.env['account.journal'].sudo()
+    #         domain = [
+    #             ('company_id', '=', company_id), 
+    #             ('type', 'in', ('bank','cash')),
+    #             ('id', '!=', m.journal_id.id),
+    #             ]
+                
+    #         account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
+    #         branch_ids = [rec.id for rec in self.env.user.branch_ids if rec] + [self.env.user.branch_id.id]
+    #         journal_ids = []
+    #         Journal_Search =Journals.search(domain = [
+    #             # ('company_id', '=', company_id), 
+    #             # ('type', 'in', ('bank','cash')),
+    #             ('id', '!=', m.journal_id.id),
+    #             ])
+    #         if account_major_user:
+    #             m.suitable_journal_ids = [(6, 0, [r.id for r in Journal_Search])]
+    #         else:
+    #             journal_items = []
+    #             for journal in Journal_Search:
+    #                 journal_branch_ids = [rec.id for rec in journal.allowed_branch_ids] + [journal.branch_id.id] if journal.branch_id else [0]
+    #                 for jb in journal_branch_ids:
+    #                     if jb and jb in branch_ids:
+    #                         journal_items.append(journal.id)
+    #                         break
+    #                 if journal.for_public_use:
+    #                     journal_items.append(journal.id)
+                
+    #             m.suitable_journal_ids = [(6, 0, journal_items)]  
+            
+            
+            
+            # for journal in Journal_Search:
+            #     journal_branches = [rec.id for rec in journal.allowed_branch_ids] + [journal.branch_id.id]
+            #     if set(branch_ids).intersection(set(journal_branches)):
+            #         journal_ids.append(journal.id)
+                
+            #     if journal.for_public_use:
+            #         journal_ids.append(journal.id)
+                 
+            # if account_major_user:
+            #     domain = domain 
+            # else:
+            #     # journal_ids = journal_ids.remove(self.journal_id.id) # removed the id of already selected journal id
+            #     domain = [
+            #         ('company_id', '=', company_id),
+            #         ('type', 'in', ('bank','cash')),
+            #         ('id', 'in', journal_ids),
+            #         ]
+
+            # m.suitable_journal_ids = self.env['account.journal'].search([('id', '=', 10)])
+
     @api.depends('company_id')
     def _compute_suitable_journal_ids(self):
         for m in self:

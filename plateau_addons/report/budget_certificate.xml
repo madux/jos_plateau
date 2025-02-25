@@ -45,7 +45,7 @@
                     <p>
                         <span>THIS IS TO CERTIFY that the budget Verification with head <t t-esc="o.budget_id.code"/> from <t t-esc="o.branch_id.name"/> </span>
                         <span>has been Verified.</span>
-
+                        <span>Total Balance in the Head ₦ <t t-esc="'{0:,}'.format(float(o.budget_id.budget_variance))"/></span>
                         This certification is issued in compliance to the requirement of the State government for the reason <t t-esc="o.name"/>.
                         Issued this <t t-esc="datetime.datetime.now().strftime('%d')"/> day of <t t-esc="datetime.datetime.now().strftime('%B')"/>, <t t-esc="datetime.datetime.now().strftime('%Y')"/>
                     </p>

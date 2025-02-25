@@ -21,7 +21,7 @@
     <template id="report_payment_voucher_template">
         <t t-call="web.external_layout">
             <div class="page">
-                <div style="text-align: left;">
+                <div style="text-align: left;" class="pt-5">
                     <h3><strong>DEPARTMENT NO:</strong> <t t-esc="o.code"/> / <t t-esc="datetime.datetime.now().strftime('%Y')"/></h3>
                 </div>
                 
@@ -44,8 +44,8 @@
                             <tbody>
                                 <t t-foreach="o.payment_ids" t-as="pay">
                                     <tr>
-                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="datetime.datetime.strftime(pay.date, '%d/%m/%Y')"/></td>
-                                        <td style="margin: 5px; border: 1px solid black; padding: 30px;">
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px;font-size=17px;"><t t-esc="datetime.datetime.strftime(pay.date, '%d/%m/%Y')"/></td>
+                                        <td style="margin: 5px; border: 1px solid black; padding: 30px; font-size=17px;">
                                             Payment of (₦ <t t-esc="'{0:,}'.format(float(pay.amount_total))"/>) from <t t-esc="o.request_mda_from.name"/> 
                                             to <t t-esc="o.branch_id.name"/>  for <t t-esc="o.name"/>
                                             <t t-esc="pay.narration or o.description"/><br/><br/>
@@ -54,10 +54,10 @@
                                             <strong>Total Sum: <t t-esc="'{0:,}'.format(float(pay.amount_total))"/></strong><br/>
                                             
                                         </td>
-                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"></td> 
-                                        <td style="text-align: right; padding: 25px; margin: 5px; border: 1px solid black"><t t-esc="'{0:,}'.format(float(pay.amount_total))"/></td>
-                                        <td style="text-align: right; padding: 10px; margin: 5px; border: 1px solid black"></td>
-                                        <td style="padding: 20px; margin: 5px; border: 1px solid black">
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px;font-size=17px;"> 1 </td> 
+                                        <td style="text-align: right; padding: 25px; margin: 5px; border: 1px solid black;font-size=17px;"><t t-esc="'{0:,}'.format(float(pay.amount_total))"/></td>
+                                        <td style="text-align: right; padding: 10px; margin: 5px; border: 1px solid black;font-size=17px;"> 0 </td>
+                                        <td style="padding: 20px; margin: 5px; border: 1px solid black;font-size=17px;">
                                             <div class="col-10">
                                                 <strong>Month/Year: <t t-esc="datetime.datetime.now().strftime('%B')"/>/ <t t-esc="datetime.datetime.now().strftime('%Y')"/></strong><br/><br/>
                                                 <strong>PV Number: </strong><p/><br/> 
@@ -79,7 +79,7 @@
                                 </t>
                             </tbody>
                         </table>
-                        <table border="1" style="font-size:25px; width: 100%; border-collapse: collapse; margin-top: 10px;">
+                        <table border="1" style="font-size:20px; width: 100%; border-collapse: collapse; margin-top: 10px;">
                             <tr style="background: #f0f0f0;">
                                 <th style="padding: 10px;"/>
                                 <th style="text-align: left; padding: 50px;">
