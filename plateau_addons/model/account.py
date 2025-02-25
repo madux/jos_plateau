@@ -178,11 +178,11 @@ class AccountPayment(models.Model):
         #         raise ValidationError("Ops. You are not allowed confirm this Bill. Ensure system admin adds you to the list approvers for this stage")
         # else:
         #     raise ValidationError("ddddEnsure system admin adds you to the lithis stage")
-        if self.memo_reference:
-            stage = self.memo_reference.stage_id
-            approval_users = [r.user_id.id for r in stage.approver_ids]
-            if self.env.user.id not in approval_users:
-                raise ValidationError(f"Only these users are allowed to post at this stage {[rec.name for rec in stage.approver_ids]}")
+        # if self.memo_reference:
+        #     stage = self.memo_reference.stage_id
+        #     approval_users = [r.user_id.id for r in stage.approver_ids]
+        #     if self.env.user.id not in approval_users:
+        #         raise ValidationError(f"Only these users are allowed to post at this stage {[rec.name for rec in stage.approver_ids]}")
         res = super(AccountPayment, self).action_post()
         return res
     
