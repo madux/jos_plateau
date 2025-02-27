@@ -139,7 +139,7 @@
             </field>
         </record>
 
-        <record id="account_payment_register_plateau_addon_form_with_branch" model="ir.ui.view">
+        <!-- <record id="account_payment_register_plateau_addon_form_with_branch" model="ir.ui.view">
             <field name="name">account.payment.register.plateau.addon.form</field>
             <field name="model">account.payment.register</field>
             <field name="inherit_id" ref="account.view_account_payment_register_form"/>
@@ -148,7 +148,7 @@
                     <attribute name="domain">[('is_bank', '=', True)]</attribute>
                 </field>
             </field>
-        </record>
+        </record> -->
 
         <record model="ir.ui.view" id="account_view_account_list_plateau_inherit">
             <field name="name">Charts of Account</field>
