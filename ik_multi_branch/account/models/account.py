@@ -389,8 +389,7 @@ class AccountPaymentRegister(models.TransientModel):
                                 required=False) 
     bank_partner_id = fields.Many2one(
         'res.partner', 
-        string='Recipient Bank-', 
-        domain="[('is_bank', '=', True)]",
+        string='Recipient Bank-',
         help="Select the bank to send payment schedule"
         )
     bank_partner_account = fields.Char(
