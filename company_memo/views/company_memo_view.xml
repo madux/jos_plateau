@@ -352,11 +352,11 @@
                                         options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
                                         required="is_budget_verification_memo_request == True or is_budget_allocation_request == True"/>
                                        
-                                        <field name="budget_line_id" readonly="state not in ['submit']" domain="[('id', 'in', dummy_budget_line_ids)]" 
+                                        <field name="budget_line_id" readonly="state not in ['submit']"
                                         invisible="is_budget_verification_memo_request != True and is_budget_allocation_request != True" 
                                         options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
                                         required="is_budget_verification_memo_request == True or is_budget_allocation_request == True"/>
-                                       
+                                        <!-- domain="[('id', 'in', dummy_budget_line_ids)]" - -->
                                         <!-- <field name="budget_id" readonly="state not in ['submit']" domain="[('id', 'in', dummy_budget_ids)]" 
                                         invisible="is_budget_verification_memo_request != True and is_budget_allocation_request != True" 
                                         options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
