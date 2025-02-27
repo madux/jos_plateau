@@ -11,9 +11,10 @@
                     <sheet>
                         <group>
                             <group>
+                                <field name="budget_type"/> 
                                 <field name="ng_budget_id" options="{'no_create':True, 'no_open': False}"/> 
                                 <field name="account_id" options="{'no_create':True, 'no_open': False}"/> 
-                                <field name="economic_id"/>
+                                <field name="economic_id" required="0" invisible="1"/>
                                 <field name="account_type" readonly="1"/> 
                                 <field name="branch_id" options="{'no_create':True, 'no_open': False}"/> 
                             </group>
@@ -24,12 +25,12 @@
                                 <field name="revise_previous_budget" default="0" readonly="0"/> 
                                 <field name="utilized_amount"/>
                                 <field name="budget_balance" readonly="0" force_save="1"/>
-                                <field name="active" readonly="1"/> 
                             </group>
                             <group>
-                                <field name="branch_id" options="{'no_create':True, 'no_open': False}"/> 
                                 <field name="approver_id" options="{'no_create':True, 'no_open': False}"/> 
                                 <field name="reviewer_id" options="{'no_create':True, 'no_open': False}"/> 
+                                <field name="active" readonly="1"/> 
+
                             </group>
                             <separator string="More info"/>
                             <group>
@@ -49,10 +50,10 @@
             <field name="arch" type="xml">
                 <tree string="Budget Information">
                     <field name="branch_id"/>
-                    <field name="economic_id"/>
 
                     <field name="ng_budget_id"/>
                     <field name="account_id"/>
+                    <field name="economic_id" invisible="1"/>
                     <field name="code" string="Fund code"/>
                     <field name="fiscal_year"/>
                     <field name="previous_budget_amount"/>
@@ -74,7 +75,7 @@
 			<field name="arch" type="xml">
 				<search string="Search">
                     <field name="branch_id" string="MDA"/>
-                    <field name="economic_id" string="Economic"/>
+                    <!-- <field name="economic_id" string="Economic"/> -->
                     <field name="ng_budget_id"/>
                     <field name="account_id"/>
                     <field name="code"/>
@@ -90,6 +91,7 @@
                         <filter name="group_by_mda_id" string='MDA' domain="[]" context="{'group_by' : 'branch_id'}"/>
                         <filter name="group_by_economic_account_id" string='Economic' domain="[]" context="{'group_by' : 'economic_id'}"/>
                         <filter name="group_by_account_id" string='Chart of Account' domain="[]" context="{'group_by' : 'account_id'}"/>
+                        <filter name="group_by_budget_type_id" string='Budget Head' domain="[]" context="{'group_by' : 'budget_type'}"/>
                     </group>
 				</search>
 			</field>
@@ -99,7 +101,7 @@
             <field name="res_model">ng.account.budget.line</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
-            <field name="context">{'search_default_group_by_mda_id': 1, 'search_default_group_by_economic_account_id': 1}</field>
+            <field name="context">{'search_default_group_by_budget_type_id': 1, 'search_default_group_by_mda_id': 1}</field>
         </record>
 
         <menuitem id="budget_overview_menu" name="Budget Overview"

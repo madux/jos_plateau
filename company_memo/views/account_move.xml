@@ -16,7 +16,7 @@
                     <!-- <field name="move_type" required="0" invisible="1"/> -->
                 </xpath>
                 <xpath expr="//field[@name='journal_id']" position="after">
-                    <field name="move_type" required="0" invisible="0" readonly="0"/>
+                    <field name="move_type" required="0" invisible="1" readonly="0"/>
                     <field name="example_invalid" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='invoice_payment_term_id']" position="replace">
@@ -39,7 +39,7 @@
                         </div>
                         <field name="example_preview" invisible="example_invalid== True"/>
                     </div>
-                    <div class="oe_right alert alert-info" role="alert" invisible="memo_id == False or state != 'draft'">
+                    <div class="oe_right alert alert-info" role="alert">
                         <separator string="Instruction"/>
                         <div>  
                             When Budget head is selected, ensure you select on the account and budget line on the lines.

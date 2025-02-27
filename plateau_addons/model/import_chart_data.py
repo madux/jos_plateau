@@ -66,6 +66,17 @@ class ImportPLCharts(models.TransientModel):
         string="Import Type", tracking=True,
         required=False, default = "chart"
     )
+    
+    account_head_type = fields.Selection(
+        [
+        ("Revenue", "Revenue"), 
+        ("Personnel", "Personnel"),
+        ("Overhead", "Overhead"), 
+        ("Expenditure", "Expenditure"), 
+        ("Capital", "Capital"),
+        ("Other", "Others"),
+        ], string="Budget Type", 
+    )
 
     account_type = fields.Selection(
         selection=[
@@ -102,10 +113,11 @@ class ImportPLCharts(models.TransientModel):
         string="Journal Type", tracking=True,
         required=False,
     )
+    budget_id = fields.Many2one('crossovered.budget', string="Budget")
+    ng_budget_id = fields.Many2one('ng.account.budget', string="Budget Head")
 
     default_account = fields.Many2one('account.account', string="Default account")
     running_journal_id = fields.Many2one('account.journal', string="Running Journal")
-    budget_id = fields.Many2one('crossovered.budget', string="Budget")
     budget_position_id = fields.Many2one('account.budget.post', string="Budgetary position")
     account_analytic_plan_id = fields.Many2one('account.analytic.plan', string="Analytic account plan", default=lambda self: self.env['account.analytic.plan'].sudo().search([], limit=1))
 
@@ -306,12 +318,10 @@ class ImportPLCharts(models.TransientModel):
     
     def create_chart_of_account(self, name, code, type=False):
         account_chart_obj = self.env['account.account']
+        # account_head_type = self.account_head_type
         if name and code:
             _logger.info(f'AXCOUNT CODE {code}')
-            # raise ValidationError(code)
-
             account_existing = account_chart_obj.search([('code', '=', code)], limit = 1)
-            
             '''
             12 ==income,
             22, 21, = expense
@@ -326,6 +336,7 @@ class ImportPLCharts(models.TransientModel):
                         'is_migrated': True,
                         'company_id': self.env.company.id,
                         "reconcile": False,
+                        "account_head_type": self.account_head_type,
                         "account_type": structure_type, # type if type else structure_type if structure_type else self.account_type if not type else type, # use type expenses
                     }) if not account_existing else account_existing
             return account
@@ -438,12 +449,12 @@ class ImportPLCharts(models.TransientModel):
                 # Creating the main charts of accounts id for main company account 
                 account_code = str(accountcode).replace('.0', '')
                 # if confirmed to be chart of account, use it
-                # account_id = self.create_chart_of_account(accountname, account_code)
+                account_id = self.create_chart_of_account(accountname, account_code)
                 
-                economic_id = create_account_economic(accountname, account_code)
+                # economic_id = create_account_economic(accountname, account_code)
                 
                 _logger.info(
-                    f"testing new account import {row} and new account id {economic_id and economic_id.id} created "
+                    f"testing new account import {row} and new account id {account_id and account_id.id} created "
                 )
                 
                 budget_amount = float(current_budget_amount) if type(current_budget_amount) in [int, float] else 0
@@ -454,13 +465,17 @@ class ImportPLCharts(models.TransientModel):
                 date_to= fields.Date.today() + rd(months = 10)
                 paid_date= fields.Date.today()
                 
-                budget = self.env['ng.account.budget'].search([('branch_id', '=', branch.id)], limit=1)
-                if economic_id:
+                budget = self.env['ng.account.budget'].search([
+                    ('branch_id', '=', branch.id),
+                    # ('general_account_id', '=', account_id.id),
+                    ('budget_type', '=', self.account_head_type)], limit=1)
+                if account_id:
                     if not budget:
                         self.env['ng.account.budget'].create({ 
-                            'name': self.budget_name +'-'+ branch.name +'-'+fund_code, 
-                            'general_journal_id': branch.default_journal_id.id, 
-                            'general_account_id': branch.default_account_id.id, 
+                            'name': self.budget_name +'-'+ self.account_head_type +' '+ branch.name, 
+                            # 'general_journal_id': branch.default_journal_id.id, 
+                            # 'general_account_id': account_id.id, 
+                            'budget_type': self.account_head_type, 
                             'budget_amount': budget_amount, 
                             'previous_budget_amount': previous_budget_amount, 
                             'current_budget_amount': budget_amount, 
@@ -472,7 +487,6 @@ class ImportPLCharts(models.TransientModel):
                             'code': fund_code,
                         })
                     
-                        
                     ### do update of the budget head 
                     else:
                         budget.update({
@@ -481,9 +495,10 @@ class ImportPLCharts(models.TransientModel):
                             'current_budget_amount': budget.budget_amount + budget_amount, 
                         })
                     # create budget transactions line
-                    self.env['ng.account.budget.line'].create({ 
-                            # 'account_id': account_id.id, 
-                            'economic_id': economic_id and economic_id.id, 
+                    line_id = self.env['ng.account.budget.line'].create({ 
+                            'account_id': account_id.id, 
+                            'budget_type': budget.budget_type or self.account_head_type, 
+                            # 'economic_id': economic_id and economic_id.id, 
                             'allocated_amount': budget_amount, 
                             'branch_id': branch.id,
                             'ng_budget_id': budget.id,
@@ -492,19 +507,21 @@ class ImportPLCharts(models.TransientModel):
                             'previous_budget_performance': previous_budget_performance,
                             'approved_date': fields.Date.today() + rd(months=-1),
                             'budget_allocation_date': fields.Date.today() + rd(months=-1),
-                            'code': fund_code,
+                            'code': str(fund_code),
                         })
                     budget.previous_budget_amount += previous_budget_amount
                     budget.revise_previous_budget += revised_budget
                     budget.previous_budget_performance += previous_budget_performance
-                    economic_id.update({
-                        'branch_ids': [(4, branch.id)]
-                    })
-                    _logger.info(f'data artifacts generated: {economic_id and economic_id.name}')
+                    
+                    budget.update({'ng_account_budget_line': [(4, line_id.id)]})
+                    # economic_id.update({
+                    #     'branch_ids': [(4, branch.id)]
+                    # })
+                    # _logger.info(f'data artifacts generated: {economic_id and economic_id.name}')
                     count += 1
                     success_records.append(row)
                 else:
-                    unsuccess_records.append("Economic record not found")
+                    unsuccess_records.append("Account transaction record not found")
             else:
                 unsuccess_records.append(row)
         errors.append('Successful Import(s): '+str(count)+' Record(s): See Records Below \n {}'.format(success_records))

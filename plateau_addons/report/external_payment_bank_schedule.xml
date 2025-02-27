@@ -38,7 +38,7 @@
                 </div>
                 <div class="row">
                     <div class="col-3 pt-2">
-                        The Manager
+                        The Manager<br/>
                         <span> <t t-esc="o.bank_partner_id.name.upper()"/><br/><br/></span> 
                         <span><t t-if="o.bank_partner_id.street"><t t-esc="o.bank_partner_id.street.upper()"/></t><br/><br/></span> 
                     </div> 
@@ -46,12 +46,12 @@
                         
                     </div>
                     <div class="col-2 offset-3 text-end p-3">
-                        <span><t t-esc="o.code"/><br/><br/></span>
+                        <span><t t-esc="o.code"/><br/></span><br/>
                         <span><t t-if="o.scheduled_pay_date">
                                 <t t-esc="datetime.datetime.strftime(o.scheduled_pay_date, '%d/%m/%Y')"/>
                             </t>
                             <br/>
-                        </span>
+                        </span><br/>
                     </div>
                 </div>
                 <div style="text-align: center;">
@@ -82,7 +82,8 @@
                                         <td style="margin: 5px; border: 1px solid black;padding: 10px"/> 
                                         <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.branch_id.name.capitalize()"/></td>
                                         <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.journal_id.name.capitalize()"/></td>
-                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.destination_journal_id.name.capitalize()"/></td>
+                                        <!-- <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.destination_journal_id.name.capitalize()"/></td> -->
+                                        <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.bank_partner_account"/></td>
                                         <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="'{0:,}'.format(float(pay.amount_total))"/></td>
                                         <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.narration"/></td>
                                     </tr>
@@ -114,7 +115,20 @@
                         
                     </div>
                     <div class="col-2 offset-3 text-end">
-                        Authorized Signature<p/><p/>
+                        Authorized Signature<p/><p/><br/>
+                        <strong>Signature: ...................................................................</strong>
+                    </div>
+                </div>
+
+                <div class="row p-3">
+                    <div class="col-3 pt-4">
+                        Name: <strong> <t t-esc="o.write_uid.name"/></strong>
+                    </div>
+                    <div class="col-2 offset-2 text-center">
+                        
+                    </div>
+                    <div class="col-2 offset-3 text-end">
+                        Authorized Signature<p/><p/><br/>
                         <strong>Signature: ...................................................................</strong>
                     </div>
                 </div>

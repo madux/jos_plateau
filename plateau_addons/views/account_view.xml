@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="account.view_account_payment_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='ref']" position="before">
-                    <field name="ng_budget_id" invisible="0" required="0" readonly="state == 'posted'"/> 
+                    <field name="ng_budget_id" invisible="1" required="0" readonly="state == 'posted'" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
                     <field name="external_memo_request" readonly="0" invisible="1" help="Determines if memo comes from external finance payment request"/>
                     <field name="suitable_journal_ids" invisible="1" widget="many2many_tags"/>
                     <field name="is_top_account_user" invisible="1"/> 
@@ -19,14 +19,24 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
-                <field name="invoice_date" position="after">
+                <field name="memo_id" position="after">
                     <field name="ng_budget_id" invisible="0" required="0" domain="[('id', 'in', dummy_budget_ids)]" 
-                    options="{'no_create':True, 'no_open': False}" readonly="state == 'posted'"/> 
+                    options="{'no_create':True, 'no_open': True}" readonly="state == 'posted'"/> 
+                    <field name="bank_partner_id" invisible="0" required="0" domain="[('is_bank', '=', True)]" 
+                    options="{'no_create':True, 'no_open': True}" readonly="state == 'posted'"/>
+                    <field name="bank_partner_account" readonly="0" required="bank_partner_id != False" />
+                </field>
+                <field name="invoice_date" position="after">
                     <field name="dummy_budget_ids" invisible="1" required="0" readonly="0" force_save="1"
                     widget="many2many_tags"/> 
                     <field name="external_memo_request" invisible="1" force_save="1"/> 
                     <field name="is_top_account_user" invisible="1" force_save="1"/>
                 </field>
+
+                <!-- <field name="invoice_date_due" position="before">
+                    <field name="bank_partner_id" invisible="0" required="0" domain="[('is_bank', '=', True)]" 
+                    options="{'no_create':True, 'no_open': True}" readonly="state == 'posted'"/> 
+                </field> -->
                 <!-- <xpath expr="//button[@name='action_post'][2]" position="attributes">
                     <attribute name="attrs">{'invisible': [ '|', '|', '|', '|', ('external_memo_request', '=', True),('is_top_account_user', '=', False), ('hide_post_button', '=', True), ('move_type', '=', 'entry'), ('display_inactive_currency_warning','=',True)]}</attribute>
                 </xpath> -->
@@ -44,6 +54,22 @@
                 </xpath> -->
                 <field name="invoice_date" position="attributes">
                     <attribute name="required">1</attribute>
+                </field>
+
+                <field name="origin" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="invoice_date" position="attributes">
+                    <attribute name="string">Date</attribute>
+                </field>
+
+                <field name="purchase_vendor_bill_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="partner_bank_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
                 </field>
  
                  <!-- <field name="partner_id" position="attributes">
@@ -63,6 +89,10 @@
 
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='quantity']" position="attributes">
                     <attribute name="string">Unit</attribute> 
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='account_id']" position="attributes">
+                    <attribute name="domain">[('is_migrated', '=', True)]</attribute> 
                 </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='account_id']" position="after">
@@ -98,21 +128,47 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="account_view_account_search_plateau_inherit">
+            <field name="name">Charts of Account search</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='accounttype']" position="after">
+                    <filter string="Account Head Type" name="accountheadtype" domain="[]" context="{'group_by':'account_head_type'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_view_account_list_plateau_inherit">
+            <field name="name">Charts of Account</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='reconcile']" position="after">
+                    <field name="account_head_type" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+
         <record id="view_account_account_form_plateau_extended" model="ir.ui.view">
-            <field name="name">account.journal</field>
+            <field name="name">account.account</field>
             <field name="model">account.account</field>
             <field name="inherit_id" ref="account.view_account_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='accounting']" position="after">
+                <xpath expr="//field[@name='account_type']" position="before">
+                    <field name="account_head_type" string="Account Head Type"/>
+                </xpath>
+                <xpath expr="//page[@name='accounting']" position="after"> 
                     <page string="Budget Line">
                         <field name="ng_budget_lines">
                             <tree string="">
-                                <field name="budget_id"/>
-                                <field name="general_account_id"/>
-                                <field name="general_journal_id"/>
+                                <field name="budget_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                <field name="general_account_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                <field name="general_journal_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                                 <field name="budget_amount"/>
                                 <field name="budget_used_amount"/>
-                                <field name="budget_variance"/>
+                                <field name="budget_variance" string="Budget balance"/>
+                               
                             </tree>
                         </field>
                     </page>

@@ -59,6 +59,16 @@ class accountAccount(models.Model):
     _inherit = "account.account"
 
     account_segment_id = fields.Many2one('account.public.segment', string='Account Segment')
+    account_head_type = fields.Selection(
+        [
+        ("Revenue", "Revenue"), 
+        ("Personnel", "Personnel"),
+        ("Overhead", "Overhead"), 
+        ("Expenditure", "Expenditure"), 
+        ("Capital", "Capital"),
+        ("Other", "Others"),
+        ], string="Budget Type", 
+    )
 
 class accountAnalyticPlan(models.Model):
     _inherit = "account.analytic.plan"
@@ -153,6 +163,99 @@ class AccountPayment(models.Model):
     #     required=False,
     #     domain="[('id', 'in', suitable_journal_ids)]"
     #     )
+    
+    @api.depends('payment_type')
+    def _compute_available_journal_ids(self):
+        """
+        Get all journals having at least one payment method for inbound/outbound depending on the payment_type.
+        """
+        # account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
+        # account_major_user = (self.env.user.has_group('ik_multi_branch.account_major_user'))
+        journals = False
+        branch_ids = [rec.id for rec in self.env.user.branch_ids if rec] + [self.env.user.branch_id.id]
+        domain = [('type', 'in', ('bank', 'cash'))]
+        # get journal related to only from requesting _mda if set
+        for m in self:
+            branch_ids = [m.request_mda_from.id] if m.request_mda_from else branch_ids
+            journal_items = []
+            for journal in self.env['account.journal'].search(domain):
+                user_branch =  [journal.branch_id.id] if journal.branch_id else [0]
+                journal_branch_ids = [rec.id for rec in journal.allowed_branch_ids] + user_branch
+                
+                for jb in journal_branch_ids:
+                    if jb and jb in branch_ids:
+                        journal_items.append(journal.id)
+                        break
+                if journal.for_public_use:
+                    journal_items.append(journal.id) 
+            journals = self.env['account.journal'].search([('id', 'in', journal_items)])
+            _logger.info(f"This is my journals 2 ==> {journals}")
+            
+            m.available_journal_ids = journals.ids
+          
+        # for pay in self:
+        #     if pay.payment_type == 'inbound':
+        #         pay.available_journal_ids = journals.filtered('inbound_payment_method_line_ids')
+        #     else:
+        #         pay.available_journal_ids = journals.filtered('outbound_payment_method_line_ids')
+
+    @api.depends('company_id')
+    def _compute_suitable_journal_ids(self):
+        for m in self:
+            company_id = m.company_id.id or self.env.company.id
+            Journals = self.env['account.journal'].sudo()
+            domain = [
+                ('company_id', '=', company_id), 
+                ('type', 'in', ('bank','cash')),
+                ('id', '!=', m.journal_id.id),
+                ]
+                
+            # account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
+            account_major_user = (self.env.user.has_group('ik_multi_branch.account_major_user'))
+            branch_ids = [rec.id for rec in self.env.user.branch_ids if rec] + [self.env.user.branch_id.id]
+            request_mda_from = [m.request_mda_from.id] if m.request_mda_from else [0]
+            
+            journal_ids = []
+            Journal_Search =Journals.search(domain = [
+                # ('company_id', '=', company_id), 
+                # ('type', 'in', ('bank','cash')),
+                ('id', '!=', m.journal_id.id),
+                ])
+            if not request_mda_from:
+                if account_major_user:
+                    m.suitable_journal_ids = [(6, 0, [r.id for r in Journal_Search])]
+                else:
+                    journal_items = []
+                    for journal in Journal_Search:
+                        journal_branch_ids = [rec.id for rec in journal.allowed_branch_ids] + [journal.branch_id.id] if journal.branch_id else [0]
+                        for jb in journal_branch_ids:
+                            if jb and jb in branch_ids:
+                                journal_items.append(journal.id)
+                                break
+                        if journal.for_public_use:
+                            journal_items.append(journal.id)
+                    
+                    m.suitable_journal_ids = [(6, 0, journal_items)]
+            else:
+                requesting_from_journals = Journals.search([
+                    ('id', '!=', m.journal_id.id),
+                    '|', ('branch_id', 'in', request_mda_from), 
+                    ('allowed_branch_ids', 'in', request_mda_from)])
+                m.suitable_journal_ids = requesting_from_journals.ids
+    
+    @api.model
+    def default_get(self, fields):
+        res = super(AccountPayment, self).default_get(fields)
+        branch_id = self.env.user.branch_id.id
+        if self.request_mda_from:
+            branch_id = self.request_mda_from.id
+        domain = [('branch_id', '=', branch_id)]
+        journal_id = self.env['account.journal'].search(domain, limit=1)
+        _logger.info(f"This is my journals ==> {journal_id} {self.env.user.branch_id.id}")
+        res.update({
+            'journal_id': journal_id.id
+            })
+        return res
 
     @api.depends('external_memo_request')
     def compute_top_account_user(self):
@@ -169,127 +272,45 @@ class AccountPayment(models.Model):
             raise ValidationError('Amount must be greater than 0 !!!')
 
     def action_post(self):
-        account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
-        # if self.memo_reference:
-        #     # if not self.memo_reference.stage_id.is_approved_stage:
-        #     #     raise ValidationError("Ops. You are not allowed confirm this Bill at this stage")
-        #     if self.memo_reference.stage_id.is_approved_stage and self.env.user.id not in [r.user_id.id for r in self.memo_reference.stage_id.approver_ids]: 
-        #         # if self.external_memo_request and not account_major_user or if self.memo_id.stage_id.approver_ids.ids :
-        #         raise ValidationError("Ops. You are not allowed confirm this Bill. Ensure system admin adds you to the list approvers for this stage")
-        # else:
-        #     raise ValidationError("ddddEnsure system admin adds you to the lithis stage")
-        # if self.memo_reference:
-        #     stage = self.memo_reference.stage_id
-        #     approval_users = [r.user_id.id for r in stage.approver_ids]
-        #     if self.env.user.id not in approval_users:
-        #         raise ValidationError(f"Only these users are allowed to post at this stage {[rec.name for rec in stage.approver_ids]}")
+        to_approve = False
+        # account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user') or self.env.user.has_group('ik_multi_branch.account_dto_user'))
+        account_major_user = (self.env.user.has_group('ik_multi_branch.account_dto_user'))
+        name_of_approvers = []
+        if self.memo_reference and self.memo_reference.stage_id:
+            
+            stage = self.memo_reference.stage_id
+            if not stage.require_bill_payment:
+                raise ValidationError(f"{self.memo_reference.id} {self.memo_reference.ids} {stage.name} {stage.id} You are not permitted to post at this draft stage. \n Use Proceed button or Contact admin to set the require bill payment at the stage configuration if necessary")
+            
+            approval_users = [r.user_id.id for r in stage.approver_ids]
+            if self.env.user.id not in approval_users:
+                to_approve = False
+                name_of_approvers = [rec.name for rec in stage.approver_ids]
+            else:
+                to_approve = True
+        if account_major_user or to_approve:
+            pass
+        else:
+            raise ValidationError(f"You are not permitted to post. \n Only these users are allowed to post at this stage {name_of_approvers}")
         res = super(AccountPayment, self).action_post()
         return res
-    
-    # @api.depends('company_id')
-    # def _compute_suitable_journal_ids(self):
-    #     for m in self:
-    #         company_id = m.company_id.id or self.env.company.id
-    #         Journals = self.env['account.journal'].sudo()
-    #         domain = [
-    #             ('company_id', '=', company_id), 
-    #             ('type', 'in', ('bank','cash')),
-    #             ('id', '!=', m.journal_id.id),
-    #             ]
-                
-    #         account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
-    #         branch_ids = [rec.id for rec in self.env.user.branch_ids if rec] + [self.env.user.branch_id.id]
-    #         journal_ids = []
-    #         Journal_Search =Journals.search(domain = [
-    #             # ('company_id', '=', company_id), 
-    #             # ('type', 'in', ('bank','cash')),
-    #             ('id', '!=', m.journal_id.id),
-    #             ])
-    #         if account_major_user:
-    #             m.suitable_journal_ids = [(6, 0, [r.id for r in Journal_Search])]
-    #         else:
-    #             journal_items = []
-    #             for journal in Journal_Search:
-    #                 journal_branch_ids = [rec.id for rec in journal.allowed_branch_ids] + [journal.branch_id.id] if journal.branch_id else [0]
-    #                 for jb in journal_branch_ids:
-    #                     if jb and jb in branch_ids:
-    #                         journal_items.append(journal.id)
-    #                         break
-    #                 if journal.for_public_use:
-    #                     journal_items.append(journal.id)
-                
-    #             m.suitable_journal_ids = [(6, 0, journal_items)]  
-            
-            
-            
-            # for journal in Journal_Search:
-            #     journal_branches = [rec.id for rec in journal.allowed_branch_ids] + [journal.branch_id.id]
-            #     if set(branch_ids).intersection(set(journal_branches)):
-            #         journal_ids.append(journal.id)
-                
-            #     if journal.for_public_use:
-            #         journal_ids.append(journal.id)
-                 
-            # if account_major_user:
-            #     domain = domain 
-            # else:
-            #     # journal_ids = journal_ids.remove(self.journal_id.id) # removed the id of already selected journal id
-            #     domain = [
-            #         ('company_id', '=', company_id),
-            #         ('type', 'in', ('bank','cash')),
-            #         ('id', 'in', journal_ids),
-            #         ]
-
-            # m.suitable_journal_ids = self.env['account.journal'].search([('id', '=', 10)])
-
-    @api.depends('company_id')
-    def _compute_suitable_journal_ids(self):
-        for m in self:
-            journal_type = m.invoice_filter_type_domain or 'general'
-            company_id = m.company_id.id or self.env.company.id
-            Journals = self.env['account.journal'].sudo()
-            domain = [
-                ('company_id', '=', company_id), 
-                ('type', 'in', ('bank','cash')),
-                ('id', '!=', m.journal_id.id),
-                ]
-                
-            account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
-            branch_ids = [rec.id for rec in self.env.user.branch_ids if rec] + [self.env.user.branch_id.id]
-            journal_ids = []
-            Journal_Search =Journals.search([])
-            
-            for journal in Journal_Search:
-                 
-                journal_branches = [rec.id for rec in journal.allowed_branch_ids] + [journal.branch_id.id]
-                if set(branch_ids).intersection(set(journal_branches)):
-                    journal_ids.append(journal.id)
-                
-                if journal.for_public_use:
-                    journal_ids.append(journal.id)
-                 
-            if account_major_user:
-                domain = domain 
-            else:
-                # journal_ids = journal_ids.remove(self.journal_id.id) # removed the id of already selected journal id
-                domain = [
-                    ('company_id', '=', company_id),
-                    ('type', 'in', ('bank','cash')),
-                    ('id', 'in', journal_ids),
-                    ]
-
-            m.suitable_journal_ids = self.env['account.journal'].search(domain)
-
-   
+      
+      
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.move.line'
     
     ng_budget_line_id = fields.Many2one(
         'ng.account.budget.line',
-        string='Budget',
+        string='Budget line',
         readonly=False,
         tracking=True,
-        ondelete='restrict')
+        )
+    
+    ng_budget_id = fields.Many2one(
+        'ng.account.budget',
+        string='Budget Head',
+        readonly=False,
+        tracking=True)
     
     ng_budget_line_ids = fields.Many2many(
         'ng.account.budget.line',
@@ -299,15 +320,12 @@ class AccountInvoiceLine(models.Model):
     
     budget_balance = fields.Float('Budget Balance', related="ng_budget_line_id.budget_balance")
     
-    @api.depends('account_id')
+    @api.depends('account_id', 'ng_budget_id')
     def _compute_ng_budget_line(self):
-        user = self.env.user
-        # if user.branch_id or user.branch_ids:
-            # for m in self:
-        if self.account_id:
+        if self.account_id and self.ng_budget_id:
             budget_line_ids = self.env['ng.account.budget.line'].search([
-            ('branch_id', '=', self.branch_id.id),
-            # ('account_id', '=', self.account_id.id)
+            ('ng_budget_id', '=', self.ng_budget_id.id),
+            ('account_id', '=', self.account_id.id)
             ])
             if budget_line_ids:
                 self.ng_budget_line_ids = [(6, 0, budget_line_ids.ids)]
@@ -316,32 +334,6 @@ class AccountInvoiceLine(models.Model):
         else:
             self.ng_budget_line_ids = False
          
-                
-    # @api.model
-    # def default_get(self, fields):
-    #     res = super(Memo_Model, self).default_get(fields)
-    #     memo_project_type = self.env.context.get('default_memo_project_type')
-    #     default_budget_allocation = self.env.context.get('default_is_budget_allocation_request')
-    #     external_payment_request = self.env.context.get('default_external_memo_request')
-        
-    #     ministry_of_finance = self.env.ref('plateau_addons.mda_ministry_of_finance')
-    #     # finance_budget_head = self.env['ng.budget'].search(domain)
-    #     # user_branches = list(self.env.user.branch_id.id)
-    #     domain = [('active', '=', True)]
-    #     # if memo_project_type: , ('branch_ids', 'in', user_branches)
-    #     #     domain = [('active', '=', True), ('project_type', '=', memo_project_type)]
-    #     memo_configs = self.env['memo.config'].search(domain)
-    #     user_branch_id = self.env.user.branch_id
-    #     res.update({
-    #         'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs if user_branch_id.id in rec.branch_ids.ids])],
-    #         'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search([
-    #             '|', ('branch_id', '=', self.env.user.branch_id.id),
-    #             ('branch_id', 'in', self.env.user.branch_ids.ids)])
-    #                                      ])],
-    #         'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request else False,
-    #         'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request else False,
-    #         })
-    #     return res
          
 class AccountInvoice(models.Model):
     _inherit = 'account.move'
@@ -390,6 +382,15 @@ class AccountInvoice(models.Model):
         string='Budget',
         readonly=False,
         compute="_compute_mda_budget")
+    
+    bank_partner_id = fields.Many2one(
+        'res.partner', 
+        string='Recipient Bank-', 
+        help="Select the bank to send payment schedule"
+        )
+    bank_partner_account = fields.Char(
+        string='Recipient Account Number', 
+        )
 
     @api.depends('company_id')
     def _compute_mda_budget(self):

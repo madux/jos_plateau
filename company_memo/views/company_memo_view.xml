@@ -46,7 +46,7 @@
                         <!-- <button name="print_work_instruction" string="Print Work Instruction" icon="fa-print" invisible="state in ['Refuse']" type="object" class="btn-primary"/> -->
                         <!-- <button name="print_po" string="Print" icon="fa-print" invisible="state in ['Refuse'] or is_budget_verification_memo_request == True" type="object" class="btn-primary"/> -->
                         <!-- <field name="stage_id" widget="statusbar" force_save="1" readonly="1" domain="[('id', 'in', computed_stage_ids)]"/> -->
-                        <button name="print_payment_voucher" id="printVoucher" string="Print Payment Voucher" invisible="external_memo_request != True or state in ['submit', 'refuse', 'cancel']" type="object"/>
+                        <button name="print_payment_voucher" id="printVoucher" string="Print Payment Voucher" invisible="external_memo_request != True or state in ['submit', 'Sent', 'refuse', 'cancel']" type="object"/>
                         <field name="stage_id" widget="statusbar" readonly="0" options="{'clickable': '1'}"/>
                     </header>
                     <sheet> 
@@ -328,11 +328,15 @@
                                         <field name="is_contract_memo_request" readonly="0" invisible="1"/>
                                         <field name="is_budget_verification_memo_request" readonly="0" invisible="1"/>
                                         <field name="budget_has_allocation" invisible="1"/> 
+                                        
                                         <field name="dummy_budget_ids" invisible="1" widget="many2many_tags" force_save="1"/>
+                                        <field name="dummy_budget_line_ids" invisible="1" widget="many2many_tags" force_save="1"/>
                                         <field name="user_is_approver" invisible="1"/> 
                                         <field name="is_request_completed" invisible="1"/> 
                                         <field name="state" invisible="1"/> 
                                         <field name="employee_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state not in ['submit']" string="Initiator"/>
+                                        <field name="phone" readonly="1" invisible="1"/>
+                                        <field name="email" readonly="1"/>
                                         <field name="approver_id" invisible="1" readonly="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" groups="base.group_system"/>
                                         <field name="approver_ids" invisible="1" widget="many2many_tags" readonly="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" groups="base.group_system"/>
                                         <field name="currency_id" invisible="1"/>
@@ -342,14 +346,28 @@
                                         <field name="move_id" invisible="1"/>
                                         <!-- <field name="contractor_id" readonly="state not in ['submit']" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
                                         invisible="is_contract_memo_request == False" required="is_contract_memo_request == True"/> -->
-                                       
-                                        <field name="budget_id" readonly="state not in ['submit']" domain="[('id', 'in', dummy_budget_ids)]" 
+
+                                        <field name="budget_id" readonly="state not in ['submit']"
                                         invisible="is_budget_verification_memo_request != True and is_budget_allocation_request != True" 
                                         options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
                                         required="is_budget_verification_memo_request == True or is_budget_allocation_request == True"/>
+                                       
+                                        <field name="budget_line_id" readonly="state not in ['submit']" domain="[('id', 'in', dummy_budget_line_ids)]" 
+                                        invisible="is_budget_verification_memo_request != True and is_budget_allocation_request != True" 
+                                        options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                        required="is_budget_verification_memo_request == True or is_budget_allocation_request == True"/>
+                                       
+                                        <!-- <field name="budget_id" readonly="state not in ['submit']" domain="[('id', 'in', dummy_budget_ids)]" 
+                                        invisible="is_budget_verification_memo_request != True and is_budget_allocation_request != True" 
+                                        options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                        required="is_budget_verification_memo_request == True or is_budget_allocation_request == True"/> -->
                                         <field name="budget_balance_amount"
                                        readonly="1" force_save="1" 
                                         invisible="is_budget_allocation_request != True"
+                                        />
+                                        <field name="budget_balance_amount"
+                                       readonly="1" force_save="1" 
+                                        invisible="is_budget_verification_memo_request != True"
                                         />
                                         <field name="is_budget_allocation_request" invisible="1"/> 
                                         <field name="budget_amount" string="Budget Amount" 
@@ -369,15 +387,15 @@
                                         <field name="work_order_code" invisible="1" force_save="1"/>
                                         <!-- invisible fields -->
 
-                                        <field name="internal_memo_option" string="Memo Option" invisible="memo_type_key not in ['Internal', 'internal']" readonly="state not in ['submit']"/>
+                                        <!-- <field name="internal_memo_option" string="Memo Option" invisible="memo_type_key not in ['Internal', 'internal']" readonly="state not in ['submit']"/> -->
+                                        <field name="internal_memo_option" string="Memo Option" invisible="1" readonly="state not in ['submit']"/>
                                          <!-- <field name="partner_ids" string="Reciepients" widget="many2many_tags" 
                                          readonly="state not in ['submit']" invisible="internal_memo_option not in ['selected']"
                                          required="not user_is_approver or internal_memo_option in ['selected'] or memo_type_key in ['Internal', 'internal']" 
                                          options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> -->
                                         <!-- <field name="client_id" string="Client" readonly="state not in ['submit']" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />  -->
                                         <field name="client_id" string="Client" invisible="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" /> 
-                                        <field name="phone" readonly="1"/>
-                                        <field name="email" readonly="1"/>
+                                        
                                         <field name="dept_ids" widget="selection" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="1" invisible="1"/>
                                         <field name="loan_type" invisible="memo_type_key != 'loan'" required="memo_type_key == 'loan'"/>
                                         <field name="loan_amount" invisible="memo_type_key != 'loan'" required="memo_type_key == 'loan'"/>
@@ -468,11 +486,18 @@
                                                                     <field name="date" string="Date" invisible="1" column_invisible="1"/> 
                                                                     <field name="journal_id" string="Payment journal" required="0"/>  
                                                                     <field name="amount_total" string="Amount" invisible="0"/> 
+                                                                    <field name="partner_bank_id" string="Bank" invisible="1" column_invisible="1"/>
+                                                                    <field name="bank_partner_id" string="Recipients Bank" invisible="1" column_invisible="1"/> 
+                                                                     <field name="bank_partner_account" string="Bank Account Number" invisible="1" column_invisible="1"/>
                                                                     <field name="state" string="Status" invisible="1" column_invisible="1"/> 
                                                                     <field name="stage_invoice_name" invisible="1" column_invisible="1"/> 
                                                                     <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" invisible="memo_state not in ['Approve']" groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
                                                                     <field name="payment_state" string="Payment Status" invisible="0"/>  
-                                                                    <button name="action_register_payment" id="account_invoice_payment_btn" type="object" class="oe_highlight btn-sm" invisible="memo_state not in ['Approve'] or state != 'posted' or payment_state != 'not_paid' or move_type not in ['out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt']" string="Register Payment" groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
+                                                                    <button name="action_register_payment" id="account_invoice_payment_btn" type="object" class="oe_highlight btn-sm" 
+                                                                    invisible="memo_state not in ['Approve'] or state != 'posted' or payment_state != 'not_paid' or move_type not in ['out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt']" 
+                                                                    string="Register Payment"
+                                                                    groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
+                                                                     <!-- context="{'default_partner_bank_id':partner_bank_id, 'default_bank_partner_id':bank_partner_id, 'default_bank_partner_account':bank_partner_account}" -->
                                                                 </tree>
                                                             </field>
                                                         </page>
@@ -824,7 +849,7 @@
                                     <!--ADDD-->
                                     <!-- <page name="Invoices" string="Finance" invisible="memo_type_key not in ['Payment', 'payment', 'pay', 'export_process', 'import_process', 'agency_process', 'procurement_request', 'procurement', 'transport', 'travel']"> -->
                                     <page name="Invoices" string="Finance" invisible="is_internal_transfer != True">
-                                        <field name="invoice_ids" context="{'default_move_type': 'in_invoice', 'default_memo_id': active_id, 'default_partner_id': client_id, 'form_view_ref': 'account.view_move_form'}" readonly="state in ['Done', 'Approve2']">
+                                        <field name="invoice_ids" context="{'default_move_type': 'in_invoice', 'default_memo_id': active_id, 'default_partner_id': client_id, 'form_view_ref': 'account.view_move_form'}" readonly="state in ['Done', 'Approve2']" domain="[('id', '=', None)]">
                                             <tree string="Invoices">
                                                 <field name="memo_id" string="Memo" invisible="1" column_invisible="1"/>  
                                                 <field name="memo_state" string="Memo state" invisible="1" column_invisible="1"/>  
@@ -839,9 +864,16 @@
                                                 <field name="state" string="Status" invisible="0"/> 
                                                 <field name="stage_invoice_name" invisible="1" column_invisible="1"/> 
                                                 <!-- <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" invisible="memo_state not in ['Approve']" groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/> -->
+                                                <field name="partner_bank_id" string="Bank" invisible="1" column_invisible="1"/>
+                                                <field name="bank_partner_id" string="Recipients Bank" invisible="1" column_invisible="1"/> 
+                                                <field name="bank_partner_account" string="Recipients Account" invisible="1" column_invisible="1"/> 
                                                 <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" invisible="memo_state not in ['Approve']"/>
                                                 <field name="payment_state" string="Payment Status" invisible="0"/>  
-                                                <button name="action_register_payment" id="account_invoice_payment_btn" type="object" class="oe_highlight btn-sm" invisible="memo_state not in ['Approve'] or state != 'posted' or payment_state != 'not_paid' or move_type not in ['out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt']" string="Register Payment" groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
+                                                <button name="action_register_payment" id="account_invoice_payment_btn" type="object" class="oe_highlight btn-sm" 
+                                                invisible="memo_state not in ['Approve'] or state != 'posted' or payment_state != 'not_paid' or move_type not in ['out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt']" 
+                                                string="Register Payment" 
+                                                groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
+                                                <!-- context="{'default_partner_bank_id':partner_bank_id, 'default_bank_partner_id':bank_partner_id, 'default_bank_partner_account':bank_partner_account}" -->
                                             </tree>
                                         </field>
                                     </page>
@@ -852,22 +884,32 @@
                                         <!-- <field name="payment_ids" context="{'default_external_memo_request': 1, 'default_payment_type': 'outbound', 'default_is_internal_transfer': 1, 'default_memo_reference': active_id}" domain="[('state', '=', 'draft')]" readonly="state in ['Done', 'Approve2']"> -->
                                         <field name="payment_ids" invisible="1" readonly="0" 
                                         context="{'default_partner_type': 'supplier','default_is_contract_memo_request': is_contract_memo_request, 'default_external_memo_request': 1, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}" 
-                                        domain="[('state', '=', 'draft')]">
+                                        domain="[('id', '=', None)]">
                                             <tree string="Payments" edit="1">
-                                                <field name="is_internal_transfer" string="Is transfer" readonly="1" force_save="1" invisible="1"/>  
-                                                <field name="payment_type" string="Payment type" invisible="0"/>  
+                                                <field name="is_internal_transfer" string="Is transfer" readonly="1" force_save="1" invisible="1" column_invisible="1"/>  
+                                                <field name="payment_type" string="Payment type" invisible="1" column_invisible="1"/>  
                                                 <field name="date" string="Date" invisible="0"/>
-                                                <field name="ref" string="Ref#" invisible="0"/> 
-                                                <field name="amount" string="Amount" invisible="0"/>  
+                                                <field name="name" string="Ref#" invisible="0"/> 
+                                                <field name="journal_id" string="Journal From" invisible="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>  
+                                                <field name="destination_journal_id" string="Destination journal" invisible="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>  
+                                                <field name="amount_total" string="Amount" invisible="0" sum="total"/> 
+                                                <field name="state" string="Payment Status" invisible="0"/> 
+                                                <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" invisible="state != 'draft'"/>
+                                            </tree>
+                                        </field>
+                                        <field name="payment_ids" readonly="state not in ['submit']" context="{'default_partner_type': 'supplier', 'default_is_internal_transfer': True, 'default_external_memo_request': external_memo_request, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}"
+                                        domain="[('id', '=', None)]">
+                                            <tree string="Payments" create="1">
+                                                <field name="is_internal_transfer" string="Is transfer" readonly="0" force_save="1" column_invisible="1" invisible="1" default="True"/>  
+                                                <field name="payment_type" string="Payment type" invisible="1" column_invisible="1"/>  
+                                                <field name="date" string="Date" invisible="0"/>
+                                                <field name="name" string="Ref#" invisible="0"/> 
                                                 <field name="journal_id" string="Journal From" invisible="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>  
                                                 <field name="destination_journal_id" string="Destination journal" invisible="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>  
                                                 <field name="amount_total" string="Amount" invisible="0" sum="total"/> 
                                                 <field name="state" string="Status" invisible="0"/> 
-                                                <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" groups="base.group_system" invisible="state != 'draft'"/>
+                                                <button name="action_post" string="Confirm" class="oe_highlight btn-sm" type="object" invisible="state != 'draft'"/>
                                             </tree>
-                                        </field>
-                                        <field name="payment_ids" readonly="state not in ['submit']" context="{'default_partner_type': 'supplier', 'default_external_memo_request': external_memo_request, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}"
-                                         domain="[('state', '=', 'draft')]">
                                             <form string="Items"> 
                                                 <header>
                                                     <!-- <button name="action_post" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'" data-hotkey="v"/> -->
@@ -885,7 +927,7 @@
                                                     <field name="is_move_sent" invisible="1"/>
                                                     <field name="is_reconciled" invisible="1"/>
                                                     <field name="is_matched" invisible="1"/>
-                                                    <field name="memo_reference" invisible="0"/>
+                                                    <field name="memo_reference" invisible="1"/>
                                                     
                                                     <field name="payment_method_code" invisible="1"/>
                                                     <field name="show_partner_bank_account" invisible="1"/>
@@ -951,7 +993,7 @@
                                                             <field name="external_memo_request" invisible="1" context="{'default_partner_type': external_memo_request}"/>
                                                             <field name="is_contract_memo_request" invisible="1" context="{'default_partner_type': is_contract_memo_request}"/>
                                                         
-                                                            <field name="is_internal_transfer" invisible="0" readonly="state != 'draft'" force_save="1" default="True"/>
+                                                            <field name="is_internal_transfer" invisible="1" readonly="state != 'draft'" force_save="1" default="True"/>
                                                             <field name="payment_type" widget="radio" options="{'horizontal': True}" readonly="state != 'draft'" invisible="1"/>
                                                             <field name="partner_id" context="{'default_is_company': True}" string="Customer" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state != 'draft'" invisible="partner_type != 'customer' or is_internal_transfer == True"/>
                                                             <field name="partner_id" context="{'default_is_company': True}" string="Vendor / Contractor" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state != 'draft'" invisible="partner_type != 'supplier' or is_internal_transfer == True"/>
@@ -986,18 +1028,7 @@
                                                     </group>
                                                 </sheet>
                                             </form>
-                                            <tree string="Payments">
-                                                <field name="is_internal_transfer" string="Is transfer" readonly="1" force_save="1" invisible="0" default="True"/>  
-                                                <field name="payment_type" string="Payment type" invisible="0"/>  
-                                                <field name="date" string="Date" invisible="0"/>
-                                                <field name="ref" string="Ref#" invisible="0"/> 
-                                                <field name="amount" string="Amount" invisible="0"/>  
-                                                <field name="journal_id" string="Journal From" invisible="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>  
-                                                <field name="destination_journal_id" string="Destination journal" invisible="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>  
-                                                <field name="amount_total" string="Amount" invisible="0" sum="total"/> 
-                                                <field name="state" string="Status" invisible="0"/> 
-                                                <button name="action_post" string="Post" class="oe_highlight btn-sm" type="object" groups="base.group_system" invisible="state != 'draft'"/>
-                                            </tree>
+                                            
                                         </field>
                                     </page>
                                     <!-- <page name="rr_form" string="Recruitment Request form" invisible="memo_type_key not in ['recruitment_request']"> -->
@@ -1156,6 +1187,9 @@
                                         <field name="manager_comment" string="Manager Comments" placeholder="Notes..." widget="html" readonly="is_manager"/>
                                     </page>
                                     <page name="reason_backs" string="Return Reason">
+                                        <div class="">State :<field name="state"/>
+                                        Stage :<field name="stage_id"/>
+                                        Settings :<field name="memo_setting_id" invisible="1" force_save="1" options="{&quot;no_create&quot;: True}"/></div>
                                         <field name="reason_back" string="Add Notes" placeholder="Notes..." widget="html" readonly="state in ['Done', 'Approve']"/>
                                     </page>
                                     <page name="work_instruction_description" string="Work instruction Description" invisible="1">
@@ -1297,7 +1331,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="internal_memo_menu_model_main2" name="PLAGFMIS" groups="base.group_system,company_memo.mainmemo_manager,company_memo.mainmemo_account,company_memo.mainmemo_officer" action = "internal_memo_model_action" sequence = "2" web_icon="company_memo,static/description/icon2.png"/>
+        <menuitem id="internal_memo_menu_model_main2" name="PLAGFMIS" groups="base.group_system,company_memo.mainmemo_manager,company_memo.mainmemo_account,company_memo.mainmemo_officer" action = "internal_memo_model_action" sequence = "2" web_icon="company_memo,static/description/icon.png"/>
         
         <record model="ir.actions.act_url" id="action_memo_open_my_request_url">
             <field name="name">Open URL for the</field>

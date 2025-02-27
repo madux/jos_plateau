@@ -8,18 +8,19 @@
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='return_memo']" position="after">
                         <button name="generate_bank_schedule" string="Send &amp; Print Bank Schedule" icon="fa-print"
-                        invisible="state in ['submit', 'Refuse'] or is_contract_memo_request != True" type="object" class="btn-primary"/>
-
+                        invisible="state in ['submit', 'Sent', 'Refuse'] or is_contract_memo_request != True" type="object" class="btn-primary"/>
+                         
                          <button name="generate_external_bank_payment_schedule" id="generate_bank_schedule_external_payment_request" 
                          string="Send &amp; Print Bank Schedule" icon="fa-print"
-                        invisible="state in ['submit', 'Refuse'] or external_memo_request != True" type="object" class="btn-primary"/>
+                        invisible="state in ['submit', 'Sent', 'Refuse', 'Done'] or external_memo_request != True" type="object" class="btn-primary"/>
                 </xpath> 
-                <xpath expr="//field[@name='email']" position="before">
-                    <field name="bank_partner_id" string="Bank Name" readonly="state not in ['Approve2']" required="state in ['Approve2']" invisible="external_memo_request != True and state in ['Approve2']"
-                    options="{&quot;no_open&quot;: False, &quot;no_create&quot;: False}" force_save="1"/> 
+                <xpath expr="//field[@name='users_followers']" position="before">
+                    <field name="bank_partner_id" string="Bank Name" readonly="state not in ['Approve2', 'Approve']" required="state in ['Approve2', 'Approve']"
+                    options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" force_save="1"
+                    domain="[('is_bank', '=', True)]" invisible="is_budget_verification_memo_request == True or is_budget_allocation_request == True"/> 
 
-                    <field name="scheduled_pay_date" string="Scheduled Date" readonly="state not in ['Approve2']" required="state in ['Approve2']" invisible="external_memo_request != True and state in ['Approve2']"
-                    options="{&quot;no_open&quot;: False, &quot;no_create&quot;: False}" force_save="1"/> 
+                    <field name="scheduled_pay_date" string="Scheduled Date" readonly="state not in ['Approve2', 'Approve']" required="state in ['Approve2', 'Approve']"
+                   force_save="1" invisible="is_budget_verification_memo_request == True or is_budget_allocation_request == True"/> 
                 </xpath>
                 <xpath expr="//field[@name='currency_id']" position="before">
                     <field name="partner_id" string="Partner" readonly="1" invisible="1" required="0"
@@ -124,11 +125,11 @@
                     <!-- <attribute name="context">{'default_move_type': 'in_invoice', 'default_memo_id': active_id,  'default_branch_id': branch_id, 'form_view_ref': 'account.view_move_form'}</attribute>  -->
                     <attribute name="context">{'default_move_type': 'in_invoice', 'default_memo_id': active_id, 'form_view_ref': 'account.view_move_form'}</attribute> 
                 </xpath> 
-                <xpath expr="//field[@name='payment_ids']" position="attributes">
+                <!-- <xpath expr="//field[@name='payment_ids']" position="attributes">
                     <attribute name="readonly">
                     "state in ['Sent', 'Done', 'Approve2'] and is_top_account_user == False"
                     </attribute> 
-                </xpath> 
+                </xpath>  -->
             </field>
         </record>
 
@@ -141,7 +142,7 @@
              <field name="view_mode">tree,form</field>
         </record>
         <record model="ir.actions.act_window" id="internal_memo_model_internal_mda_action">
-            <field name="name">Internal MDA Payment Request</field>
+            <field name="name">MDA Expenditure Request</field>
             <field name="res_model">memo.model</field>
             <field name="type">ir.actions.act_window</field>
            <field name="domain">[('is_internal_transfer','=', True)]</field>

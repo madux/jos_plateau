@@ -386,7 +386,16 @@ class AccountPaymentRegister(models.TransientModel):
     _inherit = 'account.payment.register'
 
     branch_id = fields.Many2one('multi.branch', string='MDA Sector',
-                                required=False)    
+                                required=False) 
+    bank_partner_id = fields.Many2one(
+        'res.partner', 
+        string='Recipient Bank-', 
+        domain="[('is_bank', '=', True)]",
+        help="Select the bank to send payment schedule"
+        )
+    bank_partner_account = fields.Char(
+        string='Recipient Account Number', 
+        )   
     
     @api.depends('payment_type', 'company_id', 'can_edit_wizard')
     def _compute_available_journal_ids(self):

@@ -128,10 +128,13 @@ class Memo_Model(models.Model):
         user_branch_id = self.env.user.branch_id
         res.update({
             'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs if user_branch_id.id in rec.branch_ids.ids])],
-            'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search([
-                '|', ('branch_id', '=', self.env.user.branch_id.id),
-                ('branch_id', 'in', self.env.user.branch_ids.ids)])
-                                         ])],
+            # 'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search([
+            #     '|', ('branch_id', '=', self.env.user.branch_id.id),
+            #     ('branch_id', 'in', self.env.user.branch_ids.ids)])
+            #                              ])],
+            # 'dummy_budget_line_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget.line'].search([
+            #     ('branch_id', '=', self.branch_id.id)])
+            #                              ])],
             'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request else False,
             })
         return res
@@ -169,6 +172,13 @@ class Memo_Model(models.Model):
         'budget_id',
         string='Dummy budget',
         )
+    dummy_budget_line_ids = fields.Many2many(
+        'ng.account.budget.line',
+        'ng_account_budget_line_rel',
+        'ng_account_budget_line_id', 
+        'budget_id',
+        string='Dummy budget lines',
+        )
     memo_type_key = fields.Char('Memo type key', readonly=True)
     name = fields.Char('Subject', size=400)
     code = fields.Char('Code', readonly=True, store=True)
@@ -200,6 +210,7 @@ class Memo_Model(models.Model):
         store=True,
         domain=lambda self: self._get_related_stage(),
         )
+    
             
     po_memo_ids = fields.One2many(
         'memo.model',
@@ -1926,12 +1937,46 @@ class Memo_Model(models.Model):
     budget_has_allocation = fields.Boolean(
         string='Has Allocation', 
         default=False, store=True)
+     
     budget_id = fields.Many2one(
         'ng.account.budget', 
         string='Budget Head', 
+        store=True,
+        # domain=lambda self: self._get_related_stage(),
+        ) 
+    budget_line_id = fields.Many2one(
+        'ng.account.budget.line', 
+        string='Budget line', 
         store=True, 
         # domain=lambda self: self._get_related_stage(),
-        )
+        ) 
+    
+    @api.onchange('budget_id')
+    def onchange_budget_id(self):
+        for rec in self:
+            rec.budget_line_id = False
+            rec.budget_has_allocation = False
+            budget_line_ids = self.budget_id.ng_account_budget_line
+            if budget_line_ids:
+                rec.dummy_budget_line_ids = budget_line_ids.ids
+            else:
+                rec.dummy_budget_line_ids = False
+        
+    @api.onchange('budget_line_id')
+    def check_budget_funds(self):
+        if self.budget_line_id:
+            self.budget_balance_amount = 0
+            if self.budget_line_id.budget_balance <= 0:
+                raise ValidationError("""
+                                  There is no budget allocated for the budget head
+                                  """)
+            else:
+                self.budget_has_allocation = True
+                self.budget_balance_amount = self.budget_line_id.budget_balance
+        else:
+            self.budget_has_allocation = False
+        
+    
     is_budget_allocation_request = fields.Boolean(
         string='Is Budget Allocation Process',
         related="memo_type.is_allocation",
@@ -1947,12 +1992,7 @@ class Memo_Model(models.Model):
         store=True, 
         )
     
-    @api.onchange("budget_id")
-    def change_budget_record(self):
-        if self.budget_id:
-            self.budget_balance_amount = self.budget_id.budget_variance
-        else:
-            self.budget_balance_amount = 0
+     
             
     def check_aprrover_user(self):
         # if self.env.user.id not in [r.user_id.id for r in self.stage_id.approver_ids]:
@@ -2047,17 +2087,7 @@ class Memo_Model(models.Model):
                 }
             return ret
    
-    @api.onchange('budget_id')
-    def check_budget_funds(self):
-        if self.budget_id:
-            if self.budget_id.budget_variance <= 0:
-                raise ValidationError("""
-                                  There is no budget allocated for the budget head
-                                  """)
-            else:
-                self.budget_has_allocation = True
-        else:
-            self.budget_has_allocation = False
+    
             
     # def _get_related_budget(self):
     #     # user = self.env.user
@@ -2114,7 +2144,7 @@ class Memo_Model(models.Model):
                     lambda st: st.state in ['draft']
                 )
             if payment_unposted:
-                raise ValidationError("Please kindly Post each payment on payment lines")
+                raise ValidationError("If this stage requires payment, Please kindly Post each payment on payment lines. \n Contact system admin to help you")
             
                 
     def forward_memo(self):

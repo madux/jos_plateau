@@ -22,7 +22,7 @@ class AccountPayment(models.Model):
     
 class NgAccountBudgetLine(models.Model):
     _name = "ng.account.budget.line"
-    _rec_name = "economic_id"
+    _rec_name = "account_id"
     _description = "To hold the budget allocation lines"
      
     approved_date = fields.Datetime(string="Approved Date")
@@ -71,6 +71,16 @@ class NgAccountBudgetLine(models.Model):
         store=True,
         compute="compute_account_id"
     )
+    budget_type = fields.Selection(
+        [
+        ("Revenue", "Revenue"), 
+        ("Personnel", "Personnel"), 
+        ("Overhead", "Overhead"), 
+        ("Expenditure", "Expenditure"), 
+        ("Capital", "Capital"),
+        ("Other", "Others"),
+        ], string="Budget Type", 
+    )
     code = fields.Char(string="Fund Code", store=True, readonly="0")
     allocated_amount = fields.Float(string='Allocated Amount')
     utilized_amount = fields.Float(string='Utilized Amount')
@@ -113,9 +123,19 @@ class NgAccountBudgetLine(models.Model):
     
 class ngAccountBudget(models.Model):
     _name = "ng.account.budget"
-    _rec_name = "name"
+    _rec_name = "budget_type"
     _description = "To hold the budget of accounts and journal"
     
+    budget_type = fields.Selection(
+        [
+        ("Revenue", "Revenue"), 
+        ("Personnel", "Personnel"),
+        ("Overhead", "Overhead"), 
+        ("Expenditure", "Expenditure"), 
+        ("Capital", "Capital"),
+        ("Other", "Others"),
+        ], string="Budget Type", 
+    )
     is_migrated = fields.Boolean(string="Is migrated")
     name = fields.Char(string="Name", store=True, readonly="0")
     code = fields.Char(string="Fund Code", store=True, readonly="0")
@@ -181,11 +201,20 @@ class ngAccountBudget(models.Model):
             else:
                 rec.budget_variance = 0
     
-    @api.depends('budget_allocation_line.amount_total')
+    # @api.depends('budget_allocation_line.amount_total')
+    # def compute_budget_amount(self):
+    #     rec= self
+    #     if rec.budget_allocation_line:
+    #         amount_total = sum([r.amount_total for r in rec.budget_allocation_line if r.state in ['posted']])
+    #         rec.budget_amount = amount_total
+    #     else:
+    #         rec.budget_amount = 0
+            
+    @api.depends('ng_account_budget_line.allocated_amount')
     def compute_budget_amount(self):
         rec= self
-        if rec.budget_allocation_line:
-            amount_total = sum([r.amount_total for r in rec.budget_allocation_line if r.state in ['posted']])
+        if rec.ng_account_budget_line:
+            amount_total = sum([r.allocated_amount for r in rec.ng_account_budget_line])
             rec.budget_amount = amount_total
         else:
             rec.budget_amount = 0

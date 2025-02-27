@@ -16,7 +16,7 @@
                     <field name="move_type" required="0" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='payment_journal_id']" position="after">
-                    <field name="move_type" required="0" invisible="0" readonly="0"/>
+                    <field name="move_type" required="0" invisible="1" readonly="0"/>
                     <field name="example_invalid" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='invoice_payment_term_id']" position="replace">

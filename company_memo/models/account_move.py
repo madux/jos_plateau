@@ -11,7 +11,6 @@ class AccountMoveMemo(models.Model):
     _inherit = 'account.move'
 
     memo_id = fields.Many2one('memo.model', string="Memo Reference")
-    # district_id = fields.Many2one('hr.district', string="District")
     origin = fields.Char(string="Source")
     stage_invoice_name = fields.Char(
         string="Stage invoice name", 
@@ -32,8 +31,15 @@ class AccountMoveMemo(models.Model):
     example_date = fields.Date(store=False, compute='_compute_payment_term_example')
     example_invalid = fields.Boolean(compute='_compute_payment_term_example')
     example_preview = fields.Html(compute='_compute_payment_term_example')
-    # project_id = fields.Many2one('account.analytic.account', 'Project')
-
+    bank_partner_id = fields.Many2one(
+        'res.partner', 
+        string='Recipient Bank-', 
+        help="Select the bank to send payment schedule"
+        )
+    bank_partner_account = fields.Char(
+        string='Recipient Account Number', 
+        )
+    
     @api.depends('memo_id')
     def _compute_payment_term_example(self):
         for rec in self:
@@ -57,13 +63,8 @@ class AccountMoveMemo(models.Model):
                 rec.memo_state = rec.memo_id.state
 
     def validate_invoice_lines(self):
-        pass
-        # invline_without_price = self.mapped('invoice_line_ids').filtered(
-        #                 lambda s: s.quantity >= 0 and s.price_unit <= 0
-        #                 )
-        # if invline_without_price:
-        #     raise ValidationError(f"All invoice line must have a unit price amount greater than 0 {[rec.product_id.name for rec in self.invoice_line_ids]} ")
-        
+        pass 
+    
     def action_post(self):
         if self.memo_id:
             self.validate_invoice_lines()
@@ -122,7 +123,7 @@ class AccountMoveMemo(models.Model):
                         }
                         )
                     
-        return invoice_lines # [{}, {}, {}]
+        return invoice_lines 
 
     def action_populate_all_project_pos(self):
         if self.memo_id:

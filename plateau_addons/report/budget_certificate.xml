@@ -37,16 +37,16 @@
                 </div>
                 
                 <div style="text-align: left;" class="p-3">
-                    <h3><strong>TO WHOM IT MAY CONCERN</strong>
+                    <h3><strong>TO WHOM IT MAY CONCERN</strong> 
                     </h3>
                 </div>
 
                 <div style="text-align: center; font-size: 20px;" class="pt-3">
                     <p>
-                        <span>THIS IS TO CERTIFY that the budget Verification with head <t t-esc="o.budget_id.code"/> from <t t-esc="o.branch_id.name"/> </span>
-                        <span>has been Verified.</span>
-                        <span>Total Balance in the Head ₦ <t t-esc="'{0:,}'.format(float(o.budget_id.budget_variance))"/></span>
-                        This certification is issued in compliance to the requirement of the State government for the reason <t t-esc="o.name"/>.
+                        <span>THIS IS TO CERTIFY that the budget Verification with head <t t-esc="o.budget_id.code"/> from <t t-esc="o.branch_id.name"/> </span><br/><br/>
+                        <span>has been Verified.</span><br/>
+                        <span>Total Balance in the Head ₦ <t t-esc="'{0:,}'.format(float(o.budget_id.budget_variance))"/></span><br/>
+                        This certification is issued in compliance to the requirement of the State government for the reason <t t-esc="o.name"/>.<br/>
                         Issued this <t t-esc="datetime.datetime.now().strftime('%d')"/> day of <t t-esc="datetime.datetime.now().strftime('%B')"/>, <t t-esc="datetime.datetime.now().strftime('%Y')"/>
                     </p>
                 </div>
@@ -58,9 +58,23 @@
                     <div class="col-2 offset-2 text-center">
                         
                     </div>
-                    <div class="col-4 text-end p-2">
-                        Authorized Signature<p/><p/>
+                    <div class="col-4 text-end p-3">
+                        Authorized Signature<p/><p/><br/>
                         <strong>Signature: ...................................................................</strong>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="row p-3">
+                    <div class="col-3">
+                        Name: <strong> <t t-esc="o.write_uid.name"/></strong>
+                    </div>
+                    <div class="col-2 offset-2 text-center">
+                        
+                    </div>
+                    <div class="col-3 text-end p-2">
+                        Authorized Signature<p/><p/><br/>
+                        <strong>Signature: ..................................................</strong>
                     </div>
                 </div>
                 <br/>

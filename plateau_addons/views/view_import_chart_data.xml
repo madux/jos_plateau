@@ -19,6 +19,8 @@
                     <field name="index"/> 
                     <field name="import_type" required="0" invisible="0"/>
                     <field name="budget_name" required="import_type == 'budget'" invisible="0" placeholder="e.g 2025 Capital Receipt or 2025 Personnel" />
+                    <field name="account_head_type" required="import_type == 'budget'" invisible="0"/>
+
                 </group>
                 <group invisible="import_type != 'chart'"> 
                     <field name="account_type"

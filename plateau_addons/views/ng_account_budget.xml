@@ -5,8 +5,8 @@
         <field name="model">ng.account.budget</field>
             <field name="arch" type="xml">
                 <tree string="" create="1">
+                    <field name="budget_type"/>
                     <field name="branch_id"/>
-                    <field name="name"/>
                     <!-- <field name="general_account_id"/>
                     <field name="general_journal_id"/> -->
                     <field name="previous_budget_amount" string="Previous Year Budget"/>
@@ -27,13 +27,14 @@
                 <form string="" create="1">
                     <group>
                         <group>
-                            <field name="name" required="1" readonly="0"/>
+                            <field name="budget_type" required="1"/>
+                            <field name="name" required="0" readonly="0"/>
                             <field name="code" invisible="0"/>
-                            <field name="branch_id" required="1"/>
+                            <field name="branch_id" required="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                             <field name="fiscal_year" readonly="0" force_save="1"/>
                             <field name="budget_id" invisible="1"/>
-                            <field name="general_journal_id" required="0" invisible="0"/>
-                            <field name="general_account_id" required="0" invisible="0"/>
+                            <field name="general_journal_id" required="0" invisible="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                            <field name="general_account_id" required="0" invisible="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                             <field name="date_from" required="0"/>
                             <field name="date_to" required="0"/>
                         </group>
@@ -63,6 +64,7 @@
                         <page name="Budget Request" string="Budget Lines" invisible="0">
                             <field name="ng_account_budget_line" readonly="1">
                                 <tree string="" create="0">
+                                    <field name="budget_type" required="1"/>
                                     <field name="account_id"/>
                                     <field name="ng_budget_id" required="1"/>
                                     <field name="approved_date" required="0"/>
@@ -98,7 +100,7 @@
             <field name="limit">300</field>
             <field name="domain">[('is_migrated', '=', True)]</field>
             <!-- <field name="context">{'search_default_is_migrated': 1}</field> -->
-            <field name="context">{'search_default_accounttype': 1, 'default_is_migrated': 1}</field>
+            <field name="context">{'search_default_accountheadtype': 1, 'default_is_migrated': 1}</field>
             <field name="help" type="html">
               <p class="o_view_nocontent_smiling_face">
                 Create a new Chart of account

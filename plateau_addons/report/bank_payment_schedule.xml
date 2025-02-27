@@ -19,8 +19,8 @@
       </t>
     </template>
     <template id="memomodel_print_payment_schedule_template">
-        <t t-call="web.internal_layout">
-            <t t-foreach="o.contractor_ids" t-as="con">
+        <t t-foreach="o.contractor_ids" t-as="con">
+            <t t-call="web.internal_layout">
                 <div class="page">
                     <div class="row">
                         <div class="col-2 pt-0">
@@ -119,7 +119,7 @@
                             <strong>Signature: ...................................................................</strong>
                         </div>
                     </div>
-                     
+                        
                     <br/>
                 </div>
             </t>
