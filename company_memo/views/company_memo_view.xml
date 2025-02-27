@@ -329,8 +329,7 @@
                                         <field name="is_budget_verification_memo_request" readonly="0" invisible="1"/>
                                         <field name="budget_has_allocation" invisible="1"/> 
                                         
-                                        <field name="dummy_budget_ids" invisible="1" widget="many2many_tags" force_save="1"/>
-                                        <field name="dummy_budget_line_ids" invisible="1" widget="many2many_tags" force_save="1"/>
+                                        
                                         <field name="user_is_approver" invisible="1"/> 
                                         <field name="is_request_completed" invisible="1"/> 
                                         <field name="state" invisible="1"/> 
@@ -355,7 +354,7 @@
                                         <field name="budget_line_id" readonly="state not in ['submit']"
                                         invisible="is_budget_verification_memo_request != True and is_budget_allocation_request != True" 
                                         options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
-                                        required="is_budget_verification_memo_request == True or is_budget_allocation_request == True"/>
+                                        required="is_budget_verification_memo_request == True or is_budget_allocation_request == True" domain="[('id', 'in', dummy_budget_line_ids)]"/>
                                         <!-- domain="[('id', 'in', dummy_budget_line_ids)]" - -->
                                         <!-- <field name="budget_id" readonly="state not in ['submit']" domain="[('id', 'in', dummy_budget_ids)]" 
                                         invisible="is_budget_verification_memo_request != True and is_budget_allocation_request != True" 
@@ -1189,7 +1188,9 @@
                                     <page name="reason_backs" string="Return Reason">
                                         <div class="">State :<field name="state"/>
                                         Stage :<field name="stage_id"/>
-                                        Settings :<field name="memo_setting_id" invisible="1" force_save="1" options="{&quot;no_create&quot;: True}"/></div>
+                                        Settings :<field name="memo_setting_id" invisible="1" force_save="1" options="{&quot;no_create&quot;: True}"/>
+                                        <field name="dummy_budget_ids" invisible="0" widget="many2many_tags" force_save="1"/>
+                                        <field name="dummy_budget_line_ids" invisible="0" widget="many2many_tags" force_save="1"/></div>
                                         <field name="reason_back" string="Add Notes" placeholder="Notes..." widget="html" readonly="state in ['Done', 'Approve']"/>
                                     </page>
                                     <page name="work_instruction_description" string="Work instruction Description" invisible="1">

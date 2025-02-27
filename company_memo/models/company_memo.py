@@ -1956,7 +1956,7 @@ class Memo_Model(models.Model):
         for rec in self:
             rec.budget_line_id = False
             rec.budget_has_allocation = False
-            budget_line_ids = self.budget_id.ng_account_budget_line
+            budget_line_ids = self.budget_id.ng_account_budget_line or self.env['ng.account.budget.line'].search([('ng_budget_id', '=', self.budget_id.id)])
             if budget_line_ids:
                 rec.dummy_budget_line_ids = budget_line_ids.ids
             else:
