@@ -123,7 +123,7 @@ class NgAccountBudgetLine(models.Model):
     
 class ngAccountBudget(models.Model):
     _name = "ng.account.budget"
-    _rec_name = "budget_type"
+    _rec_name = "name"
     _description = "To hold the budget of accounts and journal"
     
     budget_type = fields.Selection(
