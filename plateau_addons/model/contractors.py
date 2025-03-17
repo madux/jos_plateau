@@ -26,6 +26,18 @@ class resContractors(models.Model):
         string='MDA', 
         default=lambda self: self.env.user.branch_id
         )
+    
+    contact_tax_type = fields.Selection(
+        [
+        ("", ""), 
+        ("Consultant", "Consultant"), 
+        ("Individual", "Individual"),
+        ("Contractor", "Contractor"),
+        ], string="Contact Tax Type", 
+        default="",
+        help="Contact tax type to help determine", 
+    )
+    
     branch_account_id = fields.Many2one(
         'account.account', 
         string='Account to Debit', 

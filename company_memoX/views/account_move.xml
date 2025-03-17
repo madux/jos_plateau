@@ -10,9 +10,9 @@
                 <xpath expr="//field[@name='move_type']" position="replace">
                 </xpath>
                 <xpath expr="//field[@name='ref']" position="after">
-                    <field name="memo_id" readonly="1" force_save="1"/>
+                    <field name="memo_id" readonly="1" force_save="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                     <field name="origin" required="0"/>
-                    <field name="payment_journal_id" required="0"/>
+                    <field name="payment_journal_id" required="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                     <field name="move_type" required="0" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='payment_journal_id']" position="after">
@@ -20,7 +20,7 @@
                     <field name="example_invalid" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='invoice_payment_term_id']" position="replace">
-                 <field name="invoice_payment_term_id" context="{'example_date': invoice_date, 'example_amount': tax_totals['amount_total']}" placeholder="Terms"/>
+                 <field name="invoice_payment_term_id" context="{'example_date': invoice_date, 'example_amount': tax_totals['amount_total']}" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" placeholder="Terms"/>
                 </xpath>
                 
                 <xpath expr="//form/sheet/group[last()]" position="after">

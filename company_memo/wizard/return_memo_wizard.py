@@ -26,18 +26,18 @@ class Send_Memo_back(models.Model):
         base_url += "/my/request/view/%s" % (id)
         return "<a href={}> Click<a/>. ".format(base_url)
     
-    def get_previous_stage(self, memo_record):
-        stages = memo_record.memo_setting_id.mapped('stage_ids').filtered(
-            lambda skp: skp.id != memo_record.stage_to_skip.id
-        ).ids
-        # stages = memo_record.memo_setting_id.stage_ids.ids
-        current_stage = memo_record.stage_id
-        current_stage_index = stages.index(current_stage.id)
-        new_previous_stage = stages[current_stage_index -1] if current_stage_index != 0 else stages[0]
-        if new_previous_stage:
-            return new_previous_stage
-        else:
-            return False
+    # def get_previous_stage(self, memo_record):
+    #     stages = memo_record.memo_setting_id.mapped('stage_ids').filtered(
+    #         lambda skp: skp.id != memo_record.stage_to_skip.id
+    #     ).ids
+    #     # stages = memo_record.memo_setting_id.stage_ids.ids
+    #     current_stage = memo_record.stage_id
+    #     current_stage_index = stages.index(current_stage.id)
+    #     new_previous_stage = stages[current_stage_index -1] if current_stage_index != 0 else stages[0]
+    #     if new_previous_stage:
+    #         return new_previous_stage
+    #     else:
+    #         return False
         
     def clear_current_stage_actions(self):
         current_stage_invoices = self.memo_record.mapped('invoice_ids').filtered(
@@ -52,11 +52,29 @@ class Send_Memo_back(models.Model):
             'attachment_ids': [(3, doc.id) for doc in current_stage_documents],
             'invoice_ids': [(3, inv.id) for inv in current_stage_invoices],
         })
+        
+    def get_previous_stage(self, memo_record):
+        stages = memo_record.memo_setting_id.stage_ids.ids
+        if memo_record.memo_setting_id.send_to_initiator_on_refusal:
+            '''checks if the refusal goes straight to initiator'''
+            new_previous_stage = stages[0]
+        else:
+            current_stage = memo_record.stage_id
+            current_stage_index = stages.index(current_stage.id)
+            new_previous_stage = stages[current_stage_index -1] if current_stage_index != 0 else stages[0]
+        new_stage_index = stages.index(new_previous_stage)
+        if new_previous_stage:
+            return new_previous_stage, new_stage_index
+        else:
+            return False, False
 
     def post_refuse(self):
         get_record = self.env['memo.model'].search([('id','=', self.memo_record.id)])
-        self.clear_current_stage_actions()
-        get_previous_stage = self.get_previous_stage(get_record)
+        # self.clear_current_stage_actions() please do not try using this. it will clear all the records in invoices
+        # and documents for you to start afresh after refusal
+        # get_previous_stage = self.get_previous_stage(get_record)
+        get_previous_stage, first_stage = self.get_previous_stage(get_record)
+
         # raise ValidationError(get_previous_stage)
         reasons = "<h4>Refusal Message From: %s  Please refer to the reasons below:</h4>* %s." %(self.env.user.name,self.reason)
         if self.reason:
@@ -64,6 +82,7 @@ class Send_Memo_back(models.Model):
              Kindly {} to Review Thanks".format(self.memo_record.employee_id.name, self.get_url(self.id))
             get_record.write({
                 # 'state':'Refuse',
+                'state':'submit' if first_stage == 0 else 'Sent',
                 'reason_back': reasons,
                 'stage_id': get_previous_stage or self.env.ref("company_memo.memo_refuse_stage").id,
                 'users_followers': [(4, self.direct_employee_id.id)],

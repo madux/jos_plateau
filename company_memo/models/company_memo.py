@@ -76,8 +76,14 @@ class Memo_Model(models.Model):
         result = super(Memo_Model, self).create(vals)
         if self.attachment_ids:
             self.attachment_ids.write({'res_model': self._name, 'res_id': self.id})
+        if self.invoice_ids:
+            for rec in self.invoice_ids:
+                rec.memo_id = self.id
+        if self.payment_ids:
+            for rec in self.payment_ids:
+                rec.memo_reference = result.id
         return result
-
+    
     def _compute_attachment_number(self):
         attachment_data = self.env['ir.attachment'].sudo().read_group([
             ('res_model', '=', 'memo.model'), 
@@ -119,22 +125,15 @@ class Memo_Model(models.Model):
         external_payment_request = self.env.context.get('default_external_memo_request')
         
         ministry_of_finance = self.env.ref('plateau_addons.mda_ministry_of_finance')
-        # finance_budget_head = self.env['ng.budget'].search(domain)
-        # user_branches = list(self.env.user.branch_id.id)
         domain = [('active', '=', True)]
-        # if memo_project_type: , ('branch_ids', 'in', user_branches)
-        #     domain = [('active', '=', True), ('project_type', '=', memo_project_type)]
         memo_configs = self.env['memo.config'].search(domain)
         user_branch_id = self.env.user.branch_id
         res.update({
             'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs if user_branch_id.id in rec.branch_ids.ids])],
-            # 'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search([
-            #     '|', ('branch_id', '=', self.env.user.branch_id.id),
-            #     ('branch_id', 'in', self.env.user.branch_ids.ids)])
-            #                              ])],
-            # 'dummy_budget_line_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget.line'].search([
-            #     ('branch_id', '=', self.branch_id.id)])
-            #                              ])],
+            'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search([
+                '|', ('branch_id', '=', self.env.user.branch_id.id),
+                ('branch_id', 'in', self.env.user.branch_ids.ids)])
+                                         ])],
             'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request else False,
             })
         return res
@@ -180,7 +179,7 @@ class Memo_Model(models.Model):
         string='Dummy budget lines',
         )
     memo_type_key = fields.Char('Memo type key', readonly=True)
-    name = fields.Char('Subject', size=400)
+    name = fields.Char('Title', size=400)
     code = fields.Char('Code', readonly=True, store=True)
     employee_id = fields.Many2one('hr.employee', string = 'Employee', default =_default_employee) 
     direct_employee_id = fields.Many2one('hr.employee', string = 'Employee') 
@@ -749,14 +748,24 @@ class Memo_Model(models.Model):
             else:
                 rec.stage_duration = 0
                 
-    @api.depends('so_ids.amount_total')
+    # @api.depends('so_ids.amount_total')
+    # def compute_total_confirmed_so_amount(self):
+    #     for rec in self:
+    #         total = 0.0
+    #         if rec.so_ids:
+    #             total += sum([so.amount_total for so in rec.mapped('so_ids').filtered(lambda s: s.state not in ['draft', 'cancel'])])
+    #         rec.total_so_amount = total 
+    
+    @api.depends('payment_ids.amount_total', 'invoice_ids.amount_total')
     def compute_total_confirmed_so_amount(self):
         for rec in self:
             total = 0.0
-            if rec.so_ids:
-                total += sum([so.amount_total for so in rec.mapped('so_ids').filtered(lambda s: s.state not in ['draft', 'cancel'])])
+            if rec.payment_ids:
+                total += sum([pay.amount_total for pay in rec.mapped('payment_ids')])
+            if rec.invoice_ids:
+                total += sum([pay.amount_total for pay in rec.mapped('invoice_ids')])
             rec.total_so_amount = total 
-                   
+             
     @api.depends('task_end_date')
     def compute_remaining_task_duration(self):
         for rec in self:
@@ -1404,6 +1413,14 @@ class Memo_Model(models.Model):
         if 'users_followers' in vals:
             if len(self.users_followers) < old_length:
                 raise ValidationError("Sorry you cannot remove followers")
+        if 'invoice_ids' in vals:
+            for rec in self.invoice_ids:
+                rec.memo_id = self.id
+            
+        if 'payment_ids' in vals:
+            for rec in self.payment_ids:
+                rec.memo_reference = self.id
+        
         return res
 
     @api.constrains('document_folder')
@@ -1489,7 +1506,9 @@ class Memo_Model(models.Model):
                     self.stage_id = memo_setting_stage.id if memo_setting_stage else False
                     self.memo_setting_id = ms.id
                     self.update_validity_set(self.stage_id) 
-                    self.memo_type_key = self.memo_type.memo_key 
+                    self.memo_type_key = self.memo_type.memo_key
+                    ministry_of_finance = self.env.ref('plateau_addons.mda_ministry_of_finance')
+                    self.request_mda_from = ministry_of_finance.id,
                     self.has_sub_stage = True if memo_setting_stage.sub_stage_ids else False
                     self.users_followers = [
                         (4, self.employee_id.administrative_supervisor_id.id),
@@ -1956,7 +1975,11 @@ class Memo_Model(models.Model):
         for rec in self:
             rec.budget_line_id = False
             rec.budget_has_allocation = False
-            budget_line_ids = self.budget_id.ng_account_budget_line or self.env['ng.account.budget.line'].search([('ng_budget_id', '=', self.budget_id.id)])
+            budget_line_ids = self.budget_id.ng_account_budget_line or self.env['ng.account.budget.line'].search([
+                '|', ('ng_budget_id', '=', self.budget_id.id),
+                ('branch_id', '=', self.env.user.branch_id.id), 
+                ('budget_type', '=', self.budget_id.budget_type)
+                ]) 
             if budget_line_ids:
                 rec.dummy_budget_line_ids = budget_line_ids.ids
             else:
@@ -2188,9 +2211,10 @@ class Memo_Model(models.Model):
                     """Please attach contract verification document"""
                     )
             # did another check here to ensure user selects payment line
-            if not self.contractor_ids:
+            # if not self.contractor_ids:
+            if not self.invoice_ids:
                 raise ValidationError(
-                    """Please Add contractor request lines"""
+                    """Please Add contractor invoice lines"""
                     )
 
         # if self.to_unfreezed_budget and not self.po_ids:
@@ -3120,13 +3144,16 @@ class Memo_Model(models.Model):
             if not_done:
                 raise ValidationError("Payments should be posted manually to ensure data accuracy")
         
-        if self.is_internal_transfer and not self.invoice_ids:
+        if self.is_contract_memo_request or self.is_internal_transfer and not self.invoice_ids:
             '''If external payment transfer, system displays the payment line'''
             raise ValidationError("Please ensure the invoice lines are added")
+        
         else:
             not_done = self.mapped('invoice_ids').filtered(lambda se: se.state in ['draft'])
             if not_done:
                 raise ValidationError("Payments should be posted manually to ensure data accuracy")
+            if not self.bank_partner_id or not self.scheduled_pay_date:
+                raise ValidationError("Bank Name and schedule date must be selected to generate payment mandate")
          
         self.state = 'Done'
         self.is_request_completed = True

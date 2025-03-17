@@ -20,11 +20,11 @@ class AccountPayment(models.Model):
     #         self.sudo().memo_reference.update_final_state_and_approver()
     #     return res
 
-    def action_post(self):
-        res = super(AccountPayment, self).action_post()
-        if self.memo_reference:
+    # def action_post(self):
+    #     res = super(AccountPayment, self).action_post()
+        # if self.memo_reference:
             # self.memo_reference.state = "Done"
-            self.memo_reference.is_request_completed = True
-            self.sudo().memo_reference.update_final_state_and_approver()
-        return res
+            # self.memo_reference.is_request_completed = True
+            # self.sudo().memo_reference.update_final_state_and_approver()
+        # return res
  

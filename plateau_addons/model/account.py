@@ -69,6 +69,7 @@ class accountAccount(models.Model):
         ("Other", "Others"),
         ], string="Budget Type", 
     )
+    
 
 class accountAnalyticPlan(models.Model):
     _inherit = "account.analytic.plan"
@@ -146,6 +147,16 @@ class AccountPayment(models.Model):
         domain="[('id', 'in', suitable_journal_ids)]",
         check_company=True,
     )
+    contact_tax_type = fields.Selection(
+        [
+        ("", ""), 
+        ("Consultant", "Consultant"), 
+        ("Individual", "Individual"),
+        ("Contractor", "Contractor"),
+        ], string="Contact Tax Type", 
+        default="Individual",
+        help="Contact tax type", 
+    )
     
     # destination_journal_id = fields.Many2one(
     #     comodel_name='account.journal',
@@ -176,6 +187,7 @@ class AccountPayment(models.Model):
         domain = [('type', 'in', ('bank', 'cash'))]
         # get journal related to only from requesting _mda if set
         for m in self:
+            # ENSURE IF REQUEST FROM MDA, SYSTEM TO SHOW ONLY THE SOURCE JOURNALS OF THAT MDA (ministry of finance)
             branch_ids = [m.request_mda_from.id] if m.request_mda_from else branch_ids
             journal_items = []
             for journal in self.env['account.journal'].search(domain):
@@ -221,39 +233,42 @@ class AccountPayment(models.Model):
                 # ('type', 'in', ('bank','cash')),
                 ('id', '!=', m.journal_id.id),
                 ])
-            if not request_mda_from:
-                if account_major_user:
-                    m.suitable_journal_ids = [(6, 0, [r.id for r in Journal_Search])]
-                else:
-                    journal_items = []
-                    for journal in Journal_Search:
-                        journal_branch_ids = [rec.id for rec in journal.allowed_branch_ids] + [journal.branch_id.id] if journal.branch_id else [0]
-                        for jb in journal_branch_ids:
-                            if jb and jb in branch_ids:
-                                journal_items.append(journal.id)
-                                break
-                        if journal.for_public_use:
-                            journal_items.append(journal.id)
-                    
-                    m.suitable_journal_ids = [(6, 0, journal_items)]
+            # if not request_mda_from:
+            if account_major_user:
+                m.suitable_journal_ids = [(6, 0, [r.id for r in Journal_Search])]
             else:
-                requesting_from_journals = Journals.search([
-                    ('id', '!=', m.journal_id.id),
-                    '|', ('branch_id', 'in', request_mda_from), 
-                    ('allowed_branch_ids', 'in', request_mda_from)])
-                m.suitable_journal_ids = requesting_from_journals.ids
+                journal_items = [23]
+                for journal in Journal_Search:
+                    journalbranch_id = [journal.branch_id.id] if journal.branch_id else [0]
+                    journal_branch_ids = [rec.id for rec in journal.allowed_branch_ids] + journalbranch_id
+                    for jb in journal_branch_ids:
+                        if jb and jb in branch_ids:
+                            journal_items.append(journal.id)
+                            break
+                    if journal.for_public_use:
+                        journal_items.append(journal.id)
+                
+                m.suitable_journal_ids = [(6, 0, journal_items)]
+            # else:
+            #     requesting_from_journals = Journals.search([
+            #         ('id', '!=', m.journal_id.id),
+            #         '|', ('branch_id', 'in', request_mda_from), 
+            #         ('allowed_branch_ids', 'in', request_mda_from)])
+            #     _logger.info(f"showing journal from user branches {requesting_from_journals}")
+            #     m.suitable_journal_ids = requesting_from_journals.ids
     
     @api.model
     def default_get(self, fields):
         res = super(AccountPayment, self).default_get(fields)
         branch_id = self.env.user.branch_id.id
-        if self.request_mda_from:
-            branch_id = self.request_mda_from.id
+        # if self.request_mda_from:
+        #     branch_id = self.request_mda_from.id
         domain = [('branch_id', '=', branch_id)]
         journal_id = self.env['account.journal'].search(domain, limit=1)
         _logger.info(f"This is my journals ==> {journal_id} {self.env.user.branch_id.id}")
         res.update({
-            'journal_id': journal_id.id
+            'journal_id': journal_id.id,
+            'destination_journal_id': journal_id.id
             })
         return res
 
@@ -299,11 +314,63 @@ class AccountPayment(models.Model):
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.move.line'
     
+    # account_id = fields.Many2one(
+    #     comodel_name='account.account',
+    #     string='Account',store=True, readonly=False, precompute=True,  
+    #     index=False,  # covered by account_move_line_account_id_date_idx defined in init()
+    #     auto_join=True,
+    #     ondelete="cascade",
+    #     domain="[('deprecated', '=', False), ('account_type', '!=', 'off_balance')]",
+    #     check_company=True,
+    #     tracking=True,
+    # )
+    
+    # @api.model
+    # def default_get(self, fields):
+    #     res = super(AccountInvoiceLine, self).default_get(fields)
+    #     move_id = self.env.context.get('default_move_id')
+    #     contact_tax_type = self.env.context.get('contact_tax_type')
+    #     # date = self._context.get('force_period_date', fields.Date.context_today(self))
+        
+    #     # raise ValidationError(f"What is move id {self.move_id} {contact_tax_type}")
+        
+    #     domain = [('contact_tax_type', '=', contact_tax_type)]
+    #     account_taxs = self.env['account.tax'].search(domain)
+    #     res.update({
+    #         'tax_ids': [(6, 0, account_taxs.ids)],
+    #         })
+    #     return res
+    @api.onchange('account_id')
+    def onchange_account_id(self):
+        if self.contact_tax_type:
+            contact_tax_type = self.contact_tax_type
+            domain = [('contact_tax_type', '=', contact_tax_type)]
+            account_tax_ids = self.env['account.tax'].search(domain)
+            self.update({
+                'tax_ids': [(6, 0, account_tax_ids.ids)],
+                })
+    
+    contact_tax_type = fields.Selection(
+        [
+        ("", ""), 
+        ("Consultant", "Consultant"), 
+        ("Individual", "Individual"),
+        ("Contractor", "Contractor"),
+        ], string="Contact Tax Type", 
+        default="Individual",
+        help="""Contact tax type to be used in determining the 
+        taxes to be defaulted to the journal invoice lines""", 
+    )
     ng_budget_line_id = fields.Many2one(
         'ng.account.budget.line',
-        string='Budget line',
+        string='Budget',
         readonly=False,
         tracking=True,
+        help="""
+        Ensure you have a budget line (Budget Overview) 
+        that has the select parent budget, Related to user MDA,
+        and select account line
+        """
         )
     
     ng_budget_id = fields.Many2one(
@@ -314,17 +381,18 @@ class AccountInvoiceLine(models.Model):
     
     ng_budget_line_ids = fields.Many2many(
         'ng.account.budget.line',
-        string='Budget Tag',
+        string='Budget Tags',
         readonly=False,
-        compute="_compute_ng_budget_line")
+    )
+        # compute="_compute_ng_budget_line")
     
     budget_balance = fields.Float('Budget Balance', related="ng_budget_line_id.budget_balance")
     
-    @api.depends('account_id', 'ng_budget_id')
+    @api.onchange('account_id', 'ng_budget_id')
     def _compute_ng_budget_line(self):
-        if self.account_id and self.ng_budget_id:
+        if self.account_id:# or self.ng_budget_id:
             budget_line_ids = self.env['ng.account.budget.line'].search([
-            ('ng_budget_id', '=', self.ng_budget_id.id),
+            ('branch_id', '=', self.env.user.branch_id.id),
             ('account_id', '=', self.account_id.id)
             ])
             if budget_line_ids:
@@ -370,6 +438,18 @@ class AccountInvoice(models.Model):
             m.suitable_journal_ids = self.env['account.journal'].search(domain)
 
     external_memo_request = fields.Boolean('Is external memo request?')
+    contact_tax_type = fields.Selection(
+        [
+        ("", ""), 
+        ("Consultant", "Consultant"), 
+        ("Individual", "Individual"),
+        ("Contractor", "Contractor"),
+        ], string="Contact Tax Type", 
+        default="Individual",
+        help="""Contact tax type to be used in determining the 
+        taxes to be defaulted to the journal invoice lines""", 
+    )
+    
     is_top_account_user = fields.Boolean('Is top account user?') #, compute="compute_top_account_user")
     budget_id = fields.Many2one(
         'ng.account.budget',
@@ -466,11 +546,19 @@ class AccountInvoice(models.Model):
                     
                     rec.ng_budget_line_id.utilized_amount += total_budget
     
-             
+      
     def action_post(self):
-        account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
-        if self.external_memo_request and not account_major_user:
-            raise ValidationError("Ops. You are not allowed confirm this Bill. Only Accountant General Group is responsible to do this.")
+        # account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
+        # if self.external_memo_request and not account_major_user:
+        # raise ValidationError(f"Ops. {self.memo_id} and {self.memo_id.stage_id} You are not allowed confirm this Bill. Only Accountant General Group is responsible to do this.")
+        if self.memo_id and self.memo_id.stage_id:
+            stage = self.memo_id.stage_id
+            if not stage.require_bill_payment:
+                raise ValidationError(f"You are not permitted to post at this stage -({stage.id}) {stage.name}. \n Use Proceed button or Contact admin to set the require bill payment at the stage configuration if necessary")
+            approval_users = [r.user_id.id for r in stage.approver_ids]
+            if self.env.user.id not in approval_users:
+                name_of_approvers = [rec.name for rec in stage.approver_ids]
+                raise ValidationError(f"You are not permitted to post. \n Only these users are allowed to post at this stage {name_of_approvers}")
         self.check_budget_limit_and_post()
         res = super(AccountInvoice, self).action_post()
         return res

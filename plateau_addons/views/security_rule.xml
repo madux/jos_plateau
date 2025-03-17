@@ -26,6 +26,9 @@
         <record id="account.menu_finance_payables" model="ir.ui.menu">
             <field name="name">Billing / Expenses</field>
         </record>
+        <record id="account.menu_finance_receivables" model="ir.ui.menu">
+            <field name="name">Revenues</field>
+        </record>
 
         <record id="account.menu_finance_entries_management" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ref('ik_multi_branch.account_major_user')])]"/>
@@ -42,7 +45,6 @@
         <record id="account.product_product_menu_purchasable" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ref('ik_multi_branch.account_major_user')])]"/>
         </record>
-
         <!-- <menuitem id="menu_board_journal_for_non_top_user" name="All Journal transactions"
             parent="account_accountant.menu_accounting" sequence="2" action="ik_multi_branch.ir_action_server_account_transaction"
             groups="ik_multi_branch.account_major_user"/> -->

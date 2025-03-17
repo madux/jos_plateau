@@ -6,10 +6,34 @@
             <field name="inherit_id" ref="account.view_account_payment_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='ref']" position="before">
-                    <field name="ng_budget_id" invisible="1" required="0" readonly="state == 'posted'" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
+                    <field name="ng_budget_id" invisible="1" required="0" readonly="memo_state != 'submit'" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
+                    <field name="contact_tax_type" required="1" force_save="1" readonly="state == 'posted'"/>
                     <field name="external_memo_request" readonly="0" invisible="1" help="Determines if memo comes from external finance payment request"/>
                     <field name="suitable_journal_ids" invisible="1" widget="many2many_tags"/>
                     <field name="is_top_account_user" invisible="1"/> 
+                    <field name="memo_reference" invisible="0" force_save="1" readonly="1"/>
+                    <field name="memo_state" invisible="0" force_save="1" readonly="1"/>
+                </xpath>
+                <xpath expr="//sheet/group[last()]" position="after">
+                    <div class="alert alert-info text-center" role="alert">
+                        Please save the record first or tick the Confirm Entries option to confirm that your entries are good to go. <br/>
+                        Confirm Entries : <field name="is_saved" nolabel="1" string="Modify &amp; Confirm Entries"/>
+                    </div>
+                    <field name="invoice_line_ids" readonly="is_saved == False" context="{'default_contact_tax_type': contact_tax_type}">
+                        <tree string="" editable="bottom">
+                             <field name="sequence" widget="handle"/>
+                             <field name="account_id" options="{'no_create': True}" domain="[('deprecated', '=', False)]"/>
+                             <field name="move_id" string="Move" invisible="1" column_invisible="1"/>
+                             <field name="name" string="Description"/>
+                             <field name="partner_id" invisible="1" column_invisible="1" options="{'no_create': True}" />
+                            <field name="currency_id" invisible="1" column_invisible="1"/>
+                            <field name="company_id" invisible="1" column_invisible="1"/>
+                            <field name="contact_tax_type" invisible="0" column_invisible="0"/>
+                            <field name="tax_ids" widget="many2many_tags" options="{'no_create': True}" />
+                            <field name="debit" invisible="0"/>
+                            <field name="credit" invisible="0"/>
+                        </tree>
+                    </field>
                 </xpath>
             </field>
         </record>
@@ -25,7 +49,9 @@
                     <field name="bank_partner_id" invisible="0" required="0" domain="[('is_bank', '=', True)]" 
                     options="{'no_create':True, 'no_open': True}" readonly="state == 'posted'"/>
                     <field name="bank_partner_account" readonly="0" required="bank_partner_id != False" />
+                    <field name="contact_tax_type" required="1" force_save="1" readonly="state == 'posted'"/>
                 </field>
+                 
                 <field name="invoice_date" position="after">
                     <field name="dummy_budget_ids" invisible="1" required="0" readonly="0" force_save="1"
                     widget="many2many_tags"/> 
@@ -55,9 +81,12 @@
                 <field name="invoice_date" position="attributes">
                     <attribute name="required">1</attribute>
                 </field>
-
                 <field name="origin" position="attributes">
                     <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="auto_post" position="before">
+                    <field name="memo_id"/>
                 </field>
 
                 <field name="invoice_date" position="attributes">
@@ -76,6 +105,10 @@
                     <attribute name="string">'Beneficiary'</attribute>
                 </field> -->
 
+                <xpath expr="//field[@name='invoice_line_ids']" position="attributes">
+                    <attribute name="context">{'default_ng_budget_id': ng_budget_id, 'default_contact_tax_type': contact_tax_type}</attribute> 
+                </xpath>
+
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='product_id']" position="attributes">
                     <attribute name="string">Item</attribute> 
                 </xpath>
@@ -93,15 +126,20 @@
 
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='account_id']" position="attributes">
                     <attribute name="domain">[('is_migrated', '=', True)]</attribute> 
+                    <attribute name="limit">10</attribute>
                 </xpath>
-
+                <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='name']" position="attributes">
+                    <attribute name="required">1</attribute> 
+                    <attribute name="placeholder">eg. Purchase of office items</attribute> 
+                </xpath>
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='account_id']" position="after">
                     <field name="ng_budget_line_ids" invisible="1" required="0" readonly="0" force_save="1" column_invisible="1" widget="many2many_tags" /> 
-                    <field name="ng_budget_line_id" domain="[('id', 'in', ng_budget_line_ids)]" invisible="0" required="1" options="{'no_create':True, 'no_open': False}"/> 
-                    <field name="budget_balance" invisible="0" readonly="0"/> 
-                </xpath> 
-                
+                    <field name="ng_budget_id" invisible="1" readonly="0" column_invisible="1"/> 
 
+                    <field name="ng_budget_line_id" domain="[('id', 'in', ng_budget_line_ids)]" column_invisible="parent.ng_budget_id == False" invisible="parent.ng_budget_id == False" required="parent.ng_budget_id != False" options="{'no_create':True, 'no_open': False}"/> 
+                    <field name="budget_balance" column_invisible="parent.ng_budget_id == False" invisible="parent.ng_budget_id == False" readonly="1"/> 
+                    <field name="contact_tax_type" invisible="0" column_invisible="0"/>
+                </xpath> 
             </field>
         </record>
 

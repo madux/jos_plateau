@@ -524,7 +524,10 @@ class MemoConfig(models.Model):
         the list from the portal
         """
         )
-
+    send_to_initiator_on_refusal = fields.Boolean(string="Send to initiator",
+                                      default=False, 
+                                      help="Check if you want system to send straight to initiator upon refusal")
+    
     @api.constrains('memo_type')
     def _check_duplicate_memo_type(self):
         pass 

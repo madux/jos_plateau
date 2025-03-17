@@ -16,6 +16,7 @@
         'data/jos_charts_of_account.xml',
         'views/view_import_chart_data.xml', 
         'views/company_memo_view.xml', 
+        'views/account_tax_view.xml', 
         'views/account_view.xml', 
         'views/ng_account_budget.xml', 
         'views/account_segment_view.xml', 

@@ -10,7 +10,7 @@
                 <xpath expr="//field[@name='move_type']" position="replace">
                 </xpath>
                 <xpath expr="//field[@name='ref']" position="after">
-                    <field name="memo_id" readonly="0" force_save="1" string="Project" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                    <field name="memo_id" readonly="0" force_save="1" string="Memo Ref" invisible="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                     <field name="origin" required="0"/>
                     <field name="journal_id" required="0" invisible="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                     <!-- <field name="move_type" required="0" invisible="1"/> -->
@@ -20,7 +20,7 @@
                     <field name="example_invalid" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='invoice_payment_term_id']" position="replace">
-                 <field name="invoice_payment_term_id" context="{'example_date': invoice_date, 'example_amount': tax_totals['amount_total']}" placeholder="Terms"/>
+                 <field name="invoice_payment_term_id" context="{'example_date': invoice_date, 'example_amount': tax_totals['amount_total']}" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" placeholder="Terms"/>
                 </xpath>
                 
                 <xpath expr="//form/sheet/group[last()]" position="after">
@@ -42,7 +42,8 @@
                     <div class="oe_right alert alert-info" role="alert">
                         <separator string="Instruction"/>
                         <div>  
-                            When Budget head is selected, ensure you select on the account and budget line on the lines.
+                            Select budget head, ensure you select on the account. Select the actual budget on the lines. This will show you
+                            all budget related to the selected budget head for user branch, budget head and tied to the account
                             During posting, system checks the budget funds Available on each line and limit based on funding available
                             <!-- <button name="action_populate_all_project_pos" string="Populate Invoice Line" class="oe_highlight" type="object"/> -->
                         </div>

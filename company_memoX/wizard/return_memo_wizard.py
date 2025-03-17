@@ -36,6 +36,8 @@ class Send_Memo_back(models.Model):
         else:
             return False
         
+    
+        
     def post_refuse(self):
         get_record = self.env['memo.model'].search([('id','=', self.memo_record.id)])
         get_previous_stage = self.get_previous_stage(get_record)

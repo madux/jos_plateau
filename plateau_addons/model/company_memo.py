@@ -60,7 +60,6 @@ class CompanyMemo(models.Model):
         for rec in self:
             if not rec.bank_partner_id or not rec.scheduled_pay_date:
                 raise ValidationError("Please select bank to send Bank schedule to")
-            
             if not rec.bank_partner_id.email:
                 raise ValidationError(f"Selected bank must also have an email: Record id {rec.id}")
             if not rec.scheduled_pay_date:
