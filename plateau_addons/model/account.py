@@ -554,8 +554,10 @@ class AccountInvoice(models.Model):
         # raise ValidationError(f"Ops. {self.memo_id} and {self.memo_id.stage_id} You are not allowed confirm this Bill. Only Accountant General Group is responsible to do this.")
         if self.memo_id and self.memo_id.stage_id:
             stage = self.memo_id.stage_id
-            if not stage.require_bill_payment:
-                raise ValidationError(f"You are not permitted to post at this stage -({stage.id}) {stage.name}. \n Use Proceed button or Contact admin to set the require bill payment at the stage configuration if necessary")
+            last_stage = self.memo_id.memo_setting_id.stage_ids[-1].id
+            if not last_stage == stage.id:
+                if not stage.require_bill_payment:
+                    raise ValidationError(f"You are not permitted to post at this stage -({stage.id}) {stage.name}. \n Use Proceed button or Contact admin to set the require bill payment at the stage configuration if necessary")
             approval_users = [r.user_id.id for r in stage.approver_ids]
             if self.env.user.id not in approval_users:
                 name_of_approvers = [rec.name for rec in stage.approver_ids]
