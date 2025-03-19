@@ -295,8 +295,10 @@ class AccountPayment(models.Model):
         if self.memo_reference and self.memo_reference.stage_id:
             
             stage = self.memo_reference.stage_id
-            if not stage.require_bill_payment:
-                raise ValidationError(f"{self.memo_reference.id} {self.memo_reference.ids} {stage.name} {stage.id} You are not permitted to post at this draft stage. \n Use Proceed button or Contact admin to set the require bill payment at the stage configuration if necessary")
+            last_stage = self.memo_reference.memo_setting_id.stage_ids[-1].id
+            if not last_stage == stage.id:
+                if not stage.require_bill_payment:
+                    raise ValidationError(f"{self.memo_reference.id} {self.memo_reference.ids} {stage.name} {stage.id} You are not permitted to post at this draft stage. \n Use Proceed button or Contact admin to set the require bill payment at the stage configuration if necessary")
             
             approval_users = [r.user_id.id for r in stage.approver_ids]
             if self.env.user.id not in approval_users:
