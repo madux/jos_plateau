@@ -128,11 +128,14 @@ class Memo_Model(models.Model):
         domain = [('active', '=', True)]
         memo_configs = self.env['memo.config'].search(domain)
         user_branch_id = self.env.user.branch_id
+        top_user = self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user')
+        budget_domain = [
+                '|', ('branch_id', '=', self.env.user.branch_id.id),
+                ('branch_id', 'in', self.env.user.branch_ids.ids)] if not top_user else []
+        
         res.update({
             'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs if user_branch_id.id in rec.branch_ids.ids])],
-            'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search([
-                '|', ('branch_id', '=', self.env.user.branch_id.id),
-                ('branch_id', 'in', self.env.user.branch_ids.ids)])
+            'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search(budget_domain)
                                          ])],
             'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request else False,
             })

@@ -47,7 +47,7 @@
                 <xpath expr="//field[@name='currency_id']" position="before">
                     <field name="partner_id" string="Partner" readonly="1" invisible="1" required="0"
                     options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" force_save="1"/> 
-                    <field name="branch_id" string="Initiator MDA" invisible="0" readonly="1" required="1"
+                    <field name="branch_id" string="Initiator MDA" invisible="0" readonly="0" required="1"
                     options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
                     <field name="request_mda_from" string="Requesting From MDA" 
                     invisible="external_memo_request == False" readonly="state not in ['submit']" required="external_memo_request == True"

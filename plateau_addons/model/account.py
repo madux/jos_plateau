@@ -181,30 +181,33 @@ class AccountPayment(models.Model):
         """
         Get all journals having at least one payment method for inbound/outbound depending on the payment_type.
         """
-        # account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
+        account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
         # account_major_user = (self.env.user.has_group('ik_multi_branch.account_major_user'))
         journals = False
         branch_ids = [rec.id for rec in self.env.user.branch_ids if rec] + [self.env.user.branch_id.id]
         domain = [('type', 'in', ('bank', 'cash'))]
         # get journal related to only from requesting _mda if set
         for m in self:
-            # ENSURE IF REQUEST FROM MDA, SYSTEM TO SHOW ONLY THE SOURCE JOURNALS OF THAT MDA (ministry of finance)
-            branch_ids = [m.request_mda_from.id] if m.request_mda_from else branch_ids
-            journal_items = []
-            for journal in self.env['account.journal'].search(domain):
-                user_branch =  [journal.branch_id.id] if journal.branch_id else [0]
-                journal_branch_ids = [rec.id for rec in journal.allowed_branch_ids] + user_branch
-                
-                for jb in journal_branch_ids:
-                    if jb and jb in branch_ids:
-                        journal_items.append(journal.id)
-                        break
-                if journal.for_public_use:
-                    journal_items.append(journal.id) 
-            journals = self.env['account.journal'].search([('id', 'in', journal_items)])
-            _logger.info(f"This is my journals 2 ==> {journals}")
-            
-            m.available_journal_ids = journals.ids
+            if not account_major_user:
+                # ENSURE IF REQUEST FROM MDA, SYSTEM TO SHOW ONLY THE SOURCE JOURNALS OF THAT MDA (ministry of finance)
+                branch_ids = [m.request_mda_from.id] if m.request_mda_from else branch_ids
+                journal_items = []
+                for journal in self.env['account.journal'].search(domain):
+                    user_branch =  [journal.branch_id.id] if journal.branch_id else [0]
+                    journal_branch_ids = [rec.id for rec in journal.allowed_branch_ids] + user_branch
+                    
+                    for jb in journal_branch_ids:
+                        if jb and jb in branch_ids:
+                            journal_items.append(journal.id)
+                            break
+                    if journal.for_public_use:
+                        journal_items.append(journal.id) 
+                journals = self.env['account.journal'].search([('id', 'in', journal_items)])
+                _logger.info(f"This is my journals 2 ==> {journals}")
+                m.available_journal_ids = journals.ids
+            else:
+                journals = self.env['account.journal'].search(domain)
+                m.available_journal_ids = journals.ids
           
         # for pay in self:
         #     if pay.payment_type == 'inbound':
