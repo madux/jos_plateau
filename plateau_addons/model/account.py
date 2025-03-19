@@ -238,7 +238,7 @@ class AccountPayment(models.Model):
             if account_major_user:
                 m.suitable_journal_ids = [(6, 0, [r.id for r in Journal_Search])]
             else:
-                journal_items = [23]
+                journal_items = []
                 for journal in Journal_Search:
                     journalbranch_id = [journal.branch_id.id] if journal.branch_id else [0]
                     journal_branch_ids = [rec.id for rec in journal.allowed_branch_ids] + journalbranch_id

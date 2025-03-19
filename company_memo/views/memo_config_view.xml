@@ -21,8 +21,6 @@
                                 <field name="active" default="1" readonly="1"/> 
                                 <!-- <field name="code" default="eg. SHIPPING starts with P, CFWD starts with " readonly="0"/>  -->
                                 <field name="department_id" required="1" options="{'no_create':True, 'no_open': False}"/> 
-                                <field name="branch_ids" string="MDA Sectors" widget="many2many_tags"
-                                help="Add MDA branches, during request, only memo type set for this branches will appear"/>
                                 <field name="approver_ids" string="Employees for Follow up" required="0" widget="many2many_tags" options="{'no_create':True, 'no_open': False}"/>
                             </group>
                             <group>
@@ -48,6 +46,10 @@
                                             <field name="active"/>
                                         </tree>
                                     </field>
+                                </page>
+                                <page string="MDAs">
+                                    <field name="branch_ids" string="MDA Sectors" widget="many2many_tags" help="Add MDA branches, during request, only memo type set for this branches will appear"/>
+                                
                                 </page>
                             </notebook> 
                         </group>
