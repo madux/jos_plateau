@@ -43,8 +43,6 @@
                     font-size: 12px
                 }
 
-                
-
                 th, td{
                     padding: 5px;
                 }
@@ -73,22 +71,22 @@
                                             <span class="text-bold">S/N</span>
                                         </th>
                                         <th width="30%">
-                                            <span class="text-bold">Account</span>
+                                            <span class="text-bold">Economic</span>
                                         </th>
                                         <th width="30%">
                                             <span class="text-bold">Details</span>
                                         </th>
                                         <th width="20%">
-                                            <span class="text-bold">Actual</span>
+                                            <span class="text-bold">Actual (NGN)</span>
                                         </th>
                                         <th width="20%">
-                                            <span class="text-bold">Budget 2024</span>
+                                            <span class="text-bold">Budget <t t-esc="data[0].get('account_obj').get('fiscal_year')"/> (NGN)</span>
                                         </th>
                                         <th>
-                                            <span class="text-bold">Utilization</span>
+                                            <span class="text-bold">Utilization(NGN)</span>
                                         </th>
                                         <th>
-                                            <span class="text-bold">Variance</span>
+                                            <span class="text-bold">Variance (NGN)</span>
                                         </th>
                                         <th>
                                             <span class="text-bold">Remark</span>
@@ -111,15 +109,16 @@
                                                 <strong></strong>
                                             </td>
                                             <td>
-                                                <strong><t t-esc="'{0:,}'.format(float(dt.get('account_obj').get('current_balance')))"/></strong>
+                                                <strong><t t-esc="'{0:,}'.format(float(dt.get('account_obj').get('actual_amount')))"/></strong>
                                             </td>
                                             <td>
                                                 <strong><t t-esc="'{0:,}'.format(float(dt.get('account_obj').get('budget_amount')))"/></strong>
                                             </td> 
                                             <td>
+                                                <strong><t t-esc="'{0:,}'.format(float(dt.get('account_obj').get('budget_utilized')))"/></strong>
                                             </td>
                                             <td>
-                                                ---
+                                                <strong><t t-esc="'{0:,}'.format(float(dt.get('account_obj').get('budget_balance')))"/></strong>
                                             </td>
                                             <td>
                                                 ---
@@ -131,8 +130,7 @@
                                                 <td>
                                                 </td>
                                                 <td>
-                                                    <t t-esc="ml.get('journal')"/> 
-                                                    
+                                                    <!-- <t t-esc="ml.get('journal')"/>  -->
                                                 </td>
                                                 <td>
                                                     <t t-esc="ml.get('move_description')"/> 
@@ -155,8 +153,7 @@
                                             </tr>
                                             <t t-set="total_account" t-value="total_account + float(ml.get('account_and_journal_budget_variance'))"/>
                                         </t>
-                                        <tr>
-                                            
+                                        <!-- <tr>
                                             <td>
                                             </td>
                                             <td>
@@ -176,7 +173,7 @@
                                             </td>
                                             <td>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                     </t> 
                                 </tbody>
                             </table>

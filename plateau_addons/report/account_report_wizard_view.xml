@@ -12,23 +12,31 @@
                     </header>
 
                     <div class="oe_edit_only alert alert-info" role="alert">
-                        Select the type of default account to create for rows e.g "Domestic"<br/>
+                        Select by the year to report<br/>
+                        <strong>Fiscal Year: </strong> <field name="fiscal_year" nolabel="1" required="1"/> <br/>
+                    </div>
+                    <div class="oe_edit_only alert alert-info" role="alert">
+                        If fiscal year is selected, ensure to Select by date range based on the year<br/>
                         <strong>Date From: </strong> <field name="date_from" nolabel="1"/> -- to -- <strong>Date to: </strong><field name="date_to" nolabel="1"/><br/>
                         <br/>
                     </div>
                     <group>
                         <group>
-                            <field name="budget_id" readonly="0"/> 
+                            <!-- <field name="budget_id" readonly="0"/>  -->
+                            <field name="name" required="1" placeholder="e.g NOTE FOR FINANCIAL YEAR 2025"/> 
                             <field name="partner_id" readonly="0"/> 
                             <field name="report_type"/> 
                             <field name="format"/> 
                         </group>
                         <group> 
-                            <field name="journal_ids" widget="many2many_tags"/>
-                            <field name="account_ids" widget="many2many_tags"/>
-                            <field name="account_analytics_ids" widget="many2many_tags" readonly="0"/>
+                            <field name="journal_ids" string="Bank journals" widget="many2many_tags"/>
                             <field name="branch_ids" widget="many2many_tags" readonly="0"/>
+                            <field name="account_ids" widget="many2many_tags"/>
+                            <field name="account_head_type"/> 
+                            <field name="account_analytics_ids" widget="many2many_tags" readonly="0" invisible="1"/>
                             <field name="moveline_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="excel_file" nolabel="0" filename="filename"/>
+                            <field name="filename" invisible="1"/>
 
                         </group>
                     </group>

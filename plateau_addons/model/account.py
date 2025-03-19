@@ -59,6 +59,7 @@ class accountAccount(models.Model):
     _inherit = "account.account"
 
     account_segment_id = fields.Many2one('account.public.segment', string='Account Segment')
+    # budget_type = fields.
     account_head_type = fields.Selection(
         [
         ("Revenue", "Revenue"), 

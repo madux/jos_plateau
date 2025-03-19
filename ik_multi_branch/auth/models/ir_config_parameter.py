@@ -25,12 +25,12 @@ class IrConfigParameter(models.Model):
         )
         return urls.split(',')
 
-    def write(self, vals):
-        res = super(IrConfigParameter, self).write(vals)
-        self._auth_timeout_get_parameter_delay.clear_cache(
-            self.filtered(lambda r: r.key == DELAY_KEY),
-        )
-        self._auth_timeout_get_parameter_ignored_urls.clear_cache(
-            self.filtered(lambda r: r.key == IGNORED_PATH_KEY),
-        )
-        return res
+    # def write(self, vals):
+    #     res = super(IrConfigParameter, self).write(vals)
+    #     self._auth_timeout_get_parameter_delay.clear_cache(
+    #         self.filtered(lambda r: r.key == DELAY_KEY),
+    #     )
+    #     self._auth_timeout_get_parameter_ignored_urls.clear_cache(
+    #         self.filtered(lambda r: r.key == IGNORED_PATH_KEY),
+    #     )
+    #     return res
