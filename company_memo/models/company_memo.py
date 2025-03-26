@@ -123,7 +123,35 @@ class Memo_Model(models.Model):
         memo_project_type = self.env.context.get('default_memo_project_type')
         default_budget_allocation = self.env.context.get('default_is_budget_allocation_request')
         external_payment_request = self.env.context.get('default_external_memo_request')
+        is_internal_transfer = self.env.context.get('default_is_internal_transfer')
+        is_contract_memo_request = self.env.context.get('default_is_contract_memo_request')
         
+        
+        # memo_type, memo_tag = False, False
+        # if external_payment_request and is_internal_transfer:
+        #     memo_type = self.env['memo.type'].search([('is_internal', '=', True)], limit=1)
+        #     raise ValidationError(external_payment_request)
+            
+            
+        #     # memo_tag = self.env.ref('company_memo.memo_tag_expenditure')
+            
+        # elif external_payment_request and not is_internal_transfer: # mda payment request
+        #     memo_type = self.env['memo.type'].search([('is_external', '=', True)], limit=1)
+        #     raise ValidationError(external_payment_request)
+            
+            
+        #     # memo_tag = self.env.ref('company_memo.memo_tag_mpr')
+            
+        # elif is_contract_memo_request:
+        #     memo_type = self.env['memo.type'].search([('is_contractor', '=', True)], limit=1)
+            
+        #     # memo_tag = self.env.ref('company_memo.memo_tag_contract')
+            
+        # elif default_budget_allocation:
+        #     memo_type = self.env['memo.type'].search([('is_allocation', '=', True)], limit=1)
+            
+            # memo_tag = self.env.ref('company_memo.memo_tag_unallocated_funds')
+            
         ministry_of_finance = self.env.ref('plateau_addons.mda_ministry_of_finance')
         domain = [('active', '=', True)]
         memo_configs = self.env['memo.config'].search(domain)
@@ -138,6 +166,7 @@ class Memo_Model(models.Model):
             'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search(budget_domain)
                                          ])],
             'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request else False,
+            'memo_type': self.env['memo.type'].search([('is_internal', '=', True)], limit=1).id if is_internal_transfer == True else self.env['memo.type'].search([('is_external', '=', True)], limit=1).id if external_payment_request == True and is_internal_transfer == False else self.env['memo.type'].search([('is_contractor', '=', True)], limit=1).id if is_contract_memo_request == True else self.env['memo.type'].search([('is_allocation', '=', True)], limit=1).id if default_budget_allocation == True else 40 
             })
         return res
         
@@ -197,7 +226,15 @@ class Memo_Model(models.Model):
     project_id = fields.Many2one('account.analytic.account', 'Project')
     project_memo_id = fields.Many2one('memo.model', 'Parent Project')
     vendor_id = fields.Many2one('res.partner', 'Vendor')
-    amountfig = fields.Float('Budget Amount', store=True, default=1.0)
+    amountfig = fields.Float('Budget Amount', store=True, default=0.0) 
+    # , compute= "compute_invoice_amount")
+    
+    # @api.depends('invoice_ids')
+    # def compute_invoice_amount(self):
+    #     for inv in self:
+    #         computed_invoice_amount = sum([r.amount_total for r in inv.invoice_ids])
+    #         inv.amountfig = computed_invoice_amount
+         
     description_two = fields.Text('Reasons')
     phone = fields.Char('Phone', store=True)
     work_instruction_description = fields.Char('WK instruction')
@@ -1921,9 +1958,36 @@ class Memo_Model(models.Model):
         """
         if self.is_internal_transfer and not self.invoice_ids:
             raise ValidationError(msg) 
-        if self.external_memo_request and not self.payment_ids:
-            raise ValidationError(msg) 
-            
+        if self.external_memo_request:
+            if not self.payment_ids:
+                raise ValidationError(msg)
+            if self.payment_ids:
+                total_amount = sum([amt.amount_total for amt in self.mapped('payment_ids')])
+                if total_amount > self.budget_balance_amount:
+                    raise ValidationError("Sorry you have added total amount greater than your budget balance amount")
+                # else:
+                    # raise ValidationError("hhgg")
+                    # self.show_budget_status = True 
+                
+    # used to show if to display budget status
+    show_budget_status = fields.Boolean(
+        store=True, 
+        string="Show budget status")
+    
+    total_payments = fields.Float(
+        store=True, 
+        string="Total Amount")
+    
+    @api.onchange('payment_ids.amount_total')
+    def onchange_payment_ids(self):
+        total_amount = sum([amt.amount_total for amt in self.mapped('payment_ids')])
+        if total_amount < self.budget_balance_amount:
+            # raise ValidationError("test")
+            self.show_budget_status = True
+            self.total_payments = total_amount
+        else:
+            self.show_budget_status = False 
+    
     def validate_sub_stage(self):
         for count, rec in enumerate(self.memo_sub_stage_ids, 1):
             if not rec.sub_stage_done:
@@ -3149,7 +3213,8 @@ class Memo_Model(models.Model):
         
         if self.is_contract_memo_request or self.is_internal_transfer and not self.invoice_ids:
             '''If external payment transfer, system displays the payment line'''
-            raise ValidationError("Please ensure the invoice lines are added")
+            # raise ValidationError("Please ensure the invoice lines are added")
+            pass
         
         else:
             not_done = self.mapped('invoice_ids').filtered(lambda se: se.state in ['draft'])

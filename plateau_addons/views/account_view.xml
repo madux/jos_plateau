@@ -84,6 +84,9 @@
                 <field name="origin" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </field>
+                <field name="ref" position="attributes">
+                    <attribute name="string">Bill Reference / File No.</attribute>
+                </field>
 
                 <field name="auto_post" position="before">
                     <field name="memo_id"/>
@@ -111,7 +114,10 @@
 
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='product_id']" position="attributes">
                     <attribute name="string">Item</attribute> 
+                    <attribute name="invisible">1</attribute> 
+                    <attribute name="column_invisible">1</attribute> 
                 </xpath>
+                
 
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='price_unit']" position="attributes">
                     <attribute name="string">Amount</attribute> 

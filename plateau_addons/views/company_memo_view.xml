@@ -19,17 +19,17 @@
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='return_memo']" position="after">
                         <button name="generate_bank_schedule" string="Send &amp; Print Bank Schedule" icon="fa-print"
-                        invisible="state in ['submit', 'Sent', 'Refuse'] or is_contract_memo_request != True" type="object" class="btn-primary"/>
+                        invisible="state not in ['Done', 'done'] or is_contract_memo_request != True" type="object" class="btn-primary"/>
 
                         <!-- <button name="generate_external_bank_payment_schedule" id="printbnkExt" string="Print Bank Schedule" invisible="external_memo_request != True or state in ['submit', 'Sent', 'refuse', 'cancel']" type="object"/> -->
 
                         <button name="generate_external_bank_payment_schedule" id="generate_bank_schedule_external_payment_request" 
                          string="Send &amp; Print Bank Schedule" icon="fa-print"
-                        invisible="state in ['submit', 'Sent', 'Refuse'] or external_memo_request != True" type="object" class="btn-primary"/>
+                        invisible="state not in ['Done', 'done'] or external_memo_request != True" type="object" class="btn-primary"/>
 
                         <button name="generate_external_bank_payment_schedule" id="generate_bank_schedule_external_payment_request2" 
                          string="Send &amp; Print Bank Schedule" icon="fa-print"
-                        invisible="state in ['submit', 'Sent', 'Refuse'] or is_internal_transfer != True" type="object" class="btn-primary"/>
+                        invisible="state not in ['Done', 'done'] or is_internal_transfer != True" type="object" class="btn-primary"/>
 
                         <!-- <button name="generate_external_bank_payment_schedule" id="generate_bank_schedule_external_payment_request3" 
                          string="Send &amp; Print Bank Schedule" icon="fa-print"

@@ -1738,7 +1738,8 @@ class Memo_Model(models.Model):
     
     def validate_account_invoices(self):
         if not self.invoice_ids:
-            raise ValidationError("Please ensure the invoice lines are added")
+            pass 
+            # raise ValidationError("Please ensure the invoice lines are added")
 
         invalid_record = self.mapped('invoice_ids').filtered(lambda s: not s.partner_id or not s.journal_id) # 
         if invalid_record:

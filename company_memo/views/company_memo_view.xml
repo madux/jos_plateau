@@ -304,7 +304,8 @@
                                     </h1>
                                 </div>
                                 <!-- <div class='alert alert-info' role="alert" invisible="external_memo_request == False or is_budget_verification_memo_request == False or budget_has_allocation == False or state in ['Done']"> -->
-                                <div class='alert alert-info' role="alert" invisible="budget_balance_amount &lt;= 1 or state in ['Done']">
+                                <!-- <div class='alert alert-info' role="alert" invisible="budget_balance_amount &lt;= 1 or state in ['Done']"> -->
+                                <div class='alert alert-info' role="alert" invisible="external_memo_request == False or show_budget_status == False or state in ['Done']">
                                     Validation Status: Success - Budget Funds Available. You can proceed with your request. GoodLuck !!!
                                 </div>
                                 <group>
@@ -516,6 +517,7 @@
                                                                     groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
                                                                      <!-- context="{'default_partner_bank_id':partner_bank_id, 'default_bank_partner_id':bank_partner_id, 'default_bank_partner_account':bank_partner_account}" -->
                                                                 </tree>
+                                                                
                                                             </field>
                                                         </page>
                                                         <page name="attachment" string="Attachments">
@@ -893,6 +895,14 @@
                                                 groups="account.group_account_invoice,base.group_system,company_memo.mainmemo_account,account.group_account_manager"/>
                                                 <!-- context="{'default_partner_bank_id':partner_bank_id, 'default_bank_partner_id':bank_partner_id, 'default_bank_partner_account':bank_partner_account}" -->
                                             </tree>
+                                            <!-- <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                                <group colspan="4">
+                                                </group>
+                                                <group class="fw-bold oe_subtotal_footer oe_right" style="font-size: 30px;" colspan="2" name="amountfig">
+                                                    <field name="amountfig" nolabel="0" string="Total" colspan="2" readonly="1"/>
+                                                </group>
+                                                <div class="clearfix"/>
+                                            </group> -->
                                         </field>
                                     </page>
                                     <!--ADDD-->
@@ -1069,6 +1079,16 @@
                                                     </field>
                                                 </sheet>
                                             </form>
+
+                                            <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                                <group colspan="4">
+                                                    <!-- <field colspan="2" name="note" nolabel="1" placeholder="Terms and conditions..."/> -->
+                                                </group>
+                                                <group class="fw-bold oe_subtotal_footer oe_right" style="font-size: 30px;" colspan="2" name="total_payments">
+                                                    <field name="total_payments" nolabel="0" string="Total" colspan="2" readonly="1"/>
+                                                </group>
+                                                <div class="clearfix"/>
+                                            </group>
                                             
                                         </field>
                                     </page>
@@ -1233,6 +1253,7 @@
                                     <page name="aos" string="Admin Overview Settings" group="base.group_system">
                                         <group>
                                             <group>
+                                                <field name="show_budget_status" invisible="0" force_save="1"/> 
                                                 <field name="memo_setting_id" invisible="0" force_save="1"/> 
                                                 <field name="memo_project_type" readonly="0" invisible="0"/>
                                                 <field name="dummy_memo_types" invisible="0" widget="many2many_tags" force_save="1"/>

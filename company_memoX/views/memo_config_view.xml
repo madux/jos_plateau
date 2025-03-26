@@ -206,6 +206,7 @@
                         </group>
                         <group>
                             <field name="active" default="1"/> 
+                            <field name="memo_tag_id" required="1"/> 
                         </group>
                     </group>
                 </form>

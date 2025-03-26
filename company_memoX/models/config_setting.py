@@ -177,6 +177,8 @@ class MemoType(models.Model):
         )
     active = fields.Boolean("Active", default=True)
     allow_for_publish = fields.Boolean("Allow to be published?", default=True)
+    memo_tag_id = fields.Many2one("memo.config.tag", string="TAG")
+    
 
 class MemoStage(models.Model):
     _name = "memo.stage"
