@@ -25,7 +25,6 @@
                         <button name="generate_recruitment_request" invisible= "memo_type_key not in ['recruitment_request'] or state not in ['Done', 'Approve2'] or not user_is_approver" string="View / Generate Recruitment Request" type="object" class="oe_highlight"/>
                         <button name="action_post_and_vallidate_payment" string="Register Payment" type="object" class="oe_highlight" confirm="Are you sure you want to make Payment?" 
                         invisible="not user_is_approver or state not in ['Approve', 'Approve2'] or is_budget_verification_memo_request == True or is_budget_allocation_request == True"/>
-                        <!-- invisible="not user_is_approver or state not in ['Approve', 'Approve2'] or memo_type_key not in ['Payment'] or not is_request_completed"/> -->
                         <button name="send_memo_to_contacts" string="Send Memo" type="object" class="oe_highlight" confirm="Are you sure you want to make send memo?" 
                         invisible="not user_is_approver or state not in ['Approve2'] or memo_type_key not in ['internal', 'Internal'] or internal_memo_option not in ['all', 'selected']"/>
                         <button name="complete_memo_transactions" string="Generate &amp; Comfirm Entries" type="object" class="oe_highlight" confirm="Are you sure you want to generate?" invisible="state not in ['Done'] or is_request_completed or memo_type_key not in ['material_request', 'procurement_request', 'procurement', 'vehicle_request'] or not user_is_approver"/>
@@ -36,261 +35,29 @@
                         <button name="set_draft" invisible="state != 'Refuse'" string="ReSet &amp; Forward" type="object" class="btn-primary"/>
                         <button name="return_memo" id="return_id" string="Return Memo" icon="fa-redo" invisible="state not in ['Sent', 'Approve', 'Approve2']" type="object"/>
                         <button name="print_budget_certifcation" id="printbudget" string="Print Budget Certification" invisible="external_memo_request != True" type="object"/>
-                        <!-- <button name="confirm_budget_verification" class="oe_highlight" id="confirmbudget" string="Confirm Budget" 
-                        invisible="is_budget_verification_memo_request != True or state != 'submit'" type="object"/> -->
-
                         <button name="approve_budget_allocation" class="oe_highlight" id="approveBudgetAllocation" string="Confirm Budget Allocation" 
                         invisible="is_budget_allocation_request != True or state not in ['Approve2'] or not user_is_approver" type="object"/>
                         <button name="Cancel" string="Cancel" type="object" invisible="state != ['sent']"/>
-                        <!-- <button name="print_memo" string="Print" icon="fa-print" invisible="state in ['submit', 'Refuse']" type="object" class="oe_highlight"/> -->
-                        <!-- <button name="print_work_instruction" string="Print Work Instruction" icon="fa-print" invisible="state in ['Refuse']" type="object" class="btn-primary"/> -->
-                        <!-- <button name="print_po" string="Print" icon="fa-print" invisible="state in ['Refuse'] or is_budget_verification_memo_request == True" type="object" class="btn-primary"/> -->
-                        <!-- <field name="stage_id" widget="statusbar" force_save="1" readonly="1" domain="[('id', 'in', computed_stage_ids)]"/> -->
                         <button name="print_payment_voucher" id="printVoucher" string="Print Payment Voucher" invisible="external_memo_request != True or state in ['submit', 'Sent', 'refuse', 'cancel']" type="object"/>
                         <field name="stage_id" widget="statusbar" readonly="0" options="{'clickable': '1'}"/>
                     </header>
                     <sheet> 
                         <p class="align-center" style="color: green; font-size=30px" invisible="alert_option != 'normal'"><h1><field name="memo_type" force_save="1" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></h1></p>
-                        <!-- <p class="align-center" style="color: green;" invisible="alert_option != 'normal'">* On Track: (completion date met) </p>
-                        <p class="align-center" style="color: orange;" invisible = "alert_option != 'warning'">* At Risk: (completion date approaching) </p>
-                        <p class="align-center" style="color: red;" invisible = "alert_option != 'danger'">* Overdue: (completion date missed) </p> -->
+                        <div class='alert alert-danger' role="alert" invisible="is_saved == True">
+                            Please Save the record first before adding payment / invoice lines !!!
+                        </div>
                         <notebook>
-                            <page string="Dashboard">
-                                <div class="header text-center">
-                                    <field name="stage_id" widget="statusbar" force_save="1" readonly="1" domain="[('id', 'in', computed_stage_ids)]"/>
-                                </div>
-                                <div class="g-sidenav-show  bg-gray-100" id="dashboard-content">
-                                    <div class="dashboard-main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-                                        
-                                        <div class="container py-4 form-body">
-                                            <div class="row g-3">
-                                                <!-- General Info -->
-                                                <div class="col-md-4">
-                                                    <div class="card border-0">
-                                                        <div class="form-card-header">General Info</div>
-                                                        <div class="card-body shadow rounded">
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Title:</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="name" readonly="1"/></div>
-                                                            </div>
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Initiator:</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="employee_id" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
-                                                            </div>
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Department:</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="dept_ids" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
-                                                            </div>
-                                                            
-                                                             
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Customer Info -->
-                                                <div class="col-md-4">
-                                                    <div class="card border-0">
-                                                        <div class="form-card-header">Other Info</div>
-                                                        <div class="card-body shadow rounded">
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Reference:</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="code" readonly="1"/></div>
-                                                            </div>
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Request Type:</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="memo_type" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
-                                                            </div> 
-                                                            <div class="row border-bottom py-2" invisible="is_budget_verification_memo_request == False">
-                                                                <div class="col-4">
-                                                                    <strong>budget Head:</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="budget_id" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
-                                                            </div> 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Consignment Info -->
-                                                <div class="col-md-4">
-                                                    <div class="card border-0 consignment">
-                                                        <div class="form-card-header">Operational Info</div>
-                                                        <div class="card-body shadow rounded">
-                                                             
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Request Date</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="date" readonly="1" /></div>
-                                                            </div>
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>MDA:</strong>
-                                                                </div>
-                                                                <div class="col-8"></div>
-                                                            </div> 
-                                                            <!-- <div class="row py-2"> -->
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Status:</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="stage_id" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row g-3 mt-3">
-                                                <!-- Task -->
-                                                <div class="col-md-6">
-                                                    <div class="card border-0">
-                                                        <div class="form-card-header">Tasks</div>
-                                                        <div class="card-body shadow rounded">
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Todo:</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="task_todo" readonly="1" force_save="1"/></div>
-                                                            </div>
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Active:</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="task_active" readonly="1" force_save="1"/></div>
-                                                            </div>
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Done:</strong>
-                                                                </div>
-                                                                <div class="col-8"><field name="task_done" readonly="1" force_save="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
-                                                            </div>
-                                                            <div class="row border-bottom py-2">
-                                                                <div class="col-4">
-                                                                    <strong>Overdue:</strong>
-                                                                </div>
-                                                                <div class="col-8">0</div>
-                                                            </div>
-                                                            <div class="row pt-3 pb-2">
-                                                                <div class="col-6">
-                                                                    <div class="h5">Request Duration</div>
-                                                                    <p class="py-2">Remaining Days: <field name="remaining_task_duration" readonly="1" invisible="0"/></p>
-                                                                    <div class="progress" style="height: 20px;">
-                                                                        <!-- <div class="progress-bar" role="progressbar" style="width: 10%;">10%</div> -->
-                                                                        <field name="percentage_of_remaining_task" readonly="0" invisible="0" widget="progressbar" class="progress-bar" role="progressbar" style="width: 10%;"/>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <div class="h5">Task</div>
-                                                                    <field name="task_todo_percentage" invisible="1"/> 
-                                                                    <field name="task_active_percentage" invisible="1"/> 
-                                                                    <field name="task_done_percentage" invisible="1"/>
-                                                                    <div class="text-center">
-                                                                        <!-- <canvas id="taskDonutChart" width="240" height="100"></canvas> -->
-                                                                        <field name="task_active" widget="taskdoughnutMemo" 
-                                                                        options="{'title': 'Task Title', 'todo_field_red': 'task_todo_percentage', 'active_field_yellow': 'task_active_percentage', 'done_field_green': 'task_done_percentage', 'max_field': 'default_percentage_target', 'style': 'width:10px; height: 40px;'}" nolabel="1" force_save="1"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Finance -->
-                                            
-                                                <div class="col-md-6">
-                                                    <div class="card border-0 shadow rounded finance">
-                                                        <div class="form-card-header">Finance</div>
-                                                        <div class="card-body text-center row" >
-                                                            <!-- BUDGETED -->
-                                                            <div class="col-6">
-                                                                <div class="row bg-white rounded" style="margin: auto; margin-right: 1px; margin-top: 10px;">
-                                                                    <div class="col-6 text-start align-self-end">
-                                                                        <h4 class="text-danger">MDA Budget</h4>
-                                                                        <p class="fst-italic m-0 inner">Cost (₦): <field name="total_cost" force_save="1" readonly="1"/></p>
-                                                                        <p class="fst-italic inner">Revenue (₦): <field name="total_revenue" force_save="1" readonly="1"/></p>
-                                                                        <field name="default_percentage_target" invisible="1"/>
-                                                                        <field name="displayed_cost_revenue_margin" invisible="1"/>
-                                                                    </div>
-                                                                    <div class="col-6 pb-5" style="padding-left: 0px;">
-                                                                        <field name="total_revenue_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_cost_revenue_margin', 'field_green': 'Revenue', 'field_red': 'Cost', 'max_field': 'default_percentage_target'}" nolabel="1" force_save="1"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- BILLED COST -->
-                                                            <div class="col-6">
-                                                                <div class="row bg-white rounded" style="margin-right: 1px; margin-top: 10px;">
-                                                                    <div class="col-6 text-start align-self-end">
-                                                                        <h5 class="text-danger">MDA Bills</h5>
-                                                                        <p class="fst-italic m-0 inner">Billed (₦): <field name="total_cost" force_save="1" readonly="1"/></p>
-                                                                        <p class="fst-italic inner">Not Billed (₦): <field name="total_po_to_be_invoiced" force_save="1" readonly="1"/></p>
-                                                                    </div>
-                                                                    <div class="col-6 pb-5" style="padding-left: 0px;">
-                                                                        <!-- <div class="halfdoughnut"> -->
-                                                                            <field name="displayed_second_quad_percentage" invisible="1"/>
-                                                                            <field name="second_quad_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_second_quad_percentage', 'field_green': 'Billed', 'field_red': 'Not Billed', 'max_field': 'default_percentage_target', 'style': 'width:10px; height: 40px;'}" nolabel="1" force_save="1"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- REALIZED -->
-                                                            <div class="col-6">
-                                                                <div class="row bg-white rounded" style="margin: auto; margin-right: 1px; margin-top: 10px;">
-                                                                    <div class="col-6 text-start align-self-end">
-                                                                        <h5 class="text-danger">Income</h5>
-                                                                        <p class="fst-italic m-0 inner">Cost (₦): <field name="total_closed_paid_cost" force_save="1" readonly="1"/></p>
-                                                                        <p class="fst-italic inner">Revenue (₦): <field name="total_closed_paid_revenue" force_save="1" readonly="1"/></p>
-                                                                    </div>
-                                                                    <div class="col-6 pb-5" style="padding-left: 0px;">
-                                                                        <div class="halfdoughnut">
-                                                                            <field name="displayed_third_quad_percentage" invisible="1"/>
-                                                                            <field name="third_quad_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_third_quad_percentage', 'field_green': 'Realized', 'field_red': 'Not Realized', 'max_field': 'default_percentage_target', 'style': 'width:10px; height: 40px;'}" nolabel="1" force_save="1"/>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- REVENUE -->
-                                                            <div class="col-6">
-                                                                <div class="row bg-white rounded" style="margin-right: 1px; margin-top: 10px;">
-                                                                    <div class="col-6 text-start align-self-end">
-                                                                        <h5 class="text-danger">Revenue</h5>
-                                                                        <p class="fst-italic m-0 inner">Invoiced (₦): <field name="total_paid_revenue" force_save="1" readonly="1"/></p>
-                                                                        <p class="fst-italic inner">Not Invoiced (₦): <field name="total_so_to_be_invoiced" force_save="1" readonly="1"/></p>
-                                                                    </div>
-                                                                    <div class="col-6 pb-5" style="padding-left: 0px;">
-                                                                        <div class="halfdoughnut">
-                                                                            <field name="displayed_fourth_quad_percentage" invisible="1"/>
-                                                                            <field name="fourth_quad_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_fourth_quad_percentage', 'field_green': 'Invoiced', 'field_red': 'Not Invoiced', 'max_field': 'default_percentage_target'}" nolabel="1" force_save="1"/>
-
-                                                                            <!-- <canvas id="revenue"></canvas>
-                                                                            
-                                                                            <div class="halfdoughnut__title">N100,000,000</div> -->
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </page>
                             <page string="Transaction">
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-xs-4 pull-left mt8">
                                         <button name="return_memo" class="btn-danger oe_stat_button sm" icon="fa-redo" invisible="memo_type_key not in ['Internal', 'server_access', 'employee_update', 'material_request', 'procurement_request','procurement', 'cash_advance', 'soe', 'vehicle_request'] or state != 'Sent' or not user_is_approver" type="object" string="Refuse" confirm="Are you sure you want to refuse with comments?">
                                         </button>
                                     </div> 
                                 </div>
-                                <br/>
+                                <br/> -->
+                                <div class="header text-center">
+                                    <field name="stage_id" widget="statusbar" force_save="1" readonly="1" domain="[('id', 'in', computed_stage_ids)]"/>
+                                </div>
                                 <div class="oe_button_box oe_right" invisible="state in ['Sent', 'submit', 'Refuse']" >
                                     <button name="action_get_attachment_view" class="oe_highlight" icon="fa-book" type="object">
                                         <field name="attachment_number" widget="statinfo" string=" - Documents"/>
@@ -305,6 +72,7 @@
                                 </div>
                                 <!-- <div class='alert alert-info' role="alert" invisible="external_memo_request == False or is_budget_verification_memo_request == False or budget_has_allocation == False or state in ['Done']"> -->
                                 <!-- <div class='alert alert-info' role="alert" invisible="budget_balance_amount &lt;= 1 or state in ['Done']"> -->
+                                
                                 <div class='alert alert-info' role="alert" invisible="external_memo_request == False or show_budget_status == False or state in ['Done']">
                                     Validation Status: Success - Budget Funds Available. You can proceed with your request. GoodLuck !!!
                                 </div>
@@ -312,7 +80,7 @@
                                     <group>
                                         <label for="memo_type"/>
                                         <div>
-                                            <field name="memo_type" required="1" readonly="state not in ['submit']" 
+                                            <field name="memo_type" required="1" readonly="1" 
                                             options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
                                             domain="[('id', 'in', dummy_memo_types)]"/>
                                         </div>
@@ -335,7 +103,8 @@
                                         <field name="user_is_approver" invisible="1"/> 
                                         <field name="is_request_completed" invisible="1"/> 
                                         <field name="state" invisible="1"/> 
-                                        <field name="employee_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="state not in ['submit']" string="Initiator"/>
+                                        <field name="employee_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" readonly="1" string="Initiator"/>
+                                        <!-- readonly="state not in ['submit']" -->
                                         <field name="phone" readonly="1" invisible="1"/>
                                         <field name="email" readonly="1"/>
                                         <field name="approver_id" invisible="1" readonly="0" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" groups="base.group_system"/>
@@ -349,9 +118,9 @@
                                         invisible="is_contract_memo_request == False" required="is_contract_memo_request == True"/> -->
 
                                         <field name="budget_id" readonly="state not in ['submit']"
-                                        invisible="external_memo_request == False and is_budget_allocation_request != True" 
+                                        invisible="external_memo_request == False" 
                                         options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
-                                        required="external_memo_request == True or is_budget_allocation_request == True"
+                                        required="external_memo_request == True"
                                         domain="[('id', 'in', dummy_budget_ids)]"/>
                                        
                                        <field name="budget_id" readonly="state not in ['submit']"
@@ -369,6 +138,11 @@
                                         invisible="is_budget_verification_memo_request != True and is_budget_allocation_request != True" 
                                         options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
                                         required="is_budget_verification_memo_request == True or is_budget_allocation_request == True" domain="[('id', 'in', dummy_budget_line_ids)]"/>
+
+                                         <field name="budget_line_to_send_id" readonly="state not in ['submit', 'Approve2']"
+                                        invisible="is_budget_allocation_request != True" 
+                                        options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                        required="is_budget_allocation_request == True" domain="[('id', 'in', dummy_budget_line_ids)]"/>
                                         <!-- domain="[('id', 'in', dummy_budget_line_ids)]" - -->
                                         <!-- <field name="budget_id" readonly="state not in ['submit']" domain="[('id', 'in', dummy_budget_ids)]" 
                                         invisible="is_budget_verification_memo_request != True and is_budget_allocation_request != True" 
@@ -524,11 +298,11 @@
                                                             <field name="attachment_ids" string="Attachment" domain="[('id', '=', None)]" context="{'default_res_model': 'memo.model', 'default_res_id': active_id, 'default_public': True}">
                                                                 <tree string="Attachment">
                                                                 
-                                                                    <field name="stage_document_name" string="Required Documents"/> 
                                                                     <field name="name" string="Document Name"/> 
+                                                                    <field name="stage_document_name" string="System Generated Document Name"/> 
                                                                     <field name="datas" filename="name" string="File"/>
-                                                                    <field name="stage_document_required" string="Is Compulsory"/>
-                                                                    <field name="is_locked" string="Locked?" invisible="0" />
+                                                                    <field name="stage_document_required" string="Is Compulsory?"/>
+                                                                    <field name="is_locked" string="Locked?" invisible="1" column_invisible="1" />
                                                                 </tree>
                                                                 <form string="Attachment">
                                                                     <group>
@@ -908,7 +682,7 @@
                                     <!--ADDD-->
                                     <!-- <page name="payment_ids" string="Payment Request" invisible="memo_type_key not in ['Payment', 'payment', 'pay']"> -->
                                     <page name="payment_ids" string="Payment Request-" 
-                                    invisible="memo_type_key not in ['Payment', 'payment', 'pay'] or is_budget_verification_memo_request == True or is_contract_memo_request == True or is_internal_transfer == True">
+                                    invisible="is_saved != True or memo_type_key not in ['Payment', 'payment', 'pay'] or is_budget_verification_memo_request == True or is_contract_memo_request == True or is_internal_transfer == True">
                                         <!-- <field name="payment_ids" context="{'default_external_memo_request': 1, 'default_payment_type': 'outbound', 'default_is_internal_transfer': 1, 'default_memo_reference': active_id}" domain="[('state', '=', 'draft')]" readonly="state in ['Done', 'Approve2']"> -->
                                         <field name="payment_ids" invisible="1" readonly="0" 
                                         context="{'default_partner_type': 'supplier','default_is_contract_memo_request': is_contract_memo_request, 'default_external_memo_request': 1, 'default_payment_type': 'outbound', 'default_memo_reference': active_id}" 
@@ -1030,23 +804,22 @@
                                                                 <field name="currency_id" options="{'no_create': True, 'no_open': True}" readonly="memo_state != 'submit'" groups="base.group_multi_currency"/>
                                                             </div>
                                                             <field name="date" readonly="memo_state != 'submit'"/>
-                                                            <field name="memo_reference" invisible="0" force_save="1" readonly="1"/>
-                                                            <field name="memo_state" invisible="0" force_save="1" readonly="1"/>
+                                                            <field name="memo_reference" invisible="1" force_save="1" readonly="1"/>
+                                                            <field name="memo_state" invisible="1" force_save="1" readonly="1"/>
                                                             
                                                             <!-- <field name="ref" string="Memo"/> -->
                                                             <field name="narration" string="Narration" invisible="0" placeholder="Please enter narration of this payment"/>
                                                         </group>
                                                         <group name="group2">
-                                                            <field name="journal_id" domain="[('id', 'in', available_journal_ids)]" invisible="external_memo_request" readonly="memo_state != 'submit'" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
-                                                            <field name="payment_method_line_id" required="1" options="{'no_create': True, 'no_open': True}" readonly="memo_state != 'submit'"/>
-        
+                                                            <field name="payment_method_line_id" required="1" options="{'no_create': True, 'no_open': True}" readonly="memo_state not in ['submit','Approve2']"/>
+                                                            <field name="journal_id" domain="[('id', 'in', available_journal_ids)]" string="Source Bank"  invisible="external_memo_request" readonly="memo_state not in ['submit','Approve2']" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                                            <field name="destination_journal_id" readonly="memo_state not in ['submit','Approve2']" string="Destination Bank" context="{'default_partner_id': partner_id}" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                                                             <field name="partner_bank_id" string="Customer Bank Account" context="{'default_partner_id': partner_id, 'default_allow_out_payment': True}" invisible="not show_partner_bank_account or partner_type != 'customer' or is_internal_transfer or payment_type == 'inbound'" required="require_partner_bank_account or not is_internal_transfer"/>
                                                             <field name="partner_bank_id" string="Vendor Bank Account" context="{'default_partner_id': partner_id, 'default_allow_out_payment': True}" invisible="not show_partner_bank_account or partner_type != 'supplier' or is_internal_transfer or payment_type == 'inbound'" required="require_partner_bank_account or not is_internal_transfer"/>
         
                                                             <!-- This field should always be readonly but using readonly="1" overrides the other partner_bank_id
                                                             fields readonly condition in the framework, preventing the modification of these fields -->
                                                             <field name="partner_bank_id" string="Company Bank Account" readonly="memo_state != 'submit'" context="{'default_partner_id': partner_id, 'default_allow_out_payment': True}" invisible="not show_partner_bank_account or is_internal_transfer or payment_type == 'outbound'" required="require_partner_bank_account or not is_internal_transfer"/>
-                                                            <field name="destination_journal_id" readonly="memo_state != 'submit'" context="{'default_partner_id': partner_id}" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                                                             <!--attrs="{'invisible="is_internal_transfer', '=', False)],'readonly': [('state', '!=', 'draft'" required': [('is_internal_transfer', '=', True),('state', '=', 'draft'"/>-->
                                                             <field name="suitable_journal_ids" widget="many2many_tags" readonly="1" invisible="1"/>
 
@@ -1061,8 +834,8 @@
                                                         
                                                     </group>
                                                     <div class="alert alert-info text-center" role="alert">
-                                                        Please save the record first or tick the Modify &amp; Confirm Entries option to confirm that your entries are good to go. <br/>
-                                                        Confirm Entries : <field name="is_saved" nolabel="1" string="Modify &amp; Confirm Entries"/>
+                                                        Please ensure to select the Debit account and Credit account in the lines below. <br/>
+                                                        Confirm / Edit Entries : <field name="is_saved" nolabel="1" string="Modify &amp; Confirm Entries"/>
                                                     </div>
                                                     <field name="invoice_line_ids" readonly="is_saved == False or state == 'posted'">
                                                         <tree string="" editable="bottom">
@@ -1078,19 +851,15 @@
                                                         </tree>
                                                     </field>
                                                 </sheet>
-                                            </form>
-
-                                            <group name="note_group" col="6" class="mt-2 mt-md-0">
-                                                <group colspan="4">
-                                                    <!-- <field colspan="2" name="note" nolabel="1" placeholder="Terms and conditions..."/> -->
-                                                </group>
-                                                <group class="fw-bold oe_subtotal_footer oe_right" style="font-size: 30px;" colspan="2" name="total_payments">
-                                                    <field name="total_payments" nolabel="0" string="Total" colspan="2" readonly="1"/>
-                                                </group>
-                                                <div class="clearfix"/>
-                                            </group>
-                                            
+                                            </form> 
                                         </field>
+                                        <group name="totalPay" col="6" class="mt-2 mt-md-0">
+                                            <group colspan="4">
+                                            </group>
+                                            <group class="fw-bold oe_subtotal_footer oe_right" style="font-size: 30px;" colspan="2" name="total_payments">
+                                                <field name="total_payments" nolabel="0" string="Total" colspan="2" readonly="1"/>
+                                            </group>
+                                        </group>
                                     </page>
                                     <!-- <page name="rr_form" string="Recruitment Request form" invisible="memo_type_key not in ['recruitment_request']"> -->
                                     <page name="rr_form" string="Recruitment Request form" invisible="1">
@@ -1253,13 +1022,15 @@
                                     <page name="aos" string="Admin Overview Settings" group="base.group_system">
                                         <group>
                                             <group>
-                                                <field name="show_budget_status" invisible="0" force_save="1"/> 
+                                                
                                                 <field name="memo_setting_id" invisible="0" force_save="1"/> 
                                                 <field name="memo_project_type" readonly="0" invisible="0"/>
                                                 <field name="dummy_memo_types" invisible="0" widget="many2many_tags" force_save="1"/>
                                                 <field name="memo_type_key" string="Memo key" invisible="0" force_save="1"/> 
                                                 <field name="stage_id" readonly="0"/>
                                                 <field name="state" readonly="0"/>
+                                                <field name="show_budget_status" invisible="0" force_save="1"/> 
+                                                <field name="is_saved" invisible="0" force_save="1"/> 
                                                 <field name="dummy_budget_ids" string="Budget" widget="many2many_tags" required="0" readonly="0"/> 
                                                 <field name="dummy_budget_line_ids" string="budget lines" invisible="0" widget="many2many_tags" force_save="1"/> 
                                             </group>
@@ -1304,6 +1075,214 @@
                                         <field name="computed_stage_ids" invisible="0"/>
                                     </page>
                                 </notebook>
+                            </page>
+                            <page string="Dashboard"> 
+                                <div class="g-sidenav-show  bg-gray-100" id="dashboard-content">
+                                    <div class="dashboard-main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+                                        <div class="container py-4 form-body">
+                                            <div class="row g-3">
+                                                <div class="col-md-4">
+                                                    <div class="card border-0">
+                                                        <div class="form-card-header">General Info</div>
+                                                        <div class="card-body shadow rounded">
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Title:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="name" readonly="1"/></div>
+                                                            </div>
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Initiator:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="employee_id" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                                                            </div>
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Department:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="dept_ids" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                                                            </div>
+                                                            
+                                                             
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="card border-0">
+                                                        <div class="form-card-header">Other Info</div>
+                                                        <div class="card-body shadow rounded">
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Reference:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="code" readonly="1"/></div>
+                                                            </div>
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Request Type:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="memo_type" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                                                            </div> 
+                                                            <div class="row border-bottom py-2" invisible="is_budget_verification_memo_request == False">
+                                                                <div class="col-4">
+                                                                    <strong>budget Head:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="budget_id" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="card border-0 consignment">
+                                                        <div class="form-card-header">Operational Info</div>
+                                                        <div class="card-body shadow rounded">
+                                                             
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Request Date</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="date" readonly="1" /></div>
+                                                            </div>
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>MDA:</strong>
+                                                                </div>
+                                                                <div class="col-8"></div>
+                                                            </div> 
+                                                            <!-- <div class="row py-2"> -->
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Status:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="stage_id" readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row g-3 mt-3">
+                                                <!-- Task -->
+                                                <div class="col-md-6">
+                                                    <div class="card border-0">
+                                                        <div class="form-card-header">Tasks</div>
+                                                        <div class="card-body shadow rounded">
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Todo:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="task_todo" readonly="1" force_save="1"/></div>
+                                                            </div>
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Active:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="task_active" readonly="1" force_save="1"/></div>
+                                                            </div>
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Done:</strong>
+                                                                </div>
+                                                                <div class="col-8"><field name="task_done" readonly="1" force_save="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/></div>
+                                                            </div>
+                                                            <div class="row border-bottom py-2">
+                                                                <div class="col-4">
+                                                                    <strong>Overdue:</strong>
+                                                                </div>
+                                                                <div class="col-8">0</div>
+                                                            </div>
+                                                            <div class="row pt-3 pb-2">
+                                                                <div class="col-6">
+                                                                    <div class="h5">Request Duration</div>
+                                                                    <p class="py-2">Remaining Days: <field name="remaining_task_duration" readonly="1" invisible="0"/></p>
+                                                                    <div class="progress" style="height: 20px;">
+                                                                        <field name="percentage_of_remaining_task" readonly="0" invisible="0" widget="progressbar" class="progress-bar" role="progressbar" style="width: 10%;"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="h5">Task</div>
+                                                                    <field name="task_todo_percentage" invisible="1"/> 
+                                                                    <field name="task_active_percentage" invisible="1"/> 
+                                                                    <field name="task_done_percentage" invisible="1"/>
+                                                                    <div class="text-center">
+                                                                        <field name="task_active" widget="taskdoughnutMemo" 
+                                                                        options="{'title': 'Task Title', 'todo_field_red': 'task_todo_percentage', 'active_field_yellow': 'task_active_percentage', 'done_field_green': 'task_done_percentage', 'max_field': 'default_percentage_target', 'style': 'width:10px; height: 40px;'}" nolabel="1" force_save="1"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card border-0 shadow rounded finance">
+                                                        <div class="form-card-header">Finance</div>
+                                                        <div class="card-body text-center row" >
+                                                            <div class="col-6">
+                                                                <div class="row bg-white rounded" style="margin: auto; margin-right: 1px; margin-top: 10px;">
+                                                                    <div class="col-6 text-start align-self-end">
+                                                                        <h4 class="text-danger">MDA Budget</h4>
+                                                                        <p class="fst-italic m-0 inner">Cost (₦): <field name="total_cost" force_save="1" readonly="1"/></p>
+                                                                        <p class="fst-italic inner">Revenue (₦): <field name="total_revenue" force_save="1" readonly="1"/></p>
+                                                                        <field name="default_percentage_target" invisible="1"/>
+                                                                        <field name="displayed_cost_revenue_margin" invisible="1"/>
+                                                                    </div>
+                                                                    <div class="col-6 pb-5" style="padding-left: 0px;">
+                                                                        <field name="total_revenue_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_cost_revenue_margin', 'field_green': 'Revenue', 'field_red': 'Cost', 'max_field': 'default_percentage_target'}" nolabel="1" force_save="1"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="row bg-white rounded" style="margin-right: 1px; margin-top: 10px;">
+                                                                    <div class="col-6 text-start align-self-end">
+                                                                        <h5 class="text-danger">MDA Bills</h5>
+                                                                        <p class="fst-italic m-0 inner">Billed (₦): <field name="total_cost" force_save="1" readonly="1"/></p>
+                                                                        <p class="fst-italic inner">Not Billed (₦): <field name="total_po_to_be_invoiced" force_save="1" readonly="1"/></p>
+                                                                    </div>
+                                                                    <div class="col-6 pb-5" style="padding-left: 0px;">
+                                                                            <field name="displayed_second_quad_percentage" invisible="1"/>
+                                                                            <field name="second_quad_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_second_quad_percentage', 'field_green': 'Billed', 'field_red': 'Not Billed', 'max_field': 'default_percentage_target', 'style': 'width:10px; height: 40px;'}" nolabel="1" force_save="1"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="row bg-white rounded" style="margin: auto; margin-right: 1px; margin-top: 10px;">
+                                                                    <div class="col-6 text-start align-self-end">
+                                                                        <h5 class="text-danger">Income</h5>
+                                                                        <p class="fst-italic m-0 inner">Cost (₦): <field name="total_closed_paid_cost" force_save="1" readonly="1"/></p>
+                                                                        <p class="fst-italic inner">Revenue (₦): <field name="total_closed_paid_revenue" force_save="1" readonly="1"/></p>
+                                                                    </div>
+                                                                    <div class="col-6 pb-5" style="padding-left: 0px;">
+                                                                        <div class="halfdoughnut">
+                                                                            <field name="displayed_third_quad_percentage" invisible="1"/>
+                                                                            <field name="third_quad_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_third_quad_percentage', 'field_green': 'Realized', 'field_red': 'Not Realized', 'max_field': 'default_percentage_target', 'style': 'width:10px; height: 40px;'}" nolabel="1" force_save="1"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="row bg-white rounded" style="margin-right: 1px; margin-top: 10px;">
+                                                                    <div class="col-6 text-start align-self-end">
+                                                                        <h5 class="text-danger">Revenue</h5>
+                                                                        <p class="fst-italic m-0 inner">Invoiced (₦): <field name="total_paid_revenue" force_save="1" readonly="1"/></p>
+                                                                        <p class="fst-italic inner">Not Invoiced (₦): <field name="total_so_to_be_invoiced" force_save="1" readonly="1"/></p>
+                                                                    </div>
+                                                                    <div class="col-6 pb-5" style="padding-left: 0px;">
+                                                                        <div class="halfdoughnut">
+                                                                            <field name="displayed_fourth_quad_percentage" invisible="1"/>
+                                                                            <field name="fourth_quad_percentage" widget="gaugeMemo" options="{'title': '', 'guageInsideText': 'displayed_fourth_quad_percentage', 'field_green': 'Invoiced', 'field_red': 'Not Invoiced', 'max_field': 'default_percentage_target'}" nolabel="1" force_save="1"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </page>
                         </notebook>
                     </sheet>

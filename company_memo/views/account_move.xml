@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 
                 <xpath expr="//field[@name='move_type']" position="replace">
-                </xpath>
+                </xpath> 
                 <xpath expr="//field[@name='ref']" position="after">
                     <field name="memo_id" readonly="0" force_save="1" string="Memo Ref" invisible="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                     <field name="origin" required="0"/>
@@ -22,7 +22,6 @@
                 <xpath expr="//field[@name='invoice_payment_term_id']" position="replace">
                  <field name="invoice_payment_term_id" context="{'example_date': invoice_date, 'example_amount': tax_totals['amount_total']}" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" placeholder="Terms"/>
                 </xpath>
-                 
                 
                 <xpath expr="//form/sheet/group[last()]" position="after">
                     <div class="oe_edit_only alert alert-info" role="alert" invisible="invoice_payment_term_id == False">
@@ -44,6 +43,7 @@
                         <separator string="Instruction"/>
                         <div>  
                             Ensure you select on the account. Select the sub-budget on the lines. (Budget Sub head tied to the account)
+                            During posting, system checks the budget funds Available on each line and limit based on funding available
                             <!-- <button name="action_populate_all_project_pos" string="Populate Invoice Line" class="oe_highlight" type="object"/> -->
                         </div>
                     </div>

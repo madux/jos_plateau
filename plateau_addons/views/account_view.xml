@@ -144,7 +144,7 @@
 
                     <field name="ng_budget_line_id" domain="[('id', 'in', ng_budget_line_ids)]" column_invisible="parent.ng_budget_id == False" invisible="parent.ng_budget_id == False" required="parent.ng_budget_id != False" options="{'no_create':True, 'no_open': False}"/> 
                     <field name="budget_balance" column_invisible="parent.ng_budget_id == False" invisible="parent.ng_budget_id == False" readonly="1"/> 
-                    <field name="contact_tax_type" invisible="0" column_invisible="0"/>
+                    <field name="contact_tax_type" invisible="1" column_invisible="1"/>
                 </xpath> 
             </field>
         </record>

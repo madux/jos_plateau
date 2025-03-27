@@ -84,6 +84,8 @@ class NgAccountBudgetLine(models.Model):
     code = fields.Char(string="Fund Code", store=True, readonly="0")
     allocated_amount = fields.Float(string='Allocated Amount')
     utilized_amount = fields.Float(string='Utilized Amount')
+    added_budget_amount = fields.Float(string='Added budget Amount')
+    reduced_budget_amount = fields.Float(string='Reduced budget Amount')
     budget_balance = fields.Float(string='Balance Amount', compute="compute_variance")
     fiscal_year = fields.Char(
         string='Fiscal Year', 

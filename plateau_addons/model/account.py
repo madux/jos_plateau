@@ -533,25 +533,41 @@ class AccountInvoice(models.Model):
             each budget against the budget balance
             '''
             already_checked = []
-            for rec in self.invoice_line_ids:
-                if rec.ng_budget_line_id and rec.ng_budget_line_id.id not in already_checked:
-                    budget_invoice_ids = self.mapped('invoice_line_ids').filtered(
-                        lambda bd: bd.ng_budget_line_id.id == rec.ng_budget_line_id.id
-                    )
-                    total_budget, total_balance_budget = 0.00, 0.00
-                    for r in budget_invoice_ids:
-                        total_balance_budget += r.budget_balance
-                        total_budget += r.price_subtotal
-                    already_checked.append(rec.ng_budget_line_id.id)
-                    if total_budget > rec.budget_balance:
-                        raise ValidationError(f"""
-                        Your move line with name {rec.name or "N/A"} account 
-                        {rec.ng_budget_line_id.economic_id.name or rec.ng_budget_line_id.account_id.name} budget {rec.ng_budget_line_id.economic_id.name or rec.ng_budget_line_id.account_id.name}
-                        has sub total amount greater than the Budget - {rec.ng_budget_line_id.economic_id.name or rec.ng_budget_line_id.account_id.name} balance
-                                          """)
-                    
-                    rec.ng_budget_line_id.utilized_amount += total_budget
-    
+            
+            lines = self.invoice_line_ids or self.line_ids
+            sum_debit, sum_crebit = 0, 0
+            if self.memo_id.is_budget_allocation_request:
+                for r in self.line_ids:
+                    sum_debit += r.debit
+                    sum_crebit += r.credit
+                self.memo_id.budget_line_to_send_id.allocated_amount += sum_debit
+                self.memo_id.budget_line_to_send_id.added_budget_amount += sum_debit
+                self.memo_id.budget_line_id.utilized_amount += sum_crebit
+                self.memo_id.budget_line_id.reduced_budget_amount += sum_debit
+
+                # self.memo_id.budget_line_to_send_id.allocated_amount -= sum_crebit
+            # if self.memo_id.is_budget_allocation_request:
+            else:
+                for rec in self.invoice_line_ids:
+                    if rec.ng_budget_line_id and rec.ng_budget_line_id.id not in already_checked:
+                        budget_invoice_ids = self.mapped('invoice_line_ids').filtered(
+                            lambda bd: bd.ng_budget_line_id.id == rec.ng_budget_line_id.id
+                        )
+                        total_budget, total_balance_budget = 0.00, 0.00
+                        for r in budget_invoice_ids:
+                            total_balance_budget += r.budget_balance
+                            total_budget += r.price_total
+                        already_checked.append(rec.ng_budget_line_id.id)
+                        if total_budget > rec.budget_balance:
+                            raise ValidationError(f"""
+                            Your move line with name {rec.name or "N/A"} account 
+                            {rec.ng_budget_line_id.economic_id.name or rec.ng_budget_line_id.account_id.name} budget {rec.ng_budget_line_id.economic_id.name or rec.ng_budget_line_id.account_id.name}
+                            has sub total amount greater than the Budget - {rec.ng_budget_line_id.economic_id.name or rec.ng_budget_line_id.account_id.name} balance
+                                            """)
+                        
+                        rec.ng_budget_line_id.utilized_amount += total_budget
+        self.memo_id.confirm_memo(self.env.user.employee_id, "Budget has been allocated")
+            
       
     def action_post(self):
         # account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
@@ -567,7 +583,9 @@ class AccountInvoice(models.Model):
             if self.env.user.id not in approval_users:
                 name_of_approvers = [rec.name for rec in stage.approver_ids]
                 raise ValidationError(f"You are not permitted to post. \n Only these users are allowed to post at this stage {name_of_approvers}")
+        
         self.check_budget_limit_and_post()
+        
         res = super(AccountInvoice, self).action_post()
         return res
     

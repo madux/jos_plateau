@@ -22,6 +22,8 @@
                                 <field name="code" default="1" readonly="1"/> 
                                 <field name="allocated_amount" default="0" readonly="1"/> 
                                 <field name="budget_adjustment" default="0" readonly="0"/> 
+                                <field name="added_budget_amount" readonly="1"/>
+                                <field name="reduced_budget_amount" readonly="1"/>
                                 <field name="revise_previous_budget" default="0" readonly="0"/> 
                                 <field name="utilized_amount"/>
                                 <field name="budget_balance" readonly="0" force_save="1"/>

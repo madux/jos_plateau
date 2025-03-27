@@ -50,11 +50,11 @@
                     <field name="branch_id" string="Initiator MDA" invisible="0" readonly="0" required="1"
                     options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
                     <field name="request_mda_from" string="Requesting From MDA" 
-                    invisible="external_memo_request == False" readonly="state not in ['submit']" required="external_memo_request == True"
+                    invisible="external_memo_request == False" readonly="1" required="external_memo_request == True"
                     options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
                     <field name="request_mda_from" string="Requesting From MDA" 
                         invisible="is_budget_allocation_request == False" required="is_budget_allocation_request == True"
-                        readonly="is_budget_allocation_request == True or state not in ['submit']" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
+                        readonly="1" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
                         
                     <field name="external_memo_request" invisible="1"/>
                     <field name="is_internal_transfer" invisible="1"/>
