@@ -24,6 +24,63 @@ class NgAccountBudgetLine(models.Model):
     _name = "ng.account.budget.line"
     _rec_name = "account_id"
     _description = "To hold the budget allocation lines"
+    
+    '''Go through the overview budget 
+    If branch does not have xmlid,
+    Find the branch that has same name and xmlid
+    if budget head not linked, find budget head where budget type is equal to budget type and Branch equal to the current created branch,
+    Append budget head to the record, append branch and on the branch to the budget head
+    then delete the created branch .'''
+    
+    def update_budget_overview(self):
+        all_budget_line_ids = self.env['ng.account.budget.line'].search([])[2000:4000]
+        ir_model_data = self.env['ir.model.data'].sudo()
+        branch_obj = self.env['multi.branch'].sudo()
+        budget_obj = self.env['ng.account.budget'].sudo()
+        branches_to_delete = []
+        for ln in all_budget_line_ids:
+            _logger.info(f"THIS IS BUDGET LINE {ln.id}")
+            branch = None
+            branch_xmlid = ir_model_data.search([
+                ('model', '=', 'multi.branch'),  # Replace with the model name
+                ('res_id', '=', ln.branch_id.id)  # Replace with the record ID you want to check
+            ])
+            if branch_xmlid:
+                branch = ln.branch_id.id
+            else:
+                branches_to_delete.append(ln.branch_id.id)
+                
+                branches = branch_obj.search([
+                ('name', 'ilike', ln.branch_id.name) 
+                ])
+                for br in branches:
+                    brn = ir_model_data.search([
+                        ('model', '=', 'multi.branch'), 
+                        ('res_id', '=', br.id) 
+                    ])
+                    if brn:
+                        for jrl in self.env['account.journal'].search([('branch_id.name', '=', br.name)]):
+                            jrl.branch_id = br.id
+                        branch = br.id
+                        break
+                    else:
+                        ln.branch_id.active = False
+            if not ln.ng_budget_id:
+                budget = budget_obj.search([
+                ('budget_type', '=', ln.budget_type),
+                '|', ('branch_id.name', '=', ln.branch_id.name),
+                ('branch_id', '=', ln.branch_id.id) 
+                ])
+                if budget:
+                    for bb in budget:
+                        bb.branch_id = branch 
+                    ln.ng_budget_id = budget[0].id
+            else:
+                ln.ng_budget_id.branch_id = branch
+            ln.branch_id = branch     
+        for brd in branches_to_delete:
+            branch_obj.browse([brd]).unlink()
+                
      
     approved_date = fields.Datetime(string="Approved Date")
     budget_allocation_date = fields.Datetime(string="Allocation Date", default=fields.Date.today())

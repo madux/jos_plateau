@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <form string="">
                     <header>
+                        <button name="update_budget_overview" string="Update budget overview" icon="fa-print" type="object" class="btn-primary"/>
                     </header>
                     <sheet>
                         <group>
