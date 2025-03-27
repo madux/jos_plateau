@@ -566,7 +566,7 @@ class AccountInvoice(models.Model):
                                             """)
                         
                         rec.ng_budget_line_id.utilized_amount += total_budget
-        self.memo_id.confirm_memo(self.env.user.employee_id, "Budget has been allocated")
+        # self.memo_id.confirm_memo(self.env.user.employee_id, "Budget has been allocated")
             
       
     def action_post(self):
