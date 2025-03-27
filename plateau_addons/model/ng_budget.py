@@ -33,7 +33,7 @@ class NgAccountBudgetLine(models.Model):
     then delete the created branch .'''
     
     def update_budget_overview(self):
-        all_budget_line_ids = self.env['ng.account.budget.line'].search([])[2000:4000]
+        all_budget_line_ids = self.env['ng.account.budget.line'].search([])[0:2000]
         ir_model_data = self.env['ir.model.data'].sudo()
         branch_obj = self.env['multi.branch'].sudo()
         budget_obj = self.env['ng.account.budget'].sudo()
