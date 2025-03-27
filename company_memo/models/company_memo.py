@@ -36,6 +36,7 @@ class Memo_Model(models.Model):
     
     @api.model
     def create(self, vals):
+        vals['is_saved'] = True
         code_seq = self.env["ir.sequence"].next_by_code("memo.model") or "/" if not self.code else self.code
         dept_seq = self.env['ir.sequence'].next_by_code('department-num')
         child_code = False
@@ -74,6 +75,7 @@ class Memo_Model(models.Model):
         else:
             vals['code'] = f"{project_prefix}{code_seq}-0{0}" if po_memo not in ['project_pro'] else "" # e.g [PO-00045-X-100]
         result = super(Memo_Model, self).create(vals)
+        
         if self.attachment_ids:
             self.attachment_ids.write({'res_model': self._name, 'res_id': self.id})
         if self.invoice_ids:
@@ -126,41 +128,17 @@ class Memo_Model(models.Model):
         is_internal_transfer = self.env.context.get('default_is_internal_transfer')
         is_contract_memo_request = self.env.context.get('default_is_contract_memo_request')
         
-        
-        # memo_type, memo_tag = False, False
-        # if external_payment_request and is_internal_transfer:
-        #     memo_type = self.env['memo.type'].search([('is_internal', '=', True)], limit=1)
-        #     raise ValidationError(external_payment_request)
-            
-            
-        #     # memo_tag = self.env.ref('company_memo.memo_tag_expenditure')
-            
-        # elif external_payment_request and not is_internal_transfer: # mda payment request
-        #     memo_type = self.env['memo.type'].search([('is_external', '=', True)], limit=1)
-        #     raise ValidationError(external_payment_request)
-            
-            
-        #     # memo_tag = self.env.ref('company_memo.memo_tag_mpr')
-            
-        # elif is_contract_memo_request:
-        #     memo_type = self.env['memo.type'].search([('is_contractor', '=', True)], limit=1)
-            
-        #     # memo_tag = self.env.ref('company_memo.memo_tag_contract')
-            
-        # elif default_budget_allocation:
-        #     memo_type = self.env['memo.type'].search([('is_allocation', '=', True)], limit=1)
-            
-            # memo_tag = self.env.ref('company_memo.memo_tag_unallocated_funds')
-            
         ministry_of_finance = self.env.ref('plateau_addons.mda_ministry_of_finance')
         domain = [('active', '=', True)]
         memo_configs = self.env['memo.config'].search(domain)
         user_branch_id = self.env.user.branch_id
         top_user = self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user')
-        budget_domain = [
-                '|', ('branch_id', '=', self.env.user.branch_id.id),
-                ('branch_id', 'in', self.env.user.branch_ids.ids)] if not top_user else []
+        default_user_branch_id = res.get('branch_id')
         
+        # budget_domain = [
+        #         '|', ('branch_id', '=', self.env.user.branch_id.id),
+        #         ('branch_id', 'in', self.env.user.branch_ids.ids)] if not top_user else []
+        budget_domain = [('branch_id', '=', default_user_branch_id)]
         res.update({
             'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs if user_branch_id.id in rec.branch_ids.ids])],
             'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search(budget_domain)
@@ -169,6 +147,16 @@ class Memo_Model(models.Model):
             'memo_type': self.env['memo.type'].search([('is_internal', '=', True)], limit=1).id if is_internal_transfer == True else self.env['memo.type'].search([('is_external', '=', True)], limit=1).id if external_payment_request == True and is_internal_transfer == False else self.env['memo.type'].search([('is_contractor', '=', True)], limit=1).id if is_contract_memo_request == True else self.env['memo.type'].search([('is_allocation', '=', True)], limit=1).id if default_budget_allocation == True else 40 
             })
         return res
+    
+    @api.onchange('branch_id')
+    def onchange_branch(self):
+        if self.branch_id:
+            self.budget_id = False 
+            self.budget_line_id = False 
+            self.write({
+                'dummy_budget_ids': [
+                    (6, 0, [rec.id for rec in self.env['ng.account.budget'].search([('branch_id', '=', self.branch_id.id)])])]
+            })
         
     memo_type = fields.Many2one(
         'memo.type',
@@ -183,7 +171,7 @@ class Memo_Model(models.Model):
         ("warning", "Warning"), 
         ("danger", "Danger"),
         ], string="Alert Option", 
-        compute="compute_deadline",
+        # compute="compute_deadline",
         help="""
         Used to determine the text to display 
         when task is coming to end date"""
@@ -552,6 +540,7 @@ class Memo_Model(models.Model):
     date_expected = fields.Date('Expected Date', index=True)
 
     closing_date = fields.Date('Closing Date')
+    is_saved = fields.Boolean('Is saved')
     
     invoice_ids = fields.Many2many(
         'account.move', 
@@ -1978,7 +1967,7 @@ class Memo_Model(models.Model):
         store=True, 
         string="Total Amount")
     
-    @api.onchange('payment_ids.amount_total')
+    @api.onchange('payment_ids')
     def onchange_payment_ids(self):
         total_amount = sum([amt.amount_total for amt in self.mapped('payment_ids')])
         if total_amount < self.budget_balance_amount:
@@ -2032,7 +2021,15 @@ class Memo_Model(models.Model):
         ) 
     budget_line_id = fields.Many2one(
         'ng.account.budget.line', 
-        string='Budget line', 
+        string='Budget Sub Head', 
+        help="Sub Budget Economic line",
+        store=True, 
+        # domain=lambda self: self._get_related_stage(),
+        ) 
+    
+    budget_line_to_send_id = fields.Many2one(
+        'ng.account.budget.line', 
+        string='Send To Budget Sub Head', 
         store=True, 
         # domain=lambda self: self._get_related_stage(),
         ) 
@@ -2136,6 +2133,7 @@ class Memo_Model(models.Model):
                     # is unique 
                     # 'name': f"CADV/ {self.code}",
                     # 'move_type': 'in_receipt',
+                    # 'type': 'entry',
                     'invoice_date': fields.Date.today(),
                     'ng_budget_id': self.budget_id.id,
                     'date': fields.Date.today(),
@@ -2147,6 +2145,7 @@ class Memo_Model(models.Model):
                                 'name': rec.description,
                                 'ref': f'{self.code}',
                                 'account_id': self.request_mda_from.default_account_id.id or self.request_mda_from.default_account_id.id,
+                                'ng_budget_line_id': self.budget_line_to_send_id.id,
                                 'debit': rec.budget_amount,
                                 'quantity': 1,
                                 'code': rec.code,
@@ -2157,6 +2156,7 @@ class Memo_Model(models.Model):
                                 # 'move_id': inv.id,
                                 'name': rec.description,
                                 'ref': f'{self.code}',
+                                'ng_budget_line_id': self.budget_line_id.id,
                                 'account_id': self.branch_id.default_account_id.id or self.branch_id.default_journal.default_account_id.id,
                                 'credit': rec.budget_amount, 
                                 'code': rec.code, 
