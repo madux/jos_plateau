@@ -100,6 +100,7 @@ class accountJournal(models.Model):
         view_id_tree = self.env.ref('account.view_account_journal_tree')
         view_id_kanban = self.env.ref('account.account_journal_dashboard_kanban_view')
         user = self.env.user
+        branch_ids = [rec.id for rec in self.env.user.branch_ids if rec] + [self.env.user.branch_id.id]
         allowed_internal_users = self._get_internal_users_ids()
         record_ids = []
         if user.id in allowed_internal_users: 
@@ -115,15 +116,21 @@ class accountJournal(models.Model):
                 'domain': []
             }
         else:
-            
+            # domain = [
+            #     # ('branch_id', '=', user.branch_id.id),
+            #     ('branch_id', 'in', user.branch_id.ids),
+            #     # ('for_public_use', '=', False), 
+            #     # ('create_uid','=', user.id),
+            # ]
             domain = [
-                ('for_public_use', '=', False), 
-                # ('branch_id', '=', user.branch_id.id),
-                ('branch_id', 'in', user.branch_id.ids),
-                # ('create_uid','=', user.id),
-            ]
+                '|',
+                ('allowed_branch_ids.id', 'in', branch_ids), 
+                ('branch_id.id', 'in', branch_ids), 
+                # ('allowed_branch_ids', '=', False)
+                ]
+            
             non_user_journals = self.env['account.journal'].sudo().search(domain)
-            record_ids = [res.id for res in non_user_journals]
+            # record_ids = [res.id for res in non_user_journals]
             return {
                 'type': 'ir.actions.act_window',
                 'name': _('Journals'),
@@ -133,7 +140,7 @@ class accountJournal(models.Model):
                 'view_id': view_id_kanban.id,
                 'views': [(view_id_kanban.id, 'kanban'), (view_id_tree.id, 'tree'), (view_id_form.id,'form')],
                 'target': 'current',
-                'domain': [('id', 'in', record_ids)]
+                'domain': [('id', 'in', non_user_journals.ids)]
             } 
         
 class AccountPayment(models.Model):
@@ -150,12 +157,12 @@ class AccountPayment(models.Model):
     )
     contact_tax_type = fields.Selection(
         [
-        ("", ""), 
+        ("none", "Zero / None Tax"),  
         ("Consultant", "Consultant"), 
         ("Individual", "Individual"),
         ("Contractor", "Contractor"),
         ], string="Contact Tax Type", 
-        default="Individual",
+        default="none",
         help="Contact tax type", 
     )
     
@@ -286,10 +293,19 @@ class AccountPayment(models.Model):
                 rec.is_top_account_user = False
 
     @api.constrains('amount')
-    def check_amount(self):
+    def check_amount_state(self):
         if self.amount <= 0:
             raise ValidationError('Amount must be greater than 0 !!!')
-
+         
+    @api.constrains('payment_method_line_id')
+    def _check_payment_method_line_id(self):
+        '''overriding odoo constraint'''
+        ''' Ensure the 'payment_method_line_id' field is not null.
+        Can't be done using the regular 'required=True' because the field is a computed editable stored one.
+        '''
+        for pay in self:
+            pass
+    
     def action_post(self):
         to_approve = False
         # account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user') or self.env.user.has_group('ik_multi_branch.account_dto_user'))
@@ -346,27 +362,31 @@ class AccountInvoiceLine(models.Model):
     #         'tax_ids': [(6, 0, account_taxs.ids)],
     #         })
     #     return res
-    @api.onchange('account_id')
+    @api.onchange('account_id', 'contact_tax_type')
     def onchange_account_id(self):
         if self.contact_tax_type:
+            type_tax_use = "purchase" if self.move_type in ["in_receipt", "in_invoice"] else "sale" 
             contact_tax_type = self.contact_tax_type
-            domain = [('contact_tax_type', '=', contact_tax_type)]
+            domain = [('type_tax_use', '=', type_tax_use),
+                      ('contact_tax_type', '=', contact_tax_type)]
             account_tax_ids = self.env['account.tax'].search(domain)
-            self.update({
-                'tax_ids': [(6, 0, account_tax_ids.ids)],
-                })
+            if account_tax_ids:
+                self.update({
+                    'tax_ids': [(6, 0, account_tax_ids.ids)],
+                    })
     
     contact_tax_type = fields.Selection(
         [
-        ("", ""), 
+        ("none", " "),
         ("Consultant", "Consultant"), 
         ("Individual", "Individual"),
         ("Contractor", "Contractor"),
         ], string="Contact Tax Type", 
-        default="Individual",
+        default="none",
         help="""Contact tax type to be used in determining the 
         taxes to be defaulted to the journal invoice lines""", 
     )
+    move_type = fields.Char(string="move type")
     ng_budget_line_id = fields.Many2one(
         'ng.account.budget.line',
         string='Budget',
@@ -444,14 +464,19 @@ class AccountInvoice(models.Model):
             m.suitable_journal_ids = self.env['account.journal'].search(domain)
 
     external_memo_request = fields.Boolean('Is external memo request?')
+    invoice_date = fields.Date(
+        string='Invoice/Bill Date',
+        index=True,
+        copy=False,
+    )
     contact_tax_type = fields.Selection(
         [
-        ("", ""), 
+        ("none", " "), 
         ("Consultant", "Consultant"), 
         ("Individual", "Individual"),
         ("Contractor", "Contractor"),
         ], string="Contact Tax Type", 
-        default="Individual",
+        default="none",
         help="""Contact tax type to be used in determining the 
         taxes to be defaulted to the journal invoice lines""", 
     )
@@ -533,20 +558,24 @@ class AccountInvoice(models.Model):
             each budget against the budget balance
             '''
             already_checked = []
-            
-            lines = self.invoice_line_ids or self.line_ids
             sum_debit, sum_crebit = 0, 0
-            if self.memo_id.is_budget_allocation_request:
+            if self.memo_id.is_budget_viament_allocation or self.memo_id.is_budget_allocation_request:
                 for r in self.line_ids:
                     sum_debit += r.debit
                     sum_crebit += r.credit
-                self.memo_id.budget_line_to_send_id.allocated_amount += sum_debit
-                self.memo_id.budget_line_to_send_id.added_budget_amount += sum_debit
-                self.memo_id.budget_line_id.utilized_amount += sum_crebit
-                self.memo_id.budget_line_id.reduced_budget_amount += sum_debit
+                if self.memo_id.is_budget_viament_allocation and self.memo_id.budget_line_to_send_id:
+                    self.memo_id.budget_line_to_send_id.allocated_amount += sum_debit
+                    self.memo_id.budget_line_to_send_id.added_budget_amount += sum_debit
+                    self.memo_id.budget_line_id.utilized_amount += sum_crebit
+                    self.memo_id.budget_line_id.reduced_budget_amount -= sum_debit
+                
+                elif self.memo_id.is_budget_allocation_request and self.memo_id.budget_line_id:
+                    self.memo_id.budget_line_id.utilized_amount -= sum_debit
+                    self.memo_id.budget_line_id.added_budget_amount += sum_debit
+                
+                # self.memo_id.budget_line_id.utilized_amount += total_budget
 
-                # self.memo_id.budget_line_to_send_id.allocated_amount -= sum_crebit
-            # if self.memo_id.is_budget_allocation_request:
+            # elif self.memo_id.is_budget_allocation_request:
             else:
                 for rec in self.invoice_line_ids:
                     if rec.ng_budget_line_id and rec.ng_budget_line_id.id not in already_checked:
@@ -566,7 +595,7 @@ class AccountInvoice(models.Model):
                                             """)
                         
                         rec.ng_budget_line_id.utilized_amount += total_budget
-        # self.memo_id.confirm_memo(self.env.user.employee_id, "Budget has been allocated")
+            self.memo_id.confirm_memo(self.env.user.employee_id, "Budget has been allocated")
             
       
     def action_post(self):

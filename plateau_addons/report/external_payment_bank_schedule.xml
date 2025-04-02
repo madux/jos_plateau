@@ -73,12 +73,11 @@
                         <table border="1" style="font-size:15px; width: 100%; border-collapse: collapse; margin-top: 10px; margin: 5px;">
                             <thead>
                                 <tr style="background: #f0f0f0;">
-                                    <th style="padding: 5px; border: 1px solid black;">S/No.</th>
                                     <th style="padding: 25px; border: 1px solid black;">Beneficiary</th>
-                                    <th style="padding: 25px; border: 1px solid black;">Bank Name</th>
-                                    <th style="padding: 25px; border: 1px solid black;">Bank Account</th>
-                                    <!-- <th style="padding: 25px; border: 1px solid black;">Debit</th>
-                                    <th style="padding: 15px; border: 1px solid black;">Credit</th> -->
+                                    <th style="padding: 25px; border: 1px solid black;">Credit Bank</th>
+                                    <th style="padding: 25px; border: 1px solid black;">Credit Account</th>
+                                    <th style="padding: 25px; border: 1px solid black;">Debit Bank</th>
+                                    <th style="padding: 25px; border: 1px solid black;">Debit Account</th> 
                                     <th style="padding: 20px; border: 1px solid black;">Amount(₦)</th>
                                     <th style="padding: 20px; border: 1px solid black;">Purpose of Payment</th>
                                 </tr>
@@ -87,11 +86,12 @@
                                 <t t-if="o.payment_ids">
                                     <t t-foreach="o.payment_ids" t-as="pay">
                                         <tr>
-                                            <td style="margin: 5px; border: 1px solid black;padding: 10px"/> 
                                             <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.branch_id.name.capitalize()"/></td>
-                                            <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.destination_journal_id.name.capitalize()"/></td>
+                                            <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.credit_bank.capitalize()"/></td>
+                                            <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.credit_account"/></td>
+                                            <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.debit_bank"/></td>
+                                            <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.debit_account"/></td>
                                             <!-- <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.destination_journal_id.name.capitalize()"/></td> -->
-                                            <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.bank_partner_account"/></td>
                                             <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="'{0:,}'.format(float(pay.amount_total))"/></td>
                                             <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.narration"/></td>
                                         </tr>
@@ -100,10 +100,11 @@
                                 <t t-if="o.invoice_ids">
                                     <t t-foreach="o.invoice_ids" t-as="pay">
                                         <tr>
-                                            <td style="margin: 5px; border: 1px solid black;padding: 10px"/> 
                                             <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.partner_id.name.capitalize()"/></td>
                                             <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.bank_partner_id.name.capitalize()"/></td>
                                             <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.bank_partner_account"/></td>
+                                            <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="o.bank_partner_id.name"/></td>
+                                            <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="o.bank_account_number"/></td>
                                             <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="'{0:,}'.format(float(pay.amount_total))"/></td>
                                             <td style="margin: 5px; border: 1px solid black;padding: 10px"><t t-esc="pay.ref"/></td>
                                         </tr>
@@ -114,7 +115,8 @@
                         </table>
                         <table border="1" style="font-size:15px; width: 100%; border-collapse: collapse; margin-top: 10px;">
                             <tr style="background: #f0f0f0;">
-                                <th style="padding: 10px;"/> 
+                                <th style="padding: 10px;"/>
+                                <th style="padding: 10px;"/>
                                 <th style="padding: 10px;"/>
                                 <th style="padding: 10px;"/>
                                 <th style="padding: 10px;">
@@ -136,7 +138,8 @@
                 <br/>
                 <div class="row p-3">
                     <div class="col-3 pt-4">
-                        Name: <strong> <t t-esc="o.write_uid.name"/></strong>
+                        <!-- Name: <strong> <t t-esc="o.write_uid.name"/></strong> -->
+                        Name: <strong></strong>
                     </div>
                     <div class="col-2 offset-2 text-center">
                         
@@ -149,7 +152,7 @@
 
                 <div class="row p-3">
                     <div class="col-3 pt-4">
-                        Name: <strong> <t t-esc="o.write_uid.name"/></strong>
+                        Name: <strong> </strong>
                     </div>
                     <div class="col-2 offset-2 text-center">
                         

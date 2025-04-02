@@ -297,11 +297,12 @@
                             <field name="allow_for_publish" required="1"/> 
                         </group>
                         <group>
-                            <field name="is_internal"/> 
-                            <field name="is_external"/> 
+                            <field name="is_internal" help="MDA Expenditures request"/> 
+                            <field name="is_external" help="MDA Payment request"/> 
                             <field name="is_contractor"/> 
                             <field name="is_verification"/> 
-                            <field name="is_allocation"/> 
+                            <field name="is_allocation" help="Budget Allocation Request"/> 
+                            <field name="is_viament_allocation"/> 
                             <field name="is_revenue"/> 
                         </group>
                     </group>

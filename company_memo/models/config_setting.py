@@ -59,7 +59,7 @@ class MemoSubStageLine(models.Model):
     
     require_po_confirmation = fields.Boolean("Require PO confirmation", default=False)
     require_so_confirmation = fields.Boolean("Require SO confirmation", default=False)
-    require_bill_payment = fields.Boolean("Require PO/SO payment", default=False)
+    require_bill_payment = fields.Boolean("Require payment", default=False)
     duration_config = fields.Integer(
         "Duration", 
         default=20, 
@@ -280,6 +280,7 @@ class MemoType(models.Model):
     is_contractor = fields.Boolean("Is Contractor payment", default=False)
     is_verification = fields.Boolean("Is budget verification", default=False)
     is_allocation = fields.Boolean("Is budget allocation", default=False)
+    is_viament_allocation = fields.Boolean("Is budget Viament", default=False)
     is_revenue = fields.Boolean("Is Revenue", default=False)
     active = fields.Boolean("Active", default=True)
     allow_for_publish = fields.Boolean("Allow to be published?", default=True)
@@ -301,7 +302,7 @@ class MemoStage(models.Model):
     publish_on_dashboard = fields.Boolean("Publish on Dashboard", default=False)
     require_po_confirmation = fields.Boolean("Require PO confirmation", default=False)
     require_so_confirmation = fields.Boolean("Require SO confirmation", default=False)
-    require_bill_payment = fields.Boolean("Require PO/SO payment", default=False)
+    require_bill_payment = fields.Boolean("Require payment", default=False)
     require_waybill_detail = fields.Boolean("Require Waybill validation", default=False)
     
     enabled_date_validity_config = fields.Boolean("Date Validity", default=False)

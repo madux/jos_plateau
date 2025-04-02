@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 from bs4 import BeautifulSoup
 from odoo.tools import consteq, plaintext2html
 from odoo import http
@@ -124,6 +124,7 @@ class Memo_Model(models.Model):
         res = super(Memo_Model, self).default_get(fields)
         memo_project_type = self.env.context.get('default_memo_project_type')
         default_budget_allocation = self.env.context.get('default_is_budget_allocation_request')
+        default_budget_viament = self.env.context.get('default_is_budget_viament_allocation')
         external_payment_request = self.env.context.get('default_external_memo_request')
         is_internal_transfer = self.env.context.get('default_is_internal_transfer')
         is_contract_memo_request = self.env.context.get('default_is_contract_memo_request')
@@ -143,8 +144,17 @@ class Memo_Model(models.Model):
             'dummy_memo_types': [(6, 0, [rec.memo_type.id for rec in memo_configs if user_branch_id.id in rec.branch_ids.ids])],
             'dummy_budget_ids': [(6, 0, [rec.id for rec in self.env['ng.account.budget'].search(budget_domain)
                                          ])],
-            'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request else False,
-            'memo_type': self.env['memo.type'].search([('is_internal', '=', True)], limit=1).id if is_internal_transfer == True else self.env['memo.type'].search([('is_external', '=', True)], limit=1).id if external_payment_request == True and is_internal_transfer == False else self.env['memo.type'].search([('is_contractor', '=', True)], limit=1).id if is_contract_memo_request == True else self.env['memo.type'].search([('is_allocation', '=', True)], limit=1).id if default_budget_allocation == True else 40 
+            'request_mda_from': ministry_of_finance.id if default_budget_allocation or external_payment_request or default_budget_viament else False,
+            'memo_type': self.env['memo.type'].search([
+                ('is_internal', '=', True)], limit=1).id \
+                    if is_internal_transfer == True \
+                        else self.env['memo.type'].search([('is_external', '=', True)], limit=1).id \
+                            if external_payment_request == True and is_internal_transfer == False \
+                                else self.env['memo.type'].search([('is_contractor', '=', True)], limit=1).id \
+                                    if is_contract_memo_request == True \
+                                        else self.env['memo.type'].search([('is_allocation', '=', True)], limit=1).id \
+                                            if default_budget_allocation == True else  self.env['memo.type'].search([('is_viament_allocation', '=', True)], limit=1).id \
+                                                if default_budget_viament == True else False 
             })
         return res
     
@@ -1435,6 +1445,7 @@ class Memo_Model(models.Model):
     def write(self, vals):
         
         old_length = len(self.users_followers)
+        old_payment_ids_length = len(self.payment_ids)
         if self.attachment_ids:
             self.attachment_ids.write({'res_model': self._name, 'res_id': self.id})
         
@@ -1447,9 +1458,11 @@ class Memo_Model(models.Model):
                 rec.memo_id = self.id
             
         if 'payment_ids' in vals:
+            if self.state != 'submit':
+                if len(self.payment_ids) < old_payment_ids_length:
+                    raise ValidationError("Sorry you cannot payments if it's not in first stage. Please discard the changes")
             for rec in self.payment_ids:
                 rec.memo_reference = self.id
-        
         return res
 
     @api.constrains('document_folder')
@@ -2029,7 +2042,7 @@ class Memo_Model(models.Model):
     
     budget_line_to_send_id = fields.Many2one(
         'ng.account.budget.line', 
-        string='Send To Budget Sub Head', 
+        string='Budget Head to Receive', 
         store=True, 
         # domain=lambda self: self._get_related_stage(),
         ) 
@@ -2063,10 +2076,22 @@ class Memo_Model(models.Model):
         else:
             self.budget_has_allocation = False
         
-    
+    @api.onchange('budget_line_to_send_id')
+    def onchange_budget_line_to_send_id(self):
+        for rec in self:
+            if rec.budget_line_to_send_id:
+                if rec.budget_line_to_send_id.id == rec.budget_line_id.id:
+                    rec.budget_line_to_send_id = False
+                    raise UserError("Budget head to Send from is the same with budget head to receive, Please select a different budget")
+                
     is_budget_allocation_request = fields.Boolean(
         string='Is Budget Allocation Process',
         related="memo_type.is_allocation",
+        default=False)
+    
+    is_budget_viament_allocation = fields.Boolean(
+        string='Is Budget Viament',
+        related="memo_type.is_viament_allocation",
         default=False)
     # required and visible if budget allocation is set
     # if completed, system generates a line in ng.account.budget.line with the budget head Id selected
@@ -2079,7 +2104,17 @@ class Memo_Model(models.Model):
         store=True, 
         )
     
-     
+    @api.onchange('branch_id')
+    def onchange_budget_amount(self):
+        if self.budget_amount and self.budget_amount > 0:
+            if self.budget_amount > self.budget_balance_amount: 
+                self.update({
+                    'budget_amount': 0
+                })
+                raise UserError(
+                    """Requesting Budget amount must not 
+                    be greater than budget""")
+        
             
     def check_aprrover_user(self):
         # if self.env.user.id not in [r.user_id.id for r in self.stage_id.approver_ids]:
@@ -2096,19 +2131,6 @@ class Memo_Model(models.Model):
     def approve_budget_allocation(self):
         self.check_aprrover_user()
         for rec in self:
-            
-            # budget = self.env['ng.account.budget'].create({
-            #     'name': f"{self.branch_id.name} - f{datetime.strftime(fields.Date.today(), '%Y-%m-%d')}", 
-            #     'date_from': fields.Date.today(),
-            #     'date_to': fields.Date.today() + relativedelta(months=5), 
-            #     'general_journal_id': self.branch_id.default_journal_id.id,
-            #     'general_account_id': self.branch_id.default_account_id.id,
-            #     'budget_amount': self.budget_amount,
-            #     'active': True,
-            #     'branch_id': self.branch_id.id,
-            #     'paid_date': fields.Date.today(),
-            # })
-            
             if not any([rec.budget_amount, self.budget_id]):
                 raise ValidationError(f"""
                                       Record with code number {rec.code} does not have 
@@ -2144,8 +2166,8 @@ class Memo_Model(models.Model):
                                 # 'move_id': inv.id,
                                 'name': rec.description,
                                 'ref': f'{self.code}',
-                                'account_id': self.request_mda_from.default_account_id.id or self.request_mda_from.default_account_id.id,
-                                'ng_budget_line_id': self.budget_line_to_send_id.id,
+                                'account_id': self.request_mda_from.default_account_id.id,
+                                'ng_budget_line_id': self.budget_line_to_send_id.id if self.budget_line_to_send_id else self.budget_line_id.id,
                                 'debit': rec.budget_amount,
                                 'quantity': 1,
                                 'code': rec.code,
@@ -2282,19 +2304,8 @@ class Memo_Model(models.Model):
             if not self.invoice_ids:
                 raise ValidationError(
                     """Please Add contractor invoice lines"""
-                    )
-
-        # if self.to_unfreezed_budget and not self.po_ids:
-        #     raise ValidationError("Please add PO and Provide reasons for Additional PO approval")
-        if self.memo_type.memo_key == "Payment":
-            if self.contractor_ids or self.payment_ids or self.invoice_ids:# self.amountfig <= 0:
-                # raise ValidationError(
-                #     """Please Add payment request lines"""
-                #     ) 
-                pass
-            else:
-                raise ValidationError("Please add the payment lines or contractor lines")
-        elif self.memo_type.memo_key == "material_request" and not self.product_ids:
+                    ) 
+        if self.memo_type.memo_key == "material_request" and not self.product_ids:
             raise ValidationError("Please add request line") 
         view_id = self.env.ref('company_memo.memo_model_forward_wizard')
         condition_stages = [self.stage_id.yes_conditional_stage_id.id, self.stage_id.no_conditional_stage_id.id] or []
@@ -3217,11 +3228,12 @@ class Memo_Model(models.Model):
             pass
         
         else:
-            not_done = self.mapped('invoice_ids').filtered(lambda se: se.state in ['draft'])
-            if not_done:
-                raise ValidationError("Payments should be posted manually to ensure data accuracy")
-            if not self.bank_partner_id or not self.scheduled_pay_date:
-                raise ValidationError("Bank Name and schedule date must be selected to generate payment mandate")
+            if not self.is_budget_allocation_request or not self.is_budget_viament_allocation:
+                not_done = self.mapped('invoice_ids').filtered(lambda se: se.state in ['draft'])
+                if not_done:
+                    raise ValidationError("Payments should be posted manually to ensure data accuracy")
+                if not self.bank_partner_id or not self.scheduled_pay_date or not self.scheduled_pay_date:
+                    raise ValidationError("Bank Name and schedule date must be selected to generate payment mandate")
          
         self.state = 'Done'
         self.is_request_completed = True

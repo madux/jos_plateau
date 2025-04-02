@@ -13,6 +13,43 @@
 
 } */
 
+/* changing my notebooks  */
+.o_notebook .nav-tabs .nav-link {
+  background-color: grey !important; /* Grey background */
+  color: white !important; /* White text */
+  border: 1px solid #ccc !important; /* Border for each tab */
+  border-radius: 5px !important;
+  padding: 10px 15px !important;
+}
+
+/* Active Tab Style */
+.o_notebook .nav-tabs .nav-link.active {
+  background-color: darkgray !important; /* Darker grey for active tab */
+  color: white !important;
+  border-bottom: 3px solid white !important; /* White bottom border */
+}
+
+.o_list_renderer .o_list_table > thead > tr > {
+  color: red;
+  width: 50px;
+}
+
+
+.o_form_view .o_input {
+  border: none !important;
+  border-bottom: 2px solid grey !important; /* Grey bottom border */
+  border-radius: 0 !important; /* Remove rounded corners */
+  background-color: transparent !important; /* Make it clear */
+  outline: none !important; 
+  
+}
+
+/* Highlight on Focus */
+.o_form_view .o_input:focus {
+  border-bottom: 2px solid darkgrey !important; /* Darker grey on focus */
+  box-shadow: none !important; /* Remove default focus shadow */
+}
+
 .color-grey {
   color: #dddcdc
 }

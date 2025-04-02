@@ -25,6 +25,7 @@ class CompanyMemo(models.Model):
     is_top_account_user = fields.Boolean('Is top account user?', compute="compute_top_account_user")
     
     bank_partner_id = fields.Many2one('res.partner', string='Bank-', help="Select the bank to send payment schedule")
+    bank_account_number = fields.Char(string='Bank Account')
     scheduled_pay_date = fields.Date(string='Scheduled Pay date')
 
     @api.depends('external_memo_request', 'is_internal_transfer')

@@ -6,12 +6,12 @@ class accountTax(models.Model):
     
     contact_tax_type = fields.Selection(
         [
-        ("", ""), 
+        ("none", "Zero / None Tax"), 
         ("Consultant", "Consultant"), 
         ("Individual", "Individual"),
         ("Contractor", "Contractor"),
         ], string="Contact Tax Type", 
-        default="Individual",
+        default="none",
         help="Contact tax type to help determine", 
     )
     

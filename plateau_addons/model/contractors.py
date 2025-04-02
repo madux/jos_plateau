@@ -29,12 +29,12 @@ class resContractors(models.Model):
     
     contact_tax_type = fields.Selection(
         [
-        ("", ""), 
+        ("none", "Zero / None Tax"), 
         ("Consultant", "Consultant"), 
         ("Individual", "Individual"),
         ("Contractor", "Contractor"),
         ], string="Contact Tax Type", 
-        default="",
+        default="none",
         help="Contact tax type to help determine", 
     )
     
@@ -44,7 +44,11 @@ class resContractors(models.Model):
         default=lambda self: self.env.user.branch_id.default_account_id.id
         )
     debit_account_number = fields.Char(string='Debit Account')
-    credit_account_number = fields.Char(string='Contractor Credit Account')
+    debit_bank = fields.Char(string='Debit Bank')
+    
+    credit_bank = fields.Char(string='Contractor Bank')
+    credit_account_number = fields.Char(string='Contractor Account')
+    
     contractor_phone = fields.Char(string='Phone',related="contractor_id.phone")
     contractor_email = fields.Char(string='Email',related="contractor_id.email")
     bank_phone = fields.Char(string='Bank Phone',related="bank_id.phone")

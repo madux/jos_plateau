@@ -19,6 +19,10 @@ class AccountPayment(models.Model):
                                    help="Used to bypass validations of outstanding/payment reciepts account")
     
     memo_state = fields.Char(string="Memo state", compute="compute_memo_state")
+    debit_bank = fields.Char(string='Debit Bank')
+    credit_bank = fields.Char(string='Credit Bank')
+    debit_account = fields.Char(string='Debit Account')
+    credit_account = fields.Char(string='Credit Account')
     
     @api.depends('memo_reference')
     def compute_memo_state(self):

@@ -38,6 +38,25 @@
             </field>
         </record>
 
+        
+        <record id="view_move_form_inherit_purchase_plateau_form_extended" model="ir.ui.view">
+            <field name="name">account.move</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="purchase.view_move_form_inherit_purchase"/>
+            <field name="arch" type="xml">
+                <xpath expr="//t[@groups='purchase.group_purchase_user']" position="replace">
+
+                    <t groups="purchase.group_purchase_user">
+                        <field name="purchase_id" invisible="1" readonly="state != 'draft'"/>
+                        <!-- <label for="purchase_vendor_bill_id" string="Auto-Complete" class="oe_edit_only" invisible="state != 'draft' or move_type != 'in_invoice'"/> -->
+                        <label for="purchase_vendor_bill_id" string="Auto-Complete" class="oe_edit_only" invisible="1"/>
+                        <!-- <field name="purchase_vendor_bill_id" nolabel="1" invisible="state != 'draft' or move_type != 'in_invoice'" readonly="state != 'draft'" class="oe_edit_only" domain="partner_id and [('partner_id.commercial_partner_id', '=', commercial_partner_id)] or []" placeholder="Select a purchase order or an old bill" context="{'show_total_amount': True}" options="{'no_create': True, 'no_open': True}"/> -->
+                        <field name="purchase_vendor_bill_id" nolabel="1" invisible="1" placeholder="Select a purchase order or an old bill" context="{'show_total_amount': True}" options="{'no_create': True, 'no_open': True}"/>
+                    </t>
+                </xpath>
+              </field>
+        </record>  
+
         <record id="view_account_move_plateau_form_extended" model="ir.ui.view">
             <field name="name">account.move</field>
             <field name="model">account.move</field>
@@ -48,10 +67,10 @@
                     options="{'no_create':True, 'no_open': True}" readonly="state == 'posted'"/> 
                     <field name="bank_partner_id" invisible="0" required="0" domain="[('is_bank', '=', True)]" 
                     options="{'no_create':True, 'no_open': True}" readonly="state == 'posted'"/>
-                    <field name="bank_partner_account" readonly="0" required="bank_partner_id != False" />
+                    <field name="bank_partner_account" readonly="0" required="bank_partner_id != False" placeholder="Enter Vendor/Contractor Account"/>
                     <field name="contact_tax_type" required="1" force_save="1" readonly="state == 'posted'"/>
-                </field>
-                 
+                    <!-- <field name="move_type"/> -->
+                </field> 
                 <field name="invoice_date" position="after">
                     <field name="dummy_budget_ids" invisible="1" required="0" readonly="0" force_save="1"
                     widget="many2many_tags"/> 
@@ -59,30 +78,26 @@
                     <field name="is_top_account_user" invisible="1" force_save="1"/>
                 </field>
 
-                <!-- <field name="invoice_date_due" position="before">
-                    <field name="bank_partner_id" invisible="0" required="0" domain="[('is_bank', '=', True)]" 
-                    options="{'no_create':True, 'no_open': True}" readonly="state == 'posted'"/> 
-                </field> -->
-                <!-- <xpath expr="//button[@name='action_post'][2]" position="attributes">
-                    <attribute name="attrs">{'invisible': [ '|', '|', '|', '|', ('external_memo_request', '=', True),('is_top_account_user', '=', False), ('hide_post_button', '=', True), ('move_type', '=', 'entry'), ('display_inactive_currency_warning','=',True)]}</attribute>
-                </xpath> -->
-                <!-- <button name="button_cancel" position="attributes"> -->
-                <!-- <xpath expr="//button[@name='button_cancel'][1]" position="attributes">
-                    <attribute name="attrs">{'invisible' : ['|', '|', '|', '|', ('id', '=', False), ('state', '!=', 'draft'),('move_type', '!=', 'entry'), ('external_memo_request', '=', True),('is_top_account_user', '!=', True)]}</attribute>
-                </xpath> -->
+                <xpath expr="//div[@name='journal_div']" position="replace">
+                    <div name="journal_div" class="d-flex" groups="account.group_account_readonly" invisible="context.get('default_journal_id') and context.get('move_type', 'entry') != 'entry' and memo_id == False">
+                        <field name="journal_id" options="{'no_create': True, 'no_open': True}" readonly="posted_before and name not in (False, '', '/')"/>
+                        <span class="oe_inline o_form_label mx-3" groups="base.group_multi_currency" invisible="move_type == 'entry'"> in </span>
+                        <field name="currency_id" groups="base.group_multi_currency" invisible="move_type == 'entry'" readonly="state != 'draft'" options="{'no_create': True}" context="{'search_default_active': 1, 'search_default_inactive': 1}"/>
+                    </div>
+                </xpath>
 
-                <!-- <xpath expr="//button[@name='action_register_payment']" position="attributes">
-                    <attribute name="attrs">{'invisible': ['|', '|', '|', ('external_memo_request', '=', True), ('state', '!=', 'posted'), ('payment_state', 'not in', ('not_paid', 'partial')), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}</attribute>
-                </xpath> -->
-                <!-- <xpath expr="//button[@name='button_cancel']" position="before">
-                    <button name="button_register_payment" string="Transfer Payment" class="oe_highlight" type="object" 
-                    attrs="{'invisible': [('external_memo_request', '=', False)]}" groups="ik_multi_branch.account_major_user"/>
-                </xpath> -->
                 <field name="invoice_date" position="attributes">
                     <attribute name="required">1</attribute>
+                    <attribute name="string">Voucher Date</attribute>
                 </field>
                 <field name="origin" position="attributes">
                     <attribute name="invisible">1</attribute>
+                </field>
+                <field name="payment_reference" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="currency_id" position="attributes">
+                    <attribute name="options">{'no_create':True, 'no_open': True}</attribute>
                 </field>
                 <field name="ref" position="attributes">
                     <attribute name="string">Bill Reference / File No.</attribute>
@@ -90,11 +105,7 @@
 
                 <field name="auto_post" position="before">
                     <field name="memo_id"/>
-                </field>
-
-                <field name="invoice_date" position="attributes">
-                    <attribute name="string">Date</attribute>
-                </field>
+                </field> 
 
                 <field name="purchase_vendor_bill_id" position="attributes">
                     <attribute name="invisible">1</attribute>
@@ -109,7 +120,7 @@
                 </field> -->
 
                 <xpath expr="//field[@name='invoice_line_ids']" position="attributes">
-                    <attribute name="context">{'default_ng_budget_id': ng_budget_id, 'default_contact_tax_type': contact_tax_type}</attribute> 
+                    <attribute name="context">{'default_ng_budget_id': ng_budget_id, 'default_contact_tax_type': contact_tax_type, 'default_move_type': move_type}</attribute> 
                 </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='product_id']" position="attributes">
@@ -117,15 +128,47 @@
                     <attribute name="invisible">1</attribute> 
                     <attribute name="column_invisible">1</attribute> 
                 </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='tax_ids']" position="attributes">
+                    <attribute name="invisible">parent.contact_tax_type in ["", " ", False, "none"]</attribute> 
+                    <attribute name="column_invisible">parent.contact_tax_type in ["", " ", False, "none"]</attribute> 
+                    <attribute name="readonly">parent.contact_tax_type not in ["", " ", False, "none"]</attribute> 
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='price_subtotal']" position="attributes">
+                    <attribute name="optional">hide</attribute> 
+                </xpath>
                 
+
+                <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='price_total']" position="attributes">
+                    <attribute name="optional"></attribute> 
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='analytic_distribution']" position="attributes">
+                    <attribute name="optional">hide</attribute> 
+                </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='price_unit']" position="attributes">
                     <attribute name="string">Amount</attribute> 
                 </xpath> 
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='account_id']" position="attributes">
-                    <attribute name="groups"></attribute> 
+                    <attribute name="string">Economic (Account)</attribute>
+                    <attribute name="placeholder">Please select Account</attribute>
+                    <attribute name="groups"></attribute>
+                    <attribute name="default">False</attribute> 
+                    <attribute name="domain">[('is_migrated', '=', True)]</attribute> 
+                    <attribute name="options">{'no_create':True, 'no_open': True}</attribute> 
                 </xpath>
 
+                <xpath expr="//field[@name='invoice_line_ids']//tree//control[last()]" position="replace">
+                    <control>
+                        <create name="add_line_control" string="Add a Line - Click to create a new Expense item"/>
+                        <!-- <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                        <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/> -->
+                    </control>
+
+                </xpath>
+
+                
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='quantity']" position="attributes">
                     <attribute name="string">Unit</attribute> 
                 </xpath>
@@ -136,6 +179,7 @@
                 </xpath>
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='name']" position="attributes">
                     <attribute name="required">1</attribute> 
+                    <attribute name="string">Label (Expense line)</attribute> 
                     <attribute name="placeholder">eg. Purchase of office items</attribute> 
                 </xpath>
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='account_id']" position="after">
@@ -143,8 +187,10 @@
                     <field name="ng_budget_id" invisible="1" readonly="0" column_invisible="1"/> 
 
                     <field name="ng_budget_line_id" domain="[('id', 'in', ng_budget_line_ids)]" column_invisible="parent.ng_budget_id == False" invisible="parent.ng_budget_id == False" required="parent.ng_budget_id != False" options="{'no_create':True, 'no_open': False}"/> 
-                    <field name="budget_balance" column_invisible="parent.ng_budget_id == False" invisible="parent.ng_budget_id == False" readonly="1"/> 
+                    <field name="budget_balance" string="Balance" column_invisible="parent.ng_budget_id == False" invisible="parent.ng_budget_id == False" readonly="1"/> 
                     <field name="contact_tax_type" invisible="1" column_invisible="1"/>
+                    <field name="move_type" invisible="1" column_invisible="1"/>
+
                 </xpath> 
             </field>
         </record>
