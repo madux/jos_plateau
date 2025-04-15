@@ -123,5 +123,11 @@
             sequence="106"/>
 
         <menuitem action="action_ng_account_budget_line" id="ng_account_budget_line_menu" sequence="103" parent="account.menu_finance_entries_accounting_miscellaneous"/>
+        <menuitem
+            id="ng_account_budget_line_memo_menu2"
+            name="Budget Head (Allocation)"
+            parent="plateau_addons.internal_memo_account_setup_menu"
+            action="plateau_addons.action_ng_account_budget_line"
+            sequence="20"/>
     </data>
 </odoo>

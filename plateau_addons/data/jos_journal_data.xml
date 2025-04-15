@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data noupdate="1">
+
+    <!-- NEWSS -->
+        <record id="journal_house_assembly_bank" model="account.journal">
+            <field name="name">HOUSE OF ASSEMBLY - Bank</field>
+            <field name="type">bank</field>
+            <field name="code">HAC-BNK</field>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_house_of_assembly"/> -->
+            <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_house_of_assembly')])]"/>
+        </record>
+
+        <record id="journal_house_assembly_commission_bank" model="account.journal">
+            <field name="name">HOUSE OF ASSEMBLY COMMISSION - Bank</field>
+            <field name="type">bank</field>
+            <field name="code">PHA-BNK</field>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_house_of_assembly_commission_bank"/> -->
+            <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_house_of_assembly_commission')])]"/>
+        </record>
+
+        <record id="journal_house_of_assembly_office_clerk_bank" model="account.journal">
+            <field name="name">HOUSE OF ASSEMBLY (OFFICE CLERK) - Bank</field>
+            <field name="type">bank</field>
+            <field name="code">HAOC-BNK</field>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_house_of_assembly_office_clerk"/> -->
+            <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_house_of_assembly_office_clerk')])]"/>
+        </record>
     
         <!-- ADULT & NON-FORMAL EDUCATION -->
         <record id="journal_adult_and_non_formal_education_bank" model="account.journal">
             <field name="name">ADULT &amp; NON-FORMAL EDUCATION - Bank</field>
             <field name="type">bank</field>
             <field name="code">ANE-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_adult_and_non_formal_education_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_adult_and_non_formal_education_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_adult_and_non_formal_education')])]"/>
         </record>
         <record id="journal_adult_and_non_formal_education_expense" model="account.journal">
             <field name="name">ADULT &amp; NON-FORMAL EDUCATION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">ANE-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_adult_and_non_formal_education_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_adult_and_non_formal_education_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_adult_and_non_formal_education')])]"/>
         </record>
         <!-- BOUNDARY COMMISSION -->
@@ -22,14 +47,14 @@
             <field name="name">BOUNDARY COMMISSION - Bank</field>
             <field name="type">bank</field>
             <field name="code">BC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_boundary_commission_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_boundary_commission_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_boundary_commission')])]"/>
         </record>
         <record id="journal_boundary_commission_expense" model="account.journal">
             <field name="name">BOUNDARY COMMISSION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">BC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_boundary_commission_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_boundary_commission_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_boundary_commission')])]"/>
         </record>
         <!-- CHRISTIAN PILGRIMS WELFARE BOARD -->
@@ -37,29 +62,31 @@
             <field name="name">CHRISTIAN PILGRIMS WELFARE BOARD - Bank</field>
             <field name="type">bank</field>
             <field name="code">CPWB-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_christian_pilgrims_welfare_board_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_christian_pilgrims_welfare_board_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_christian_pilgrims_welfare_board')])]"/>
         </record>
         <record id="journal_christian_pilgrims_welfare_board_expense" model="account.journal">
             <field name="name">CHRISTIAN PILGRIMS WELFARE BOARD - EXP</field>
             <field name="type">purchase</field>
             <field name="code">CPWB-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_christian_pilgrims_welfare_board_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_christian_pilgrims_welfare_board_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_christian_pilgrims_welfare_board')])]"/>
         </record>
+
+        
         <!-- CIVIL SERVICE COMMISSION -->
         <record id="journal_civil_service_commission_bank" model="account.journal">
             <field name="name">CIVIL SERVICE COMMISSION - Bank</field>
             <field name="type">bank</field>
             <field name="code">CSC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_civil_service_commission_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_civil_service_commission_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_civil_service_commission')])]"/>
         </record>
         <record id="journal_civil_service_commission_expense" model="account.journal">
             <field name="name">CIVIL SERVICE COMMISSION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">CSC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_civil_service_commission_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_civil_service_commission_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_civil_service_commission')])]"/>
         </record>
         <!-- COLLEGE OF AGRICULTURE, GARKAWA -->
@@ -67,14 +94,14 @@
             <field name="name">COLLEGE OF AGRICULTURE, GARKAWA - Bank</field>
             <field name="type">bank</field>
             <field name="code">CAG-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_agriculture_garkawa_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_agriculture_garkawa_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_agriculture_garkawa')])]"/>
         </record>
         <record id="journal_college_of_agriculture_garkawa_expense" model="account.journal">
             <field name="name">COLLEGE OF AGRICULTURE, GARKAWA - EXP</field>
             <field name="type">purchase</field>
             <field name="code">CAG-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_agriculture_garkawa_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_agriculture_garkawa_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_agriculture_garkawa')])]"/>
         </record>
         <!-- COLLEGE OF ARTS,SCIENCE AND TECHNOLOGY, KURGWI -->
@@ -82,14 +109,14 @@
             <field name="name">COLLEGE OF ARTS,SCIENCE AND TECHNOLOGY, KURGWI - Bank</field>
             <field name="type">bank</field>
             <field name="code">CATK-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_artsscience_and_technology_kurgwi_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_artsscience_and_technology_kurgwi_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_arts_science_and_remedial_studies_kurgwi')])]"/>
         </record>
         <record id="journal_college_of_artsscience_and_technology_kurgwi_expense" model="account.journal">
             <field name="name">COLLEGE OF ARTS,SCIENCE AND TECHNOLOGY, KURGWI - EXP</field>
             <field name="type">purchase</field>
             <field name="code">CATK-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_artsscience_and_technology_kurgwi_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_artsscience_and_technology_kurgwi_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_arts_science_and_remedial_studies_kurgwi')])]"/>
         </record>
         <!-- COLLEGE OF EDUCATION, GINDIRI -->
@@ -97,14 +124,14 @@
             <field name="name">COLLEGE OF EDUCATION, GINDIRI - Bank</field>
             <field name="type">bank</field>
             <field name="code">CEG-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_education_gindiri_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_education_gindiri_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_education_gindiri')])]"/>
         </record>
         <record id="journal_college_of_education_gindiri_expense" model="account.journal">
             <field name="name">COLLEGE OF EDUCATION, GINDIRI - EXP</field>
             <field name="type">purchase</field>
             <field name="code">CEG-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_education_gindiri_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_education_gindiri_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_education_gindiri')])]"/>
         </record>
         <!-- COLLEGE OF HEALTH TECHNOLOGY ZAWAN -->
@@ -112,14 +139,14 @@
             <field name="name">COLLEGE OF HEALTH TECHNOLOGY ZAWAN - Bank</field>
             <field name="type">bank</field>
             <field name="code">CHTZ-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_health_technology_zawan_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_health_technology_zawan_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_health_technology_zawan')])]"/>
         </record>
         <record id="journal_college_of_health_technology_zawan_expense" model="account.journal">
             <field name="name">COLLEGE OF HEALTH TECHNOLOGY ZAWAN - EXP</field>
             <field name="type">purchase</field>
             <field name="code">CHTZ-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_health_technology_zawan_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_health_technology_zawan_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_health_technology_zawan')])]"/>
         </record>
         <!-- COLLEGE OF HEALTH TECHNOLOGY, PANKSHIN -->
@@ -127,14 +154,14 @@
             <field name="name">COLLEGE OF HEALTH TECHNOLOGY, PANKSHIN - Bank</field>
             <field name="type">bank</field>
             <field name="code">CHTP-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_health_technology_pankshin_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_health_technology_pankshin_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_health_technology_pankshin')])]"/>
         </record>
         <record id="journal_college_of_health_technology_pankshin_expense" model="account.journal">
             <field name="name">COLLEGE OF HEALTH TECHNOLOGY, PANKSHIN - EXP</field>
             <field name="type">purchase</field>
             <field name="code">CHTP-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_health_technology_pankshin_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_health_technology_pankshin_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_health_technology_pankshin')])]"/>
         </record>
         <!-- COLLEGE OF NURSING & MIDWIFERY VOM -->
@@ -142,14 +169,14 @@
             <field name="name">COLLEGE OF NURSING &amp; MIDWIFERY VOM - Bank</field>
             <field name="type">bank</field>
             <field name="code">CNMV-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_nursing_and_midwifery_vom_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_nursing_and_midwifery_vom_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_nursing_and_midwifery_vom')])]"/>
         </record>
         <record id="journal_college_of_nursing_and_midwifery_vom_expense" model="account.journal">
             <field name="name">COLLEGE OF NURSING &amp; MIDWIFERY VOM - EXP</field>
             <field name="type">purchase</field>
             <field name="code">CNMV-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_college_of_nursing_and_midwifery_vom_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_college_of_nursing_and_midwifery_vom_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_college_of_nursing_and_midwifery_vom')])]"/>
         </record>
         <!-- COMMUNITY AND SOCIAL DEVELOPMENT AGENCY -->
@@ -157,14 +184,14 @@
             <field name="name">COMMUNITY AND SOCIAL DEVELOPMENT AGENCY - Bank</field>
             <field name="type">bank</field>
             <field name="code">CSDA-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_community_and_social_development_agency_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_community_and_social_development_agency_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_community_and_social_development_agency')])]"/>
         </record>
         <record id="journal_community_and_social_development_agency_expense" model="account.journal">
             <field name="name">COMMUNITY AND SOCIAL DEVELOPMENT AGENCY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">CSDA-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_community_and_social_development_agency_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_community_and_social_development_agency_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_community_and_social_development_agency')])]"/>
         </record>
         <!-- JOS MAIN MARKET AUTHORITY -->
@@ -172,14 +199,14 @@
             <field name="name">JOS MAIN MARKET AUTHORITY - Bank</field>
             <field name="type">bank</field>
             <field name="code">JMMA-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_jos_main_market_authority_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_jos_main_market_authority_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_jos_main_market_authority')])]"/>
         </record>
         <record id="journal_jos_main_market_authority_expense" model="account.journal">
             <field name="name">JOS MAIN MARKET AUTHORITY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">JMMA-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_jos_main_market_authority_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_jos_main_market_authority_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_jos_main_market_authority')])]"/>
         </record>
         <!-- JOS METROPOLITAN DEVELOPMENT BOARD -->
@@ -187,14 +214,14 @@
             <field name="name">JOS METROPOLITAN DEVELOPMENT BOARD - Bank</field>
             <field name="type">bank</field>
             <field name="code">JMDB-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_jos_metropolitan_development_board_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_jos_metropolitan_development_board_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_jos_metropolitan_development_board')])]"/>
         </record>
         <record id="journal_jos_metropolitan_development_board_expense" model="account.journal">
             <field name="name">JOS METROPOLITAN DEVELOPMENT BOARD - EXP</field>
             <field name="type">purchase</field>
             <field name="code">JMDB-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_jos_metropolitan_development_board_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_jos_metropolitan_development_board_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_jos_metropolitan_development_board')])]"/>
         </record>
         <!-- JOS WATER SERVICES CORPORATION -->
@@ -202,14 +229,14 @@
             <field name="name">JOS WATER SERVICES CORPORATION - Bank</field>
             <field name="type">bank</field>
             <field name="code">JWSC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_jos_water_services_corporation_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_jos_water_services_corporation_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_jos_water_services_corporation')])]"/>
         </record>
         <record id="journal_jos_water_services_corporation_expense" model="account.journal">
             <field name="name">JOS WATER SERVICES CORPORATION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">JWSC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_jos_water_services_corporation_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_jos_water_services_corporation_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_jos_water_services_corporation')])]"/>
         </record>
         <!-- LOCAL GOVERNMENT AUDIT DEPARTMENT -->
@@ -217,14 +244,14 @@
             <field name="name">LOCAL GOVERNMENT AUDIT DEPARTMENT - Bank</field>
             <field name="type">bank</field>
             <field name="code">LGAD-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_local_government_audit_department_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_local_government_audit_department_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_local_government_audit')])]"/>
         </record>
         <record id="journal_local_government_audit_department_expense" model="account.journal">
             <field name="name">LOCAL GOVERNMENT AUDIT DEPARTMENT - EXP</field>
             <field name="type">purchase</field>
             <field name="code">LGAD-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_local_government_audit_department_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_local_government_audit_department_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_local_government_audit')])]"/>
         </record>
         <!-- LOCAL GOVERNMENT STAFF PENSION BOARD -->
@@ -232,29 +259,29 @@
             <field name="name">LOCAL GOVERNMENT STAFF PENSION BOARD - Bank</field>
             <field name="type">bank</field>
             <field name="code">LGSPB-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_local_government_staff_pension_board_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_local_government_staff_pension_board_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_local_government_pension_board')])]"/>
         </record>
         <record id="journal_local_government_staff_pension_board_expense" model="account.journal">
             <field name="name">LOCAL GOVERNMENT STAFF PENSION BOARD - EXP</field>
             <field name="type">purchase</field>
             <field name="code">LGSPB-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_local_government_staff_pension_board_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_local_government_staff_pension_board_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_local_government_pension_board')])]"/>
         </record>
         <!-- MIGHTY JETS -->
         <record id="journal_mighty_jets_bank" model="account.journal">
-            <field name="name">MIGHTY JETS - Bank</field>
+            <field name="name">PLATEAU STATE MIGHTY JETS INTERNATIONAL - Bank</field>
             <field name="type">bank</field>
             <field name="code">MJS-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_mighty_jets_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_mighty_jets_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_mighty_jets')])]"/>
         </record>
         <record id="journal_mighty_jets_expense" model="account.journal">
-            <field name="name">MIGHTY JETS - EXP</field>
+            <field name="name">PLATEAU STATE MIGHTY JETS INTERNATIONAL - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MJS-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_mighty_jets_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_mighty_jets_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_mighty_jets')])]"/>
         </record>
         <!-- MIN. OF LANDS, SURVEY & TOWN PLANNING -->
@@ -262,14 +289,14 @@
             <field name="name">MIN. OF LANDS, SURVEY &amp; TOWN PLANNING - Bank</field>
             <field name="type">bank</field>
             <field name="code">MLSTP-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_min_of_lands_survey_and_town_planning_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_min_of_lands_survey_and_town_planning_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_lands_survey_and_town_planning')])]"/>
         </record>
         <record id="journal_min_of_lands_survey_and_town_planning_expense" model="account.journal">
             <field name="name">MIN. OF LANDS, SURVEY &amp; TOWN PLANNING - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MLSTP-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_min_of_lands_survey_and_town_planning_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_min_of_lands_survey_and_town_planning_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_lands_survey_and_town_planning')])]"/>
         </record>
         <!-- MINISTRY FOR TOURISM, CULTURE & HOSPITALITY -->
@@ -277,14 +304,14 @@
             <field name="name">MINISTRY FOR TOURISM, CULTURE &amp; HOSPITALITY - Bank</field>
             <field name="type">bank</field>
             <field name="code">MTCH-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_for_tourism_culture_and_hospitality_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_for_tourism_culture_and_hospitality_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_tourism_culture_and_hospitality')])]"/>
         </record>
         <record id="journal_ministry_for_tourism_culture_and_hospitality_expense" model="account.journal">
             <field name="name">MINISTRY FOR TOURISM, CULTURE &amp; HOSPITALITY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MTCH-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_for_tourism_culture_and_hospitality_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_for_tourism_culture_and_hospitality_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_tourism_culture_and_hospitality')])]"/>
         </record>
         <!-- MINISTRY FOR YOUTH & SPORTS DEVELOPMENT -->
@@ -292,14 +319,14 @@
             <field name="name">MINISTRY FOR YOUTH &amp; SPORTS DEVELOPMENT - Bank</field>
             <field name="type">bank</field>
             <field name="code">MYSD-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_for_youth_and_sports_development_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_for_youth_and_sports_development_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_sports_and_youth_development')])]"/>
         </record>
         <record id="journal_ministry_for_youth_and_sports_development_expense" model="account.journal">
             <field name="name">MINISTRY FOR YOUTH &amp; SPORTS DEVELOPMENT - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MYSD-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_for_youth_and_sports_development_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_for_youth_and_sports_development_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_sports_and_youth_development')])]"/>
         </record>
         <!-- MINISTRY OF AGRICULTURE AND NATURAL RESOURCES -->
@@ -307,14 +334,14 @@
             <field name="name">MINISTRY OF AGRICULTURE AND NATURAL RESOURCES - Bank</field>
             <field name="type">bank</field>
             <field name="code">MANR-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_agriculture_and_natural_resources_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_agriculture_and_natural_resources_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_agriculture_and_rural_development')])]"/>
         </record>
         <record id="journal_ministry_of_agriculture_and_natural_resources_expense" model="account.journal">
             <field name="name">MINISTRY OF AGRICULTURE AND NATURAL RESOURCES - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MANR-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_agriculture_and_natural_resources_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_agriculture_and_natural_resources_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_agriculture_and_rural_development')])]"/>
         </record>
         <!-- MINISTRY OF BUDGET AND ECONOMIC PLANNING -->
@@ -322,14 +349,14 @@
             <field name="name">MINISTRY OF BUDGET AND ECONOMIC PLANNING - Bank</field>
             <field name="type">bank</field>
             <field name="code">MBEP-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_budget_and_economic_planning_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_budget_and_economic_planning_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_budget_and_economic_planning')])]"/>
         </record>
         <record id="journal_ministry_of_budget_and_economic_planning_expense" model="account.journal">
             <field name="name">MINISTRY OF BUDGET AND ECONOMIC PLANNING - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MBEP-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_budget_and_economic_planning_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_budget_and_economic_planning_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_budget_and_economic_planning')])]"/>
         </record>
         <!-- MINISTRY OF COMMERCE & INDUSTRIES -->
@@ -337,14 +364,14 @@
             <field name="name">MINISTRY OF COMMERCE &amp; INDUSTRIES - Bank</field>
             <field name="type">bank</field>
             <field name="code">MCI-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_commerce_and_industries_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_commerce_and_industries_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_commerce_and_industry')])]"/>
         </record>
         <record id="journal_ministry_of_commerce_and_industries_expense" model="account.journal">
             <field name="name">MINISTRY OF COMMERCE &amp; INDUSTRIES - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MCI-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_commerce_and_industries_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_commerce_and_industries_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_commerce_and_industry')])]"/>
         </record>
         <!-- MINISTRY OF EDUCATION (HIGHER) -->
@@ -352,14 +379,14 @@
             <field name="name">MINISTRY OF EDUCATION (HIGHER) - Bank</field>
             <field name="type">bank</field>
             <field name="code">MEH-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_education_higher_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_education_higher_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_education_higher_education')])]"/>
         </record>
         <record id="journal_ministry_of_education_higher_expense" model="account.journal">
             <field name="name">MINISTRY OF EDUCATION (HIGHER) - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MEH-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_education_higher_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_education_higher_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_education_higher_education')])]"/>
         </record>
         <!-- MINISTRY OF EDUCATION (SECONDARY) -->
@@ -367,14 +394,14 @@
             <field name="name">MINISTRY OF EDUCATION (SECONDARY) - Bank</field>
             <field name="type">bank</field>
             <field name="code">MES-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_education_secondary_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_education_secondary_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_education_secondary_education')])]"/>
         </record>
         <record id="journal_ministry_of_education_secondary_expense" model="account.journal">
             <field name="name">MINISTRY OF EDUCATION (SECONDARY) - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MES-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_education_secondary_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_education_secondary_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_education_secondary_education')])]"/>
         </record>
         <!-- MINISTRY OF ENVIRONMENT, CLIMATE CHANGE -->
@@ -382,14 +409,14 @@
             <field name="name">MINISTRY OF ENVIRONMENT, CLIMATE CHANGE - Bank</field>
             <field name="type">bank</field>
             <field name="code">MECC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_environment_climate_change_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_environment_climate_change_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_environment')])]"/>
         </record>
         <record id="journal_ministry_of_environment_climate_change_expense" model="account.journal">
             <field name="name">MINISTRY OF ENVIRONMENT, CLIMATE CHANGE - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MECC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_environment_climate_change_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_environment_climate_change_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_environment')])]"/>
         </record>
         <!-- MINISTRY OF FINANCE -->
@@ -397,14 +424,14 @@
             <field name="name">MINISTRY OF FINANCE - Bank</field>
             <field name="type">bank</field>
             <field name="code">MF-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_finance_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_finance_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_finance')])]"/>
         </record>
         <record id="journal_ministry_of_finance_expense" model="account.journal">
             <field name="name">MINISTRY OF FINANCE - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MF-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_finance_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_finance_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_finance')])]"/>
         </record>
         <!-- MINISTRY OF HEALTH -->
@@ -412,14 +439,14 @@
             <field name="name">MINISTRY OF HEALTH - Bank</field>
             <field name="type">bank</field>
             <field name="code">MH-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_health_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_health_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_health')])]"/>
         </record>
         <record id="journal_ministry_of_health_expense" model="account.journal">
             <field name="name">MINISTRY OF HEALTH - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MH-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_health_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_health_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_health')])]"/>
         </record>
         <!-- MINISTRY OF HOUSING -->
@@ -427,14 +454,14 @@
             <field name="name">MINISTRY OF HOUSING - Bank</field>
             <field name="type">bank</field>
             <field name="code">MHS-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_housing_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_housing_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_housing')])]"/>
         </record>
         <record id="journal_ministry_of_housing_expense" model="account.journal">
             <field name="name">MINISTRY OF HOUSING - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MHS-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_housing_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_housing_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_housing')])]"/>
         </record>
         <!-- MINISTRY OF INFORMATION -->
@@ -442,14 +469,14 @@
             <field name="name">MINISTRY OF INFORMATION - Bank</field>
             <field name="type">bank</field>
             <field name="code">MI-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_information_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_information_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_information_and_communication')])]"/>
         </record>
         <record id="journal_ministry_of_information_expense" model="account.journal">
             <field name="name">MINISTRY OF INFORMATION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MI-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_information_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_information_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_information_and_communication')])]"/>
         </record>
         <!-- MINISTRY OF JUSTICE -->
@@ -457,14 +484,14 @@
             <field name="name">MINISTRY OF JUSTICE - Bank</field>
             <field name="type">bank</field>
             <field name="code">MJ-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_justice_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_justice_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_justice')])]"/>
         </record>
         <record id="journal_ministry_of_justice_expense" model="account.journal">
             <field name="name">MINISTRY OF JUSTICE - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MJ-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_justice_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_justice_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_justice')])]"/>
         </record>
         <!-- MINISTRY OF MINERAL DEVELOPMENT -->
@@ -472,14 +499,14 @@
             <field name="name">MINISTRY OF MINERAL DEVELOPMENT - Bank</field>
             <field name="type">bank</field>
             <field name="code">MMD-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_mineral_development_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_mineral_development_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_mineral_and_development')])]"/>
         </record>
         <record id="journal_ministry_of_mineral_development_expense" model="account.journal">
             <field name="name">MINISTRY OF MINERAL DEVELOPMENT - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MMD-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_mineral_development_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_mineral_development_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_mineral_and_development')])]"/>
         </record>
         <!-- MINISTRY OF SCIENCE AND TECHNOLOGY -->
@@ -487,14 +514,14 @@
             <field name="name">MINISTRY OF SCIENCE AND TECHNOLOGY - Bank</field>
             <field name="type">bank</field>
             <field name="code">MST-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_science_and_technology_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_science_and_technology_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_science_and_technology')])]"/>
         </record>
         <record id="journal_ministry_of_science_and_technology_expense" model="account.journal">
             <field name="name">MINISTRY OF SCIENCE AND TECHNOLOGY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MST-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_science_and_technology_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_science_and_technology_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_science_and_technology')])]"/>
         </record>
         <!-- MINISTRY OF TRANSPORT -->
@@ -502,14 +529,14 @@
             <field name="name">MINISTRY OF TRANSPORT - Bank</field>
             <field name="type">bank</field>
             <field name="code">MT-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_transport_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_transport_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_transport')])]"/>
         </record>
         <record id="journal_ministry_of_transport_expense" model="account.journal">
             <field name="name">MINISTRY OF TRANSPORT - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MT-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_transport_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_transport_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_transport')])]"/>
         </record>
         <!-- MINISTRY OF WATER RESOURCES & ENERGY -->
@@ -517,14 +544,14 @@
             <field name="name">MINISTRY OF WATER RESOURCES &amp; ENERGY - Bank</field>
             <field name="type">bank</field>
             <field name="code">MWRE-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_water_resources_and_energy_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_water_resources_and_energy_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_water_resources_and_energy')])]"/>
         </record>
         <record id="journal_ministry_of_water_resources_and_energy_expense" model="account.journal">
             <field name="name">MINISTRY OF WATER RESOURCES &amp; ENERGY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MWRE-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_water_resources_and_energy_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_water_resources_and_energy_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_water_resources_and_energy')])]"/>
         </record>
         <!-- MINISTRY OF WOMEN AFFAIRS & SOCIAL DEVELOPMENT -->
@@ -532,14 +559,14 @@
             <field name="name">MINISTRY OF WOMEN AFFAIRS &amp; SOCIAL DEVELOPMENT - Bank</field>
             <field name="type">bank</field>
             <field name="code">MWASD-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_women_affairs_and_social_development_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_women_affairs_and_social_development_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_women_affairs_and_social_development')])]"/>
         </record>
         <record id="journal_ministry_of_women_affairs_and_social_development_expense" model="account.journal">
             <field name="name">MINISTRY OF WOMEN AFFAIRS &amp; SOCIAL DEVELOPMENT - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MWASD-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_women_affairs_and_social_development_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_women_affairs_and_social_development_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_women_affairs_and_social_development')])]"/>
         </record>
         <!-- MINISTRY OF WORKS -->
@@ -547,14 +574,14 @@
             <field name="name">MINISTRY OF WORKS - Bank</field>
             <field name="type">bank</field>
             <field name="code">MW-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_works_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_works_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_works')])]"/>
         </record>
         <record id="journal_ministry_of_works_expense" model="account.journal">
             <field name="name">MINISTRY OF WORKS - EXP</field>
             <field name="type">purchase</field>
             <field name="code">MW-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_works_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_ministry_of_works_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_ministry_of_works')])]"/>
         </record>
         <!-- OFFICE OF THE ACCOUNTANT GENERAL -->
@@ -562,14 +589,14 @@
             <field name="name">OFFICE OF THE ACCOUNTANT GENERAL - Bank</field>
             <field name="type">bank</field>
             <field name="code">OAG-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_accountant_general_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_accountant_general_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_office_of_the_accountant_general')])]"/>
         </record>
         <record id="journal_office_of_the_accountant_general_expense" model="account.journal">
             <field name="name">OFFICE OF THE ACCOUNTANT GENERAL - EXP</field>
             <field name="type">purchase</field>
             <field name="code">OAG-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_accountant_general_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_accountant_general_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_office_of_the_accountant_general')])]"/>
         </record>
         <!-- OFFICE OF THE EXECUTIVE GOVERNOR -->
@@ -577,14 +604,14 @@
             <field name="name">OFFICE OF THE EXECUTIVE GOVERNOR - Bank</field>
             <field name="type">bank</field>
             <field name="code">OEG-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_executive_governor_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_executive_governor_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_governors_office')])]"/>
         </record>
         <record id="journal_office_of_the_executive_governor_expense" model="account.journal">
             <field name="name">OFFICE OF THE EXECUTIVE GOVERNOR - EXP</field>
             <field name="type">purchase</field>
             <field name="code">OEG-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_executive_governor_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_executive_governor_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_governors_office')])]"/>
         </record>
         <!-- OFFICE OF THE HEAD OF CIVIL SERVICE -->
@@ -592,14 +619,14 @@
             <field name="name">OFFICE OF THE HEAD OF CIVIL SERVICE - Bank</field>
             <field name="type">bank</field>
             <field name="code">OHCS-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_head_of_civil_service_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_head_of_civil_service_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_0ffice_of_the_head_of_civil_service')])]"/>
         </record>
         <record id="journal_office_of_the_head_of_civil_service_expense" model="account.journal">
             <field name="name">OFFICE OF THE HEAD OF CIVIL SERVICE - EXP</field>
             <field name="type">purchase</field>
             <field name="code">OHCS-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_head_of_civil_service_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_head_of_civil_service_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_0ffice_of_the_head_of_civil_service')])]"/>
         </record>
         <!-- OFFICE OF THE SECRETARY TO THE STATE GOVERNMENT -->
@@ -607,14 +634,14 @@
             <field name="name">OFFICE OF THE SECRETARY TO THE STATE GOVERNMENT - Bank</field>
             <field name="type">bank</field>
             <field name="code">OSTSG-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_secretary_to_the_state_government_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_secretary_to_the_state_government_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_0ffice_of_the_secretary_to_the_government_of_the_state')])]"/>
         </record>
         <record id="journal_office_of_the_secretary_to_the_state_government_expense" model="account.journal">
             <field name="name">OFFICE OF THE SECRETARY TO THE STATE GOVERNMENT - EXP</field>
             <field name="type">purchase</field>
             <field name="code">OSTSG-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_secretary_to_the_state_government_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_office_of_the_secretary_to_the_state_government_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_0ffice_of_the_secretary_to_the_government_of_the_state')])]"/>
         </record>
         <!-- PL. STATE CONTRI. HEALTH CARE MANAGEMENT AGENCY -->
@@ -622,14 +649,14 @@
             <field name="name">PL. STATE CONTRI. HEALTH CARE MANAGEMENT AGENCY - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSCHCMA-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_pl_state_contri_health_care_management_agency_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_pl_state_contri_health_care_management_agency_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_contributory_health_care_management_agency')])]"/>
         </record>
         <record id="journal_pl_state_contri_health_care_management_agency_expense" model="account.journal">
             <field name="name">PL. STATE CONTRI. HEALTH CARE MANAGEMENT AGENCY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSCHCMA-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_pl_state_contri_health_care_management_agency_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_pl_state_contri_health_care_management_agency_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_contributory_health_care_management_agency')])]"/>
         </record>
         <!-- PL.RURAL WATER SUPPLY & SANITATION AGENCY -->
@@ -637,14 +664,14 @@
             <field name="name">PL.RURAL WATER SUPPLY &amp; SANITATION AGENCY - Bank</field>
             <field name="type">bank</field>
             <field name="code">PWSSA-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_pl_rural_water_supply_and_sanitation_agency_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_pl_rural_water_supply_and_sanitation_agency_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_municipal_water_supply_and_sanitation_agency')])]"/>
         </record>
         <record id="journal_pl_rural_water_supply_and_sanitation_agency_expense" model="account.journal">
             <field name="name">PL.RURAL WATER SUPPLY &amp; SANITATION AGENCY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PWSSA-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_pl_rural_water_supply_and_sanitation_agency_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_pl_rural_water_supply_and_sanitation_agency_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_municipal_water_supply_and_sanitation_agency')])]"/>
         </record>
         <!-- PL.ST. HOSPITAL MANAGEMENT BOARD -->
@@ -652,14 +679,14 @@
             <field name="name">PL.ST. HOSPITAL MANAGEMENT BOARD - Bank</field>
             <field name="type">bank</field>
             <field name="code">PHMB-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_hospital_management_board_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_hospital_management_board_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_hospitals_management_board')])]"/>
         </record>
         <record id="journal_pl_st_hospital_management_board_expense" model="account.journal">
             <field name="name">PL.ST. HOSPITAL MANAGEMENT BOARD - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PHMB-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_hospital_management_board_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_hospital_management_board_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_hospitals_management_board')])]"/>
         </record>
         <!-- PL.ST. INDEPENDENT ELECTORAL COMMISSION -->
@@ -667,14 +694,14 @@
             <field name="name">PL.ST. INDEPENDENT ELECTORAL COMMISSION - Bank</field>
             <field name="type">bank</field>
             <field name="code">PIEC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_independent_electoral_commission_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_independent_electoral_commission_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_electoral_independent_commission')])]"/>
         </record>
         <record id="journal_pl_st_independent_electoral_commission_expense" model="account.journal">
             <field name="name">PL.ST. INDEPENDENT ELECTORAL COMMISSION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PIEC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_independent_electoral_commission_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_independent_electoral_commission_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_electoral_independent_commission')])]"/>
         </record>
         <!-- PL.ST. SPECIALIST HOSPITAL -->
@@ -682,14 +709,14 @@
             <field name="name">PL.ST. SPECIALIST HOSPITAL - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSH-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_specialist_hospital_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_specialist_hospital_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_specialist_hospital')])]"/>
         </record>
         <record id="journal_pl_st_specialist_hospital_expense" model="account.journal">
             <field name="name">PL.ST. SPECIALIST HOSPITAL - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSH-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_specialist_hospital_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_pl_st_specialist_hospital_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_specialist_hospital')])]"/>
         </record>
         <!-- PLATEAU STATE FADAMA NG-CARES -->
@@ -697,14 +724,14 @@
             <field name="name">PLATEA STATE FADAMA NG-CARES - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSFN-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_fadama_ng_cares_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_fadama_ng_cares_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_platea_state_fadama_ng_cares')])]"/>
         </record>
         <record id="journal_platea_state_fadama_ng_cares_expense" model="account.journal">
             <field name="name">PLATEA STATE FADAMA NG-CARES - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSFN-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_fadama_ng_cares_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_fadama_ng_cares_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_platea_state_fadama_ng_cares')])]"/>
         </record>
         <!-- PLATEAU AGRICULTURAL DEVELOPMENT PROGRAMME -->
@@ -712,14 +739,14 @@
             <field name="name">PLATEAU AGRICULTURAL DEVELOPMENT PROGRAMME - Bank</field>
             <field name="type">bank</field>
             <field name="code">PADP-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_agricultural_development_programme_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_agricultural_development_programme_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_agricultural_development_programme')])]"/>
         </record>
         <record id="journal_plateau_agricultural_development_programme_expense" model="account.journal">
             <field name="name">PLATEAU AGRICULTURAL DEVELOPMENT PROGRAMME - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PADP-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_agricultural_development_programme_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_agricultural_development_programme_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_agricultural_development_programme')])]"/>
         </record>
         <!-- PLATEAU AGRICULTURAL MECHANIZATION SERV.CORP. -->
@@ -727,14 +754,14 @@
             <field name="name">PLATEAU AGRICULTURAL MECHANIZATION SERV.CORP. - Bank</field>
             <field name="type">bank</field>
             <field name="code">PAMS-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_agricultural_mechanization_serv_corp_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_agricultural_mechanization_serv_corp_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_agricultural_mechanization_service')])]"/>
         </record>
         <record id="journal_plateau_agricultural_mechanization_serv_corp_expense" model="account.journal">
             <field name="name">PLATEAU AGRICULTURAL MECHANIZATION SERV.CORP. - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PAMS-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_agricultural_mechanization_serv_corp_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_agricultural_mechanization_serv_corp_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_agricultural_mechanization_service')])]"/>
         </record>
         <!-- PLATEAU MINERAL DEVELOPMENT COMPANY -->
@@ -742,14 +769,14 @@
             <field name="name">PLATEAU MINERAL DEVELOPMENT COMPANY - Bank</field>
             <field name="type">bank</field>
             <field name="code">PMDC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_mineral_development_company_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_mineral_development_company_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_mineral_development_company')])]"/>
         </record>
         <record id="journal_plateau_mineral_development_company_expense" model="account.journal">
             <field name="name">PLATEAU MINERAL DEVELOPMENT COMPANY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PMDC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_mineral_development_company_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_mineral_development_company_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_mineral_development_company')])]"/>
         </record>
         <!-- PLATEAU RADIO TELEVISION CORPORATION -->
@@ -757,14 +784,14 @@
             <field name="name">PLATEAU RADIO TELEVISION CORPORATION - Bank</field>
             <field name="type">bank</field>
             <field name="code">PRTC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_radio_television_corporation_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_radio_television_corporation_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_radio_television_corporation')])]"/>
         </record>
         <record id="journal_plateau_radio_television_corporation_expense" model="account.journal">
             <field name="name">PLATEAU RADIO TELEVISION CORPORATION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PRTC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_radio_television_corporation_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_radio_television_corporation_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_radio_television_corporation')])]"/>
         </record>
         <!-- PLATEAU STATE BUREAU OF PUBLIC PROCUREMENT -->
@@ -772,14 +799,14 @@
             <field name="name">PLATEAU STATE BUREAU OF PUBLIC PROCUREMENT - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSBPP-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_bureau_of_public_procurement_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_bureau_of_public_procurement_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_public_procurement')])]"/>
         </record>
         <record id="journal_plateau_state_bureau_of_public_procurement_expense" model="account.journal">
             <field name="name">PLATEAU STATE BUREAU OF PUBLIC PROCUREMENT - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSBPP-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_bureau_of_public_procurement_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_bureau_of_public_procurement_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_public_procurement')])]"/>
         </record>
         <!-- PLATEAU STATE BUREAU OF STATISTICS -->
@@ -787,14 +814,14 @@
             <field name="name">PLATEAU STATE BUREAU OF STATISTICS - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSBS-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_bureau_of_statistics_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_bureau_of_statistics_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_bureau_of_statistics')])]"/>
         </record>
         <record id="journal_plateau_state_bureau_of_statistics_expense" model="account.journal">
             <field name="name">PLATEAU STATE BUREAU OF STATISTICS - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSBS-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_bureau_of_statistics_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_bureau_of_statistics_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_bureau_of_statistics')])]"/>
         </record>
         <!-- PLATEAU STATE DISABILITY RIGHTS COMMISSION -->
@@ -802,14 +829,14 @@
             <field name="name">PLATEAU STATE DISABILITY RIGHTS COMMISSION - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSDRC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_disability_rights_commission_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_disability_rights_commission_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_disability_rights_commission')])]"/>
         </record>
         <record id="journal_plateau_state_disability_rights_commission_expense" model="account.journal">
             <field name="name">PLATEAU STATE DISABILITY RIGHTS COMMISSION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSDRC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_disability_rights_commission_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_disability_rights_commission_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_disability_rights_commission')])]"/>
         </record>
         <!-- PLATEAU STATE EMERGENCY AGENCY -->
@@ -817,14 +844,14 @@
             <field name="name">PLATEAU STATE EMERGENCY AGENCY - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSEA-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_emergency_agency_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_emergency_agency_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_emergency_and_relief_management_agency')])]"/>
         </record>
         <record id="journal_plateau_state_emergency_agency_expense" model="account.journal">
             <field name="name">PLATEAU STATE EMERGENCY AGENCY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSEA-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_emergency_agency_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_emergency_agency_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_emergency_and_relief_management_agency')])]"/>
         </record>
         <!-- PLATEAU STATE FIRE SERVICE DIRECTORATE -->
@@ -832,14 +859,14 @@
             <field name="name">PLATEAU STATE FIRE SERVICE DIRECTORATE - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSFSD-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_fire_service_directorate_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_fire_service_directorate_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_fire_service_directorate')])]"/>
         </record>
         <record id="journal_plateau_state_fire_service_directorate_expense" model="account.journal">
             <field name="name">PLATEAU STATE FIRE SERVICE DIRECTORATE - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSFSD-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_fire_service_directorate_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_fire_service_directorate_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_fire_service_directorate')])]"/>
         </record>
         <!-- PLATEAU STATE ICT DEVELOPMENT AGENCY -->
@@ -847,14 +874,14 @@
             <field name="name">PLATEAU STATE ICT DEVELOPMENT AGENCY - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSIDA-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_ict_development_agency_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_ict_development_agency_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_ict_development_agency')])]"/>
         </record>
         <record id="journal_plateau_state_ict_development_agency_expense" model="account.journal">
             <field name="name">PLATEAU STATE ICT DEVELOPMENT AGENCY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSIDA-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_ict_development_agency_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_ict_development_agency_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_ict_development_agency')])]"/>
         </record>
         <!-- PLATEAU STATE LIBRARY BOARD -->
@@ -862,14 +889,14 @@
             <field name="name">PLATEAU STATE LIBRARY BOARD - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSLB-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_library_board_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_library_board_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_library_board')])]"/>
         </record>
         <record id="journal_plateau_state_library_board_expense" model="account.journal">
             <field name="name">PLATEAU STATE LIBRARY BOARD - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSLB-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_library_board_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_library_board_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_library_board')])]"/>
         </record>
         <!-- PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY -->
@@ -877,14 +904,14 @@
             <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSMDA-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_microfinance_development_agency_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_microfinance_development_agency_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_microfinance_development_agency')])]"/>
         </record>
         <record id="journal_plateau_state_microfinance_development_agency_expense" model="account.journal">
             <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSMDA-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_microfinance_development_agency_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_microfinance_development_agency_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_microfinance_development_agency')])]"/>
         </record>
         <!-- PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY NG-CARES -->
@@ -892,14 +919,14 @@
             <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY NG-CARES - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSMDAN-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_microfinance_development_agency_ng_cares_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_microfinance_development_agency_ng_cares_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_microfinance_development_agency_ng_cares')])]"/>
         </record>
         <record id="journal_plateau_state_microfinance_development_agency_ng_cares_expense" model="account.journal">
             <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY NG-CARES - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSMDAN-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_microfinance_development_agency_ng_cares_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_microfinance_development_agency_ng_cares_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_microfinance_development_agency_ng_cares')])]"/>
         </record>
         <!-- PLATEAU STATE MUSLIM PILGRIMS WELFARE BOARD -->
@@ -907,14 +934,14 @@
             <field name="name">PLATEAU STATE MUSLIM PILGRIMS WELFARE BOARD - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSMPWB-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_muslim_pilgrims_welfare_board_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_muslim_pilgrims_welfare_board_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_muslim_pilgrims_welfare_board')])]"/>
         </record>
         <record id="journal_plateau_state_muslim_pilgrims_welfare_board_expense" model="account.journal">
             <field name="name">PLATEAU STATE MUSLIM PILGRIMS WELFARE BOARD - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSMPWB-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_muslim_pilgrims_welfare_board_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_muslim_pilgrims_welfare_board_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_muslim_pilgrims_welfare_board')])]"/>
         </record>
         <!-- PLATEAU STATE NG-CARES COORDINATING UNIT -->
@@ -922,14 +949,14 @@
             <field name="name">PLATEAU STATE NG-CARES COORDINATING UNIT - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSNCU-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_ng_cares_coordinating_unit_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_ng_cares_coordinating_unit_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_ng_cares_coordinating_unit')])]"/>
         </record>
         <record id="journal_plateau_state_ng_cares_coordinating_unit_expense" model="account.journal">
             <field name="name">PLATEAU STATE NG-CARES COORDINATING UNIT - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSNCU-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_ng_cares_coordinating_unit_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_ng_cares_coordinating_unit_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_ng_cares_coordinating_unit')])]"/>
         </record>
         <!-- PLATEAU STATE POLYTECHNIC, BARKIN LADI -->
@@ -937,14 +964,14 @@
             <field name="name">PLATEAU STATE POLYTECHNIC, BARKIN LADI - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSPBL-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_polytechnic_barkin_ladi_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_polytechnic_barkin_ladi_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_polytechnic_barkin_ladi')])]"/>
         </record>
         <record id="journal_plateau_state_polytechnic_barkin_ladi_expense" model="account.journal">
             <field name="name">PLATEAU STATE POLYTECHNIC, BARKIN LADI - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSPBL-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_polytechnic_barkin_ladi_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_polytechnic_barkin_ladi_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_polytechnic_barkin_ladi')])]"/>
         </record>
         <!-- PLATEAU STATE PRIMARY HEALTH CARE BOARD -->
@@ -952,14 +979,14 @@
             <field name="name">PLATEAU STATE PRIMARY HEALTH CARE BOARD - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSPHCB-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_primary_health_care_board_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_primary_health_care_board_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_primary_health_care')])]"/>
         </record>
         <record id="journal_plateau_state_primary_health_care_board_expense" model="account.journal">
             <field name="name">PLATEAU STATE PRIMARY HEALTH CARE BOARD - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSPHCB-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_primary_health_care_board_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_primary_health_care_board_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_primary_health_care')])]"/>
         </record>
         <!-- PLATEAU STATE PUBLISHING COOPERATION -->
@@ -967,14 +994,14 @@
             <field name="name">PLATEAU STATE PUBLISHING COOPERATION - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSPC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_publishing_cooperation_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_publishing_cooperation_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_publishing_corporation')])]"/>
         </record>
         <record id="journal_plateau_state_publishing_cooperation_expense" model="account.journal">
             <field name="name">PLATEAU STATE PUBLISHING COOPERATION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSPC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_publishing_cooperation_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_publishing_cooperation_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_publishing_corporation')])]"/>
         </record>
         <!-- PLATEAU STATE ROAD MAINT. AGENCY (DIRECT LABOUR) -->
@@ -982,14 +1009,14 @@
             <field name="name">PLATEAU STATE ROAD MAINT. AGENCY (DIRECT LABOUR) - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSRMADL-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_road_maint_agency_direct_labour_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_road_maint_agency_direct_labour_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_road_maintenance_agency')])]"/>
         </record>
         <record id="journal_plateau_state_road_maint_agency_direct_labour_expense" model="account.journal">
             <field name="name">PLATEAU STATE ROAD MAINT. AGENCY (DIRECT LABOUR) - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSRMADL-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_road_maint_agency_direct_labour_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_road_maint_agency_direct_labour_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_road_maintenance_agency')])]"/>
         </record>
         <!-- PLATEAU STATE SCHOLARSHIP BOARD -->
@@ -997,14 +1024,14 @@
             <field name="name">PLATEAU STATE SCHOLARSHIP BOARD - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSSB-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_scholarship_board_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_scholarship_board_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_scholarship_board')])]"/>
         </record>
         <record id="journal_plateau_state_scholarship_board_expense" model="account.journal">
             <field name="name">PLATEAU STATE SCHOLARSHIP BOARD - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSSB-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_scholarship_board_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_scholarship_board_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_scholarship_board')])]"/>
         </record>
         <!-- PLATEAU STATE SPORTS COUNCIL -->
@@ -1012,14 +1039,14 @@
             <field name="name">PLATEAU STATE SPORTS COUNCIL - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSSC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_sports_council_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_sports_council_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_sports_council')])]"/>
         </record>
         <record id="journal_plateau_state_sports_council_expense" model="account.journal">
             <field name="name">PLATEAU STATE SPORTS COUNCIL - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSSC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_sports_council_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_sports_council_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_sports_council')])]"/>
         </record>
         <!-- PLATEAU STATE TOURISM CORPORATION -->
@@ -1027,14 +1054,14 @@
             <field name="name">PLATEAU STATE TOURISM CORPORATION - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSTC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_tourism_corporation_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_tourism_corporation_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_tourism_corporation')])]"/>
         </record>
         <record id="journal_plateau_state_tourism_corporation_expense" model="account.journal">
             <field name="name">PLATEAU STATE TOURISM CORPORATION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSTC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_tourism_corporation_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_tourism_corporation_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_tourism_corporation')])]"/>
         </record>
         <!-- PLATEAU STATE UNIVERSAL BASIC EDUCATION -->
@@ -1042,14 +1069,14 @@
             <field name="name">PLATEAU STATE UNIVERSAL BASIC EDUCATION - Bank</field>
             <field name="type">bank</field>
             <field name="code">PSUBE-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_universal_basic_education_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_universal_basic_education_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_universal_basic_education_board')])]"/>
         </record>
         <record id="journal_plateau_state_universal_basic_education_expense" model="account.journal">
             <field name="name">PLATEAU STATE UNIVERSAL BASIC EDUCATION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PSUBE-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_universal_basic_education_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_state_universal_basic_education_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_state_universal_basic_education_board')])]"/>
         </record>
         <!-- PLATEAU UNITED FOOTBALL CLUB -->
@@ -1057,14 +1084,14 @@
             <field name="name">PLATEAU UNITED FOOTBALL CLUB - Bank</field>
             <field name="type">bank</field>
             <field name="code">PUFC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_united_football_club_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_united_football_club_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_united_football_club')])]"/>
         </record>
         <record id="journal_plateau_united_football_club_expense" model="account.journal">
             <field name="name">PLATEAU UNITED FOOTBALL CLUB - EXP</field>
             <field name="type">purchase</field>
             <field name="code">PUFC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_plateau_united_football_club_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_plateau_united_football_club_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_plateau_united_football_club')])]"/>
         </record>
         <!-- RELEVANT TECHNOLOGY BOARD -->
@@ -1072,14 +1099,14 @@
             <field name="name">RELEVANT TECHNOLOGY BOARD - Bank</field>
             <field name="type">bank</field>
             <field name="code">RTB-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_relevant_technology_board_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_relevant_technology_board_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_relevant_technology_board')])]"/>
         </record>
         <record id="journal_relevant_technology_board_expense" model="account.journal">
             <field name="name">RELEVANT TECHNOLOGY BOARD - EXP</field>
             <field name="type">purchase</field>
             <field name="code">RTB-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_relevant_technology_board_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_relevant_technology_board_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_relevant_technology_board')])]"/>
         </record>
         <!-- STATE AUDIT DEPARTMENT -->
@@ -1087,14 +1114,14 @@
             <field name="name">STATE AUDIT DEPARTMENT - Bank</field>
             <field name="type">bank</field>
             <field name="code">SAD-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_state_audit_department_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_state_audit_department_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_state_audit_department')])]"/>
         </record>
         <record id="journal_state_audit_department_expense" model="account.journal">
             <field name="name">STATE AUDIT DEPARTMENT - EXP</field>
             <field name="type">purchase</field>
             <field name="code">SAD-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_state_audit_department_expense"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_state_audit_department_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_state_audit_department')])]"/>
         </record>
         <!-- TEACHERS SERVICE COMMISSION -->
@@ -1102,14 +1129,16 @@
             <field name="name">TEACHERS SERVICE COMMISSION - Bank</field>
             <field name="type">bank</field>
             <field name="code">TSC-BNK</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_teachers_service_commission_bank_cash"/>
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_teachers_service_commission_bank_cash"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_teachers_service_commission')])]"/>
         </record>
         <record id="journal_teachers_service_commission_expense" model="account.journal">
             <field name="name">TEACHERS SERVICE COMMISSION - EXP</field>
             <field name="type">purchase</field>
             <field name="code">TSC-EXP</field>
-            <field name="default_account_id" ref="plateau_addons.account_mda_teachers_service_commission_expense"/>
+            <!-- <field name="custom_account_number">TSC-EXP</field>
+            <field name="custom_account_bank">TSC-EXP</field> -->
+            <!-- <field name="default_account_id" ref="plateau_addons.account_mda_teachers_service_commission_expense"/> -->
             <field name="allowed_branch_ids" eval="[(6,0,[ref('plateau_addons.mda_teachers_service_commission')])]"/>
         </record>
     

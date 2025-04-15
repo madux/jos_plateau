@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data noupdate="1">
-    
+        <!-- NEW -->
+        <record id="account_mda_plateau_state_house_of_assembly" model="account.account">
+            <field name="name">HOUSE OF ASSEMBLY - Bank/Cash</field>
+            <field name="code">011200400100</field>
+            <field name="account_type">asset_cash</field>
+            <field name="branch_id" ref="plateau_addons.mda_plateau_state_house_of_assembly"/>
+        </record>
+
+        <record id="account_mda_plateau_state_house_of_assembly_commission_bank" model="account.account">
+            <field name="name">HOUSE OF ASSEMBLY COMMISSION - Bank/Cash</field>
+            <field name="code">011200300100</field>
+            <field name="account_type">asset_cash</field>
+            <field name="branch_id" ref="plateau_addons.mda_plateau_state_house_of_assembly_commission"/>
+        </record>
+
+
         <!-- ADULT & NON-FORMAL EDUCATION -->
         <record id="account_mda_adult_and_non_formal_education_bank_cash" model="account.account">
             <field name="name">ADULT &amp; NON-FORMAL EDUCATION - Bank/Cash</field>
@@ -212,13 +227,13 @@
         </record>
         <!-- MIGHTY JETS -->
         <record id="account_mda_mighty_jets_bank_cash" model="account.account">
-            <field name="name">MIGHTY JETS - Bank/Cash</field>
+            <field name="name">PLATEAU STATE MIGHTY JETS INTERNATIONAL - Bank/Cash</field>
             <field name="code">79058598cash</field>
             <field name="account_type">asset_cash</field>
             <field name="branch_id" ref="plateau_addons.mda_mighty_jets"/>
         </record>
         <record id="account_mda_mighty_jets_expense" model="account.account">
-            <field name="name">MIGHTY JETS - Expense</field>
+            <field name="name">PLATEAU STATE MIGHTY JETS INTERNATIONAL - Expense</field>
             <field name="code">79058598</field>
             <field name="account_type">expense</field>
             <field name="branch_id" ref="plateau_addons.mda_mighty_jets"/>

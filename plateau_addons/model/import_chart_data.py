@@ -195,7 +195,14 @@ class ImportPLCharts(models.TransientModel):
         
     def create_branch(self, name, code):
         if name and code:
-            branch = self.env['multi.branch'].search([('code', '=', code)], limit=1)
+            if type(code) in [float, int]:
+                code = int(code)
+            code = str(code).strip() 
+            if not code.startswith('0'): # 10
+                code = '0'+ code
+                        
+            branch = self.env['multi.branch'].search([
+                ('code', '=', code)], limit=1)
             if not branch:
                 branch = self.env['multi.branch'].create({
                     'name': name,
@@ -316,11 +323,14 @@ class ImportPLCharts(models.TransientModel):
         # })
         return inv
     
-    def create_chart_of_account(self, name, code, type=False):
+    def create_chart_of_account(self, name, code, acc_type=False):
         account_chart_obj = self.env['account.account']
         # account_head_type = self.account_head_type
         if name and code:
             _logger.info(f'AXCOUNT CODE {code}')
+            if type(code) in [float, int]:
+                code = int(code)
+            code = str(code).strip()
             account_existing = account_chart_obj.search([('code', '=', code)], limit = 1)
             '''
             12 ==income,
@@ -333,6 +343,7 @@ class ImportPLCharts(models.TransientModel):
             account = account_chart_obj.create({
                         "name": name.strip().upper(),
                         "code": code,
+                        "active": True,
                         'is_migrated': True,
                         'company_id': self.env.company.id,
                         "reconcile": False,
@@ -379,7 +390,7 @@ class ImportPLCharts(models.TransientModel):
     #         rec.code = rec.code.replace('.0', '')
     
     def import_budget_journal(self):
-        # file sample => wizard / 2025plateau2025_budget
+        # file sample => MAIN BUDGET 2025
         '''
         [0: mda, 1: mda:xmlid, 2: accountcode, 3: accountname, 4: 2024, 5 2025 budget amount]
         0. First update the MDA codes 
@@ -471,7 +482,7 @@ class ImportPLCharts(models.TransientModel):
                     ('budget_type', '=', self.account_head_type)], limit=1)
                 if account_id:
                     if not budget:
-                        self.env['ng.account.budget'].create({ 
+                        budget = self.env['ng.account.budget'].create({ 
                             'name': self.budget_name +'-'+ self.account_head_type +' '+ branch.name, 
                             # 'general_journal_id': branch.default_journal_id.id, 
                             # 'general_account_id': account_id.id, 

@@ -70,6 +70,8 @@ class accountAccount(models.Model):
         ("Other", "Others"),
         ], string="Budget Type", 
     )
+    active = fields.Boolean(string='Active')
+    
     
 
 class accountAnalyticPlan(models.Model):
@@ -82,6 +84,8 @@ class accountJournal(models.Model):
     _inherit = "account.journal"
     
     for_public_use = fields.Boolean(string="For Public user")
+    custom_account_number = fields.Char(string="Account Number")
+    custom_account_bank = fields.Char(string="Account Bank")
     
     code = fields.Char(
         string='Short Code',
@@ -155,6 +159,8 @@ class AccountPayment(models.Model):
         domain="[('id', 'in', suitable_journal_ids)]",
         check_company=True,
     )
+    custom_account_number = fields.Char(string="Account Number", related="destination_journal_id.custom_account_number")
+    custom_account_bank = fields.Char(string="Account Bank", related="destination_journal_id.custom_account_bank")
     contact_tax_type = fields.Selection(
         [
         ("none", "Zero / None Tax"),  
@@ -431,7 +437,8 @@ class AccountInvoiceLine(models.Model):
          
 class AccountInvoice(models.Model):
     _inherit = 'account.move'
-     
+    
+    
     @api.depends('company_id', 'invoice_filter_type_domain')
     def _compute_suitable_journal_ids(self):
         for m in self:

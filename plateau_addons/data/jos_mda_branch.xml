@@ -1,5 +1,5 @@
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
     
         <!-- MINISTRIES -->
         <record id="mda_ministry_of_debt" model="multi.branch">
@@ -17,7 +17,7 @@
         </record>
         <record id="mda_ministry_of_health" model="multi.branch">
             <field name="name">MINISTRY OF HEALTH</field>
-            <field name="code">52100100100</field>
+            <field name="code">052100100100</field>
         </record>
         <record id="mda_colledge_agric_garkawa" model="multi.branch">
             <field name="name">COLLEGE OF AGRICULTURE, GARKAWA</field>
@@ -40,7 +40,7 @@
             <field name="code">025200300100</field>
         </record>
         <record id="mda_ministry_of_justice" model="multi.branch">
-            <field name="name">Ministry of Justice</field>
+            <field name="name">MINISTRY OF JUSTICE</field>
             <field name="code">032600100100</field>
         </record>
         <record id="mda_ministry_of_housing" model="multi.branch">
@@ -50,7 +50,7 @@
 
         <record id="mda_ministry_of_agriculture_and_rural_development" model="multi.branch">
             <field name="name">MINISTRY OF AGRICULTURE AND RURAL DEVELOPMENT</field>
-            <field name="code">021500000000</field>
+            <field name="code">021500100100</field>
         </record>
         <record id="mda_ministry_of_works" model="multi.branch">
             <field name="name">MINISTRY OF WORKS</field>
@@ -107,11 +107,15 @@
         </record>
         <record id="mda_ministry_of_science_and_technology" model="multi.branch">
             <field name="name">MINISTRY OF SCIENCE AND TECHNOLOGY</field>
-            <field name="code">22800100100</field>
+            <field name="code">022800100100</field>
         </record>
         <record id="mda_info_commu_and_technology_agency" model="multi.branch">
             <field name="name">PLATEAU STATE INFORMATION AND COMMUNICATION TECHNOLOGY DEVELOPMENT AGENCY</field>
             <field name="code">022800200100</field>
+        </record>
+        <record id="mda_science_and_technology_agency" model="multi.branch">
+            <field name="name">MINISTRY OF SCIENCE AND TECHNOLOGY </field>
+            <field name="code">022800100100</field>
         </record>
         <record id="mda_ministry_of_mineral_and_development" model="multi.branch">
             <field name="name">MINISTRY OF MINERAL DEVELOPMENT</field>
@@ -119,7 +123,7 @@
         </record>
         <record id="mda_ministry_of_special_duties" model="multi.branch">
             <field name="name">Ministry of Special Duties</field>
-            <field name="code">xxxxx</field>
+            <field name="code">xxxxxMSD</field>
         </record>
         <record id="mda_ministry_of_budget_and_economic_planning" model="multi.branch">
             <field name="name">MINISTRY OF BUDGET AND ECONOMIC PLANNING</field>
@@ -141,9 +145,21 @@
             <field name="name">OFFICE OF THE DEPUTY GOVERNOR</field>
             <field name="code">011100100200</field>
         </record>
+        <record id="mda_consolidated_revenue" model="multi.branch">
+            <field name="name">CONSOLIDATED REVENUE FUND CHARGES OFFICE</field>
+            <field name="code">022001000100</field>
+        </record>
         <record id="mda_plateau_state_house_of_assembly" model="multi.branch">
             <field name="name">PLATEAU STATE HOUSE OF ASSEMBLY</field>
             <field name="code">011200400100</field>
+        </record>
+        <record id="mda_plateau_state_house_of_assembly_commission" model="multi.branch">
+            <field name="name">PLATEAU STATE HOUSE OF ASSEMBLY COMMISSION</field>
+            <field name="code">011200300100</field>
+        </record>
+        <record id="mda_plateau_state_house_of_assembly_office_clerk" model="multi.branch">
+            <field name="name">PLATEAU STATE HOUSE OF ASSEMBLY (OFFICE OF THE CLERK)</field>
+            <field name="code">011200500100</field>
         </record>
         <record id="mda_0ffice_of_the_auditor_general_state" model="multi.branch">
             <field name="name">0ffice of the Auditor-General (State)</field>
@@ -176,7 +192,7 @@
         <!-- COMMISSIONS -->
         <record id="mda_plateau_state_house_of_assembly_service_commission" model="multi.branch">
             <field name="name">Plateau State House of Assembly Service Commission</field>
-            <field name="code">11200300100</field>
+            <field name="code">011200300100</field>
         </record>
         <record id="mda_judicial_service_commission" model="multi.branch">
             <field name="name">PLATEAU STATE JUDICIAL SERVICE COMMISSION</field>
@@ -253,7 +269,7 @@
         </record>
         <record id="mda_plateau_state_sport_council" model="multi.branch">
             <field name="name">Plateau State Sport Council</field>
-            <field name="code">xxxxx</field>
+            <field name="code">051300200100</field>
         </record>
         <record id="mda_plateau_united_football_club" model="multi.branch">
             <field name="name">Plateau United Football Club</field>
@@ -265,7 +281,7 @@
         </record>
         <record id="mda_jos_main_market_authority" model="multi.branch">
             <field name="name">JOS MAIN MARKET AUTHORITY</field>
-            <field name="code">022200400100</field>
+            <field name="code">022200200100</field>
         </record>
         <record id="mda_kabong_market_authority" model="multi.branch">
             <field name="name">KABONG MARKET AUTHORITY</field>
@@ -279,9 +295,13 @@
             <field name="name">PLATEAU STATE PUBLISHING CORPORATION</field>
             <field name="code">012305500100</field>
         </record>
+        <record id="mda_plateau_publishing_corporation" model="multi.branch">
+            <field name="name">PLATEAU STATE GENDER AND EQUAL OPPORTUNITIES COMMISSION</field>
+            <field name="code">051400200100</field>
+        </record>
         <record id="mda_plateau_express_service_limited" model="multi.branch">
             <field name="name">Plateau Express Service Limited</field>
-            <field name="code">xxxxx</field>
+            <field name="code">xxxxxPES</field>
         </record>
         <record id="mda_plateau_aids_control_agency" model="multi.branch">
             <field name="name">PLATEAU STATE AIDS CONTROL AGENCY</field>
@@ -309,11 +329,11 @@
         </record>
         <record id="mda_plateau_state_afforestation_programme" model="multi.branch">
             <field name="name">Plateau State Afforestation Programme</field>
-            <field name="code">xxxxx</field>
+            <field name="code">xxxxxAP</field>
         </record>
         <record id="mda_public_sector_reform_and_development_project" model="multi.branch">
             <field name="name">Public Sector Reform and Development Project</field>
-            <field name="code">xxxxx</field>
+            <field name="code">xxxxxPSRD</field>
         </record>
         
         <record id="mda_plateau_state_hospitals_management_board" model="multi.branch">
@@ -365,8 +385,7 @@
             <field name="code">056400800100</field>
         </record>
         <record id="mda_plateau_state_pension_board" model="multi.branch">
-            <field name="name">PLATEAU STATE PENSION BOARD
-</field>
+            <field name="name">PLATEAU STATE PENSION BOARD</field>
             <field name="code">011103500100</field>
         </record>
         <record id="mda_bureau_of_statistics" model="multi.branch">
@@ -395,9 +414,9 @@
         </record>
         <record id="mda_plateau_state_primary_health_care" model="multi.branch">
             <field name="name">PLATEAU STATE PRIMARY HEALTH CARE DEVELOPMENT AGENCY</field>
-            <field name="code">52100800100</field>
+            <field name="code">052100300100</field>
         </record>
-        <record id="mda_plateau_state_micro_finance_agency" model="multi.branch">
+        <record id="mda_plateau_state_microfinance_development_agency" model="multi.branch">
             <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY</field>
             <field name="code">011103100100</field>
         </record>
@@ -414,10 +433,7 @@
             <field name="name">PLATEAU STATE CONTRIBUTORY HEALTH CARE MANAGEMENT AGENCY</field>
             <field name="code">052100800100</field>
         </record>
-        <record id="mda_plateau_state_information_and_communication_development_agency_" model="multi.branch">
-            <field name="name">Plateau State Information and Communication Development Agency </field>
-            <field name="code">022800200100</field>
-        </record>
+        
         <record id="mda_plateau_state_rural_water_supply_and_sanitation_agency" model="multi.branch">
             <field name="name">PLATEAU STATE RURAL WATER SUPPLY AND SANITATION AGENCY</field>
             <field name="code">025200500100</field>
@@ -429,8 +445,7 @@
         <!-- TERTIARY INSTITUTIONS -->
         <record id="mda_college_of_health_technology_pankshin" model="multi.branch">
             <field name="name">COLLEGE OF Health Technology, PANKSHIN</field>
-            <field name="code">052100900100
-</field>
+            <field name="code">052100900100</field>
         </record>
         <record id="mda_climate_change_mineral_development" model="multi.branch">
             <field name="name">MINISTRY OF ENVIRONMENT, CLIMATE CHANGE AND MINERAL DEVELOPMENT</field>
@@ -445,7 +460,7 @@
             <field name="code">052100700100</field>
         </record>
         <record id="mda_college_of_agriculture_garkawa" model="multi.branch">
-            <field name="name">College of Agriculture Garkawa</field>
+            <field name="name">COLLEGE OF AGRICULTURE GARKAWA</field>
             <field name="code">021502100100</field>
         </record>
         <record id="mda_college_of_education_gindiri" model="multi.branch">
@@ -472,8 +487,8 @@
 
         <!-- unknown_classification -->
         <record id="mda_mighty_jets" model="multi.branch">
-            <field name="name">Mighty Jets</field>
-            <field name="code">MJ001</field>
+            <field name="name">PLATEAU STATE MIGHTY JETS INTERNATIONAL</field>
+            <field name="code">051300400100</field>
         </record>
         <record id="mda_platea_state_fadama_ng_cares" model="multi.branch">
             <field name="name">PLATEAU STATE FADAMA NG-CARES</field>
@@ -483,10 +498,7 @@
             <field name="name">PLATEAU STATE ICT DEVELOPMENT AGENCY</field>
             <field name="code">T0ICT</field>
         </record>
-        <record id="mda_plateau_state_microfinance_development_agency_2" model="multi.branch">
-            <field name="name">!! PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY</field>
-            <field name="code">T0</field>
-        </record>
+         
         <record id="mda_plateau_state_microfinance_development_agency_ng_cares" model="multi.branch">
             <field name="name">PLATEAU STATE MICROFINANCE DEVELOPMENT AGENCY NG-CARES</field>
             <field name="code">PMA01</field>

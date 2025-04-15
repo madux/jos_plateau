@@ -26,12 +26,7 @@
         <menuitem id="internal_memo_bank_menu" sequence= "10" name="Bank"
             parent="plateau_addons.internal_memo_account_setup_menu" action="internal_memo_res_partner_bank_action"/>
 
-        <menuitem
-            id="ng_account_budget_line_memo_menu2"
-            name="Budget Head (Allocation)"
-            parent="plateau_addons.internal_memo_account_setup_menu"
-            action="plateau_addons.action_ng_account_budget_line"
-            sequence="20"/>
+        
         <menuitem 
             id="memo_setup_menu_branch_form" 
             action="ik_multi_branch.action_res_multi_branch_form" 

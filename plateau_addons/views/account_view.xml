@@ -8,6 +8,8 @@
                 <xpath expr="//field[@name='ref']" position="before">
                     <field name="ng_budget_id" invisible="1" required="0" readonly="memo_state != 'submit'" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/> 
                     <field name="contact_tax_type" required="1" force_save="1" readonly="state == 'posted'"/>
+                    <field name="custom_account_number" required="1" force_save="1" readonly="state == 'posted'"/>
+                    <field name="custom_account_bank" required="1" force_save="1" readonly="state == 'posted'"/>
                     <field name="external_memo_request" readonly="0" invisible="1" help="Determines if memo comes from external finance payment request"/>
                     <field name="suitable_journal_ids" invisible="1" widget="many2many_tags"/>
                     <field name="is_top_account_user" invisible="1"/> 
