@@ -70,6 +70,7 @@ class CompanyMemo(models.Model):
                 if pnp.state not in ['posted']: 
                     raise ValidationError("Each payment lines must be posted before generating bank schedule")
         # todo send mail 
+        self.is_request_completed = True
         return self.env.ref('plateau_addons.print_external_payment_schedule_report').report_action(self)
             
     def print_payment_schedule_report(self):

@@ -18,17 +18,17 @@
             <field name="inherit_id" ref="company_memo.memo_model_form_view_3"/>
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='return_memo']" position="after">
-                        <button name="generate_bank_schedule" string="Send &amp; Print Bank Schedule" icon="fa-print"
+                        <button name="generate_bank_schedule" string="Print Bank Schedule" icon="fa-print"
                         invisible="state not in ['Done', 'done'] or is_contract_memo_request != True" type="object" class="btn-primary"/>
 
                         <!-- <button name="generate_external_bank_payment_schedule" id="printbnkExt" string="Print Bank Schedule" invisible="external_memo_request != True or state in ['submit', 'Sent', 'refuse', 'cancel']" type="object"/> -->
 
                         <button name="generate_external_bank_payment_schedule" id="generate_bank_schedule_external_payment_request" 
-                         string="Send &amp; Print Bank Schedule" icon="fa-print"
+                         string="Print Bank Schedule" icon="fa-print"
                         invisible="state not in ['Done', 'done'] or external_memo_request != True" type="object" class="btn-primary"/>
 
                         <button name="generate_external_bank_payment_schedule" id="generate_bank_schedule_external_payment_request2" 
-                         string="Send &amp; Print Bank Schedule" icon="fa-print"
+                         string="Print Bank Schedule" icon="fa-print"
                         invisible="state not in ['Done', 'done'] or is_internal_transfer != True" type="object" class="btn-primary"/>
 
                         <!-- <button name="generate_external_bank_payment_schedule" id="generate_bank_schedule_external_payment_request3" 
@@ -37,13 +37,13 @@
 
                 </xpath> 
                 <xpath expr="//field[@name='users_followers']" position="before">
-                    <field name="bank_partner_id" string="Bank Name-" readonly="state not in ['Approve2', 'Approve']"
+                    <field name="bank_partner_id" string="Bank Name-" readonly="state not in ['Approve2', 'Approve', 'Done']"
                     options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" force_save="1"
                     domain="[('is_bank', '=', True)]" invisible="is_budget_viament_allocation == True or is_budget_verification_memo_request == True or is_budget_allocation_request == True"/> 
-                    <field name="bank_account_number" string="Account Number" readonly="state not in ['Approve2', 'Approve']"
+                    <field name="bank_account_number" string="Account Number" readonly="state not in ['Approve2', 'Approve', 'Done']"
                    force_save="1" invisible="is_budget_viament_allocation == True or is_budget_verification_memo_request == True or is_budget_allocation_request == True"/> 
 
-                    <field name="scheduled_pay_date" string="Scheduled Date" readonly="state not in ['Approve2', 'Approve']"
+                    <field name="scheduled_pay_date" string="Scheduled Date" readonly="state not in ['Approve2', 'Approve', 'Done']"
                    force_save="1" invisible="is_budget_viament_allocation == True or is_budget_verification_memo_request == True or is_budget_allocation_request == True"/> 
                 </xpath>
                 <xpath expr="//field[@name='currency_id']" position="before">

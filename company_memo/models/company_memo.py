@@ -1459,8 +1459,8 @@ class Memo_Model(models.Model):
             
         if 'payment_ids' in vals:
             if self.state != 'submit':
-                if len(self.payment_ids) < old_payment_ids_length:
-                    raise ValidationError("Sorry you cannot payments if it's not in first stage. Please discard the changes")
+                if len(self.payment_ids) != old_payment_ids_length:
+                    raise ValidationError("Sorry you cannot add payments if it's not in first stage. Please discard the changes")
             for rec in self.payment_ids:
                 rec.memo_reference = self.id
         return res

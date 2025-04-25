@@ -459,6 +459,9 @@
                     <field name="bank_partner_id" readonly="0" options="{'no_create': False, 'no_open': False}" />
                     <field name="bank_partner_account" readonly="0" required="bank_partner_id != False" />
                 </field>
+                <xpath expr="//field[@name='partner_bank_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
             </field>
         </record>
 

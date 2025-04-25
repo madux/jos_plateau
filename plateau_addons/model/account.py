@@ -312,31 +312,32 @@ class AccountPayment(models.Model):
         for pay in self:
             pass
     
-    def action_post(self):
-        to_approve = False
-        # account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user') or self.env.user.has_group('ik_multi_branch.account_dto_user'))
-        account_major_user = (self.env.user.has_group('ik_multi_branch.account_dto_user'))
-        name_of_approvers = []
-        if self.memo_reference and self.memo_reference.stage_id:
+    ## dont use because by the time of this, account invoice has posted it already
+    # def action_post(self):
+    #     to_approve = False
+    #     # account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user') or self.env.user.has_group('ik_multi_branch.account_dto_user'))
+    #     account_major_user = (self.env.user.has_group('ik_multi_branch.account_dto_user'))
+    #     name_of_approvers = []
+    #     if self.memo_reference and self.memo_reference.stage_id:
             
-            stage = self.memo_reference.stage_id
-            last_stage = self.memo_reference.memo_setting_id.stage_ids[-1].id
-            if not last_stage == stage.id:
-                if not stage.require_bill_payment:
-                    raise ValidationError(f"{self.memo_reference.id} {self.memo_reference.ids} {stage.name} {stage.id} You are not permitted to post at this draft stage. \n Use Proceed button or Contact admin to set the require bill payment at the stage configuration if necessary")
+    #         stage = self.memo_reference.stage_id
+    #         last_stage = self.memo_reference.memo_setting_id.stage_ids[-1].id
+    #         if not last_stage == stage.id:
+    #             if not stage.require_bill_payment:
+    #                 raise ValidationError(f"{self.memo_reference.id} {self.memo_reference.ids} {stage.name} {stage.id} You are not permitted to post at this draft stage. \n Use Proceed button or Contact admin to set the require bill payment at the stage configuration if necessary")
             
-            approval_users = [r.user_id.id for r in stage.approver_ids]
-            if self.env.user.id not in approval_users:
-                to_approve = False
-                name_of_approvers = [rec.name for rec in stage.approver_ids]
-            else:
-                to_approve = True
-        if account_major_user or to_approve:
-            pass
-        else:
-            raise ValidationError(f"You are not permitted to post. \n Only these users are allowed to post at this stage {name_of_approvers}")
-        res = super(AccountPayment, self).action_post()
-        return res
+    #         approval_users = [r.user_id.id for r in stage.approver_ids]
+    #         if self.env.user.id not in approval_users:
+    #             to_approve = False
+    #             name_of_approvers = [rec.name for rec in stage.approver_ids]
+    #         else:
+    #             to_approve = True
+    #     if account_major_user or to_approve:
+    #         pass
+    #     else:
+    #         raise ValidationError(f"You are not permitted to post. \n Only these users are allowed to post at this stage {name_of_approvers}")
+    #     res = super(AccountPayment, self).action_post()
+    #     return res
       
       
 class AccountInvoiceLine(models.Model):
@@ -602,8 +603,7 @@ class AccountInvoice(models.Model):
                                             """)
                         
                         rec.ng_budget_line_id.utilized_amount += total_budget
-            self.memo_id.confirm_memo(self.env.user.employee_id, "Budget has been allocated")
-            
+            # self.memo_id.confirm_memo(self.env.user.employee_id, "Budget has been allocated")
       
     def action_post(self):
         # account_major_user = (self.env.is_admin() or self.env.user.has_group('ik_multi_branch.account_major_user'))
